@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Serviço do Banco de Dados
+  postgres_db:
+    image: postgres:16-alpine
+    container_name: lunar_cycle_db
+    restart: always
+    environment:
+      POSTGRES_USER: lunar_user
+      POSTGRES_PASSWORD: lunar_password
+      POSTGRES_DB: lunar_cycle
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # Servico do Back-end
+  backend:
+    build: ./backend
+    container_name: lunar_cycle_backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - DATABASE_URL=postgresql://lunar_user:lunar_password@postgres_db:5432/lunar_cycle
+    depends_on:
+      - postgres_db
+
+  # Serviço do Front-end
+  frontend:
+    build: ./frontend
+    container_name: lunar_cycle_frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    depends_on:
+      - backend
+
+# Volume para não perder os dados do banco quando o container for parado
+volumes:
+  pgdata:

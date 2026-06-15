@@ -1,0 +1,18 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copia os arquivos de dependências
+COPY package*.json ./
+
+# Instala as dependências do back
+RUN npm install
+
+# Copia o restante do código do back-end
+COPY . .
+
+# Porta padrão que o Express costuma rodar
+EXPOSE 3000
+
+# Comando para iniciar o servidor (ajuste para o seu arquivo principal se necessário)
+CMD ["node", "index.js"]
