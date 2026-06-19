@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// 1. Tabela Usuaria
+model Usuaria {
+  id                 String   @id @default(uuid())
+  email              String   @unique
+  nome               String
+  senha              String
+  signo              String
+  duracaoCiclo       Int      @map("duracao_ciclo")
+  duracaoMenstruacao Int      @map("duracao_menstruacao")
+
+  // Relacionamentos (Lado 1)
+  diasMenstruacao    DiaMenstruacao[]
+  sonhos             Sonho[]
+
+  @@map("usuarias") // Nome da tabela no banco
+}
+
+// 2. Tabela Dia_Menstruacao (Entidade Fraca)
+model DiaMenstruacao {
+  data      DateTime @db.Date
+  usuariaId String   @map("id_usuaria")
+
+  // Relacionamento com Deleção em Cascata (Lado N)
+  usuaria   Usuaria  @relation(fields: [usuariaId], references: [id], onDelete: Cascade)
+
+  // Chave Primária Composta
+  @@id([usuariaId, data])
+  @@map("dias_menstruacao")
+}
+
+// 3. Tabela Sonho
+model Sonho {
+  id        String   @id @default(uuid())
+  titulo    String
+  descricao String   @db.Text // Suporta até 5000 caracteres conforme requisito
+  dataSonho DateTime @map("data_sonho") @db.Date
+  faseLunar String   @map("fase_lunar")
+  usuariaId String   @map("id_usuaria")
+
+  // Relacionamento com Deleção em Cascata (Lado N)
+  usuaria   Usuaria  @relation(fields: [usuariaId], references: [id], onDelete: Cascade)
+  
+  // Relacionamento (Lado 1 para as Tags)
+  tags      TagSonho[]
+
+  @@map("sonhos")
+}
+
+// 4. Tabela Tag_Sonho (Tabela de Atributo Multivalorado)
+model TagSonho {
+  nomeTag String @map("nome_tag") @db.VarChar(25)
+  sonhoId String @map("id_sonho")
+
+  // Relacionamento com Deleção em Cascata (Lado N)
+  sonho   Sonho  @relation(fields: [sonhoId], references: [id], onDelete: Cascade)
+
+  // Chave Primária Composta
+  @@id([sonhoId, nomeTag])
+  @@map("tags_sonhos")
+}
