@@ -1,4 +1,3 @@
-const { ca } = require("zod/v4/locales");
 
 const validaRequisicao = (schema) => {
     return (req, res, next) =>{
@@ -6,7 +5,7 @@ const validaRequisicao = (schema) => {
             schema.parse(req.body);
             next();
         } catch (error) {
-            const errosFormatados = error.errors.map((e) => ({
+            const errosFormatados = error.issues.map((e) => ({
                 campo: e.path[0],
                 mensagem: e.message
             }));
@@ -15,6 +14,4 @@ const validaRequisicao = (schema) => {
     };
 };
 
-module.exports = {
-    validaRequisicao
-}
+module.exports = validaRequisicao;
