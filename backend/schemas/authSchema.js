@@ -31,3 +31,7 @@ const criarContaSchema = z.object({
     message: 'A duração da menstruação deve ser menor que a duração do ciclo.',
     path: ['duracaoMenstruacao'],
 });
+
+module.exports = {
+    criarContaSchema
+}
