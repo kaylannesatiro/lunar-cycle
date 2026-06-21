@@ -1,84 +1,52 @@
-/* Container que envelopa toda a tela */
 .background-container {
-  position: relative;
-  min-height: 100vh; /* Garante que tenha pelo menos a altura da tela inteira */
-  width: 100vw;
-  overflow-x: hidden; /* Previne barras de rolagem horizontais */
-  display: flex;
-  flex-direction: column;
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-/* =========================================
-   CAMADA 1: O FUNDO ESTRELADO ESTÁTICO
-   ========================================= */
+/* FUNDO ESTRELADO ESTÁTICO */
 .background-mistico {
-  /* position: fixed mantém o fundo travado. 
-     Se a página de sonhos ficar muito longa, o usuário rola a tela, 
-     mas o céu noturno continua fixo e bonito no fundo! */
-  position: fixed; 
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1; /* Joga a imagem do fundo para trás de tudo */
-
-  /* Aqui aplicamos EXATAMENTE as cores e nebulosas mágicas do Figma! */
-  background: 
-    radial-gradient(75% 60% at 18% 42%, rgba(17, 34, 80, 0.65) 0%, rgba(0, 0, 0, 0.00) 60%), 
-    radial-gradient(58% 52% at 84% 22%, rgba(13, 26, 61, 0.55) 0%, rgba(0, 0, 0, 0.00) 58%), 
-    radial-gradient(65% 58% at 52% 85%, rgba(10, 16, 40, 0.65) 0%, rgba(0, 0, 0, 0.00) 58%), 
-    radial-gradient(100% 100% at 50% 50%, #0C1535 0%, #060817 68%);
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; 
+    background: 
+        radial-gradient(75% 60% at 18% 42%, rgba(17, 34, 80, 0.65) 0%, rgba(0, 0, 0, 0.00) 60%), 
+        radial-gradient(58% 52% at 84% 22%, rgba(13, 26, 61, 0.55) 0%, rgba(0, 0, 0, 0.00) 58%), 
+        radial-gradient(65% 58% at 52% 85%, rgba(10, 16, 40, 0.65) 0%, rgba(0, 0, 0, 0.00) 58%), 
+        radial-gradient(100% 100% at 50% 50%, #0C1535 0%, #060817 68%);
 }
 
-/* =========================================
-   CAMADA 2: CONTAINER DO CONTEÚDO (Children)
-   ========================================= */
+/* CONTAINER DO CONTEÚDO (Children) */
 .conteudo-app {
-  position: relative;
-  z-index: 1; /* Traz o conteúdo para a frente do fundo */
-  flex: 1; /* Faz o conteúdo esticar para ocupar o espaço disponível */
-  display: flex;
-  flex-direction: column;
-  
-  /* PULO DO GATO: Se você estiver usando o componente <Menu> fixo que fizemos antes, 
-     esse padding-top impede que o conteúdo fique escondido atrás do menu. */
-  padding-top: 4.5rem; 
-  
-  /* Mantém o conteúdo centralizado e alinhado com o menu superior */
-  width: 100%;
-  max-width: 85rem; /* ~1360px (Largura máxima do Figma) */
-  margin: 0 auto; 
-  
-  /* Adiciona um respiro nas laterais para telas menores */
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+    position: relative;
+    z-index: 1;
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    padding-top: 4.5rem; 
+    width: 100%;
+    max-width: 85rem;
+    margin: 0 auto; 
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
-/* =========================================
-   CAMADA 2: ESTRELAS (Overlay)
-   ========================================= */
+/* ESTRELAS (Overlay) */
 .background-estrelas {
-  position: fixed; 
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  
-  /* O z-index 0 coloca as estrelas ENTRE o fundo (-1) e o conteúdo (1) */
-  z-index: 0; 
-  
-  /* PULO DO GATO RESPONSIVO: 'cover' faz a imagem crescer ou encolher
-     proporcionalmente para preencher toda a tela, ignorando os 1332px do Figma */
-  background-size: cover;
-  background-position: center;
-  
-  /* SEGREDO DE MENTOR: Como as estrelas ficam "flutuando" por cima de tudo no fundo, 
-     precisamos garantir que essa camada invisível não bloqueie os cliques do usuário 
-     nos botões e links. O pointer-events: none; deixa os cliques "vazarem" através dela. */
-  pointer-events: none;
-  
-  /* Um leve ajuste de opacidade para a imagem não brigar com o texto do app */
-  opacity: 0.85; 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
+    opacity: 0.85; 
 }
-
-/* Nota: Mantenha as outras classes (.background-container, .background-mistico, .conteudo-app) exatamente como estavam! */
