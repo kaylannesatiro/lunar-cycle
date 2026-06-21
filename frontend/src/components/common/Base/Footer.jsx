@@ -9,7 +9,7 @@ const Footer = () => {
 
                     <div className="footer-marca">
                         <div className="footer-logo">
-                            <span className="logo-icone-footer">{Icone}</span>
+                            <img src={Icone} alt="Lunar Cycle Logo" className="logo-icone-footer"/>
                             <span className="logo-texto-footer">LUNAR CYCLE</span>
                         </div>
                         <p className="footer-descricao">
