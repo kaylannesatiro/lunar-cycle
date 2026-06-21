@@ -1,0 +1,111 @@
+/* Importação das fontes do Figma (se já estiver no Menu.css ou App.css, não precisa repetir) */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@500&display=swap');
+
+/* =========================================
+   BASE DE TODOS OS BOTÕES
+   ========================================= */
+.btn-base {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  
+  /* Removemos o background padrão dos botões HTML */
+  background: transparent; 
+  
+  /* Fonte padrão dos botões (Cinzel) */
+  font-family: "Cinzel", serif;
+  font-weight: 400;
+  
+  /* Transição suave de CSS para complementar o Framer Motion */
+  transition: background 0.3s ease, opacity 0.3s ease;
+}
+
+/* Container interno para alinhar o ícone de losango e o texto */
+.btn-conteudo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espaço entre o ícone e o texto */
+}
+
+/* =========================================
+   VARIANTE: PADRÃO (Quadrado com cantos arredondados)
+   ========================================= */
+.btn-padrao {
+  /* O Figma pediu width fixo de 341px, mas para ser responsivo usamos 100% com limite máximo */
+  width: 100%;
+  max-width: 21.3rem; /* ~341px */
+  padding: 0.97rem 0; /* ~15.5px */
+  
+  border-radius: 0.875rem; /* 14px */
+  border: 0.04rem solid rgba(224, 197, 143, 0.30);
+  background: linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%);
+  
+  color: #E0C58F;
+  font-size: 0.67rem; /* ~10.72px */
+  line-height: 1.05rem; /* ~16px */
+  letter-spacing: 0.087rem; /* ~1.39px */
+  text-transform: uppercase;
+}
+
+/* =========================================
+   VARIANTE: REDONDO
+   ========================================= */
+.btn-redondo {
+  width: 100%;
+  max-width: 16.7rem; /* ~268px */
+  padding: 0.97rem 2.6rem; /* ~15.5px e 42px */
+  
+  border-radius: 6.25rem; /* 100px */
+  border: 0.04rem solid #E0C58F; /* Borda mais forte que o padrão */
+  background: linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%);
+  
+  color: #E0C58F;
+  font-size: 0.67rem;
+  line-height: 1.05rem;
+  letter-spacing: 0.087rem;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   VARIANTE: FECHAR (X)
+   ========================================= */
+.btn-fechar {
+  width: 2.125rem; /* ~34px */
+  height: 2.125rem; /* ~34px */
+  flex-shrink: 0; /* Impede que ele seja esmagado no Flexbox */
+  
+  border-radius: 50%; /* Faz um círculo perfeito (17px = metade de 34px) */
+  border: 0.04rem solid rgba(224, 197, 143, 0.50);
+  background: rgba(224, 197, 143, 0.06);
+  
+  /* A fonte do Fechar no Figma é a Inter, não a Cinzel */
+  font-family: "Inter", sans-serif;
+  color: #E0C58F;
+  font-size: 1rem; /* 16px */
+  font-weight: 500;
+}
+
+/* =========================================
+   ESTADOS ESPECIAIS (Disabled / Loading)
+   ========================================= */
+.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  /* Retira o gradiente e deixa opaco para indicar inatividade */
+  background: rgba(200, 200, 200, 0.05); 
+}
+
+.btn-loading {
+  font-style: italic;
+  letter-spacing: 0.1rem;
+  animation: pulsar 1.5s infinite;
+}
+
+/* Animação simples de loading no CSS (piscar suave) */
+@keyframes pulsar {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
