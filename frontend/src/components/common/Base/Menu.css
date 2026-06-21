@@ -11,19 +11,20 @@
    ========================================= */
 .menu-wrapper {
   display: flex;
-  justify-content: center; /* Garante que o container interno fique no meio */
+  justify-content: center;
   
-  /* Aqui está a distância da borda que o Figma pede (40px nas laterais) */
-  padding: 16px 40px; 
+  /* PADDING DE 16px SOMENTE NA ALTURA:
+     1rem (16px) no topo e na base, e 2.5rem (40px) nas laterais */
+  padding: 1rem 2.5rem; 
   
-  border-bottom: 0.667px solid rgba(224, 197, 143, 0.40);
+  border-bottom: 0.04rem solid rgba(224, 197, 143, 0.40);
   background: rgba(6, 8, 23, 0.80);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(0.5rem); 
   
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; /* Força o menu a ir de ponta a ponta na tela */
+  width: 100vw;
   z-index: 1000;
 }
 
@@ -32,11 +33,13 @@
    ========================================= */
 .menu-container {
   display: flex;
-  justify-content: space-between; /* Empurra a logo totalmente para a esquerda e a lista totalmente para a direita */
+  /* Isso garante que a logo vá para a extrema esquerda e os links para a extrema direita */
+  justify-content: space-between; 
   align-items: center;
   
-  max-width: 1360px; /* Limite do Figma */
-  width: 100%; /* Fundamental: faz o container esticar até o limite do padding de 40px */
+  /* O PULO DO GATO: */
+  width: 100%; /* Força o container a ocupar 100% do espaço interno do wrapper */
+  max-width: none; /* Removemos o limite! Agora ele cresce infinitamente junto com a tela */
 }
 
 /* =========================================
@@ -45,7 +48,6 @@
 .menu-logo {
   display: flex;
   align-items: center;
-  /* Removemos o gap porque vamos controlar a distância com a margem da imagem */
   gap: 0; 
   text-decoration: none;
   cursor: pointer;
@@ -53,16 +55,18 @@
 
 /* Como você colocou a classe direto na tag <img>, o CSS age direto nela! */
 .logo-icone {
-  /* Aumentamos a caixa da imagem para que a lua no centro fique com o tamanho ideal */
   width: 4.5rem; 
   height: 4.5rem;
   
-  /* O PULO DO GATO: Usamos margens negativas para "engolir" o espaço vazio
-     transparente do SVG e puxar o texto LUNAR CYCLE para coladinho na lua */
-  margin-right: -1.2rem; /* Puxa o texto para perto da lua */
-  margin-left: -1rem;    /* Puxa a lua para perto da borda esquerda */
+  /* O PULO DO GATO PARA A ALTURA: 
+     Adicionamos margens negativas também no topo e na base (-1.5rem = -24px).
+     Isso faz o navegador ignorar a altura de 72px da imagem na hora de calcular 
+     a grossura da barra de navegação! */
+  margin-top: -1.5rem;
+  margin-bottom: -1.5rem;
+  margin-right: -1.2rem;
+  margin-left: -1rem;
   
-  /* Garante que a imagem não distorça */
   object-fit: contain;
 }
 
