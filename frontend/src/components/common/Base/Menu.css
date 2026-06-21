@@ -123,62 +123,75 @@
 .menu-hamburger {
   display: none;
   flex-direction: column;
-  /* 5px = 0.3rem */
   gap: 0.3rem; 
   cursor: pointer;
+  z-index: 1001; /* Garante que o hambúrguer nunca fique embaixo de nada */
 }
 
 .menu-hamburger .barra {
-  /* 25px = 1.56rem | 2px = 0.125rem */
   width: 1.56rem;
   height: 0.125rem; 
   background-color: #E0C58F;
   transition: all 0.3s ease;
 }
 
-/* 768px = 48rem (Ponto de quebra para Tablets/Mobile) */
+/* Quebra para Responsividade (Tablets e Celulares - 48rem = 768px) */
 @media (max-width: 48rem) {
+  
   .menu-wrapper {
-    /* Reduz o padding nas laterais no celular: 1rem 1.25rem */
-    padding: 1rem 1.25rem; 
+    /* Ajuste de padding para não espremer o celular nas laterais */
+    padding: 1rem 1.5rem; 
   }
 
   .menu-hamburger {
     display: flex;
   }
 
+  /* LISTA DE LINKS NO MOBILE */
   .menu-links {
     position: absolute;
-    /* 65px = ~4rem */
-    top: 4rem; 
-    right: 0;
-    width: 100%;
-    /* Alterado para vh (viewport height) para ocupar a tela toda se abrir */
-    min-height: 100vh;
-    background: rgba(6, 8, 23, 0.95);
-    border-bottom: 0.04rem solid rgba(224, 197, 143, 0.40);
+    /* O PULO DO GATO: top: 100% faz o menu nascer EXATAMENTE onde o navbar termina, 
+       independentemente da grossura da sua barra! */
+    top: 100%; 
+    left: 0;
+    
+    /* Ocupa a tela inteira */
+    width: 100%; 
+    height: 100vh; 
+    
+    background: rgba(6, 8, 23, 0.98); /* Fundo noturno quase sólido para leitura clara */
+    border-top: 0.04rem solid rgba(224, 197, 143, 0.40); /* Linha dourada para separar do header */
+    
+    /* Reorganiza os itens em coluna */
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    /* Usando rem para espaçamentos */
-    gap: 1.5rem;
-    padding: 2rem 0;
-    transform: translateY(-150%);
+    
+    /* Espaçamentos pensados em UI/UX para toque no celular */
+    padding-top: 3rem; 
+    gap: 2.5rem; 
+    
+    /* O SEGREDO DO MENU PERFEITO: Usamos visibility ao invés de z-index ou display.
+       Isso permite a animação fluida, mas desativa os botões quando o menu está fechado */
+    visibility: hidden;
     opacity: 0;
-    transition: all 0.4s ease;
-    z-index: -1;
+    transform: translateY(-20px); /* Apenas desliza suavemente, sem exageros */
+    transition: all 0.3s ease-in-out;
   }
 
+  /* Quando o estado menuAberto for true, ativamos esta classe */
   .menu-links.ativo {
-    transform: translateY(0);
+    visibility: visible;
     opacity: 1;
+    transform: translateY(0);
   }
 
-  /* Animações convertidas para rem */
+  /* Animação das barrinhas do Hambúrguer virando um "X" */
   .menu-hamburger .barra.aberta:nth-child(1) {
     transform: translateY(0.43rem) rotate(45deg);
   }
   .menu-hamburger .barra.aberta:nth-child(2) {
-    opacity: 0;
+    opacity: 0; /* Esconde a barra do meio */
   }
   .menu-hamburger .barra.aberta:nth-child(3) {
     transform: translateY(-0.43rem) rotate(-45deg);
