@@ -5,9 +5,9 @@ const App = () => {
   return (
     <>
       <Menu links={[
-        { titulo: 'Diário dos Sonhos', rota: '/' },
-        { titulo: 'Calendário', rota: '/sobre' },
-        { titulo: 'Conta', rota: '/contato' }
+        { titulo: 'Diário dos Sonhos', rota: '/diario' },
+        { titulo: 'Calendário', rota: '/calendario' },
+        { titulo: 'Conta', rota: '/conta' }
       ]} />
     </>
   )
