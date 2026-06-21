@@ -1,67 +1,114 @@
-/* Reseta margens padrão e define a fonte do componente */
+/* Importação das fontes usadas no Figma */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400&family=Cinzel+Decorative:wght@700&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Container principal da barra de navegação */
-.menu-container {
+/* =========================================
+   ESTRUTURA DO FIGMA: Menu (Externo)
+   ========================================= */
+.menu-wrapper {
   display: flex;
-  justify-content: space-between; /* Separa o logo dos links */
-  align-items: center; /* Centraliza verticalmente */
-  padding: 1rem 2rem;
+  flex-direction: column;
+  align-items: center; /* Centraliza o container interno */
+  padding: 16px 40px;
   
-  /* Vibe mística: Fundo escuro levemente transparente (Glassmorphism) */
-  background: rgba(48, 50, 64, 0.95); /* Cor inspirada no céu noturno do protótipo */
-  backdrop-filter: blur(8px); /* Efeito de vidro embaçado */
+  /* Borda inferior dourada com opacidade extraída do Figma */
+  border-bottom: 0.667px solid rgba(224, 197, 143, 0.40);
   
-  /* Mantém o menu fixo no topo da tela */
+  /* Fundo noturno escuro com opacidade */
+  background: rgba(6, 8, 23, 0.80);
+  backdrop-filter: blur(8px); /* Mantemos o glassmorphism básico */
+  
+  /* Fixa o menu no topo */
   position: sticky;
   top: 0;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilo da área do Logo */
+/* =========================================
+   ESTRUTURA DO FIGMA: Container de Menu (Interno)
+   ========================================= */
+.menu-container {
+  display: flex;
+  max-width: 1360px; /* Largura máxima definida no Figma */
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+/* =========================================
+   ESTRUTURA DO FIGMA: Logo
+   ========================================= */
 .menu-logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #EAC996; /* Dourado suave */
-  font-weight: bold;
-  letter-spacing: 2px;
-  font-size: 1.2rem;
+  gap: 10px;
 }
 
 .logo-icone {
-  font-size: 1.5rem;
+  /* Tamanho exato do Figma */
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Efeito de brilho místico exportado do Figma */
+  filter: drop-shadow(0 0 7.436px rgba(224, 197, 143, 0.00)) 
+          drop-shadow(0 0 42.479px rgba(224, 197, 143, 0.08)) 
+          drop-shadow(0 0 12.826px rgba(224, 197, 143, 0.32));
 }
 
-/* Lista de links (ul) no Desktop */
+.logo-texto {
+  /* Tipografia do texto da Logo extraída do Figma */
+  color: #E0C58F;
+  text-align: center;
+  font-family: "Cinzel Decorative", serif;
+  font-size: 11.52px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 17.28px;
+  letter-spacing: 2.765px;
+}
+
+/* =========================================
+   ESTRUTURA DO FIGMA: Links
+   ========================================= */
 .menu-links {
   display: flex;
-  list-style: none; /* Remove as bolinhas da lista */
-  gap: 2rem; /* Espaçamento entre os links */
+  list-style: none;
+  gap: 32px; /* Espaçamento entre os itens */
 }
 
-/* Estilo individual de cada link (a) */
 .menu-link {
-  text-decoration: none; /* Remove o sublinhado */
-  color: #FFFFFF; /* Texto claro */
-  font-size: 0.9rem;
-  letter-spacing: 1px;
+  /* Tipografia dos Links extraída do Figma */
+  color: #FFF;
+  text-align: center;
+  font-family: "Cinzel", serif;
+  font-size: 11.2px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16.8px;
+  letter-spacing: 1.12px;
+  text-decoration: none;
   text-transform: uppercase;
-  transition: color 0.3s ease; /* Transição suave de cor */
+  transition: color 0.3s ease;
 }
 
-/* Hover: Ao passar o mouse, a cor muda para o dourado do Lunar Cycle */
+/* Hover interativo usando a cor dourada do Figma */
 .menu-link:hover {
-  color: #EAC996;
+  color: #E0C58F;
 }
 
-/* Oculta o botão hambúrguer no Desktop */
+/* =========================================
+   ESTRUTURA DO HAMBÚRGUER E MOBILE
+   ========================================= */
 .menu-hamburger {
   display: none;
   flex-direction: column;
@@ -69,57 +116,51 @@
   cursor: pointer;
 }
 
-/* Linhas do botão hambúrguer */
 .menu-hamburger .barra {
   width: 25px;
-  height: 3px;
-  background-color: #EAC996;
+  height: 2px; /* Deixei mais fino para combinar com a fonte elegante */
+  background-color: #E0C58F; /* Cor dourada do Figma */
   transition: all 0.3s ease;
 }
 
-/* =========================================
-   RESPONSIVIDADE (Mobile - Abaixo de 768px)
-   ========================================= */
 @media (max-width: 768px) {
-  
-  /* Exibe o botão hambúrguer */
+  .menu-wrapper {
+    padding: 16px 20px; /* Reduz o padding nas laterais no celular */
+  }
+
   .menu-hamburger {
     display: flex;
   }
 
-  /* Transforma a lista de links em um menu lateral/abaixo */
   .menu-links {
     position: absolute;
-    top: 60px; /* Altura do menu principal */
+    top: 65px;
     right: 0;
     width: 100%;
-    background: rgba(48, 50, 64, 0.98);
+    background: rgba(6, 8, 23, 0.95); /* Mantém o fundo escuro do Figma */
+    border-bottom: 0.667px solid rgba(224, 197, 143, 0.40);
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
     padding: 2rem 0;
-    
-    /* Esconde o menu fora da tela por padrão */
     transform: translateY(-150%);
     opacity: 0;
     transition: all 0.4s ease;
-    z-index: -1; /* Fica atrás da barra superior quando fechado */
+    z-index: -1;
   }
 
-  /* Quando o menu mobile estiver "ativo" (aberto) */
   .menu-links.ativo {
-    transform: translateY(0); /* Desce o menu para a tela */
+    transform: translateY(0);
     opacity: 1;
   }
 
-  /* Animações do Hambúrguer para formar um "X" quando aberto */
   .menu-hamburger .barra.aberta:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(7px) rotate(45deg);
   }
   .menu-hamburger .barra.aberta:nth-child(2) {
-    opacity: 0; /* Esconde a barra do meio */
+    opacity: 0;
   }
   .menu-hamburger .barra.aberta:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-7px) rotate(-45deg);
   }
 }

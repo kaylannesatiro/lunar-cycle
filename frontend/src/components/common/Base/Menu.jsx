@@ -9,34 +9,33 @@ function Menu({ links }) {
     };
 
     return (
-        <nav className="menu-container">
-        
-        {/* Logo e Título */}
-        <div className="menu-logo">
-            <span className="logo-icone">🌙</span>
-            <span className="logo-texto">LUNAR CYCLE</span>
-        </div>
+        <header className="menu-wrapper">
+            <nav className="menu-container">
+                
+                <div className="menu-logo">
+                {/* Substitua o emoji pelo seu SVG exportado do Figma, se tiver. Por enquanto, usamos a classe */}
+                <span className="logo-icone">🌙</span>
+                <span className="logo-texto">LUNAR CYCLE</span>
+                </div>
 
-        {/* Botão Hambúrguer visível apenas no Mobile */}
-        <div className="menu-hamburger" onClick={alternarMenu}>
-            <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
-            <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
-            <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
-        </div>
+                <div className="menu-hamburger" onClick={alternarMenu}>
+                <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
+                <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
+                <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
+                </div>
 
-        {/* Lista de Links */}
-        <ul className={`menu-links ${menuAberto ? 'ativo' : ''}`}>
-            
-            {links.map((link, index) => (
-            <li key={index} className="menu-item">
-                <a href={link.rota} className="menu-link">
-                {link.titulo}
-                </a>
-            </li>
-            ))}
-            
-        </ul>
-        </nav>
+                <ul className={`menu-links ${menuAberto ? 'ativo' : ''}`}>
+                {links.map((link, index) => (
+                    <li key={index} className="menu-item">
+                    <a href={link.rota} className="menu-link">
+                        {link.titulo}
+                    </a>
+                    </li>
+                ))}
+                </ul>
+                
+            </nav>
+        </header>
     );
 }
 
