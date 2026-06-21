@@ -40,42 +40,40 @@
 }
 
 /* =========================================
-   ESTRUTURA DO FIGMA: Logo (Agora é um link)
+   ESTRUTURA DO FIGMA: Logo (Link)
    ========================================= */
 .menu-logo {
   display: flex;
   align-items: center;
-  /* 10px = 0.625rem */
-  gap: 0.625rem; 
-  text-decoration: none; /* Remove o sublinhado do link */
+  /* Removemos o gap porque vamos controlar a distância com a margem da imagem */
+  gap: 0; 
+  text-decoration: none;
   cursor: pointer;
 }
 
+/* Como você colocou a classe direto na tag <img>, o CSS age direto nela! */
 .logo-icone {
-  /* 22px = 1.375rem */
-  width: 1.375rem;
-  height: 1.375rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* Aumentamos a caixa da imagem para que a lua no centro fique com o tamanho ideal */
+  width: 4.5rem; 
+  height: 4.5rem;
   
-  /* Sombras convertidas para rem */
-  filter: drop-shadow(0 0 0.46rem rgba(224, 197, 143, 0.00)) 
-          drop-shadow(0 0 2.65rem rgba(224, 197, 143, 0.08)) 
-          drop-shadow(0 0 0.8rem rgba(224, 197, 143, 0.32));
+  /* O PULO DO GATO: Usamos margens negativas para "engolir" o espaço vazio
+     transparente do SVG e puxar o texto LUNAR CYCLE para coladinho na lua */
+  margin-right: -1.2rem; /* Puxa o texto para perto da lua */
+  margin-left: -1rem;    /* Puxa a lua para perto da borda esquerda */
+  
+  /* Garante que a imagem não distorça */
+  object-fit: contain;
 }
 
 .logo-texto {
   color: #E0C58F;
   text-align: center;
   font-family: "Cinzel Decorative", serif;
-  /* 11.52px = 0.72rem */
   font-size: 0.72rem; 
   font-style: normal;
   font-weight: 700;
-  /* 17.28px = 1.08rem */
   line-height: 1.08rem; 
-  /* 2.765px = 0.17rem */
   letter-spacing: 0.17rem; 
 }
 
