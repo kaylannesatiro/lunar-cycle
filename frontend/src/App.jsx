@@ -13,27 +13,38 @@ const App = () => {
           { titulo: 'Conta', rota: '/conta' }
         ]} />
 
-        <Button 
-          variant="redondo" 
-          icone={<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 0L10 5L5 10L0 5L5 0Z" fill="#E0C58F"/></svg>}
-          onClick={() => console.log("Registrando...")}
-        >
-          Registrar Menstruação
-        </Button>
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          gap: '20px', 
+          paddingTop: '60px',
+          width: '100%'
+        }}>
+          
+          <Button 
+            variant="redondo" 
+            icone={<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 0L10 5L5 10L0 5L5 0Z" fill="#E0C58F"/></svg>}
+            onClick={() => console.log("Registrando...")}
+          >
+            Registrar Menstruação
+          </Button>
 
-        <Button variant="padrao">
-          Salvar
-        </Button>
+          <Button variant="padrao">
+            Salvar
+          </Button>
 
-        <Button variant="fechar" />
+          <Button variant="fechar" />
 
-        <Button variant="padrao" isLoading={true}>
-          Enviar
-        </Button>
+          <Button variant="padrao" isLoading={true}>
+            Enviar
+          </Button>
 
-        <Button variant="padrao" color="#FF6B6B">
-          Excluir Sonho
-        </Button>
+          <Button variant="padrao" color="#FF6B6B">
+            Excluir Sonho
+          </Button>
+
+        </div>
       </Background>
     </>
   )
