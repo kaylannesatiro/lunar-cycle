@@ -24,13 +24,12 @@ const App = () => {
           
           <Button 
             variant="redondo" 
-            icone={<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 0L10 5L5 10L0 5L5 0Z" fill="#E0C58F"/></svg>}
-            onClick={() => console.log("Registrando...")}
-          >
+            icone={"◈"}
+            onClick={() => console.log("Registrando...")}>
             Registrar Menstruação
           </Button>
 
-          <Button variant="padrao">
+          <Button variant="padrao" icone={"◈"}>
             Salvar
           </Button>
 
@@ -40,7 +39,7 @@ const App = () => {
             Enviar
           </Button>
 
-          <Button variant="padrao" color="#FF6B6B">
+          <Button variant="padrao" color="#eadee2">
             Excluir Sonho
           </Button>
 
