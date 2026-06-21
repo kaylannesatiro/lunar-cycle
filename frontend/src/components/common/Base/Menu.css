@@ -1,199 +1,157 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400&family=Cinzel+Decorative:wght@700&display=swap');
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* =========================================
-   ESTRUTURA DO FIGMA: Menu (Externo)
-   ========================================= */
+/*Menu*/
+
 .menu-wrapper {
-  display: flex;
-  justify-content: center;
-  
-  /* PADDING DE 16px SOMENTE NA ALTURA:
-     1rem (16px) no topo e na base, e 2.5rem (40px) nas laterais */
-  padding: 1rem 2.5rem; 
-  
-  border-bottom: 0.04rem solid rgba(224, 197, 143, 0.40);
-  background: rgba(6, 8, 23, 0.80);
-  backdrop-filter: blur(0.5rem); 
-  
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  z-index: 1000;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 2.5rem; 
+    border-bottom: 0.04rem solid rgba(224, 197, 143, 0.40);
+    background: rgba(6, 8, 23, 0.80);
+    backdrop-filter: blur(0.5rem); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
 }
 
-/* =========================================
-   ESTRUTURA DO FIGMA: Container de Menu
-   ========================================= */
+/*Container de Menu*/
+
 .menu-container {
-  display: flex;
-  /* Isso garante que a logo vá para a extrema esquerda e os links para a extrema direita */
-  justify-content: space-between; 
-  align-items: center;
-  
-  /* O PULO DO GATO: */
-  width: 100%; /* Força o container a ocupar 100% do espaço interno do wrapper */
-  max-width: none; /* Removemos o limite! Agora ele cresce infinitamente junto com a tela */
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%;
+    max-width: none;
 }
 
-/* =========================================
-   ESTRUTURA DO FIGMA: Logo (Link)
-   ========================================= */
+/*Logo*/
 .menu-logo {
-  display: flex;
-  align-items: center;
-  gap: 0; 
-  text-decoration: none;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0; 
+    text-decoration: none;
+    cursor: pointer;
 }
 
-/* Como você colocou a classe direto na tag <img>, o CSS age direto nela! */
 .logo-icone {
-  width: 4.5rem; 
-  height: 4.5rem;
-  
-  /* O PULO DO GATO PARA A ALTURA: 
-     Adicionamos margens negativas também no topo e na base (-1.5rem = -24px).
-     Isso faz o navegador ignorar a altura de 72px da imagem na hora de calcular 
-     a grossura da barra de navegação! */
-  margin-top: -1.5rem;
-  margin-bottom: -1.5rem;
-  margin-right: -1.2rem;
-  margin-left: -1rem;
-  
-  object-fit: contain;
+    width: 4.5rem; 
+    height: 4.5rem;
+    margin-top: -1.5rem;
+    margin-bottom: -1.5rem;
+    margin-right: -1.2rem;
+    margin-left: -1rem;
+    object-fit: contain;
 }
 
 .logo-texto {
-  color: #E0C58F;
-  text-align: center;
-  font-family: "Cinzel Decorative", serif;
-  font-size: 0.72rem; 
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1.08rem; 
-  letter-spacing: 0.17rem; 
+    color: #E0C58F;
+    text-align: center;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 0.72rem; 
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.08rem; 
+    letter-spacing: 0.17rem; 
 }
 
-/* =========================================
-   ESTRUTURA DO FIGMA: Links
-   ========================================= */
+/*Links*/
 .menu-links {
-  display: flex;
-  justify-content: flex-end; /* Garante que os links colem no lado direito */
-  gap: 32px;
-  
-  /* CRÍTICO: O navegador coloca um padding natural na tag <ul>. 
-     Isso é o que estava empurrando seus links para a esquerda! */
-  padding: 0; 
-  margin: 0;
-  list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    gap: 32px;
+    padding: 0; 
+    margin: 0;
+    list-style: none;
 }
 
 .menu-link {
-  color: #FFF;
-  text-align: center;
-  font-family: "Cinzel", serif;
-  /* 11.2px = 0.7rem */
-  font-size: 0.7rem; 
-  font-style: normal;
-  font-weight: 400;
-  /* 16.8px = 1.05rem */
-  line-height: 1.05rem; 
-  /* 1.12px = 0.07rem */
-  letter-spacing: 0.07rem; 
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
+    color: #FFF;
+    text-align: center;
+    font-family: "Cinzel", serif;
+    font-size: 0.7rem; 
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.05rem;
+    letter-spacing: 0.07rem; 
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
 }
 
 .menu-link:hover {
-  color: #E0C58F;
+    color: #E0C58F;
 }
 
-/* =========================================
-   ESTRUTURA DO HAMBÚRGUER E MOBILE
-   ========================================= */
+/*HAMBÚRGUER E MOBILE*/
 .menu-hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 0.3rem; 
-  cursor: pointer;
-  z-index: 1001; /* Garante que o hambúrguer nunca fique embaixo de nada */
+    display: none;
+    flex-direction: column;
+    gap: 0.3rem; 
+    cursor: pointer;
+    z-index: 1001;
 }
 
 .menu-hamburger .barra {
-  width: 1.56rem;
-  height: 0.125rem; 
-  background-color: #E0C58F;
-  transition: all 0.3s ease;
+    width: 1.56rem;
+    height: 0.125rem; 
+    background-color: #E0C58F;
+    transition: all 0.3s ease;
 }
 
-/* Quebra para Responsividade (Tablets e Celulares - 48rem = 768px) */
 @media (max-width: 48rem) {
-  
-  .menu-wrapper {
-    /* Ajuste de padding para não espremer o celular nas laterais */
-    padding: 1rem 1.5rem; 
-  }
+    .menu-wrapper {
+        padding: 1rem 1.5rem; 
+    }
 
-  .menu-hamburger {
-    display: flex;
-  }
+    .menu-hamburger {
+        display: flex;
+    }
 
-  /* LISTA DE LINKS NO MOBILE */
-  .menu-links {
-    position: absolute;
-    /* O PULO DO GATO: top: 100% faz o menu nascer EXATAMENTE onde o navbar termina, 
-       independentemente da grossura da sua barra! */
-    top: 100%; 
-    left: 0;
-    
-    /* Ocupa a tela inteira */
-    width: 100%; 
-    height: 100vh; 
-    
-    background: rgba(6, 8, 23, 0.98); /* Fundo noturno quase sólido para leitura clara */
-    border-top: 0.04rem solid rgba(224, 197, 143, 0.40); /* Linha dourada para separar do header */
-    
-    /* Reorganiza os itens em coluna */
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    
-    /* Espaçamentos pensados em UI/UX para toque no celular */
-    padding-top: 3rem; 
-    gap: 2.5rem; 
-    
-    /* O SEGREDO DO MENU PERFEITO: Usamos visibility ao invés de z-index ou display.
-       Isso permite a animação fluida, mas desativa os botões quando o menu está fechado */
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-20px); /* Apenas desliza suavemente, sem exageros */
-    transition: all 0.3s ease-in-out;
-  }
+    .menu-links {
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        
+        width: 100%; 
+        height: 100vh; 
+        
+        background: rgba(6, 8, 23, 0.98); 
+        border-top: 0.04rem solid rgba(224, 197, 143, 0.40);
+        
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        
+        padding-top: 3rem; 
+        gap: 2.5rem; 
+        
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+    }
 
-  /* Quando o estado menuAberto for true, ativamos esta classe */
-  .menu-links.ativo {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-  }
+    .menu-links.ativo {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-  /* Animação das barrinhas do Hambúrguer virando um "X" */
-  .menu-hamburger .barra.aberta:nth-child(1) {
-    transform: translateY(0.43rem) rotate(45deg);
-  }
-  .menu-hamburger .barra.aberta:nth-child(2) {
-    opacity: 0; /* Esconde a barra do meio */
-  }
-  .menu-hamburger .barra.aberta:nth-child(3) {
-    transform: translateY(-0.43rem) rotate(-45deg);
-  }
+    .menu-hamburger .barra.aberta:nth-child(1) {
+        transform: translateY(0.43rem) rotate(45deg);
+    }
+    .menu-hamburger .barra.aberta:nth-child(2) {
+        opacity: 0; 
+    }
+    .menu-hamburger .barra.aberta:nth-child(3) {
+        transform: translateY(-0.43rem) rotate(-45deg);
+    }
 }
