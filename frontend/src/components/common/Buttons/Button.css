@@ -1,117 +1,89 @@
-/* Importação das fontes do Figma (se já estiver no Menu.css ou App.css, não precisa repetir) */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@500&display=swap');
 
-/* =========================================
-   BASE DE TODOS OS BOTÕES
-   ========================================= */
+/*TODOS OS BOTÕES*/
 .btn-base {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  outline: none;
-  background: transparent; 
-  font-family: "Cinzel", serif;
-  font-weight: 400;
-  transition: background 0.3s ease, opacity 0.3s ease;
-  
-  /* O PULO DO GATO: flex-shrink 0 impede que o botão seja esmagado (vire linha) */
-  flex-shrink: 0; 
-  box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+    background: transparent; 
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+    transition: background 0.3s ease, opacity 0.3s ease;
+    flex-shrink: 0; 
+    box-sizing: border-box;
 }
 
-/* Container interno para alinhar o ícone de losango e o texto */
 .btn-conteudo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem; 
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; 
 }
 
-/* =========================================
-   VARIANTE: PADRÃO (Quadrado com cantos arredondados)
-   ========================================= */
+/*PADRÃO (Quadrado)*/
 .btn-padrao {
-  width: 100%;
-  max-width: 21.3rem; 
-  
-  /* Usando height fixo para garantir o tamanho do Figma */
-  height: 3rem; 
-  padding: 0 1rem; 
-  
-  border-radius: 0.875rem; 
-  border: 0.04rem solid rgba(224, 197, 143, 0.30);
-  background: linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%);
-  
-  color: #E0C58F;
-  font-size: 0.67rem; 
-  line-height: 1.05rem; 
-  letter-spacing: 0.087rem; 
-  text-transform: uppercase;
+    width: 100%;
+    max-width: 21.3rem; 
+    height: 3rem; 
+    padding: 0 1rem; 
+    border-radius: 0.875rem; 
+    border: 0.04rem solid rgba(224, 197, 143, 0.30);
+    background: linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%);
+    color: #E0C58F;
+    font-size: 0.67rem; 
+    line-height: 1.05rem; 
+    letter-spacing: 0.087rem; 
+    text-transform: uppercase;
 }
 
-/* =========================================
-   VARIANTE: REDONDO
-   ========================================= */
+/*REDONDO*/
 .btn-redondo {
-  width: 100%;
-  max-width: 16.7rem; 
-  
-  /* Usando height fixo para garantir o tamanho do Figma */
-  height: 3rem; 
-  padding: 0 2rem; 
-  
-  border-radius: 6.25rem; 
-  border: 0.04rem solid #E0C58F; 
-  background: linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%);
-  
-  color: #E0C58F;
-  font-size: 0.67rem;
-  line-height: 1.05rem;
-  letter-spacing: 0.087rem;
-  text-transform: uppercase;
+    width: 100%;
+    max-width: 16.7rem; 
+    height: 3rem; 
+    padding: 0 2rem; 
+    border-radius: 6.25rem; 
+    border: 0.04rem solid #E0C58F; 
+    background: linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%);
+    color: #E0C58F;
+    font-size: 0.67rem;
+    line-height: 1.05rem;
+    letter-spacing: 0.087rem;
+    text-transform: uppercase;
 }
 
-/* Variante Fechar se mantém igual, apenas certifique-se que ela tem flex-shrink: 0; */
-
-/* =========================================
-   VARIANTE: FECHAR (X)
-   ========================================= */
+/*FECHAR*/
 .btn-fechar {
-  width: 2.125rem; 
-  height: 2.125rem; 
-  min-height: 2.125rem; /* Impede que ele seja esmagado */
-  flex-shrink: 0; 
-  box-sizing: border-box;
-  
-  border-radius: 50%; 
-  border: 0.04rem solid rgba(224, 197, 143, 0.50);
-  background: rgba(224, 197, 143, 0.06);
-  
-  font-family: "Inter", sans-serif;
-  color: #E0C58F;
-  font-size: 1rem; 
-  font-weight: 500;
+    width: 2.125rem; 
+    height: 2.125rem; 
+    min-height: 2.125rem;
+    flex-shrink: 0; 
+    box-sizing: border-box;
+    border-radius: 50%; 
+    border: 0.04rem solid rgba(224, 197, 143, 0.50);
+    background: rgba(224, 197, 143, 0.06);
+    font-family: "Inter", sans-serif;
+    color: #E0C58F;
+    font-size: 1rem; 
+    font-weight: 500;
 }
 
-/* =========================================
-   ESTADOS ESPECIAIS (Disabled / Loading)
-   ========================================= */
+/*ESTADOS(Disabled / Loading)*/
 .btn-disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  /* Retira o gradiente e deixa opaco para indicar inatividade */
-  background: rgba(200, 200, 200, 0.05); 
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: rgba(200, 200, 200, 0.05); 
 }
 
 .btn-loading {
-  font-style: italic;
-  letter-spacing: 0.1rem;
-  animation: pulsar 1.5s infinite;
+    font-style: italic;
+    letter-spacing: 0.1rem;
+    animation: pulsar 1.5s infinite;
 }
 
-/* Animação simples de loading no CSS (piscar suave) */
 @keyframes pulsar {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
 }
