@@ -1,0 +1,125 @@
+/* Reseta margens padrão e define a fonte do componente */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container principal da barra de navegação */
+.menu-container {
+  display: flex;
+  justify-content: space-between; /* Separa o logo dos links */
+  align-items: center; /* Centraliza verticalmente */
+  padding: 1rem 2rem;
+  
+  /* Vibe mística: Fundo escuro levemente transparente (Glassmorphism) */
+  background: rgba(48, 50, 64, 0.95); /* Cor inspirada no céu noturno do protótipo */
+  backdrop-filter: blur(8px); /* Efeito de vidro embaçado */
+  
+  /* Mantém o menu fixo no topo da tela */
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo da área do Logo */
+.menu-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #EAC996; /* Dourado suave */
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+}
+
+.logo-icone {
+  font-size: 1.5rem;
+}
+
+/* Lista de links (ul) no Desktop */
+.menu-links {
+  display: flex;
+  list-style: none; /* Remove as bolinhas da lista */
+  gap: 2rem; /* Espaçamento entre os links */
+}
+
+/* Estilo individual de cada link (a) */
+.menu-link {
+  text-decoration: none; /* Remove o sublinhado */
+  color: #FFFFFF; /* Texto claro */
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s ease; /* Transição suave de cor */
+}
+
+/* Hover: Ao passar o mouse, a cor muda para o dourado do Lunar Cycle */
+.menu-link:hover {
+  color: #EAC996;
+}
+
+/* Oculta o botão hambúrguer no Desktop */
+.menu-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+/* Linhas do botão hambúrguer */
+.menu-hamburger .barra {
+  width: 25px;
+  height: 3px;
+  background-color: #EAC996;
+  transition: all 0.3s ease;
+}
+
+/* =========================================
+   RESPONSIVIDADE (Mobile - Abaixo de 768px)
+   ========================================= */
+@media (max-width: 768px) {
+  
+  /* Exibe o botão hambúrguer */
+  .menu-hamburger {
+    display: flex;
+  }
+
+  /* Transforma a lista de links em um menu lateral/abaixo */
+  .menu-links {
+    position: absolute;
+    top: 60px; /* Altura do menu principal */
+    right: 0;
+    width: 100%;
+    background: rgba(48, 50, 64, 0.98);
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    
+    /* Esconde o menu fora da tela por padrão */
+    transform: translateY(-150%);
+    opacity: 0;
+    transition: all 0.4s ease;
+    z-index: -1; /* Fica atrás da barra superior quando fechado */
+  }
+
+  /* Quando o menu mobile estiver "ativo" (aberto) */
+  .menu-links.ativo {
+    transform: translateY(0); /* Desce o menu para a tela */
+    opacity: 1;
+  }
+
+  /* Animações do Hambúrguer para formar um "X" quando aberto */
+  .menu-hamburger .barra.aberta:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .menu-hamburger .barra.aberta:nth-child(2) {
+    opacity: 0; /* Esconde a barra do meio */
+  }
+  .menu-hamburger .barra.aberta:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
