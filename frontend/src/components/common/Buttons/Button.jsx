@@ -1,7 +1,7 @@
 import "./Button.css"
 import { motion } from "framer-motion";
 
-const Button = ({variant = 'padrao', backgroundColor, color, isLoading = false, onClick, disabled = false, children, icone}) => {
+const Button = ({variant = 'padrao', backgroundColor, color, textColor, isLoading = false, onClick, disabled = false, children, icone}) => {
     const interativo = !disabled && !isLoading;
     let estilosDeSeguranca = {};
     
@@ -20,6 +20,10 @@ const Button = ({variant = 'padrao', backgroundColor, color, isLoading = false, 
 
     if (backgroundColor) {
         estilosDeSeguranca.background = backgroundColor;
+    }
+
+    if (textColor) {
+        estilosDeSeguranca.color = textColor;
     }
 
     return (

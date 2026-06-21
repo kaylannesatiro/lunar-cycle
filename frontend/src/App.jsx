@@ -25,7 +25,9 @@ const App = () => {
           <Button 
             variant="redondo" 
             icone={"◈"}
-            onClick={() => console.log("Registrando...")}>
+            onClick={() => console.log("Registrando...")}
+            backgroundColor="rgba(110, 76, 163, 0.28)"
+            color="#A58CFF">
             Registrar Menstruação
           </Button>
 
