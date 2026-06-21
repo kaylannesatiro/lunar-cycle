@@ -1,7 +1,7 @@
 import "./Button.css"
 import { motion } from "framer-motion";
 
-const Button = (variant = 'padrao', color, isLoading = false, onClick, disabled = false, children, icone) => {
+const Button = ({variant = 'padrao', color, isLoading = false, onClick, disabled = false, children, icone}) => {
 
     const classVariante = `btn-${variant}`;
     const interativo = !disabled && !isLoading;
