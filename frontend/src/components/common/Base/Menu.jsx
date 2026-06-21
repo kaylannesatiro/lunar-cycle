@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Menu.css';
+import Icone from '../../../assets/Icon.svg';
 
 function Menu({ links }) {
     const [menuAberto, setMenuAberto] = useState(false);
@@ -13,7 +14,7 @@ function Menu({ links }) {
             <nav className="menu-container">
                 
                 <a href="/" className="menu-logo">
-                    <span className="logo-icone">🌙</span>
+                    <img src={Icone} alt="Lunar Cycle Logo" className="logo-icone"/>
                     <span className="logo-texto">LUNAR CYCLE</span>
                 </a>
 
