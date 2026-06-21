@@ -37,7 +37,7 @@ const Button = ({variant = 'padrao', backgroundColor, color, textColor, isLoadin
             whileTap={interativo ? { scale: 0.95 } : {}}>
 
             {isLoading ? (
-                <span className="btn-loading">Processando...</span>
+                <span className="btn-loading">Carregando...</span>
             ) : (
                 <>
                 {variant === 'fechar' ? ('✕') : (
