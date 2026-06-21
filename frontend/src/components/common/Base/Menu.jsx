@@ -12,11 +12,10 @@ function Menu({ links }) {
         <header className="menu-wrapper">
             <nav className="menu-container">
                 
-                <div className="menu-logo">
-                {/* Substitua o emoji pelo seu SVG exportado do Figma, se tiver. Por enquanto, usamos a classe */}
-                <span className="logo-icone">🌙</span>
-                <span className="logo-texto">LUNAR CYCLE</span>
-                </div>
+                <a href="/" className="menu-logo">
+                    <span className="logo-icone">🌙</span>
+                    <span className="logo-texto">LUNAR CYCLE</span>
+                </a>
 
                 <div className="menu-hamburger" onClick={alternarMenu}>
                 <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
