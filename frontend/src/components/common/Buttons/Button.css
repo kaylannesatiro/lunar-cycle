@@ -30,22 +30,23 @@
 }
 
 /* =========================================
-   VARIANTE: PADRÃO (Quadrado com cantos arredondados)
+   VARIANTE: PADRÃO (Quadrado)
    ========================================= */
 .btn-padrao {
-  /* O Figma pediu width fixo de 341px, mas para ser responsivo usamos 100% com limite máximo */
   width: 100%;
-  max-width: 21.3rem; /* ~341px */
-  padding: 0.97rem 0; /* ~15.5px */
+  max-width: 21.3rem; 
+  min-height: 3rem; /* O PULO DO GATO: Força o botão a ter ~48px de altura sempre */
+  padding: 0 1rem; /* Adicionado padding lateral por segurança */
+  box-sizing: border-box; /* Garante que o padding não estoure o tamanho */
   
-  border-radius: 0.875rem; /* 14px */
+  border-radius: 0.875rem; 
   border: 0.04rem solid rgba(224, 197, 143, 0.30);
   background: linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%);
   
   color: #E0C58F;
-  font-size: 0.67rem; /* ~10.72px */
-  line-height: 1.05rem; /* ~16px */
-  letter-spacing: 0.087rem; /* ~1.39px */
+  font-size: 0.67rem; 
+  line-height: 1.05rem; 
+  letter-spacing: 0.087rem; 
   text-transform: uppercase;
 }
 
@@ -54,11 +55,13 @@
    ========================================= */
 .btn-redondo {
   width: 100%;
-  max-width: 16.7rem; /* ~268px */
-  padding: 0.97rem 2.6rem; /* ~15.5px e 42px */
+  max-width: 16.7rem; 
+  min-height: 3rem; /* Garante a altura arredondada perfeita */
+  padding: 0 2rem; 
+  box-sizing: border-box;
   
-  border-radius: 6.25rem; /* 100px */
-  border: 0.04rem solid #E0C58F; /* Borda mais forte que o padrão */
+  border-radius: 6.25rem; 
+  border: 0.04rem solid #E0C58F; 
   background: linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%);
   
   color: #E0C58F;
@@ -72,18 +75,19 @@
    VARIANTE: FECHAR (X)
    ========================================= */
 .btn-fechar {
-  width: 2.125rem; /* ~34px */
-  height: 2.125rem; /* ~34px */
-  flex-shrink: 0; /* Impede que ele seja esmagado no Flexbox */
+  width: 2.125rem; 
+  height: 2.125rem; 
+  min-height: 2.125rem; /* Impede que ele seja esmagado */
+  flex-shrink: 0; 
+  box-sizing: border-box;
   
-  border-radius: 50%; /* Faz um círculo perfeito (17px = metade de 34px) */
+  border-radius: 50%; 
   border: 0.04rem solid rgba(224, 197, 143, 0.50);
   background: rgba(224, 197, 143, 0.06);
   
-  /* A fonte do Fechar no Figma é a Inter, não a Cinzel */
   font-family: "Inter", sans-serif;
   color: #E0C58F;
-  font-size: 1rem; /* 16px */
+  font-size: 1rem; 
   font-weight: 500;
 }
 
