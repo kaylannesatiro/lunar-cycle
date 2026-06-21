@@ -53,3 +53,32 @@
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
+
+/* =========================================
+   CAMADA 2: ESTRELAS (Overlay)
+   ========================================= */
+.background-estrelas {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  
+  /* O z-index 0 coloca as estrelas ENTRE o fundo (-1) e o conteúdo (1) */
+  z-index: 0; 
+  
+  /* PULO DO GATO RESPONSIVO: 'cover' faz a imagem crescer ou encolher
+     proporcionalmente para preencher toda a tela, ignorando os 1332px do Figma */
+  background-size: cover;
+  background-position: center;
+  
+  /* SEGREDO DE MENTOR: Como as estrelas ficam "flutuando" por cima de tudo no fundo, 
+     precisamos garantir que essa camada invisível não bloqueie os cliques do usuário 
+     nos botões e links. O pointer-events: none; deixa os cliques "vazarem" através dela. */
+  pointer-events: none;
+  
+  /* Um leve ajuste de opacidade para a imagem não brigar com o texto do app */
+  opacity: 0.85; 
+}
+
+/* Nota: Mantenha as outras classes (.background-container, .background-mistico, .conteudo-app) exatamente como estavam! */
