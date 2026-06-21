@@ -11,19 +11,19 @@
    ========================================= */
 .menu-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center; 
-  /* 16px = 1rem | 40px = 2.5rem */
-  padding: 1rem 2.5rem;
+  justify-content: center; /* Garante que o container interno fique no meio */
   
-  /* Borda inferior (0.667px / 16 = ~0.04rem) */
-  border-bottom: 0.04rem solid rgba(224, 197, 143, 0.40);
+  /* Aqui está a distância da borda que o Figma pede (40px nas laterais) */
+  padding: 16px 40px; 
+  
+  border-bottom: 0.667px solid rgba(224, 197, 143, 0.40);
   background: rgba(6, 8, 23, 0.80);
-  backdrop-filter: blur(0.5rem); 
+  backdrop-filter: blur(8px);
   
-  position: sticky;
+  position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
+  width: 100vw; /* Força o menu a ir de ponta a ponta na tela */
   z-index: 1000;
 }
 
@@ -32,12 +32,11 @@
    ========================================= */
 .menu-container {
   display: flex;
-  /* 1360px = 85rem */
-  max-width: 85rem; 
-  width: 100%;
-  justify-content: space-between;
+  justify-content: space-between; /* Empurra a logo totalmente para a esquerda e a lista totalmente para a direita */
   align-items: center;
-  align-self: stretch;
+  
+  max-width: 1360px; /* Limite do Figma */
+  width: 100%; /* Fundamental: faz o container esticar até o limite do padding de 40px */
 }
 
 /* =========================================
@@ -85,9 +84,14 @@
    ========================================= */
 .menu-links {
   display: flex;
+  justify-content: flex-end; /* Garante que os links colem no lado direito */
+  gap: 32px;
+  
+  /* CRÍTICO: O navegador coloca um padding natural na tag <ul>. 
+     Isso é o que estava empurrando seus links para a esquerda! */
+  padding: 0; 
+  margin: 0;
   list-style: none;
-  /* 32px = 2rem */
-  gap: 2rem; 
 }
 
 .menu-link {
