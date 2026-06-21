@@ -10,34 +10,33 @@
   align-items: center;
   cursor: pointer;
   outline: none;
-  
-  /* Removemos o background padrão dos botões HTML */
   background: transparent; 
-  
-  /* Fonte padrão dos botões (Cinzel) */
   font-family: "Cinzel", serif;
   font-weight: 400;
-  
-  /* Transição suave de CSS para complementar o Framer Motion */
   transition: background 0.3s ease, opacity 0.3s ease;
+  
+  /* O PULO DO GATO: flex-shrink 0 impede que o botão seja esmagado (vire linha) */
+  flex-shrink: 0; 
+  box-sizing: border-box;
 }
 
 /* Container interno para alinhar o ícone de losango e o texto */
 .btn-conteudo {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* Espaço entre o ícone e o texto */
+  gap: 0.5rem; 
 }
 
 /* =========================================
-   VARIANTE: PADRÃO (Quadrado)
+   VARIANTE: PADRÃO (Quadrado com cantos arredondados)
    ========================================= */
 .btn-padrao {
   width: 100%;
   max-width: 21.3rem; 
-  min-height: 3rem; /* O PULO DO GATO: Força o botão a ter ~48px de altura sempre */
-  padding: 0 1rem; /* Adicionado padding lateral por segurança */
-  box-sizing: border-box; /* Garante que o padding não estoure o tamanho */
+  
+  /* Usando height fixo para garantir o tamanho do Figma */
+  height: 3rem; 
+  padding: 0 1rem; 
   
   border-radius: 0.875rem; 
   border: 0.04rem solid rgba(224, 197, 143, 0.30);
@@ -56,9 +55,10 @@
 .btn-redondo {
   width: 100%;
   max-width: 16.7rem; 
-  min-height: 3rem; /* Garante a altura arredondada perfeita */
+  
+  /* Usando height fixo para garantir o tamanho do Figma */
+  height: 3rem; 
   padding: 0 2rem; 
-  box-sizing: border-box;
   
   border-radius: 6.25rem; 
   border: 0.04rem solid #E0C58F; 
@@ -70,6 +70,8 @@
   letter-spacing: 0.087rem;
   text-transform: uppercase;
 }
+
+/* Variante Fechar se mantém igual, apenas certifique-se que ela tem flex-shrink: 0; */
 
 /* =========================================
    VARIANTE: FECHAR (X)
