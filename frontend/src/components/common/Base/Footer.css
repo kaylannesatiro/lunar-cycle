@@ -4,20 +4,20 @@
 .footer-wrapper {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Alinhamento extraído do seu Figma */
   width: 100vw;
   
-  /* A TRAVA DO FIGMA: 431px convertido para rem (431 / 16 = ~27rem) */
-  max-height: 27rem; 
-  
-  /* Paddings exatos do Figma: 72px 40px 35.2px 40px */
+  /* Valores do Figma convertidos para rem (72px no topo, 35px embaixo) */
   padding: 4.5rem 2.5rem 2.2rem 2.5rem; 
   
+  /* Borda superior fininha com a cor exata do Figma */
   border-top: 0.04rem solid rgba(224, 197, 143, 0.07);
+  
+  /* Fundo azul meia-noite sutil */
   background: rgba(4, 6, 18, 0.80);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px); /* Mantém o tema glassmorphism do projeto */
+  
+  /* Previne que o footer encolha caso a página tenha pouco conteúdo */
   flex-shrink: 0; 
-  margin-top: auto; 
 }
 
 /* Container interno (Limita a largura para bater com o Header) */
@@ -174,11 +174,7 @@
    ========================================= */
 @media (max-width: 48rem) {
   .footer-wrapper {
-    padding: 3rem 1.5rem 2rem 1.5rem; 
-    
-    /* O PULO DO GATO: Remove a trava de 431px no celular 
-       para permitir que as colunas empilhadas caibam sem vazar! */
-    max-height: none; 
+    padding: 3rem 1.5rem 2rem 1.5rem; /* Reduz o padding para não espremer o celular */
   }
 
   .footer-conteudo {
