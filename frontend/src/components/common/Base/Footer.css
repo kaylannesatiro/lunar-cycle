@@ -127,11 +127,14 @@
 
 .footer-titulo-links {
   color: #E0C58F;
-  font-family: "Cinzel", serif;
-  font-size: 12px;
-  letter-spacing: 1.5px;
+  font-family: "Cinzel", serif; /* Fallback adicionado para segurança */
+  font-size: 9.28px;
+  font-style: normal;
   font-weight: 400;
-  margin: 0;
+  line-height: 13.92px;
+  letter-spacing: 2.784px;
+  text-transform: uppercase;
+  margin: 0; /* Garante que o espaçamento seja controlado apenas pelo gap do container pai */
 }
 
 .footer-lista-links {
