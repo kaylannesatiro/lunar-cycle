@@ -1,7 +1,7 @@
 import "./Footer.css"
 import Icone from '../../../assets/Icon-Footer.svg'
 
-const Footer = () => {
+const Footer = ({links}) => {
     return (
         <footer className="footer-wrapper">
             <div className="footer-container">
@@ -26,12 +26,14 @@ const Footer = () => {
                     <div className="footer-coluna-links">
                         <h4 className="footer-titulo-links">NAVEGAÇÃO</h4>
                         <ul className="footer-lista-links">
-                            <li><a href="/">Início</a></li>
-                            <li><a href="/diario">Diário dos Sonhos</a></li>
-                            <li><a href="/calendario">Calendário</a></li>
-                            <li><a href="/conta">Conta</a></li>
+                            {links.map((link, index) => (
+                                <li key={index}>
+                                    <a href={link.rota}>{link.titulo}</a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
+
 
                     <div className="footer-coluna-links">
                         <h4 className="footer-titulo-links">SUPORTE</h4>
