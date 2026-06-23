@@ -209,24 +209,60 @@
 }
 
 /* =========================================
-   RESPONSIVIDADE OBRIGATÓRIA
+   RESPONSIVIDADE OBRIGATÓRIA (Padrão de Mercado)
    ========================================= */
 @media (max-width: 48rem) {
   .footer-wrapper {
     max-height: none; 
-    padding: 2.5rem 1.5rem; /* Antigo 40px 24px */
+    padding: 3rem 1.5rem 2rem 1.5rem; /* Ajuste de respiro para telas menores */
   }
+
+  /* Transformamos em Grid para colocar os links lado a lado no celular */
   .footer-conteudo {
-    flex-direction: column;
-    gap: 2.5rem; /* Antigo 40px */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Cria 2 colunas iguais */
+    gap: 3rem 1.5rem; /* 3rem de espaço vertical, 1.5rem horizontal */
   }
-  .footer-marca, .footer-coluna-links {
+
+  /* A marca ocupa a linha inteira do grid e fica centralizada */
+  .footer-marca {
+    grid-column: 1 / -1; /* Manda ocupar todas as colunas disponíveis */
     max-width: 100%;
     align-items: center;
     text-align: center;
-    width: 100%;
   }
+
+  /* Garante que a logo fique no meio da tela */
+  .footer-logo {
+    justify-content: center;
+  }
+
+  /* Centraliza o texto da descrição no celular */
+  .footer-descricao {
+    text-align: center;
+  }
+
+  /* As colunas de links dividem o espaço e ficam alinhadas à esquerda (Melhor UX) */
+  .footer-coluna-links {
+    min-width: 0; /* Previne que palavras grandes quebrem a tela */
+    align-items: flex-start;
+  }
+
+  /* Sobrescreve o alinhamento central do desktop para alinhar à esquerda no mobile */
+  .footer-lista-links a {
+    text-align: left;
+    font-size: 0.8rem; /* Aumenta um pouquinho a fonte pro toque do dedo */
+  }
+
+  /* Ajustes de respiro para a linha final */
   .footer-rodape-final {
-    margin-top: 2rem; /* Antigo 32px */
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    gap: 1rem;
+  }
+
+  /* Dá mais espaço entre as linhas da frase caso ela quebre em 3 partes no celular */
+  .frase-mistica {
+    line-height: 1.3rem; 
   }
 }
