@@ -25,8 +25,11 @@
 .footer-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 1334px; /* Largura máxima do Figma */
+  
+  /* O PULO DO GATO: */
+  width: 100%; /* Força a ocupar todo o espaço interno do wrapper */
+  max-width: none; /* Removemos a trava de 1334px! Agora ele estica com a tela */
+  
   justify-content: space-between;
 }
 
@@ -35,7 +38,10 @@
    ========================================= */
 .footer-conteudo {
   display: flex;
-  justify-content: space-between;
+  
+  /* Isso garante que o espaço extra gerado em telas grandes 
+     seja distribuído ENTRE as colunas */
+  justify-content: space-between; 
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 40px;
