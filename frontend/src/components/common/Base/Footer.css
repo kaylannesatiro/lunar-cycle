@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: flex-start;
   width: 100vw;
-  max-height: 431px;
+  max-height: 26.9375rem; /* Antigo 431px */
   
   /* O PULO DO GATO DO DESIGN FLUIDO:
      Topo: 4.5rem (72px)
@@ -19,7 +19,7 @@
   box-sizing: border-box; 
   border-top: 0.04rem solid rgba(224, 197, 143, 0.07);
   background: rgba(4, 6, 18, 0.80);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(0.5rem); /* Antigo blur(8px) */
   flex-shrink: 0; 
   margin-top: auto; 
 }
@@ -46,7 +46,7 @@
   justify-content: space-between; 
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 2.5rem; /* Antigo 40px */
   width: 100%;
 }
 
@@ -54,43 +54,43 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* O PULO DO GATO: Crava tudo na esquerda */
-  max-width: 350px;
-  gap: 24px;
+  max-width: 21.875rem; /* Antigo 350px */
+  gap: 1.5rem; /* Antigo 24px */
 }
 
-/* 2. Mantém o ícone e o texto LUNAR CYCLE alinhados no meio um do outro */
+/* Mantém o ícone e o texto LUNAR CYCLE alinhados no meio um do outro */
 .footer-logo {
   display: flex;
   align-items: center; 
-  gap: 12px;
+  gap: 0.75rem; /* Antigo 12px */
   margin-left: 0; /* Garante que o container do logo não fuja para a direita */
 }
 
 .logo-icone-footer {
   width: 4.5rem; 
-    height: 4.5rem;
-    margin-top: -1.5rem;
-    margin-bottom: -1.5rem;
-    margin-right: -1.2rem;
-    margin-left: -1rem;
-    object-fit: contain;
+  height: 4.5rem;
+  margin-top: -1.5rem;
+  margin-bottom: -1.5rem;
+  margin-right: -1.2rem;
+  margin-left: -1rem;
+  object-fit: contain;
 }
 
 .logo-texto-footer {
   color: #E0C58F;
-  font-family: "Cinzel Decorative";
-  font-size: 14px;
+  font-family: "Cinzel Decorative", serif;
+  font-size: 0.875rem; /* Antigo 14px */
   font-weight: 400;
-  letter-spacing: 2px;
+  letter-spacing: 0.125rem; /* Antigo 2px */
 }
 
 .footer-descricao {
   color: #F5F0E9;
   font-family: "Raleway", sans-serif;
-  font-size: 12px;
+  font-size: 0.75rem; /* Antigo 12px */
   font-style: normal;
   font-weight: 400;
-  line-height: 22.2px;
+  line-height: 1.3875rem; /* Antigo 22.2px */
   
   /* Remove margens extras e alinha o texto à esquerda */
   margin: 0; 
@@ -102,20 +102,20 @@
    ========================================= */
 .footer-sociais {
   display: flex;
-  gap: 16px;
+  gap: 1rem; /* Antigo 16px */
 }
 
 .icone-social {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 36px;
-  height: 36px;
+  width: 2.25rem; /* Antigo 36px */
+  height: 2.25rem; /* Antigo 36px */
   border-radius: 50%;
-  border: 1px solid rgba(224, 197, 143, 0.3);
+  border: 0.0625rem solid rgba(224, 197, 143, 0.3); /* Antigo 1px */
   color: #E0C58F;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 0.875rem; /* Antigo 14px */
   transition: all 0.3s ease;
 }
 
@@ -127,20 +127,20 @@
 .footer-coluna-links {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  min-width: 160px;
+  gap: 1.25rem; /* Antigo 20px */
+  min-width: 10rem; /* Antigo 160px */
 }
 
 .footer-titulo-links {
   color: #E0C58F;
-  font-family: "Cinzel", serif; /* Fallback adicionado para segurança */
-  font-size: 9.28px;
+  font-family: "Cinzel", serif; 
+  font-size: 0.58rem; /* Antigo 9.28px */
   font-style: normal;
   font-weight: 400;
-  line-height: 13.92px;
-  letter-spacing: 2.784px;
+  line-height: 0.87rem; /* Antigo 13.92px */
+  letter-spacing: 0.174rem; /* Antigo 2.784px */
   text-transform: uppercase;
-  margin: 0; /* Garante que o espaçamento seja controlado apenas pelo gap do container pai */
+  margin: 0; 
 }
 
 .footer-lista-links {
@@ -149,23 +149,22 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem; /* Antigo 16px */
 }
 
 .footer-lista-links a {
   color: #F5F0E9;
-  text-align: center; /* Conforme especificado no Figma */
+  text-align: center; 
   font-family: "Raleway", sans-serif;
-  font-size: 11.52px;
+  font-size: 0.72rem; /* Antigo 11.52px */
   font-style: normal;
   font-weight: 500;
-  line-height: 17.28px;
-  letter-spacing: 0.576px;
+  line-height: 1.08rem; /* Antigo 17.28px */
+  letter-spacing: 0.036rem; /* Antigo 0.576px */
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-/* O brilho dourado ao passar o mouse continua ativo! */
 .footer-lista-links a:hover {
   color: #E0C58F; 
 }
@@ -177,10 +176,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  border-top: 1px solid rgba(224, 197, 143, 0.05);
-  margin-top: 48px;
-  padding-top: 24px;
+  gap: 0.75rem; /* Antigo 12px */
+  border-top: 0.0625rem solid rgba(224, 197, 143, 0.05); /* Antigo 1px */
+  margin-top: 3rem; /* Antigo 48px */
+  padding-top: 1.5rem; /* Antigo 24px */
   text-align: center;
 }
 
@@ -188,11 +187,11 @@
   color: #E0C58F;
   text-align: center;
   font-family: "Cinzel", serif;
-  font-size: 9.6px;
+  font-size: 0.6rem; /* Antigo 9.6px */
   font-style: normal;
   font-weight: 400;
-  line-height: 14.4px;
-  letter-spacing: 3.36px;
+  line-height: 0.9rem; /* Antigo 14.4px */
+  letter-spacing: 0.21rem; /* Antigo 3.36px */
   text-transform: uppercase;
   margin: 0;
 }
@@ -200,24 +199,26 @@
 .copyright {
   color: #F5F0E9;
   text-align: center;
-  font-family: "Raleway", sans-serif; /* Fallback de segurança adicionado */
-  font-size: 9.6px;
+  font-family: "Raleway", sans-serif; 
+  font-size: 0.6rem; /* Antigo 9.6px */
   font-style: normal;
   font-weight: 400;
-  line-height: 14.4px;
-  letter-spacing: 0.96px;
-  margin: 0; /* Garante que o espaçamento seja controlado apenas pelo pai (gap) */
+  line-height: 0.9rem; /* Antigo 14.4px */
+  letter-spacing: 0.06rem; /* Antigo 0.96px */
+  margin: 0; 
 }
 
-/* RESPONSIVIDADE OBRIGATÓRIA */
+/* =========================================
+   RESPONSIVIDADE OBRIGATÓRIA
+   ========================================= */
 @media (max-width: 48rem) {
   .footer-wrapper {
-    max-height: none; /* Destrava a altura no celular pras colunas caberem */
-    padding: 40px 24px;
+    max-height: none; 
+    padding: 2.5rem 1.5rem; /* Antigo 40px 24px */
   }
   .footer-conteudo {
     flex-direction: column;
-    gap: 40px;
+    gap: 2.5rem; /* Antigo 40px */
   }
   .footer-marca, .footer-coluna-links {
     max-width: 100%;
@@ -226,6 +227,6 @@
     width: 100%;
   }
   .footer-rodape-final {
-    margin-top: 32px;
+    margin-top: 2rem; /* Antigo 32px */
   }
 }
