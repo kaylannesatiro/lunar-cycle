@@ -1,270 +1,232 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
 
-/* =========================================
-   ESTRUTURA EXTERNA (Fundo e Proporção)
-   ========================================= */
 .footer-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100vw;
-  max-height: 26.9375rem; /* Antigo 431px */
-  
-  /* O PULO DO GATO DO DESIGN FLUIDO:
-     Topo: 4.5rem (72px)
-     Laterais: 15.5vw (Garante os exatos 207px proporcionais ao tamanho da tela!)
-     Base: 2.2rem (35px) */
-  padding: 4.5rem 15.5vw 2.2rem 15.5vw; 
-  
-  box-sizing: border-box; 
-  border-top: 0.04rem solid rgba(224, 197, 143, 0.07);
-  background: rgba(4, 6, 18, 0.80);
-  backdrop-filter: blur(0.5rem); /* Antigo blur(8px) */
-  flex-shrink: 0; 
-  margin-top: auto; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100vw;
+    max-height: 26.9375rem;
+    padding: 4.5rem 15.5vw 2.2rem 15.5vw;   
+    box-sizing: border-box; 
+    border-top: 0.04rem solid rgba(224, 197, 143, 0.07);
+    background: rgba(4, 6, 18, 0.80);
+    backdrop-filter: blur(0.5rem);
+    flex-shrink: 0; 
+    margin-top: auto; 
 }
 
 .footer-container {
-  display: flex;
-  flex-direction: column;
-  
-  /* O PULO DO GATO: */
-  width: 100%; /* Força a ocupar todo o espaço interno do wrapper */
-  max-width: none; /* Removemos a trava de 1334px! Agora ele estica com a tela */
-  
-  justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    justify-content: space-between;
 }
 
-/* =========================================
-   CONTEÚDO INTERNO / COLUNAS
-   ========================================= */
 .footer-conteudo {
-  display: flex;
-  
-  /* Isso garante que o espaço extra gerado em telas grandes 
-     seja distribuído ENTRE as colunas */
-  justify-content: space-between; 
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 2.5rem; /* Antigo 40px */
-  width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    width: 100%;
 }
 
 .footer-marca {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* O PULO DO GATO: Crava tudo na esquerda */
-  max-width: 21.875rem; /* Antigo 350px */
-  gap: 1.5rem; /* Antigo 24px */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    max-width: 21.875rem; 
+    gap: 1.5rem; 
 }
 
-/* Mantém o ícone e o texto LUNAR CYCLE alinhados no meio um do outro */
 .footer-logo {
-  display: flex;
-  align-items: center; 
-  gap: 0.75rem; /* Antigo 12px */
-  margin-left: 0; /* Garante que o container do logo não fuja para a direita */
+    display: flex;
+    align-items: center; 
+    gap: 0.75rem; 
+    margin-left: 0; 
 }
 
 .logo-icone-footer {
-  width: 4.5rem; 
-  height: 4.5rem;
-  margin-top: -1.5rem;
-  margin-bottom: -1.5rem;
-  margin-right: -1.2rem;
-  margin-left: -1rem;
-  object-fit: contain;
+    width: 4.5rem; 
+    height: 4.5rem;
+    margin-top: -1.5rem;
+    margin-bottom: -1.5rem;
+    margin-right: -1.2rem;
+    margin-left: -1rem;
+    object-fit: contain;
 }
 
 .logo-texto-footer {
-  color: #E0C58F;
-  font-family: "Cinzel Decorative", serif;
-  font-size: 0.875rem; /* Antigo 14px */
-  font-weight: 400;
-  letter-spacing: 0.125rem; /* Antigo 2px */
+    color: #E0C58F;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 0.875rem; 
+    font-weight: 400;
+    letter-spacing: 0.125rem; 
 }
 
 .footer-descricao {
-  color: #F5F0E9;
-  font-family: "Raleway", sans-serif;
-  font-size: 0.75rem; /* Antigo 12px */
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.3875rem; /* Antigo 22.2px */
-  
-  /* Remove margens extras e alinha o texto à esquerda */
-  margin: 0; 
-  text-align: left; 
+    color: #F5F0E9;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.75rem; 
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.3875rem; 
+    margin: 0; 
+    text-align: left; 
 }
 
-/* =========================================
-   ÍCONES SOCIAIS E LINKS
-   ========================================= */
 .footer-sociais {
-  display: flex;
-  gap: 1rem; /* Antigo 16px */
+    display: flex;
+    gap: 1rem; 
 }
 
 .icone-social {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 2.25rem; /* Antigo 36px */
-  height: 2.25rem; /* Antigo 36px */
-  border-radius: 50%;
-  border: 0.0625rem solid rgba(224, 197, 143, 0.3); /* Antigo 1px */
-  color: #E0C58F;
-  text-decoration: none;
-  font-size: 0.875rem; /* Antigo 14px */
-  transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.25rem; 
+    height: 2.25rem; 
+    border-radius: 50%;
+    border: 0.0625rem solid rgba(224, 197, 143, 0.3); 
+    color: #E0C58F;
+    text-decoration: none;
+    font-size: 0.875rem;  
+    transition: all 0.3s ease;
 }
 
 .icone-social:hover {
-  background: rgba(224, 197, 143, 0.1);
-  border-color: #E0C58F;
+    background: rgba(224, 197, 143, 0.1);
+    border-color: #E0C58F;
 }
 
 .footer-coluna-links {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem; /* Antigo 20px */
-  min-width: 10rem; /* Antigo 160px */
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; 
+    min-width: 10rem; 
 }
 
 .footer-titulo-links {
-  color: #E0C58F;
-  font-family: "Cinzel", serif; 
-  font-size: 0.58rem; /* Antigo 9.28px */
-  font-style: normal;
-  font-weight: 400;
-  line-height: 0.87rem; /* Antigo 13.92px */
-  letter-spacing: 0.174rem; /* Antigo 2.784px */
-  text-transform: uppercase;
-  margin: 0; 
+    color: #E0C58F;
+    font-family: "Cinzel", serif; 
+    font-size: 0.58rem; 
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0.87rem; 
+    letter-spacing: 0.174rem;
+    text-transform: uppercase;
+    margin: 0; 
 }
 
 .footer-lista-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem; /* Antigo 16px */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
 }
 
 .footer-lista-links a {
-  color: #F5F0E9;
-  text-align: center; 
-  font-family: "Raleway", sans-serif;
-  font-size: 0.72rem; /* Antigo 11.52px */
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.08rem; /* Antigo 17.28px */
-  letter-spacing: 0.036rem; /* Antigo 0.576px */
-  text-decoration: none;
-  transition: color 0.3s ease;
+    color: #F5F0E9;
+    text-align: center; 
+    font-family: "Raleway", sans-serif;
+    font-size: 0.72rem; 
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.08rem;
+    letter-spacing: 0.036rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .footer-lista-links a:hover {
-  color: #E0C58F; 
+    color: #E0C58F;   
 }
 
-/* =========================================
-   RODAPÉ FINAL
-   ========================================= */
 .footer-rodape-final {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem; /* Antigo 12px */
-  border-top: 0.0625rem solid rgba(224, 197, 143, 0.05); /* Antigo 1px */
-  margin-top: 3rem; /* Antigo 48px */
-  padding-top: 1.5rem; /* Antigo 24px */
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem; 
+    border-top: 0.0625rem solid rgba(224, 197, 143, 0.05); 
+    margin-top: 3rem; 
+    padding-top: 1.5rem; 
+    text-align: center;
 }
 
 .frase-mistica {
-  color: #E0C58F;
-  text-align: center;
-  font-family: "Cinzel", serif;
-  font-size: 0.6rem; /* Antigo 9.6px */
-  font-style: normal;
-  font-weight: 400;
-  line-height: 0.9rem; /* Antigo 14.4px */
-  letter-spacing: 0.21rem; /* Antigo 3.36px */
-  text-transform: uppercase;
-  margin: 0;
+    color: #E0C58F;
+    text-align: center;
+    font-family: "Cinzel", serif;
+    font-size: 0.6rem; 
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0.9rem; 
+    letter-spacing: 0.21rem; 
+    text-transform: uppercase;
+    margin: 0;
 }
 
 .copyright {
-  color: #F5F0E9;
-  text-align: center;
-  font-family: "Raleway", sans-serif; 
-  font-size: 0.6rem; /* Antigo 9.6px */
-  font-style: normal;
-  font-weight: 400;
-  line-height: 0.9rem; /* Antigo 14.4px */
-  letter-spacing: 0.06rem; /* Antigo 0.96px */
-  margin: 0; 
+    color: #F5F0E9;
+    text-align: center;
+    font-family: "Raleway", sans-serif; 
+    font-size: 0.6rem; 
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0.9rem;
+    letter-spacing: 0.06rem; 
+    margin: 0; 
 }
 
-/* =========================================
-   RESPONSIVIDADE OBRIGATÓRIA (Blindagem Total Flexbox)
-   ========================================= */
 @media (max-width: 48rem) {
-  .footer-wrapper {
-    max-height: none; /* Destrava a altura */
-    padding: 3rem 1.5rem 2rem 1.5rem; 
-  }
+    .footer-wrapper {
+        max-height: none; 
+        padding: 3rem 1.5rem 2rem 1.5rem; 
+    }
 
-  /* Retorna para Flexbox e empilha tudo verticalmente no centro */
-  .footer-conteudo {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    gap: 3rem;
-  }
+    .footer-conteudo {
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        gap: 3rem;
+    }
 
-  /* Centraliza a coluna da marca */
-  .footer-marca {
-    max-width: 100%;
-    align-items: center;
-    text-align: center;
-  }
+    .footer-marca {
+        max-width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .footer-logo {
+        justify-content: center;
+    }
 
-  /* Garante que o ícone e a palavra LUNAR CYCLE fiquem no meio */
-  .footer-logo {
-    justify-content: center;
-  }
+    .footer-descricao {
+        text-align: center;
+    }
+    .footer-coluna-links {
+        min-width: 100%;
+        align-items: center;
+        text-align: center;
+    }
 
-  /* Centraliza a descrição */
-  .footer-descricao {
-    text-align: center;
-  }
+    .footer-lista-links {
+        align-items: center;
+    }
 
-  /* Centraliza as colunas de links */
-  .footer-coluna-links {
-    min-width: 100%;
-    align-items: center;
-    text-align: center;
-  }
+    .footer-lista-links a {
+        text-align: center;
+    }
 
-  /* Garante que os itens da lista não fujam para a esquerda */
-  .footer-lista-links {
-    align-items: center;
-  }
-
-  .footer-lista-links a {
-    text-align: center;
-  }
-
-  /* Respiros finais */
-  .footer-rodape-final {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-  }
-  
-  .frase-mistica {
-    line-height: 1.4rem; 
-  }
+    .footer-rodape-final {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
+    
+    .frase-mistica {
+        line-height: 1.4rem; 
+    }
 }
