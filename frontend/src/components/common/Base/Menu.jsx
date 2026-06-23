@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './Menu.css';
 import Icone from '../../../assets/Icon.svg';
 
-function Menu({ links }) {
+const Menu = ({ links }) => {
     const [menuAberto, setMenuAberto] = useState(false);
 
     const alternarMenu = () => {
@@ -19,19 +19,19 @@ function Menu({ links }) {
                 </a>
 
                 <div className="menu-hamburger" onClick={alternarMenu}>
-                <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
-                <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
-                <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
+                    <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
+                    <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
+                    <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
                 </div>
 
                 <ul className={`menu-links ${menuAberto ? 'ativo' : ''}`}>
-                {links.map((link, index) => (
-                    <li key={index} className="menu-item">
-                    <a href={link.rota} className="menu-link">
-                        {link.titulo}
-                    </a>
-                    </li>
-                ))}
+                    {links.map((link, index) => (
+                        <li key={index} className="menu-item">
+                            <a href={link.rota} className="menu-link">
+                                {link.titulo}
+                            </a>
+                        </li>
+                    ))}
                 </ul>
                 
             </nav>
