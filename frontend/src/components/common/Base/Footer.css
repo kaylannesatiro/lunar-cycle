@@ -209,60 +209,62 @@
 }
 
 /* =========================================
-   RESPONSIVIDADE OBRIGATÓRIA (Padrão de Mercado)
+   RESPONSIVIDADE OBRIGATÓRIA (Blindagem Total Flexbox)
    ========================================= */
 @media (max-width: 48rem) {
   .footer-wrapper {
-    max-height: none; 
-    padding: 3rem 1.5rem 2rem 1.5rem; /* Ajuste de respiro para telas menores */
+    max-height: none; /* Destrava a altura */
+    padding: 3rem 1.5rem 2rem 1.5rem; 
   }
 
-  /* Transformamos em Grid para colocar os links lado a lado no celular */
+  /* Retorna para Flexbox e empilha tudo verticalmente no centro */
   .footer-conteudo {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Cria 2 colunas iguais */
-    gap: 3rem 1.5rem; /* 3rem de espaço vertical, 1.5rem horizontal */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 3rem;
   }
 
-  /* A marca ocupa a linha inteira do grid e fica centralizada */
+  /* Centraliza a coluna da marca */
   .footer-marca {
-    grid-column: 1 / -1; /* Manda ocupar todas as colunas disponíveis */
     max-width: 100%;
     align-items: center;
     text-align: center;
   }
 
-  /* Garante que a logo fique no meio da tela */
+  /* Garante que o ícone e a palavra LUNAR CYCLE fiquem no meio */
   .footer-logo {
     justify-content: center;
   }
 
-  /* Centraliza o texto da descrição no celular */
+  /* Centraliza a descrição */
   .footer-descricao {
     text-align: center;
   }
 
-  /* As colunas de links dividem o espaço e ficam alinhadas à esquerda (Melhor UX) */
+  /* Centraliza as colunas de links */
   .footer-coluna-links {
-    min-width: 0; /* Previne que palavras grandes quebrem a tela */
-    align-items: flex-start;
+    min-width: 100%;
+    align-items: center;
+    text-align: center;
   }
 
-  /* Sobrescreve o alinhamento central do desktop para alinhar à esquerda no mobile */
+  /* Garante que os itens da lista não fujam para a esquerda */
+  .footer-lista-links {
+    align-items: center;
+  }
+
   .footer-lista-links a {
-    text-align: left;
-    font-size: 0.8rem; /* Aumenta um pouquinho a fonte pro toque do dedo */
+    text-align: center;
   }
 
-  /* Ajustes de respiro para a linha final */
+  /* Respiros finais */
   .footer-rodape-final {
-    margin-top: 2.5rem;
+    margin-top: 2rem;
     padding-top: 1.5rem;
-    gap: 1rem;
   }
-
-  /* Dá mais espaço entre as linhas da frase caso ela quebre em 3 partes no celular */
+  
   .frase-mistica {
-    line-height: 1.3rem; 
+    line-height: 1.4rem; 
   }
 }
