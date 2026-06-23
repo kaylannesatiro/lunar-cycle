@@ -64,9 +64,13 @@
 }
 
 .logo-icone-footer {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+  width: 4.5rem; 
+    height: 4.5rem;
+    margin-top: -1.5rem;
+    margin-bottom: -1.5rem;
+    margin-right: -1.2rem;
+    margin-left: -1rem;
+    object-fit: contain;
 }
 
 .logo-texto-footer {

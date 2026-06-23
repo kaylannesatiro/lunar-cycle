@@ -1,5 +1,5 @@
 import "./Footer.css"
-import Icone from '../../../assets/Icon-Footer.svg'
+import Icone from '../../../assets/Icon.svg'
 
 const Footer = ({links}) => {
     return (
