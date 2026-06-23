@@ -6,7 +6,6 @@
     padding: 0;
 }
 
-/*Menu*/
 .menu-wrapper {
     display: flex;
     justify-content: center;
@@ -15,14 +14,11 @@
     background: rgba(6, 8, 23, 0.80);
     backdrop-filter: blur(0.5rem); 
     
-    /* A MÁGICA ACONTECE AQUI: Trocamos 'fixed' por 'sticky' */
-    position: sticky; 
-    top: 0; 
+    /* MOLDURA FIXA */
+    position: fixed; 
+    top: 0;
     left: 0;
-    
-    /* Dica de Sênior: Use 100% em vez de 100vw para evitar barra de rolagem horizontal em telas do Windows */
-    width: 100%; 
-    
+    width: 100%; /* Proteção contra a barra de rolagem */
     z-index: 1000;
 }
 
