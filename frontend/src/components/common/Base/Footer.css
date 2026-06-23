@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
+
 /* =========================================
    ESTRUTURA EXTERNA (Fundo e Proporção)
    ========================================= */
@@ -76,11 +78,13 @@
 }
 
 .footer-descricao {
-  color: rgba(255, 255, 255, 0.6);
-  font-family: "Inter", sans-serif;
-  font-size: 13px;
-  line-height: 22px;
-  margin: 0;
+  color: #F5F0E9;
+  font-family: "Raleway", sans-serif; /* Fallback de segurança para navegadores */
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22.2px;
+  margin: 0; /* Mantém a margem zerada para não quebrar o layout do flexbox */
 }
 
 /* =========================================
