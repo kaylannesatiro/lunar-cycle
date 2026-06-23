@@ -13,16 +13,12 @@
     border-bottom: 0.04rem solid rgba(224, 197, 143, 0.40);
     background: rgba(6, 8, 23, 0.80);
     backdrop-filter: blur(0.5rem); 
-    
-    /* MOLDURA FIXA */
     position: fixed; 
     top: 0;
     left: 0;
-    width: 100%; /* Proteção contra a barra de rolagem */
+    width: 100%;
     z-index: 1000;
 }
-
-/*Container de Menu*/
 
 .menu-container {
     display: flex;
@@ -32,7 +28,6 @@
     max-width: none;
 }
 
-/*Logo*/
 .menu-logo {
     display: flex;
     align-items: center;
@@ -62,7 +57,6 @@
     letter-spacing: 0.17rem; 
 }
 
-/*Links*/
 .menu-links {
     display: flex;
     justify-content: flex-end;
@@ -90,7 +84,6 @@
     color: #E0C58F;
 }
 
-/*HAMBÚRGUER E MOBILE*/
 .menu-hamburger {
     display: none;
     flex-direction: column;
