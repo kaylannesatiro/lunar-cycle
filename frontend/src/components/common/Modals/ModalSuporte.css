@@ -1,0 +1,133 @@
+/* OVERLAY: Fundo escuro cobrindo a tela toda (Glassmorphism básico) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(4, 6, 18, 0.85); /* Fundo translúcido */
+    backdrop-filter: blur(4px); /* Efeito de vidro borrado nativo do CSS */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* Garante que ficará acima do menu */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* CAIXA: A janela do Modal */
+.modal-caixa {
+    background-color: #0B0E1E;
+    border: 1px solid rgba(224, 197, 143, 0.15); /* Borda levemente dourada */
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh; /* Se o texto for longo, a caixa não vaza da tela */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* CABEÇALHO */
+.modal-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid rgba(224, 197, 143, 0.08);
+}
+
+.modal-titulo {
+    color: #E0C58F;
+    font-family: "Cinzel", serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* BOTÃO FECHAR (Simples e Minimalista) */
+.botao-fechar-modal {
+    background: transparent;
+    border: 1px solid rgba(224, 197, 143, 0.3);
+    color: #E0C58F;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.botao-fechar-modal:hover {
+    background: rgba(224, 197, 143, 0.1);
+}
+
+/* CORPO DO TEXTO (Aqui a barra de rolagem entra em ação se necessário) */
+.modal-corpo {
+    padding: 32px 24px;
+    overflow-y: auto; /* Cria barra de rolagem interna se o texto for gigante */
+    color: #F5F0E9;
+    font-family: "Raleway", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-corpo p {
+    margin: 0;
+}
+
+.modal-subtitulo {
+    color: #E0C58F;
+    font-family: "Cinzel", serif;
+    font-size: 14px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.modal-versao {
+    text-align: center;
+    color: rgba(245, 240, 233, 0.5);
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 16px !important;
+}
+
+.modal-lista {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.texto-destaque-final {
+    text-align: center;
+    color: #E0C58F;
+    font-family: "Cinzel", serif;
+    margin-top: 24px !important;
+    letter-spacing: 1.5px;
+    font-size: 12px;
+}
+
+/* RESPONSIVIDADE (Mobile) */
+@media (max-width: 600px) {
+    .modal-cabecalho {
+        padding: 16px;
+    }
+    .modal-titulo {
+        font-size: 16px;
+    }
+    .modal-corpo {
+        padding: 24px 16px;
+        font-size: 13px;
+    }
+}
