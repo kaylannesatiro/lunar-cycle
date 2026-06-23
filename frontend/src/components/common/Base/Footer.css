@@ -1,24 +1,24 @@
 /* =========================================
-   ESTRUTURA EXTERNA (Trava do Figma e Fundo)
+   ESTRUTURA EXTERNA (Fundo e Proporção)
    ========================================= */
 .footer-wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   width: 100vw;
-  
-  /* MEDIDAS EXATAS DO SEU FIGMA */
   max-height: 431px;
-  padding: 72px 40px 35.2px 40px; 
-  box-sizing: border-box; /* Previne que o padding "engorde" o tamanho fixado */
   
-  border-top: 0.667px solid rgba(224, 197, 143, 0.07);
+  /* O PULO DO GATO DO DESIGN FLUIDO:
+     Topo: 4.5rem (72px)
+     Laterais: 15.5vw (Garante os exatos 207px proporcionais ao tamanho da tela!)
+     Base: 2.2rem (35px) */
+  padding: 4.5rem 15.5vw 2.2rem 15.5vw; 
+  
+  box-sizing: border-box; 
+  border-top: 0.04rem solid rgba(224, 197, 143, 0.07);
   background: rgba(4, 6, 18, 0.80);
   backdrop-filter: blur(8px);
   flex-shrink: 0; 
-  
-  /* A BALA DE PRATA: Força o navegador a jogar este bloco para o rodapé da tela 
-     calculando o espaço vazio restante */
   margin-top: auto; 
 }
 
