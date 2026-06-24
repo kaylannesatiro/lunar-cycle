@@ -6,6 +6,7 @@ const verificarToken =  (req, res, next) =>{
     const authHeader = req.headers.authorization;
 
     //verificar se o cabeçalho existe
+    //startsWith verifica se a string começa com 'Bearer ', que é o padrão para tokens JWT no cabeçalho de autorização.
     if(!authHeader || !authHeader.startsWith('Bearer ')){
         return res.status(401).json({
             mensagem: 'Acesso negada. faça login para continuar.'
@@ -13,7 +14,7 @@ const verificarToken =  (req, res, next) =>{
     }
 
     //Extrar apenas o token da string do cabeçalho
-
+    //função split para separar a string em duas partes, usando o espaço como delimitador. O token é a segunda parte (índice 1) da string.
     const token = authHeader.split(' ')[1];
 
     try{
