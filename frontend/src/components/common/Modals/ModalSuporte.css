@@ -1,6 +1,3 @@
-/* =========================================
-   ESTRUTURA BASE E OVERLAY
-   ========================================= */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -20,10 +17,10 @@
 .modal-caixa {
     position: relative;
     width: 100%;
-    max-width: 38.75rem; /* 620px */
+    max-width: 38.75rem; 
     height: auto;
-    max-height: 49.476rem; /* 791.625px */
-    border-radius: 2rem; /* 32px */
+    max-height: 49.476rem; 
+    border-radius: 2rem; 
     border: 0.04rem solid rgba(224, 197, 143, 0.18);
     background: #060817;
     box-shadow: 
@@ -40,13 +37,10 @@
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    max-width: 32.901rem; /* 526.417px */
+    max-width: 32.901rem; 
     margin: 0 auto;
 }
 
-/* =========================================
-   ÁREA DE ROLAGEM E SCROLLBAR MÍSTICA
-   ========================================= */
 .modal-scroll-area {
     padding: 3rem 2rem;
     overflow-y: auto;
@@ -72,16 +66,13 @@
     background: rgba(224, 197, 143, 0.7); 
 }
 
-/* =========================================
-   BOTÃO FECHAR ABSOLUTO
-   ========================================= */
 .botao-fechar-absoluto {
     position: absolute;
     right: 1.25rem;
     top: 1.25rem;
     display: flex;
-    width: 2.625rem; /* 42px */
-    height: 2.625rem; /* 42px */
+    width: 2.625rem;
+    height: 2.625rem;
     justify-content: center;
     align-items: center;
     background: transparent;
@@ -99,9 +90,6 @@
     border-color: #E0C58F;
 }
 
-/* =========================================
-   TEXTOS, ÍCONES E DIVISÕES
-   ========================================= */
 .modal-topo {
     display: flex;
     flex-direction: column;
@@ -111,8 +99,8 @@
 }
 
 .modal-icone-destaque {
-    width: 4.5rem; /* 72px */
-    height: 4.5rem; /* 72px */
+    width: 4.5rem; 
+    height: 4.5rem; 
     filter: 
         drop-shadow(0 0 7.657rem rgba(224, 197, 143, 0.05)) 
         drop-shadow(0 0 5.052rem rgba(224, 197, 143, 0.18)) 
@@ -124,11 +112,11 @@
     color: #E0C58F;
     text-align: center;
     font-family: "Cinzel Decorative", serif;
-    font-size: 2rem; /* 32px */
+    font-size: 2rem; 
     font-style: normal;
     font-weight: 400;
-    line-height: 3rem; /* 48px */
-    letter-spacing: 0.16rem; /* 2.56px */
+    line-height: 3rem; 
+    letter-spacing: 0.16rem;
     margin: 0;
 }
 
@@ -136,27 +124,25 @@
     color: #E0C58F;
     text-align: center;
     font-family: "Raleway", sans-serif;
-    font-size: 0.8rem; /* 12.8px */
+    font-size: 0.8rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 1.2rem; /* 19.2px */
-    letter-spacing: 0.24rem; /* 3.84px */
+    line-height: 1.2rem;
+    letter-spacing: 0.24rem; 
     text-transform: uppercase;
     margin: 0.5rem 0 0 0;
 }
 
-/* DIVISÃO 1 */
 .modal-divisao-1 {
-    height: 0.0625rem; /* 1px */
+    height: 0.0625rem;
     align-self: stretch;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.00) 0%, rgba(224, 197, 143, 0.25) 50%, rgba(0, 0, 0, 0.00) 100%);
     margin: 2rem 0;
 }
 
-/* DIVISÃO 2 (Sempre visível) */
 .modal-divisao-2 {
-    width: 5rem; /* 80px */
-    height: 0.0625rem; /* 1px */
+    width: 5rem; 
+    height: 0.0625rem; 
     background: linear-gradient(90deg, rgba(224, 197, 143, 0.40) 0%, rgba(0, 0, 0, 0.00) 100%);
     margin: 2rem 0;
 }
@@ -171,10 +157,10 @@
 .modal-icone-frase {
     color: rgba(224, 197, 143, 0.08);
     font-family: "Cinzel Decorative", serif;
-    font-size: 4rem; /* 64px */
+    font-size: 4rem; 
     font-style: normal;
     font-weight: 400;
-    line-height: 3.2rem; /* 51.2px */
+    line-height: 3.2rem; 
 }
 
 .modal-citacao-container {
@@ -187,57 +173,48 @@
 .modal-texto-principal {
     color: #F5F0E9;
     font-family: "Raleway", sans-serif;
-    font-size: 1.05rem; /* 16.8px */
+    font-size: 1.05rem; 
     font-style: italic;
     font-weight: 400;
-    line-height: 1.995rem; /* 31.92px */
-    letter-spacing: 0.021rem; /* 0.336px */
+    line-height: 1.995rem; 
+    letter-spacing: 0.021rem; 
     margin: -1rem 0 0 0; 
 }
 
 .modal-texto-secundario {
     color: #F5F0E9;
     font-family: "Raleway", sans-serif;
-    font-size: 0.85rem; /* 13.6px */
+    font-size: 0.85rem; 
     font-style: normal;
     font-weight: 400;
-    line-height: 1.53rem; /* 24.48px */
-    letter-spacing: 0.017rem; /* 0.272px */
+    line-height: 1.53rem; 
+    letter-spacing: 0.017rem; 
     margin: 0 0 2rem 0;
 }
 
-/* =========================================
-   CARD DA LISTA
-   ========================================= */
 .modal-card-lista {
     display: flex;
-    padding: 1.8rem; /* 28.8px */
+    padding: 1.8rem;
     flex-direction: column;
     align-items: flex-start;
     align-self: stretch;
-    border-radius: 1.125rem; /* 18px */
+    border-radius: 1.125rem;
     border: 0.04rem solid rgba(224, 197, 143, 0.10);
     background: rgba(17, 34, 80, 0.40);
-    
-    /* DISTÂNCIA EXATA: 2rem equivalem a 32px de recuo para o footer */
     margin-bottom: 2rem; 
 }
 
 .modal-titulo-lista {
     color: #E0C58F;
     font-family: "Cinzel", serif;
-    font-size: 0.75rem; /* 12px */
+    font-size: 0.75rem; 
     font-style: normal;
     font-weight: 400;
-    line-height: 1.125rem; /* 18px */
-    letter-spacing: 0.1875rem; /* 3px */
+    line-height: 1.125rem;
+    letter-spacing: 0.1875rem; 
     text-transform: uppercase;
     margin: 0;
 }
-
-/* =========================================
-   AJUSTE DE PADDING DINÂMICO DA LISTA
-   ========================================= */
 
 .modal-conteiner-lista-itens {
     display: flex;
@@ -247,39 +224,30 @@
     margin: 0;
     padding-left: 0;
     gap: 1rem;
-    
-    /* 1. Começa em 0 por padrão. Se não houver título, 
-       o card fica com espaçamento perfeitamente igual em cima e embaixo! */
     padding-top: 0; 
 }
 
-/* 2. O PULO DO GATO DO PROFESSOR: Seletor irmão (+)
-   O navegador lê isso como: "Aplique este padding-top APENAS se a classe
-   .modal-conteiner-lista-itens vier LOGO APÓS uma classe .modal-titulo-lista" */
 .modal-titulo-lista + .modal-conteiner-lista-itens {
-    padding-top: 1.3rem; /* Os exatos 20.8px do Figma reativados dinamicamente! */
+    padding-top: 1.3rem; 
 }
 
 .modal-item-lista {
     display: flex;
     align-items: flex-start;
-    gap: 0.8rem; /* 12.8px */
+    gap: 0.8rem; 
     align-self: stretch;
 }
 
 .modal-frase-item {
     color: #F5F0E9;
     font-family: "Raleway", sans-serif;
-    font-size: 0.82rem; /* 13.12px */
+    font-size: 0.82rem; 
     font-style: normal;
     font-weight: 400;
-    line-height: 1.312rem; /* 20.992px */
-    letter-spacing: 0.008rem; /* 0.131px */
+    line-height: 1.312rem; 
+    letter-spacing: 0.008rem; 
 }
 
-/* =========================================
-   FOOTER DO MODAL
-   ========================================= */
 .modal-footer-container {
     display: flex;
     padding-top: 1rem; 
@@ -294,11 +262,11 @@
     color: #E0C58F;
     text-align: center;
     font-family: "Cinzel", serif;
-    font-size: 0.65rem; /* 10.4px */
+    font-size: 0.65rem; 
     font-style: normal;
     font-weight: 400;
-    line-height: 0.975rem; /* 15.6px */
-    letter-spacing: 0.13rem; /* 2.08px */
+    line-height: 0.975rem; 
+    letter-spacing: 0.13rem; 
     text-transform: uppercase;
     margin: 0;
 }
@@ -307,15 +275,14 @@
     color: #F5F0E9;
     text-align: center;
     font-family: "Raleway", sans-serif;
-    font-size: 0.65rem; /* 10.4px */
+    font-size: 0.65rem; 
     font-style: normal;
     font-weight: 400;
-    line-height: 0.975rem; /* 15.6px */
-    letter-spacing: 0.032rem; /* 0.52px */
+    line-height: 0.975rem;
+    letter-spacing: 0.032rem; 
     margin: 0;
 }
 
-/* RESPONSIVIDADE */
 @media (max-width: 48rem) {
     .modal-caixa {
         max-height: 90vh; 
