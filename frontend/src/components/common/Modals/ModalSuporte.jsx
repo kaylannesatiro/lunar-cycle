@@ -50,7 +50,7 @@ const ModalSuporte = ({ isOpen, onClose, dados }) => {
                             </div>
                         )}
 
-                        {dados.textoSecundario && <div className="modal-divisao-2"></div>}
+                        <div className="modal-divisao-2"></div>
 
                         {dados.textoSecundario && (
                             <p className="modal-texto-secundario">{dados.textoSecundario}</p>
