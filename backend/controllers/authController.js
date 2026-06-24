@@ -15,7 +15,7 @@ const criarConta = async (req, res) => {
         });
     } catch (error) {
         //erro 409
-        if (error.mensage === 'Email já cadastrado, tente fazer login ou use outro email.') {
+        if (error.message === 'Email já cadastrado, tente fazer login ou use outro email.') {
             return res.status(409).json({ mensagem: error.message });
         }
         //erro 500
@@ -54,7 +54,7 @@ const obterDadosPerfil = async(req, res) =>{
         return res.status(200).json(perfil)
     } catch (erro){
         return res.status(400).json({
-            mensagem: erro.mensage
+            mensagem: erro.message
         })
     }
 }

@@ -3,8 +3,7 @@ const router = express.Router();
 const authController = require('../controllers/authController');
 const validaRequisicao = require('../middlewares/validaRequisicao');
 const { criarContaSchema, loginSchema } = require('../schemas/authSchema');
-const {verificarToken} = require('../middlewares/autenticacao');
-
+const verificarToken = require('../middlewares/autenticacao');
 
 //rotas de api/auth
 
