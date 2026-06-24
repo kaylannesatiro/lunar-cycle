@@ -223,32 +223,38 @@
 }
 
 /* =========================================
-   BARRA DE ROLAGEM MÍSTICA (Minimalista)
+   BARRA DE ROLAGEM MÍSTICA (Ajuste Fino)
    ========================================= */
 
-/* 1. Suporte para o Firefox (Usa propriedades diretas no container) */
+/* 1. Suporte para o Firefox */
 .modal-scroll-area {
-    scrollbar-width: thin; /* Deixa a barra fina */
-    scrollbar-color: rgba(224, 197, 143, 0.3) transparent; /* Cor da barra e fundo invisível */
+    scrollbar-width: thin; 
+    scrollbar-color: rgba(190, 165, 115, 0.4) transparent; 
 }
 
 /* 2. Suporte para Chrome, Edge, Safari e Opera */
 .modal-scroll-area::-webkit-scrollbar {
-    width: 4px; /* Extremamente fina, parece apenas um detalhe do design */
+    width: 5px; /* Um pixel a mais para a cor nova aparecer melhor */
 }
 
 /* 3. O Trilho (Background da barra) */
 .modal-scroll-area::-webkit-scrollbar-track {
-    background: transparent; /* O PULO DO GATO: Deixa o fundo invisível para o texto "flutuar" */
+    background: transparent; 
+    
+    /* O PULO DO GATO: Adiciona margem no topo e na base do trilho. 
+       Isso afasta a barra das bordas do modal! */
+    margin: 1.5rem 0; 
 }
 
-/* 4. O Bloquinho (Thumb) */
+/* 4. O Bloquinho (Thumb) com a nova cor */
 .modal-scroll-area::-webkit-scrollbar-thumb {
-    background: rgba(224, 197, 143, 0.2); /* Dourado suave para combinar com a borda do modal */
-    border-radius: 10px; /* Cantos totalmente arredondados */
+    /* Cor levemente mais fechada/bronzeada para não estourar no fundo escuro */
+    background: rgba(190, 165, 115, 0.4); 
+    border-radius: 10px; 
 }
 
 /* 5. Efeito Hover (Ao passar o mouse) */
 .modal-scroll-area::-webkit-scrollbar-thumb:hover {
-    background: rgba(224, 197, 143, 0.5); /* Fica mais brilhante quando a usuária for arrastar */
+    /* Acende com o dourado original do seu projeto */
+    background: rgba(224, 197, 143, 0.7); 
 }
