@@ -1,45 +1,56 @@
 .input-wrapper {
     display: flex;
     flex-direction: column;
-    width: 100%;
     gap: 4px;
 }
 
 .input-field {
-    width: 100%;
-    box-sizing: border-box;
-    min-height: 44px;
+    width: 436px;
+    height: 43.33px;
     border-radius: 12px;
-    border: 0.67px solid rgba(224, 197, 143, 0.4);
-    background: rgba(17, 34, 80, 0.4);
+    border: 0.67px solid #E0C58F66;
     padding: 12px 16px;
+    box-sizing: border-box;
+    background: #11225066;
     color: #F5F0E9;
     font-family: 'Cinzel', serif;
-    font-size: 12px;
     font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
     letter-spacing: 0.84px;
-    transition: border-color 0.3s ease;
     outline: none;
+}
+
+.input-field[type="number"] {
+    width: 210px;
 }
 
 .input-field[type="number"]::-webkit-inner-spin-button,
 .input-field[type="number"]::-webkit-outer-spin-button {
--webkit-appearance: none;
+    -webkit-appearance: none;
     margin: 0;
 }
 
-.input-field:focus {
-    border-color: #E0C58F;
+.input-field[type="number"] {
+    -moz-appearance: textfield;
 }
 
-.input-field.input-error {
-    border-color: #D84B6B;
-    background: rgba(216, 75, 107, 0.1);
-}
-
-.error-message {
-    color: #D84B6B;
+.input-field::placeholder {
+    color: #F5F0E9;
+    opacity: 0.6;
     font-family: 'Cinzel', serif;
-    font-size: 10px;
-    margin-left: 4px;
+    font-size: 12px;
+    letter-spacing: 0.84px;
+}
+
+.input-field--error {
+    border-color: #c0395b;
+}
+
+.input-error-message {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: #c0395b;
+    letter-spacing: 0.5px;
+    padding-left: 4px;
 }

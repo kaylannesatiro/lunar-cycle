@@ -1,7 +1,7 @@
-import React from 'react';
-import './Input.css';
+import React from "react";
+import "./Input.css";
 
-const Input = ({ type = "text", placeholder, value, onChange, error }) => {
+const Input = ({ type, placeholder, value, onChange, error }) => {
 return (
     <div className="input-wrapper">
     <input
@@ -9,11 +9,11 @@ return (
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className={`input-field ${error ? 'input-error' : ''}`}
+        className={`input-field ${error ? "input-field--error" : ""}`}
     />
-    
+
     {}
-    {error && <span className="error-message">{error}</span>}
+    {error && <span className="input-error-message">{error}</span>}
     </div>
 );
 };
