@@ -3,8 +3,25 @@ import Menu from './components/common/Base/Menu'
 import Background from './components/common/Base/Background'
 import Footer from './components/common/Base/Footer'
 import ModalSuporte from './components/common/Modals/ModalSuporte'
+import arquivoDeModais from "./data/dadosModais.json";
+import { useState } from 'react';
 
 const App = () => {
+
+  const [modalAberto, setModalAberto] = useState(false);
+    
+  const [tipoConteudo, setTipoConteudo] = useState("sobre");
+
+  const abrirModal = (tipo) => {
+      setTipoConteudo(tipo);
+      setModalAberto(true);
+  };
+
+  const fecharModal = () => {
+      setModalAberto(false);
+  };
+
+  const dadosSelecionadosParaOModal = arquivoDeModais[tipoConteudo];
 
   const linksNavegacao = [
     { titulo: 'Diário dos Sonhos', rota: '/diario' },
@@ -17,7 +34,21 @@ const App = () => {
       <Background>
         <Menu links={linksNavegacao}/>
 
-        <ModalSuporte isOpen={true} onClose={() => {}}/>
+        <div style={{ padding: "50px", textAlign: "center", color: "white" }}>
+            
+            <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+                <button onClick={() => abrirModal("sobre")}>Sobre</button>
+                <button onClick={() => abrirModal("privacidade")}>Privacidade</button>
+                <button onClick={() => abrirModal("termos")}>Termos</button>
+                <button onClick={() => abrirModal("contato")}>Contato</button>
+            </div>
+
+            <ModalSuporte 
+                isOpen={modalAberto} 
+                onClose={fecharModal} 
+                dados={dadosSelecionadosParaOModal} 
+            />
+        </div>
 
         <Footer links={linksNavegacao}/>
 

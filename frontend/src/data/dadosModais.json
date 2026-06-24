@@ -1,0 +1,68 @@
+{
+    "sobre": {
+        "exibirIcone": true,
+        "tituloPrincipal": "LUNAR CYCLE",
+        "subtitulo": "VERSÃO 1.0.0",
+        "iconeFrase": "❝",
+        "textoPrincipal": "Conecte-se aos ritmos sagrados do cosmos e sincronize sua jornada com os ciclos lunares. Lunar Cycle é seu portal místico para compreender e honrar as fases da natureza, entrelaçadas com a sabedoria milenar da Lua.",
+        "tituloContainer": "RECURSOS MÍSTICOS",
+        "listaContainer": [
+            "Calendário lunar interativo sincronizado com as fases da Lua",
+            "Registro e acompanhamento do ciclo menstrual",
+            "Diário dos sonhos com timeline celestial",
+            "Oráculo lunar personalizado para cada fase",
+            "Visualização das conexões entre ciclos e cosmos"
+        ],
+        "textoSecundario": "Acompanhe seus ciclos menstruais, registre seus sonhos noturnos, consulte o oráculo lunar e descubra a magia que existe em cada fase da sua jornada pessoal sob o brilho celestial da Lua.",
+        "fraseMistica": "Desenvolvido com ✦ e magia lunar",
+        "copyright": "© 2026 Lunar Cycle · Todos os direitos reservados"
+    },
+
+    "privacidade": {
+        "exibirIcone": true,
+        "tituloPrincipal": "PRIVACIDADE",
+        "subtitulo": "O SEU SANTUÁRIO É SEGURO",
+        "iconeFrase": "❝",
+        "textoPrincipal": "Bem-vinda ao seu espaço sagrado. No Lunar Cycle, acreditamos que sua jornada, seus ciclos e seus sonhos pertencem única e exclusivamente a você. Veja como cuidamos do seu santuário:",
+        "listaContainer": [
+            "O que guardamos: Apenas o necessário para a magia acontecer. Seu e-mail (para login), as datas do seu ciclo (para calcular sua sincronia lunar) e os registros do seu Diário dos Sonhos.",
+            "Onde fica guardado: Seus dados são enviados de forma segura para o nosso cofre digital (banco de dados). Não vendemos, não compartilhamos e não bisbilhotamos suas informações.",
+            "A inteligência fica com você: Todo o cálculo do seu signo, arquétipo místico e sincronia (Lua Vermelha) acontece diretamente no seu celular ou computador. Nosso servidor não processa essas magias, ele apenas guarda seus registros com segurança.",
+            "Seu direito de partir: Você tem controle total. Pode editar ou excluir seus ciclos, sonhos e até mesmo sua conta a qualquer momento nas configurações do perfil."
+        ],
+        "textoSecundario": "",
+        "fraseMistica": "Desenvolvido com ✦ e magia lunar",
+        "copyright": "© 2026 Lunar Cycle · Todos os direitos reservados"
+    },
+
+    "termos": {
+        "exibirIcone": true,
+        "tituloPrincipal": "TERMOS DE USO",
+        "subtitulo": "NOSSO ACORDO CÓSMICO",
+        "iconeFrase": "❝",
+        "textoPrincipal": "Ao adentrar este espaço, firmamos um compromisso mútuo de respeito e cuidado. Leia atentamente como o Lunar Cycle funciona:",
+        "listaContainer": [
+            "Propósito do Nosso Espaço: O Lunar Cycle é um projeto acadêmico em desenvolvimento. Ele foi criado para ser o seu diário místico e rastreador de ciclos, focado no autoconhecimento e na conexão com a lua.",
+            "A Magia não substitui a Medicina: Este aplicativo não é uma ferramenta médica. Nossas mensagens, arquétipos e previsões são para acolhimento e reflexão holística. Para questões de saúde física ou mental, consulte sempre um médico ou especialista.",
+            "O Cultivo do seu Diário: Você é a única responsável pelo que escreve no Diário dos Sonhos. Use este espaço para o bem e para o seu crescimento pessoal.",
+            "Constante Evolução (Beta): Como estamos em fase de testes (MVP), algumas estrelas podem mudar de lugar. O sistema pode passar por atualizações e manutenções sem aviso prévio."
+        ],
+        "fraseMistica": "Desenvolvido com ✦ e magia lunar",
+        "copyright": "© 2026 Lunar Cycle · Todos os direitos reservados"
+    },
+
+    "contato": {
+        "exibirIcone": true,
+        "tituloPrincipal": "CONTATO",
+        "subtitulo": "SINAIS PARA AS ESTRELAS",
+        "iconeFrase": "❝",
+        "textoPrincipal": "Dúvidas, sugestões ou encontrou algum problema no nosso aplicativo? Envie uma mensagem e nossa equipe de desenvolvedoras lerá com carinho.",
+        "listaContainer": [
+            "kaylannesatiro@alu.ufc.br",
+            "carlacristinasousaaraujo@alu.ufc.br",
+            "clidenorlopesmartinsfilho@alu.ufc.br"
+        ],
+        "fraseMistica": "Desenvolvido com ✦ e magia lunar",
+        "copyright": "© 2026 Lunar Cycle · Todos os direitos reservados"
+    }
+}
