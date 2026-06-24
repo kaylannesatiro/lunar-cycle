@@ -32,6 +32,17 @@ const criarContaSchema = z.object({
     path: ['duracaoMenstruacao'],
 });
 
+
+const loginSchema = z.object({
+    email: z.string({required_error: 'Informe seu email.'}).
+    min(1, 'O email é obrigatório.').
+    transform((val) => val.toLowerCase()),
+
+    senha: z.string({required_error: 'Informe sua senha.'}).
+    min(1, 'A senha é obrigatória.')
+});
+
 module.exports = {
-    criarContaSchema
+    criarContaSchema,
+    loginSchema
 }
