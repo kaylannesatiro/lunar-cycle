@@ -24,46 +24,57 @@ const ModalSuporte = ({ isOpen, onClose, dados }) => {
                 </button>
 
                 <div className="modal-scroll-area">
-                    <div className="modal-conteudo-completo">
+                    <div className="modal-container-conteudo">
                         {dados.tituloPrincipal && (
-                            <div className="modal-topo-centralizado">
+                            <div className="modal-topo">
                                 {dados.exibirIcone && (
                                     <img src={IconeLua} alt="Ícone Lunar" className="modal-icone-destaque" />
                                 )}
+                                
                                 <h2 className="modal-titulo-principal">{dados.tituloPrincipal}</h2>
                                 {dados.subtitulo && <h3 className="modal-subtitulo-topo">{dados.subtitulo}</h3>}
                             </div>
                         )}
 
+                        <div className="modal-divisao-1"></div>
+
                         {dados.textoPrincipal && (
                             <div className="modal-citacao-container">
-                                {dados.iconeFrase && <span className="modal-icone-frase">{dados.iconeFrase}</span>}
+                                {dados.iconeFrase && (
+                                    <div className="modal-icone-fixo-container">
+                                        <span className="modal-icone-frase">{dados.iconeFrase}</span>
+                                    </div>
+                                )}
+
                                 <p className="modal-texto-principal">{dados.textoPrincipal}</p>
                             </div>
                         )}
 
-                        {(dados.tituloContainer || dados.listaContainer || dados.textoSecundario) && (
-                            <div className="modal-secao-secundaria">
+                        {dados.textoSecundario && <div className="modal-divisao-2"></div>}
+
+                        {dados.textoSecundario && (
+                            <p className="modal-texto-secundario">{dados.textoSecundario}</p>
+                        )}
+
+                        {dados.listaContainer && dados.listaContainer.length > 0 && (
+                            <div className="modal-card-lista">
                                 {dados.tituloContainer && (
-                                    <h4 className="modal-titulo-container">{dados.tituloContainer}</h4>
+                                    <h4 className="modal-titulo-lista">{dados.tituloContainer}</h4>
                                 )}
                                 
-                                {dados.listaContainer && dados.listaContainer.length > 0 && (
-                                    <ul className="modal-lista-container">
-                                        {dados.listaContainer.map((item, index) => (
-                                            <li key={index}>{item}</li>
-                                        ))}
-                                    </ul>
-                                )}
-                                
-                                {dados.textoSecundario && (
-                                    <p className="modal-texto-secundario">{dados.textoSecundario}</p>
-                                )}
+                                <ul className="modal-conteiner-lista-itens">
+                                    {dados.listaContainer.map((item, index) => (
+                                        <li key={index} className="modal-item-lista">
+                                            <span style={{ color: '#E0C58F' }}>◈</span>
+                                            <span className="modal-frase-item">{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         )}
 
                         {(dados.fraseMistica || dados.copyright) && (
-                            <div className="modal-rodape-interno">
+                            <div className="modal-footer-container">
                                 {dados.fraseMistica && <p className="modal-frase-mistica">{dados.fraseMistica}</p>}
                                 {dados.copyright && <p className="modal-copyright">{dados.copyright}</p>}
                             </div>
@@ -72,7 +83,7 @@ const ModalSuporte = ({ isOpen, onClose, dados }) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
 export default ModalSuporte;

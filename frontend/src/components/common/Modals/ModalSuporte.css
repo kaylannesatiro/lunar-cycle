@@ -1,5 +1,5 @@
 /* =========================================
-   ESTRUTURA BASE DO MODAL
+   ESTRUTURA BASE E OVERLAY
    ========================================= */
 .modal-overlay {
     position: fixed;
@@ -13,76 +13,120 @@
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    padding: 1.25rem; /* 20px */
+    padding: 1.25rem;
     box-sizing: border-box;
 }
 
+/* MODAL TOTAL (Especificações exatas do Figma) */
 .modal-caixa {
-    background-color: #0B0E1E;
-    border: 0.0625rem solid rgba(224, 197, 143, 0.15);
-    border-radius: 1rem;
+    position: relative;
     width: 100%;
-    max-width: 37.5rem; /* 600px */
-    max-height: 85vh; 
+    max-width: 38.75rem; /* 620px */
+    height: auto;
+    max-height: 49.476rem; /* 791.625px */
     
-    /* PULO DO GATO: Necessário para o botão absolute saber onde é a "borda" */
-    position: relative; 
+    border-radius: 2rem; /* 32px */
+    border: 0.04rem solid rgba(224, 197, 143, 0.18); /* 0.667px */
+    background: #060817;
     
+    /* Sombras do Figma detalhadas */
+    box-shadow: 
+        0 2.1875rem 8.125rem 0 rgba(0, 0, 0, 0.80), 
+        0 0 5.625rem 0 rgba(224, 197, 143, 0.12), 
+        0 0.0625rem 0 0 rgba(255, 255, 255, 0.04) inset;
+        
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
+    overflow: hidden;
 }
 
-.modal-scroll-area {
-    padding: 2.5rem 2rem; /* 40px 32px */
-    overflow-y: auto;
+/* CONTAINER DE CONTEÚDO */
+.modal-container-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 32.901rem; /* 526.417px */
+    margin: 0 auto; /* Centraliza o conteúdo dentro da caixa maior */
 }
 
 /* =========================================
-   BOTÃO FECHAR (Agora DENTRO do Container)
+   ÁREA DE ROLAGEM E SCROLLBAR MÍSTICA
+   ========================================= */
+.modal-scroll-area {
+    padding: 3rem 2rem;
+    overflow-y: auto;
+    
+    /* Suporte para Firefox */
+    scrollbar-width: thin; 
+    scrollbar-color: rgba(190, 165, 115, 0.4) transparent; 
+}
+
+/* Suporte para navegadores Webkit (Chrome, Edge, Safari) */
+.modal-scroll-area::-webkit-scrollbar {
+    width: 5px; 
+}
+
+.modal-scroll-area::-webkit-scrollbar-track {
+    background: transparent; 
+    margin: 1.5rem 0; /* Afasta a barra do topo e da base */
+}
+
+.modal-scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(190, 165, 115, 0.4); 
+    border-radius: 10px; 
+}
+
+.modal-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(224, 197, 143, 0.7); 
+}
+
+/* =========================================
+   BOTÃO FECHAR ABSOLUTO
    ========================================= */
 .botao-fechar-absoluto {
     position: absolute;
-    right: 1.25rem; /* Mudado de -0.5rem para 1.25rem (20px) para entrar no card */
-    top: 1.25rem;   /* Mudado de -0.5rem para 1.25rem (20px) para entrar no card */
+    right: 1.25rem;
+    top: 1.25rem;
     display: flex;
     width: 2.625rem; /* 42px */
     height: 2.625rem; /* 42px */
     justify-content: center;
     align-items: center;
-    
-    background: transparent; /* Ficou transparente pois já está em cima do fundo escuro */
+    background: transparent;
     border: 0.0625rem solid rgba(224, 197, 143, 0.3);
     color: #E0C58F;
     border-radius: 50%;
     cursor: pointer;
     font-family: Arial, sans-serif;
     transition: all 0.3s ease;
-    z-index: 10; /* Garante que fique clicável acima do conteúdo */
+    z-index: 10;
 }
 
 .botao-fechar-absoluto:hover {
     background: rgba(224, 197, 143, 0.1);
-    border-color: #E0C58F; /* Dá um leve destaque dourado no hover */
+    border-color: #E0C58F;
 }
 
 /* =========================================
-   ESTRUTURA DO CONTEÚDO (O que você extraiu)
+   TEXTOS, ÍCONES E DIVISÕES
    ========================================= */
-.modal-topo-centralizado {
+.modal-topo {
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-self: stretch; 
     margin-bottom: 2rem;
 }
 
+/* ICON MISTICO COM MÚLTIPLAS SOMBRAS */
 .modal-icone-destaque {
     width: 4.5rem; /* 72px */
     height: 4.5rem; /* 72px */
-    /* Múltiplas sombras extraídas do Figma */
-    filter: drop-shadow(0 0 7.65rem rgba(224, 197, 143, 0.05)) 
-            drop-shadow(0 0 5.05rem rgba(224, 197, 143, 0.18)) 
-            drop-shadow(0 0 1.6rem rgba(224, 197, 143, 0.61));
+    filter: 
+        drop-shadow(0 0 7.657rem rgba(224, 197, 143, 0.05)) 
+        drop-shadow(0 0 5.052rem rgba(224, 197, 143, 0.18)) 
+        drop-shadow(0 0 1.6rem rgba(224, 197, 143, 0.61));
     margin-bottom: 1rem;
 }
 
@@ -108,14 +152,30 @@
     line-height: 1.2rem; /* 19.2px */
     letter-spacing: 0.24rem; /* 3.84px */
     text-transform: uppercase;
-    margin: 0;
+    margin: 0.5rem 0 0 0;
 }
 
-.modal-citacao-container {
+/* DIVISÃO 1 (Gradiente centralizado) */
+.modal-divisao-1 {
+    height: 0.0625rem; /* 1px */
+    align-self: stretch;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.00) 0%, rgba(224, 197, 143, 0.25) 50%, rgba(0, 0, 0, 0.00) 100%);
+    margin: 2rem 0;
+}
+
+/* DIVISÃO 2 (Gradiente à esquerda) */
+.modal-divisao-2 {
+    width: 5rem; /* 80px */
+    height: 0.0625rem; /* 1px */
+    background: linear-gradient(90deg, rgba(224, 197, 143, 0.40) 0%, rgba(0, 0, 0, 0.00) 100%);
+    margin: 2rem 0;
+}
+
+.modal-icone-fixo-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 2.5rem;
+    align-items: flex-start;
+    align-self: stretch;
 }
 
 .modal-icone-frase {
@@ -125,31 +185,53 @@
     font-style: normal;
     font-weight: 400;
     line-height: 3.2rem; /* 51.2px */
-    margin-bottom: -1rem; /* Aproxima as aspas do texto */
+}
+
+.modal-citacao-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
 }
 
 .modal-texto-principal {
     color: rgba(245, 240, 233, 0.75);
-    text-align: center;
     font-family: "Raleway", sans-serif;
     font-size: 1.05rem; /* 16.8px */
     font-style: italic;
     font-weight: 400;
     line-height: 1.995rem; /* 31.92px */
     letter-spacing: 0.021rem; /* 0.336px */
-    margin: 0;
+    margin: -1rem 0 0 0; /* Aproxima do ícone de aspas */
 }
 
-.modal-secao-secundaria {
+.modal-texto-secundario {
+    color: #F5F0E9;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.85rem; /* 13.6px */
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.53rem; /* 24.48px */
+    letter-spacing: 0.017rem; /* 0.272px */
+    margin: 0 0 2rem 0;
+}
+
+/* =========================================
+   CARD DA LISTA DE RECURSOS/REGRAS
+   ========================================= */
+.modal-card-lista {
     display: flex;
+    padding: 1.8rem; /* 28.8px */
     flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(224, 197, 143, 0.08);
+    align-items: flex-start;
+    align-self: stretch;
+    border-radius: 1.125rem; /* 18px */
+    border: 0.04rem solid rgba(224, 197, 143, 0.10); /* 0.667px */
+    background: rgba(17, 34, 80, 0.40);
+    margin-bottom: 2rem;
 }
 
-.modal-titulo-container {
+.modal-titulo-lista {
     color: #E0C58F;
     font-family: "Cinzel", serif;
     font-size: 0.75rem; /* 12px */
@@ -161,40 +243,45 @@
     margin: 0;
 }
 
-.modal-lista-container {
+.modal-conteiner-lista-itens {
     display: flex;
+    padding-top: 1.3rem; /* 20.8px */
     flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+    gap: 1rem;
+}
+
+.modal-item-lista {
+    display: flex;
     align-items: flex-start;
     gap: 0.8rem; /* 12.8px */
     align-self: stretch;
-    padding-left: 1.2rem;
-    margin: 0;
 }
 
-.modal-lista-container li {
+.modal-frase-item {
     color: #F5F0E9;
     font-family: "Raleway", sans-serif;
-    font-size: 0.85rem;
-    line-height: 1.5;
-}
-
-.modal-texto-secundario {
-    color: #F5F0E9;
-    font-family: "Raleway", sans-serif;
-    font-size: 0.85rem; /* 13.6px */
+    font-size: 0.82rem; /* 13.12px */
     font-style: normal;
     font-weight: 400;
-    line-height: 1.53rem; /* 24.48px */
-    letter-spacing: 0.017rem; /* 0.272px */
-    margin: 0;
+    line-height: 1.312rem; /* 20.992px */
+    letter-spacing: 0.008rem; /* 0.131px */
 }
 
-.modal-rodape-interno {
+/* =========================================
+   FOOTER DO MODAL
+   ========================================= */
+.modal-footer-container {
     display: flex;
+    padding-top: 1rem; /* 16px */
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
+    align-self: stretch;
     gap: 1rem;
-    margin-top: 2rem;
+    border-top: 0.0625rem solid rgba(224, 197, 143, 0.08); 
 }
 
 .modal-frase-mistica {
@@ -218,43 +305,28 @@
     font-style: normal;
     font-weight: 400;
     line-height: 0.975rem; /* 15.6px */
-    letter-spacing: 0.0325rem; /* 0.52px */
+    letter-spacing: 0.032rem; /* 0.52px */
     margin: 0;
 }
 
 /* =========================================
-   BARRA DE ROLAGEM MÍSTICA (Ajuste Fino)
+   RESPONSIVIDADE BÁSICA (MOBILE)
    ========================================= */
-
-/* 1. Suporte para o Firefox */
-.modal-scroll-area {
-    scrollbar-width: thin; 
-    scrollbar-color: rgba(190, 165, 115, 0.4) transparent; 
-}
-
-/* 2. Suporte para Chrome, Edge, Safari e Opera */
-.modal-scroll-area::-webkit-scrollbar {
-    width: 5px; /* Um pixel a mais para a cor nova aparecer melhor */
-}
-
-/* 3. O Trilho (Background da barra) */
-.modal-scroll-area::-webkit-scrollbar-track {
-    background: transparent; 
-    
-    /* O PULO DO GATO: Adiciona margem no topo e na base do trilho. 
-       Isso afasta a barra das bordas do modal! */
-    margin: 1.5rem 0; 
-}
-
-/* 4. O Bloquinho (Thumb) com a nova cor */
-.modal-scroll-area::-webkit-scrollbar-thumb {
-    /* Cor levemente mais fechada/bronzeada para não estourar no fundo escuro */
-    background: rgba(190, 165, 115, 0.4); 
-    border-radius: 10px; 
-}
-
-/* 5. Efeito Hover (Ao passar o mouse) */
-.modal-scroll-area::-webkit-scrollbar-thumb:hover {
-    /* Acende com o dourado original do seu projeto */
-    background: rgba(224, 197, 143, 0.7); 
+@media (max-width: 48rem) {
+    .modal-caixa {
+        max-height: 90vh; 
+    }
+    .modal-scroll-area {
+        padding: 2rem 1.5rem;
+    }
+    .modal-card-lista {
+        padding: 1.2rem;
+    }
+    .modal-icone-destaque {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+    .modal-titulo-principal {
+        font-size: 1.5rem;
+    }
 }
