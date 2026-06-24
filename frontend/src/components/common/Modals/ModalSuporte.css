@@ -235,15 +235,29 @@
     margin: 0;
 }
 
+/* =========================================
+   AJUSTE DE PADDING DINÂMICO DA LISTA
+   ========================================= */
+
 .modal-conteiner-lista-itens {
     display: flex;
-    padding-top: 1.3rem; /* 20.8px */
     flex-direction: column;
     align-items: flex-start;
     list-style: none;
     margin: 0;
     padding-left: 0;
     gap: 1rem;
+    
+    /* 1. Começa em 0 por padrão. Se não houver título, 
+       o card fica com espaçamento perfeitamente igual em cima e embaixo! */
+    padding-top: 0; 
+}
+
+/* 2. O PULO DO GATO DO PROFESSOR: Seletor irmão (+)
+   O navegador lê isso como: "Aplique este padding-top APENAS se a classe
+   .modal-conteiner-lista-itens vier LOGO APÓS uma classe .modal-titulo-lista" */
+.modal-titulo-lista + .modal-conteiner-lista-itens {
+    padding-top: 1.3rem; /* Os exatos 20.8px do Figma reativados dinamicamente! */
 }
 
 .modal-item-lista {
