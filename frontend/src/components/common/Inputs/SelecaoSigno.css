@@ -1,0 +1,67 @@
+/* =========================================
+   CONTAINER PRINCIPAL
+   ========================================= */
+.signo-container {
+    display: flex;
+    width: 27.25rem; /* 436px exatos do Figma */
+    justify-content: space-between;
+    align-items: center;
+    
+    /* Proteção de Responsividade para o celular: 
+       Se a tela for menor que 436px, ele quebra a linha em vez de esmagar as caixas */
+    max-width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* =========================================
+   CAIXA DO SIGNO (Botão)
+   ========================================= */
+.signo-caixa {
+    display: flex;
+    width: 1.875rem; /* 30px */
+    height: 1.875rem; /* 30px */
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    
+    /* Bordas e Cores do Figma */
+    border-radius: 0.75rem; /* 12px */
+    border: 0.04rem solid rgba(224, 197, 143, 0.30); /* 0.667px */
+    background: rgba(17, 34, 80, 0.40);
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25); /* 0 4px 4px 0 */
+    
+    /* Configurações de Botão */
+    cursor: pointer;
+    padding: 0; 
+    transition: all 0.3s ease; /* Transição suave ao clicar/passar o mouse */
+}
+
+/* Efeito ao passar o mouse */
+.signo-caixa:hover {
+    background: rgba(224, 197, 143, 0.2);
+    border-color: #E0C58F;
+}
+
+/* Efeito QUANDO ESTÁ SELECIONADO (A classe condicional do React) */
+.signo-caixa.ativo {
+    background: rgba(224, 197, 143, 0.5); /* Fica mais dourado */
+    border-color: #E0C58F;
+    box-shadow: 0 0 0.5rem rgba(224, 197, 143, 0.6); /* Brilho místico ao redor */
+}
+
+/* =========================================
+   ÍCONE DO SIGNO
+   ========================================= */
+.signo-icone {
+    width: 1.5rem; /* 24px */
+    flex-shrink: 0;
+    color: #F5F0E9;
+    text-align: center;
+    font-family: "Cinzel", serif;
+    font-size: 1rem; /* 16px */
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.0525rem; /* 0.84px */
+}
