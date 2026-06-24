@@ -24,6 +24,27 @@ const criarConta = async (req, res) => {
     }
 };
 
+const realizarLogin = async (req, res) => {
+    try{
+        const {email, senha} = req.body;
+
+        const resultado = await usuariaService.realizarLogin(email, senha);
+
+        //200 OK:
+        return res.status(200).json({
+            mensagem: 'Login realizado com sucesso!',
+            ...resultado
+        })
+    } catch (error){
+        if (error.message === 'Usuário ou senha inválidos. Verifique suas informações e tente novamente.') {
+            return res.status(401).json({ mensagem: error.message });
+        }
+
+        return res.status(500).json({ mensagem: 'Ocorreu um erro ao realizar o login. Por favor, tente novamente mais tarde.' });
+    }
+};
+
 module.exports = {
-    criarConta
+    criarConta,
+    realizarLogin
 };
