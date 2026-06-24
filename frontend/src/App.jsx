@@ -2,6 +2,7 @@ import './App.css'
 import Menu from './components/common/Base/Menu'
 import Background from './components/common/Base/Background'
 import Footer from './components/common/Base/Footer'
+import ModalSuporte from './components/common/Modals/ModalSuporte'
 
 const App = () => {
 
@@ -15,6 +16,8 @@ const App = () => {
     <>
       <Background>
         <Menu links={linksNavegacao}/>
+
+        <ModalSuporte isOpen={true} onClose={() => {}}/>
 
         <Footer links={linksNavegacao}/>
 

@@ -1,133 +1,222 @@
-/* OVERLAY: Fundo escuro cobrindo a tela toda (Glassmorphism básico) */
+/* =========================================
+   ESTRUTURA BASE DO MODAL
+   ========================================= */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(4, 6, 18, 0.85); /* Fundo translúcido */
-    backdrop-filter: blur(4px); /* Efeito de vidro borrado nativo do CSS */
+    background-color: rgba(4, 6, 18, 0.85);
+    backdrop-filter: blur(0.25rem);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10000; /* Garante que ficará acima do menu */
-    padding: 20px;
+    z-index: 10000;
+    padding: 1.25rem; /* 20px */
     box-sizing: border-box;
 }
 
-/* CAIXA: A janela do Modal */
 .modal-caixa {
     background-color: #0B0E1E;
-    border: 1px solid rgba(224, 197, 143, 0.15); /* Borda levemente dourada */
-    border-radius: 16px;
+    border: 0.0625rem solid rgba(224, 197, 143, 0.15);
+    border-radius: 1rem;
     width: 100%;
-    max-width: 600px;
-    max-height: 85vh; /* Se o texto for longo, a caixa não vaza da tela */
+    max-width: 37.5rem; /* 600px */
+    max-height: 85vh; 
+    
+    /* PULO DO GATO: Necessário para o botão absolute saber onde é a "borda" */
+    position: relative; 
+    
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
 }
 
-/* CABEÇALHO */
-.modal-cabecalho {
+.modal-scroll-area {
+    padding: 2.5rem 2rem; /* 40px 32px */
+    overflow-y: auto;
+}
+
+/* =========================================
+   BOTÃO FECHAR (Absolute, como você pediu)
+   ========================================= */
+.botao-fechar-absoluto {
+    position: absolute;
+    right: -0.5rem; /* -8px */
+    top: -0.5rem;  /* -8px */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px;
-    border-bottom: 1px solid rgba(224, 197, 143, 0.08);
-}
-
-.modal-titulo {
-    color: #E0C58F;
-    font-family: "Cinzel", serif;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 2px;
-    margin: 0;
-    text-transform: uppercase;
-}
-
-/* BOTÃO FECHAR (Simples e Minimalista) */
-.botao-fechar-modal {
-    background: transparent;
-    border: 1px solid rgba(224, 197, 143, 0.3);
-    color: #E0C58F;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    display: flex;
+    width: 2.625rem; /* 42px */
+    height: 2.625rem; /* 42px */
     justify-content: center;
     align-items: center;
-    transition: background 0.3s ease;
+    
+    background: #0B0E1E; /* Fundo para não ficar transparente por cima da borda */
+    border: 0.0625rem solid rgba(224, 197, 143, 0.3);
+    color: #E0C58F;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    transition: all 0.3s ease;
+    z-index: 10;
 }
 
-.botao-fechar-modal:hover {
+.botao-fechar-absoluto:hover {
     background: rgba(224, 197, 143, 0.1);
 }
 
-/* CORPO DO TEXTO (Aqui a barra de rolagem entra em ação se necessário) */
-.modal-corpo {
-    padding: 32px 24px;
-    overflow-y: auto; /* Cria barra de rolagem interna se o texto for gigante */
-    color: #F5F0E9;
-    font-family: "Raleway", sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
+/* =========================================
+   ESTRUTURA DO CONTEÚDO (O que você extraiu)
+   ========================================= */
+.modal-topo-centralizado {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 
-.modal-corpo p {
+.modal-icone-destaque {
+    width: 4.5rem; /* 72px */
+    height: 4.5rem; /* 72px */
+    /* Múltiplas sombras extraídas do Figma */
+    filter: drop-shadow(0 0 7.65rem rgba(224, 197, 143, 0.05)) 
+            drop-shadow(0 0 5.05rem rgba(224, 197, 143, 0.18)) 
+            drop-shadow(0 0 1.6rem rgba(224, 197, 143, 0.61));
+    margin-bottom: 1rem;
+}
+
+.modal-titulo-principal {
+    color: #E0C58F;
+    text-align: center;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 2rem; /* 32px */
+    font-style: normal;
+    font-weight: 400;
+    line-height: 3rem; /* 48px */
+    letter-spacing: 0.16rem; /* 2.56px */
     margin: 0;
 }
 
-.modal-subtitulo {
+.modal-subtitulo-topo {
     color: #E0C58F;
-    font-family: "Cinzel", serif;
-    font-size: 14px;
-    margin-top: 16px;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-.modal-versao {
     text-align: center;
-    color: rgba(245, 240, 233, 0.5);
-    font-size: 12px;
-    letter-spacing: 2px;
-    margin-bottom: 16px !important;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.8rem; /* 12.8px */
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.2rem; /* 19.2px */
+    letter-spacing: 0.24rem; /* 3.84px */
+    text-transform: uppercase;
+    margin: 0;
 }
 
-.modal-lista {
-    padding-left: 20px;
+.modal-citacao-container {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    margin-bottom: 2.5rem;
 }
 
-.texto-destaque-final {
+.modal-icone-frase {
+    color: rgba(224, 197, 143, 0.08);
+    font-family: "Cinzel Decorative", serif;
+    font-size: 4rem; /* 64px */
+    font-style: normal;
+    font-weight: 400;
+    line-height: 3.2rem; /* 51.2px */
+    margin-bottom: -1rem; /* Aproxima as aspas do texto */
+}
+
+.modal-texto-principal {
+    color: rgba(245, 240, 233, 0.75);
     text-align: center;
+    font-family: "Raleway", sans-serif;
+    font-size: 1.05rem; /* 16.8px */
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.995rem; /* 31.92px */
+    letter-spacing: 0.021rem; /* 0.336px */
+    margin: 0;
+}
+
+.modal-secao-secundaria {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(224, 197, 143, 0.08);
+}
+
+.modal-titulo-container {
     color: #E0C58F;
     font-family: "Cinzel", serif;
-    margin-top: 24px !important;
-    letter-spacing: 1.5px;
-    font-size: 12px;
+    font-size: 0.75rem; /* 12px */
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.125rem; /* 18px */
+    letter-spacing: 0.1875rem; /* 3px */
+    text-transform: uppercase;
+    margin: 0;
 }
 
-/* RESPONSIVIDADE (Mobile) */
-@media (max-width: 600px) {
-    .modal-cabecalho {
-        padding: 16px;
-    }
-    .modal-titulo {
-        font-size: 16px;
-    }
-    .modal-corpo {
-        padding: 24px 16px;
-        font-size: 13px;
-    }
+.modal-lista-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem; /* 12.8px */
+    align-self: stretch;
+    padding-left: 1.2rem;
+    margin: 0;
+}
+
+.modal-lista-container li {
+    color: #F5F0E9;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.modal-texto-secundario {
+    color: #F5F0E9;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.85rem; /* 13.6px */
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.53rem; /* 24.48px */
+    letter-spacing: 0.017rem; /* 0.272px */
+    margin: 0;
+}
+
+.modal-rodape-interno {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.modal-frase-mistica {
+    color: #E0C58F;
+    text-align: center;
+    font-family: "Cinzel", serif;
+    font-size: 0.65rem; /* 10.4px */
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0.975rem; /* 15.6px */
+    letter-spacing: 0.13rem; /* 2.08px */
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.modal-copyright {
+    color: #F5F0E9;
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.65rem; /* 10.4px */
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0.975rem; /* 15.6px */
+    letter-spacing: 0.0325rem; /* 0.52px */
+    margin: 0;
 }
