@@ -1,72 +1,55 @@
-/* =========================================
-   CONTAINER PRINCIPAL
-   ========================================= */
 .signo-container {
     display: flex;
-    width: 100%; /* PULO DO GATO: Deixa o container fluido */
-    max-width: 27.25rem; /* 436px exatos do Figma limitando o crescimento */
-    justify-content: space-between; /* Distribui os espaços automaticamente! */
+    width: 100%;
+    max-width: 27.25rem;
+    justify-content: space-between; 
     align-items: center;
-    
-    /* Removemos o 'gap' para caber perfeitamente nos 436px */
     flex-wrap: wrap; 
 }
 
-/* =========================================
-   CAIXA DO SIGNO (Botão)
-   ========================================= */
 .signo-caixa {
     display: flex;
-    width: 1.875rem; /* 30px */
-    height: 1.875rem; /* 30px */
+    width: 1.875rem; 
+    height: 1.875rem; 
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
-    
-    /* Bordas e Cores do Figma */
-    border-radius: 0.75rem; /* 12px */
-    border: 0.04rem solid rgba(224, 197, 143, 0.30); /* 0.667px */
+    border-radius: 0.75rem;
+    border: 0.04rem solid rgba(224, 197, 143, 0.30);
     background: rgba(17, 34, 80, 0.40);
-    box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25); /* 0 4px 4px 0 */
-    
-    /* Configurações de Botão */
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
     cursor: pointer;
     padding: 0; 
-    transition: all 0.3s ease; /* Transição suave ao clicar/passar o mouse */
+    transition: all 0.3s ease; 
 }
 
-/* Efeito ao passar o mouse */
 .signo-caixa:hover {
     background: rgba(224, 197, 143, 0.2);
     border-color: #E0C58F;
 }
 
-/* Efeito QUANDO ESTÁ SELECIONADO (A classe condicional do React) */
 .signo-caixa.ativo {
-    background: rgba(224, 197, 143, 0.5); /* Fica mais dourado */
+    background: rgba(224, 197, 143, 0.5); 
     border-color: #E0C58F;
-    box-shadow: 0 0 0.5rem rgba(224, 197, 143, 0.6); /* Brilho místico ao redor */
+    box-shadow: 0 0 0.5rem rgba(224, 197, 143, 0.6); 
 }
 
-/* =========================================
-   ÍCONE DO SIGNO
-   ========================================= */
 .signo-icone {
-    width: 1.5rem; /* 24px */
+    width: 1.5rem; 
     flex-shrink: 0;
     color: #F5F0E9;
     text-align: center;
     font-family: "Cinzel", serif;
-    font-size: 1rem; /* 16px */
+    font-size: 1rem; 
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    letter-spacing: 0.0525rem; /* 0.84px */
+    letter-spacing: 0.0525rem; 
 }
 
 @media (max-width: 28rem) {
     .signo-container {
         gap: 0.5rem;
-        justify-content: center; /* Centraliza as caixinhas no mobile */
+        justify-content: center; 
     }
 }
