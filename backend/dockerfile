@@ -11,6 +11,8 @@ RUN npm install
 # Copia o restante do código do back-end
 COPY . .
 
+RUN npx prisma generate
+
 # Porta padrão que o Express costuma rodar
 EXPOSE 3000
 
