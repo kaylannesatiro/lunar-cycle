@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400&family=Cinzel+Decorative:wght@700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/*Menu*/
+
+.menu-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 2.5rem; 
+    border-bottom: 0.04rem solid rgba(224, 197, 143, 0.40);
+    background: rgba(6, 8, 23, 0.80);
+    backdrop-filter: blur(0.5rem); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1000;
+}
+
+/*Container de Menu*/
+
+.menu-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%;
+    max-width: none;
+}
+
+/*Logo*/
+.menu-logo {
+    display: flex;
+    align-items: center;
+    gap: 0; 
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo-icone {
+    width: 4.5rem; 
+    height: 4.5rem;
+    margin-top: -1.5rem;
+    margin-bottom: -1.5rem;
+    margin-right: -1.2rem;
+    margin-left: -1rem;
+    object-fit: contain;
+}
+
+.logo-texto {
+    color: #E0C58F;
+    text-align: center;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 0.72rem; 
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.08rem; 
+    letter-spacing: 0.17rem; 
+}
+
+/*Links*/
+.menu-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 32px;
+    padding: 0; 
+    margin: 0;
+    list-style: none;
+}
+
+.menu-link {
+    color: #FFF;
+    text-align: center;
+    font-family: "Cinzel", serif;
+    font-size: 0.7rem; 
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.05rem;
+    letter-spacing: 0.07rem; 
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.menu-link:hover {
+    color: #E0C58F;
+}
+
+/*HAMBÚRGUER E MOBILE*/
+.menu-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 0.3rem; 
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-hamburger .barra {
+    width: 1.56rem;
+    height: 0.125rem; 
+    background-color: #E0C58F;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 48rem) {
+    .menu-wrapper {
+        padding: 1rem 1.5rem; 
+    }
+
+    .menu-hamburger {
+        display: flex;
+    }
+
+    .menu-links {
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        
+        width: 100%; 
+        height: 100vh; 
+        
+        background: rgba(6, 8, 23, 0.98); 
+        border-top: 0.04rem solid rgba(224, 197, 143, 0.40);
+        
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        
+        padding-top: 3rem; 
+        gap: 2.5rem; 
+        
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .menu-links.ativo {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .menu-hamburger .barra.aberta:nth-child(1) {
+        transform: translateY(0.43rem) rotate(45deg);
+    }
+    .menu-hamburger .barra.aberta:nth-child(2) {
+        opacity: 0; 
+    }
+    .menu-hamburger .barra.aberta:nth-child(3) {
+        transform: translateY(-0.43rem) rotate(-45deg);
+    }
+}
