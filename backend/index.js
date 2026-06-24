@@ -1,5 +1,17 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const authRoutes = require('./routers/authRoutes');
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Rotas
+// Rota para autenticação
+app.use('/api/auth', authRoutes);
+
+
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
