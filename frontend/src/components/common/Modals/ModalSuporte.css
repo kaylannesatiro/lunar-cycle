@@ -221,3 +221,31 @@
     letter-spacing: 0.0325rem; /* 0.52px */
     margin: 0;
 }
+
+/* =========================================
+   CUSTOMIZAÇÃO DA BARRA DE ROLAGEM (Scrollbar)
+   ========================================= */
+
+/* 1. Define a largura total da barra de rolagem */
+.modal-scroll-area::-webkit-scrollbar {
+    width: 0.375rem; /* Deixamos ela fina e elegante (~6px) */
+}
+
+/* 2. O "trilho" por onde a barra desliza */
+.modal-scroll-area::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02); /* Fundo quase invisível para não poluir */
+    border-radius: 0.5rem;
+    margin: 1rem 0; /* Dá um respiro nas pontas do trilho */
+}
+
+/* 3. O "bloquinho" que o usuário arrasta */
+.modal-scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(224, 197, 143, 0.2); /* Dourado suave e bem translúcido */
+    border-radius: 0.5rem;
+    transition: background 0.3s ease;
+}
+
+/* 4. Quando o usuário passa o mouse em cima da barra */
+.modal-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(224, 197, 143, 0.45); /* O dourado acende um pouco mais */
+}
