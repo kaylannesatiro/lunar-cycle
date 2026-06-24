@@ -17,7 +17,6 @@ const App = () => {
         <Menu links={linksNavegacao}/>
 
         <Footer links={linksNavegacao}/>
-
       </Background>
     </>
   )
