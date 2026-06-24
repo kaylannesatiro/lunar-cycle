@@ -8,6 +8,13 @@ const buscarPorEmail = async (email) => {
     });
 };
 
+
+const buscarPorId = async (id) =>{
+    return await prisma.usuaria.findUnique({
+        where: {id}
+    });
+};
+
 const criarUsuaria = async (dadosUsuaria) => {
     return await prisma.usuaria.create({
         data: {
@@ -23,5 +30,6 @@ const criarUsuaria = async (dadosUsuaria) => {
 
 module.exports = {
     buscarPorEmail,
-    criarUsuaria
+    criarUsuaria,
+    buscarPorId
 };
