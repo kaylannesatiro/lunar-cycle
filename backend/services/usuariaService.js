@@ -54,7 +54,7 @@ const realizarLogin = async (email, senha) => {
 
     //Caso não haja erro, proxima etapa: Gerar token JWT para autenticação
 
-
+    //jwt.sing pega o id da usuaria e transforma em uma string.
     const token = jwt.sign(
         { id: usuaria.id},
         'secretKey_provisoria_do_lunar_cycle',
