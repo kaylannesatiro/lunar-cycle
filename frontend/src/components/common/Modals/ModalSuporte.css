@@ -39,30 +39,31 @@
 }
 
 /* =========================================
-   BOTÃO FECHAR (Absolute, como você pediu)
+   BOTÃO FECHAR (Agora DENTRO do Container)
    ========================================= */
 .botao-fechar-absoluto {
     position: absolute;
-    right: -0.5rem; /* -8px */
-    top: -0.5rem;  /* -8px */
+    right: 1.25rem; /* Mudado de -0.5rem para 1.25rem (20px) para entrar no card */
+    top: 1.25rem;   /* Mudado de -0.5rem para 1.25rem (20px) para entrar no card */
     display: flex;
     width: 2.625rem; /* 42px */
     height: 2.625rem; /* 42px */
     justify-content: center;
     align-items: center;
     
-    background: #0B0E1E; /* Fundo para não ficar transparente por cima da borda */
+    background: transparent; /* Ficou transparente pois já está em cima do fundo escuro */
     border: 0.0625rem solid rgba(224, 197, 143, 0.3);
     color: #E0C58F;
     border-radius: 50%;
     cursor: pointer;
     font-family: Arial, sans-serif;
     transition: all 0.3s ease;
-    z-index: 10;
+    z-index: 10; /* Garante que fique clicável acima do conteúdo */
 }
 
 .botao-fechar-absoluto:hover {
     background: rgba(224, 197, 143, 0.1);
+    border-color: #E0C58F; /* Dá um leve destaque dourado no hover */
 }
 
 /* =========================================
