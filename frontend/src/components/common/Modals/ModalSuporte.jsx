@@ -3,6 +3,7 @@ import "./ModalSuporte.css";
 import IconeLua from "../../../assets/Icon-Modal.svg"; 
 
 const ModalSuporte = ({ isOpen, onClose, dados }) => {
+
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
@@ -20,7 +21,7 @@ const ModalSuporte = ({ isOpen, onClose, dados }) => {
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-caixa" onClick={(evento) => evento.stopPropagation()}>
                 <button className="botao-fechar-absoluto" onClick={onClose} aria-label="Fechar">
-                    X
+                    ✕
                 </button>
 
                 <div className="modal-scroll-area">
