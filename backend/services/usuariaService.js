@@ -2,6 +2,8 @@ const bcrypt = require('bcrypt');
 const usuariaRepository = require('../repositories/usuariaRepository');
 const jwt = require('jsonwebtoken');
 
+
+//FUNÇÃO PARA CRIAR CONTA
 const criarConta = async (dadosusuaria) => {
     //RN- 001: Verificar se o email já está cadastrado
     const usuariaExistente = await usuariaRepository.buscarPorEmail(dadosusuaria.email);
@@ -36,7 +38,7 @@ const criarConta = async (dadosusuaria) => {
 
 };
 
-
+//FUNÇÃO PARA REALIZAR LOGIN
 const realizarLogin = async (email, senha) => {
 
     //verificações de segurança e autenticação.
@@ -75,7 +77,21 @@ const realizarLogin = async (email, senha) => {
 
 }
 
+
+//Pra retornar o perfil completo da usuaria.
+
+const obterPerfil = async (id) => {
+    const usuaria = await usuariaRepository.buscarPorId(id);
+    if(!usuaria){
+        throw new Error('Usuária não encontrada.');
+    }
+
+    const {senha, ...usuariaSemSenha} = usuaria;
+    return usuariaSemSenha;
+}
+
 module.exports = {
     criarConta,
-    realizarLogin
+    realizarLogin,
+    obterPerfil
 };
