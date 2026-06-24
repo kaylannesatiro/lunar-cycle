@@ -3,15 +3,13 @@
    ========================================= */
 .signo-container {
     display: flex;
-    width: 27.25rem; /* 436px exatos do Figma */
-    justify-content: space-between;
+    width: 100%; /* PULO DO GATO: Deixa o container fluido */
+    max-width: 27.25rem; /* 436px exatos do Figma limitando o crescimento */
+    justify-content: space-between; /* Distribui os espaços automaticamente! */
     align-items: center;
     
-    /* Proteção de Responsividade para o celular: 
-       Se a tela for menor que 436px, ele quebra a linha em vez de esmagar as caixas */
-    max-width: 100%;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    /* Removemos o 'gap' para caber perfeitamente nos 436px */
+    flex-wrap: wrap; 
 }
 
 /* =========================================
@@ -64,4 +62,11 @@
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0.0525rem; /* 0.84px */
+}
+
+@media (max-width: 28rem) {
+    .signo-container {
+        gap: 0.5rem;
+        justify-content: center; /* Centraliza as caixinhas no mobile */
+    }
 }
