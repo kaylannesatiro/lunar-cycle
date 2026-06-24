@@ -44,7 +44,23 @@ const realizarLogin = async (req, res) => {
     }
 };
 
+const obterDadosPerfil = async(req, res) =>{
+    try{
+        //middleware de autenticação adiciona o id da usuaria no objeto de requisição. Por isso posso acessar o id da usuaria através de req.usuariaId
+        const id = req.usuariaId;
+
+        const perfil = await usuariaService.obterPerfil(id);
+        //o service retorna o perfil da usuaria sem a senha, então posso retornar diretamente para o frontend.
+        return res.status(200).json(perfil)
+    } catch (erro){
+        return res.status(400).json({
+            mensagem: erro.mensage
+        })
+    }
+}
+
 module.exports = {
     criarConta,
-    realizarLogin
+    realizarLogin,
+    obterDadosPerfil
 };
