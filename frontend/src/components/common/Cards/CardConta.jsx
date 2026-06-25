@@ -1,4 +1,4 @@
-import "./Card-conta.css"
+import "./CardConta.css"
 
 const CardConta = () => {
     return (
