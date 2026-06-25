@@ -1,43 +1,30 @@
-/* =========================================
-   O WRAPPER PRINCIPAL (Com a nova largura de 516px)
-   ========================================= */
 .card-conta-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
     width: 100%;
-    /* MUDANÇA AQUI: Ajustado para 516px em medida relativa */
     max-width: 32.25rem; 
-    
     height: auto; 
-    padding: 3rem 2.5rem; /* Aumentei levemente o respiro lateral para 40px (2.5rem) */
-    
-    border-radius: 2rem; /* 32px */
-    
+    padding: 3rem 2.5rem;
+    border-radius: 2rem; 
     background: 
-        radial-gradient(111.8% 111.8% at 50% 0%, rgba(224, 197, 143, 0.08) 0%, rgba(0, 0, 0, 0.00) 60%),
-        rgba(6, 8, 23, 0.6); 
-    
+        radial-gradient(111.8% 111.8% at 50% 0%, rgba(224, 197, 143, 0.08) 0%, rgba(0, 0, 0, 0.00) 60%), rgba(6, 8, 23, 0.6); 
     backdrop-filter: blur(12px); 
     border: 1px solid rgba(224, 197, 143, 0.1); 
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
 }
 
-/* =========================================
-   CABEÇALHO (Ícone e Textos)
-   ========================================= */
 .card-conta-cabecalho {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    gap: 1rem; /* Espaço uniforme entre ícone, título e subtítulo */
+    gap: 1rem; 
 }
 
 .card-conta-icone {
-    width: 4rem; /* 64px */
-    height: 4rem; /* 64px */
+    width: 4rem;
+    height: 4rem;
     object-fit: contain;
     margin-bottom: 0.5rem;
 }
@@ -46,11 +33,11 @@
     color: #E0C58F;
     text-align: center;
     font-family: "Cinzel Decorative", serif;
-    font-size: 1.85rem; /* 29.6px */
+    font-size: 1.85rem; 
     font-style: normal;
     font-weight: 400;
-    line-height: 2.22rem; /* 35.52px */
-    letter-spacing: 0.111rem; /* 1.776px */
+    line-height: 2.22rem; 
+    letter-spacing: 0.111rem;
     margin: 0;
 }
 
@@ -58,141 +45,106 @@
     color: #F5F0E9;
     text-align: center;
     font-family: "Raleway", sans-serif;
-    font-size: 0.85rem; /* 13.6px */
+    font-size: 0.85rem;
     font-style: italic;
     font-weight: 400;
-    line-height: 1.36rem; /* 21.76px */
-    letter-spacing: 0.0425rem; /* 0.68px */
+    line-height: 1.36rem;
+    letter-spacing: 0.0425rem; 
     margin: 0;
 }
 
-/* =========================================
-   O MIOLO (Ajustado para os inputs esticarem)
-   ========================================= */
 .card-conta-conteudo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
     width: 100%;
-    /* MUDANÇA AQUI: Expandido para 436px em rem para os inputs ocuparem 
-       o novo espaço disponível no card maior */
     max-width: 27.25rem; 
-    
-    padding-top: 2.5rem; /* 40px */
-    gap: 1.3rem; /* 20.8px */
+    padding-top: 2.5rem; 
+    gap: 1.3rem; 
 }
 
-/* =========================================
-   RODAPÉ (Links Opcionais)
-   ========================================= */
 .card-conta-links {
     display: flex;
     justify-content: center;
     align-items: center;
-    
     width: 100%;
     padding-top: 2.5rem;
-    gap: 1.5rem; /* 24px entre os links e os pontinhos */
+    gap: 1.5rem; 
 }
 
 .card-conta-link {
     color: #E0C58F;
     text-align: center;
     font-family: "Raleway", sans-serif;
-    font-size: 0.7rem; /* 11.2px */
+    font-size: 0.7rem; 
     font-style: normal;
     font-weight: 500;
-    line-height: 1.05rem; /* 16.8px */
-    letter-spacing: 0.035rem; /* 0.56px */
+    line-height: 1.05rem; 
+    letter-spacing: 0.035rem; 
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .card-conta-link:hover {
-    color: #FFFFFF; /* Dá um brilho branco ao passar o mouse */
+    color: #FFFFFF; 
 }
 
 .card-conta-separador {
-    color: rgba(224, 197, 143, 0.4); /* Dourado escurecido para não chamar mais atenção que o link */
+    color: rgba(224, 197, 143, 0.4);
     font-size: 0.7rem;
 }
 
-/* =========================================
-   ESTRUTURA DOS INPUTS E LABELS
-   (Enviados como 'children' para o CardConta)
-   ========================================= */
-
-/* O Container do Item Input (A tag <label>) */
 .card-conta-grupo-input {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    align-self: stretch; /* Faz a label ocupar 100% da largura do miolo */
+    align-self: stretch;
     width: 100%;
-    gap: 0.5rem; /* ~8px de espaço entre o texto da label e a caixa de input */
+    gap: 0.5rem; 
 }
 
-/* O Texto da Label ("EMAIL", "SENHA", etc.) */
 .card-conta-texto-label {
     color: #E0C58F;
     font-family: Cinzel;
-    font-size: 0.75rem; /* 12px */
+    font-size: 0.75rem; 
     font-style: normal;
     font-weight: 500;
-    letter-spacing: 0.15rem; /* 2.4px - Espaçamento elegante */
+    letter-spacing: 0.15rem; 
     text-transform: uppercase;
 }
 
-/* =========================================
-   LINHA DUPLA (Inputs lado a lado)
-   ========================================= */
 .card-conta-linha-dupla {
     display: flex;
     width: 100%;
-    gap: 1.3rem; /* O mesmo espaçamento do Figma, mas agora na horizontal */
+    gap: 1.3rem; 
     align-items: flex-start;
 }
 
-/* A MÁGICA: Dizemos para as labels que estiverem dentro dessa 
-   linha dupla dividirem o espaço igualmente (50% para cada) */
 .card-conta-linha-dupla .card-conta-grupo-input {
     flex: 1; 
 }
 
-/* PROTEÇÃO MOBILE: Se a tela for menor que ~448px, os inputs 
-   voltam a ficar um embaixo do outro para não quebrar o layout */
 @media (max-width: 28rem) {
     .card-conta-linha-dupla {
         flex-direction: column;
     }
 }
 
-/* =========================================
-   PROTEÇÃO UNIVERSAL
-   ========================================= */
-/* Garante que o padding nunca faça o card ultrapassar 100% da tela */
 .card-conta-wrapper, .card-conta-conteudo {
     box-sizing: border-box;
 }
 
-/* =========================================
-   RESPONSIVIDADE (Telas menores que 600px - Celulares)
-   ========================================= */
 @media (max-width: 37.5rem) {
-    /* 1. Reduzimos o respiro interno do card e suavizamos a borda */
     .card-conta-wrapper {
         padding: 2rem 1.25rem; 
         border-radius: 1.5rem; 
     }
 
-    /* 2. Diminuímos o ícone levemente para economizar espaço vertical */
     .card-conta-icone {
         width: 3rem; 
         height: 3rem;
     }
 
-    /* 3. Encolhemos o título para ele não quebrar as palavras no meio */
     .card-conta-titulo {
         font-size: 1.4rem; 
         line-height: 1.3;
@@ -203,13 +155,11 @@
         font-size: 0.75rem;
     }
 
-    /* 4. Aproximamos os inputs e reduzimos o padding superior do miolo */
     .card-conta-conteudo {
         padding-top: 2rem;
         gap: 1rem; 
     }
 
-    /* 5. Proteção para os links não vazarem da tela (permite quebrar linha) */
     .card-conta-links {
         flex-wrap: wrap;
         gap: 1rem;
@@ -217,16 +167,13 @@
     }
 }
 
-/* =========================================
-   PROTEÇÃO PARA TELAS MUITO PEQUENAS (Ex: iPhone SE - 320px)
-   ========================================= */
 @media (max-width: 22.5rem) {
     .card-conta-links {
-        flex-direction: column; /* Coloca um link embaixo do outro */
+        flex-direction: column;
         gap: 0.8rem;
     }
     
     .card-conta-separador {
-        display: none; /* Esconde o pontinho (•) quando estiverem empilhados */
+        display: none; 
     }
 }

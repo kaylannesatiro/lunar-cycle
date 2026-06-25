@@ -2,8 +2,6 @@ import CardConta from './components/common/Cards/CardConta';
 import Input from './components/common/Inputs/Input';
 import Button from './components/common/Buttons/Button';
 import Background from './components/common/Base/Background';
-import InputSenha from './components/common/Inputs/InputSenha';
-import SelecaoSigno from './components/common/Inputs/SelecaoSigno';
 import './App.css';
 
 function App() {
@@ -11,56 +9,13 @@ function App() {
       <Background>
         <div style={{ padding: '50px', display: 'flex', gap: '50px', flexWrap: 'wrap', justifyContent: 'center' }}>
             <CardConta 
-                titulo="Comece sua jornada entre as fases da Lua"
+                titulo="Recupere sua conexão"
+                subtitulo="Informe seu email para receber o código de recuperação."
             >
               <label className="card-conta-grupo-input">
-                <span className="card-conta-texto-label">Nome de exibição</span>
+                <span className="card-conta-texto-label">Emailo</span>
                 <Input
-                    placeholder="Digite como deseja ser chamada(o)" 
-                />
-              </label>
-
-              <label className="card-conta-grupo-input">
-                <span className="card-conta-texto-label">Email</span>
-                <Input 
-                    placeholder="Digite seu email" 
-                />
-              </label>
-
-              <div className="card-conta-linha-dupla">
-                <label className="card-conta-grupo-input">
-                <span className="card-conta-texto-label">Dias do ciclo</span>
-                <Input 
-                    placeholder="ex: 28"
-                    variante="cadastro-numero" 
-                />
-                </label>
-
-                <label className="card-conta-grupo-input">
-                  <span className="card-conta-texto-label">Dias menstruação</span>
-                  <Input 
-                      placeholder="ex: 5" 
-                      variante="cadastro-numero"
-                  />
-                </label>
-              </div>
-
-              <label className="card-conta-grupo-input">
-                <span className="card-conta-texto-label">Signo</span>
-                <SelecaoSigno/>
-              </label>
-
-              <label className="card-conta-grupo-input">
-                <span className="card-conta-texto-label">Senha</span>
-                <InputSenha 
-                    placeholder="Digite sua senha" 
-                />
-              </label>
-
-              <label className="card-conta-grupo-input">
-                <span className="card-conta-texto-label">Confirmar senha</span>
-                <InputSenha 
-                    placeholder="Confirme a sua senha" 
+                    placeholder="Digite o e-mail da sua conta" 
                 />
               </label>
 
