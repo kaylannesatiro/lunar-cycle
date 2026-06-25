@@ -1,7 +1,7 @@
 import "./Button.css"
 import { motion } from "framer-motion";
 
-const Button = ({variant = 'padrao', backgroundColor, color, textColor, isLoading = false, onClick, disabled = false, children, icone}) => {
+const Button = ({variant = 'padrao', backgroundColor, color, textColor, isLoading = false, onClick, disabled = false, children, icone, width, maxWidth}) => {
     const interativo = !disabled && !isLoading;
     let estilosDeSeguranca = {};
     
@@ -11,6 +11,14 @@ const Button = ({variant = 'padrao', backgroundColor, color, textColor, isLoadin
         estilosDeSeguranca = { width: '100%', maxWidth: '268px', height: '48px', minHeight: '48px' };
     } else if (variant === 'fechar') {
         estilosDeSeguranca = { width: '34px', height: '34px', minWidth: '34px', minHeight: '34px' };
+    }
+
+    if (width) {
+        estilosDeSeguranca.width = width;
+    }
+    
+    if (maxWidth) {
+        estilosDeSeguranca.maxWidth = maxWidth;
     }
 
     if (color) {
