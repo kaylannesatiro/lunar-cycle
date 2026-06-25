@@ -1,6 +1,6 @@
 import "./PopupAlert.css";
 
-const PopUpAlert = ({ isOpen, title, message, onClose, botao }) => {
+const PopupAlert = ({ isOpen, title, message, onClose, botao }) => {
     if (!isOpen) return null;
 
     return (
