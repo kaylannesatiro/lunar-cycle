@@ -3,7 +3,7 @@ import { obterDadosDoOraculo, obterTagsDoCiclo } from "../../../data/oraculoData
 import "./CardOraculo.css"
 import Tag from "../../common/Tags/Tag";
 
-const CardOraculo = ({ diaDoCiclo, estaMenstruada}) => {
+const CardOraculo = ({ estaMenstruada}) => {
     const [faseAtual, setFaseAtual] = useState("Nova");
     const [carregando, setCarregando] = useState(true);
 

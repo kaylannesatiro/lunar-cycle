@@ -67,43 +67,43 @@ const obterDadosDoOraculo = (faseDaLua, estaMenstruada) => {
 const obterTagsDoCiclo = (faseDaLua, estaMenstruada) => {
     const tags = {
         "Nova": {
-            menstruada: ["Silêncio", "Limpeza", "Recolhimento"],
-            naoMenstruada: ["Recomeço", "Intenção", "Magia"]
+            menstruada: ["Silêncio", "Recolhimento", "Renovação"],
+            naoMenstruada: ["Intenção", "Recomeço", "Semente"]
         },
 
         "Crescente": {
-            menstruada: ["Pausa", "Equilíbrio", "Nutrição"],
-            naoMenstruada: ["Despertar", "Firmeza", "Crescimento"]
+            menstruada: ["Nutrição", "Paciência", "Cura"],
+            naoMenstruada: ["Despertar", "Impulso", "Coragem"]
         },
 
         "Quarto Crescente": {
-            menstruada: ["", "", ""],
-            naoMenstruada: ["", "", ""]
+            menstruada: ["Autocuidado", "Equilíbrio", "Raízes"],
+            naoMenstruada: ["Ação", "Força", "Crescimento"]
         },
 
         "Gibosa Crescente": {
-            menstruada: ["", "", ""],
-            naoMenstruada: ["", "", ""]
+            menstruada: ["Pausa", "Acolhimento", "Transmutação"],
+            naoMenstruada: ["Persistência", "Expansão", "Foco"]
         },
 
         "Cheia": {
-            menstruada: ["Lua Vermelha", "Intuição", "Sabedoria"],
-            naoMenstruada: ["Plenitude", "Vitalidade", "Magnetismo"]
+            menstruada: ["LuaVermelha", "Intuição", "Magia"],
+            naoMenstruada: ["Plenitude", "Magnetismo", "Poder"]
         },
 
         "Gibosa Minguante": {
-            menstruada: ["", "", ""],
-            naoMenstruada: ["", "", ""]
+            menstruada: ["Desapego", "Purificação", "Aceitação"],
+            naoMenstruada: ["Gratidão", "Colheita", "Reflexão"]
         },
 
         "Quarto Minguante": {
-            menstruada: ["", "", ""],
-            naoMenstruada: ["", "", ""]
+            menstruada: ["Banimento", "Libertação", "Desintoxicação"],
+            naoMenstruada: ["Limpeza", "Finalização", "Triagem"]
         },
 
         "Minguante": {
-            menstruada: ["Purificação", "Cura", "Libertação"],
-            naoMenstruada: ["Introspecção", "Desacelerar", "Desapego"]
+            menstruada: ["Esvaziamento", "Restauração", "Paz"],
+            naoMenstruada: ["Descanso", "Introspecção", "Preparação"]
         }
     };
 
