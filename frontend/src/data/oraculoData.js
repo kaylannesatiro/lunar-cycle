@@ -64,11 +64,50 @@ const obterDadosDoOraculo = (faseDaLua, estaMenstruada) => {
     };
 }
 
-const obterTagsDoCiclo = (diaDoCiclo) => {
-    if (diaDoCiclo >= 1 && diaDoCiclo <= 5) return [""];
-    if (diaDoCiclo >= 6 && diaDoCiclo <= 12) return [""];
-    if (diaDoCiclo >= 13 && diaDoCiclo <= 16) return [""];
-    return [""];
+const obterTagsDoCiclo = (faseDaLua, estaMenstruada) => {
+    const tags = {
+        "Nova": {
+            menstruada: ["Silêncio", "Limpeza", "Recolhimento"],
+            naoMenstruada: ["Recomeço", "Intenção", "Magia"]
+        },
+
+        "Crescente": {
+            menstruada: ["Pausa", "Equilíbrio", "Nutrição"],
+            naoMenstruada: ["Despertar", "Firmeza", "Crescimento"]
+        },
+
+        "Quarto Crescente": {
+            menstruada: ["", "", ""],
+            naoMenstruada: ["", "", ""]
+        },
+
+        "Gibosa Crescente": {
+            menstruada: ["", "", ""],
+            naoMenstruada: ["", "", ""]
+        },
+
+        "Cheia": {
+            menstruada: ["Lua Vermelha", "Intuição", "Sabedoria"],
+            naoMenstruada: ["Plenitude", "Vitalidade", "Magnetismo"]
+        },
+
+        "Gibosa Minguante": {
+            menstruada: ["", "", ""],
+            naoMenstruada: ["", "", ""]
+        },
+
+        "Quarto Minguante": {
+            menstruada: ["", "", ""],
+            naoMenstruada: ["", "", ""]
+        },
+
+        "Minguante": {
+            menstruada: ["Purificação", "Cura", "Libertação"],
+            naoMenstruada: ["Introspecção", "Desacelerar", "Desapego"]
+        }
+    };
+
+    return tags[faseDaLua][estaMenstruada ? "menstruada" : "naoMenstruada"];
 }
 
 export { obterDadosDoOraculo, obterTagsDoCiclo }

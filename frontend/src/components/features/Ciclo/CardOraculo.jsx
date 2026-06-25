@@ -53,7 +53,7 @@ const CardOraculo = ({ diaDoCiclo, estaMenstruada}) => {
     }, []);
 
     const dadosOraculo = obterDadosDoOraculo(faseAtual, estaMenstruada);
-    const tagsDoDia = obterTagsDoCiclo(diaDoCiclo);
+    const tagsDoDia = obterTagsDoCiclo(faseAtual, estaMenstruada)
 
     if (carregando) {
         return <div className="oraculo-container">Consultando os astros...</div>;
