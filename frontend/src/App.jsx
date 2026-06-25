@@ -3,6 +3,7 @@ import IconeLua from './assets/Icon-Modal.svg';
 import Input from './components/common/Inputs/Input';
 import Button from './components/common/Buttons/Button';
 import Background from './components/common/Base/Background';
+import InputSenha from './components/common/Inputs/InputSenha';
 
 
 function App() {
@@ -18,24 +19,32 @@ function App() {
                     { texto: "Criar conta", rota: "/cadastro" }
                 ]}
             >
-                <Input label="EMAIL" placeholder="DIGITE SEU EMAIL" />
-                <Input label="SENHA" placeholder="DIGITE SUA SENHA" type="password" />
-                <Button/>
+              <label className="card-conta-grupo-input">
+                <span className="card-conta-texto-label">EMAIL</span>
+                <Input
+                    placeholder="DIGITE SEU EMAIL" 
+                />
+              </label>
+
+              <label className="card-conta-grupo-input">
+                <span className="card-conta-texto-label">SENHA</span>
+                <InputSenha 
+                    placeholder="DIGITE SUA SENHA" 
+                />
+              </label>
+
+              <Button variant = 'padrao'>Entrar</Button>
             </CardConta>
 
 
-            {/* TELA DE RECUPERAR SENHA (Usa o MESMO CardConta) */}
             <CardConta 
                 icone={IconeLua}
                 titulo="RECUPERE SUA CONEXÃO"
                 subtitulo="Informe seu e-mail para receber o código de recuperação."
-                // Repare que aqui não mandamos links de rodapé!
             >
-                {/* Aqui o "children" é diferente */}
                 <Input label="EMAIL" placeholder="DIGITE O E-MAIL DA SUA CONTA" />
                 <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
-                    <Button variant="secundario">VOLTAR</Button>
-                    <Button>ENVIAR</Button>
+                    <Button variant='padrao'>ENVIAR</Button>
                 </div>
             </CardConta>
         </div>

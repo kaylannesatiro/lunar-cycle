@@ -118,3 +118,29 @@
     color: rgba(224, 197, 143, 0.4); /* Dourado escurecido para não chamar mais atenção que o link */
     font-size: 0.7rem;
 }
+
+/* =========================================
+   ESTRUTURA DOS INPUTS E LABELS
+   (Enviados como 'children' para o CardConta)
+   ========================================= */
+
+/* O Container do Item Input (A tag <label>) */
+.card-conta-grupo-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch; /* Faz a label ocupar 100% da largura do miolo */
+    width: 100%;
+    gap: 0.5rem; /* ~8px de espaço entre o texto da label e a caixa de input */
+}
+
+/* O Texto da Label ("EMAIL", "SENHA", etc.) */
+.card-conta-texto-label {
+    color: #E0C58F;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.75rem; /* 12px */
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.15rem; /* 2.4px - Espaçamento elegante */
+    text-transform: uppercase;
+}
