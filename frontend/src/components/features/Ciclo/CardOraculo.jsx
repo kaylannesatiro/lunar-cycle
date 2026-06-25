@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react"
-import { obterDadosDoOraculo, obterTagsDoCiclo } from '../../data/oraculoData';
+import { obterDadosDoOraculo, obterTagsDoCiclo } from "../../../data/oraculoData";
 import "./CardOraculo.css"
 
 const CardOraculo = ({ diaDoCiclo, estaMenstruada}) => {
