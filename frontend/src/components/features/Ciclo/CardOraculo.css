@@ -1,16 +1,17 @@
-/* Container Principal */
+/* Container Principal (Pai) */
 .oraculo-container {
   display: flex;
-  width: 918.66px;
-  height: 352.97px;
-  /* Radial gradient exato do Figma */
+  width: 918.667px;
+  height: 352.979px;
   background: radial-gradient(111.8% 111.8% at 50% 0%, rgba(224, 197, 143, 0.04) 0%, rgba(0, 0, 0, 0.00) 55%);
+  
+  /* Propriedades mantidas para garantir que os itens internos fiquem alinhados */
   border-radius: 16px;
   padding: 40px;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
-  gap: 40px; /* Separa as duas colunas */
+  gap: 40px; 
 }
 
 /* Coluna Esquerda (Alinhada ao centro) */
