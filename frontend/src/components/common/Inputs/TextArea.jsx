@@ -1,6 +1,11 @@
 import "./TextArea.css";
 
-const TextArea = ({ placeholder = "", value = "", onChange, error = "", limiteCaracteres = 5000 }) => {
+const TextArea = ({
+    placeholder = "",
+    value = "",
+    onChange,
+    error = ""
+}) => {
     return (
         <div className="textarea-container">
             <div className={`textarea-wrapper ${error ? "textarea-wrapper--erro" : ""}`}>
@@ -8,12 +13,9 @@ const TextArea = ({ placeholder = "", value = "", onChange, error = "", limiteCa
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
-                    maxLength={limiteCaracteres}
                     className="textarea-campo"
                 />
             </div>
-
-            <span className="textarea-contador">{value.length} / {limiteCaracteres}</span>
 
             {error && <span className="textarea-erro">{error}</span>}
         </div>
