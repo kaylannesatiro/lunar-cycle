@@ -1,41 +1,30 @@
-import { useState } from 'react'
-import './App.css'
-import Menu from './components/common/Base/Menu'
-import Background from './components/common/Base/Background'
-import Footer from './components/common/Base/Footer'
-import TextArea from './components/common/Inputs/TextArea'
+import CardConta from './components/common/Cards/CardConta';
+import Input from './components/common/Inputs/Input';
+import Button from './components/common/Buttons/Button';
+import Background from './components/common/Base/Background';
+import './App.css';
 
-const App = () => {
-  const [texto, setTexto] = useState('')
+function App() {
+    return (
+      <Background>
+        <div style={{ padding: '50px', display: 'flex', gap: '50px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <CardConta 
+                titulo="Recupere sua conexão"
+                subtitulo="Informe seu email para receber o código de recuperação."
+            >
+              <label className="card-conta-grupo-input">
+                <span className="card-conta-texto-label">Emailo</span>
+                <Input
+                    placeholder="Digite o e-mail da sua conta" 
+                />
+              </label>
 
-  const linksNavegacao = [
-    { titulo: 'Diário dos Sonhos', rota: '/diario' },
-    { titulo: 'Calendário', rota: '/calendario' },
-    { titulo: 'Conta', rota: '/conta' }
-  ]
-
-  return (
-    <Background>
-      <Menu links={linksNavegacao} />
-
-      <main
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          padding: '2rem'
-        }}
-      >
-        <TextArea
-          placeholder="Digite seu sonho..."
-          value={texto}
-          onChange={(e) => setTexto(e.target.value)}
-          limiteCaracteres={200}
-        />
-      </main>
-
-      <Footer links={linksNavegacao} />
-    </Background>
-  )
+              <Button variant = 'padrao'>◇ Voltar</Button>
+              <Button variant = 'padrao'>◈ Entrar</Button>
+            </CardConta>
+        </div>
+      </Background>
+    );
 }
 
-export default App
+export default App;
