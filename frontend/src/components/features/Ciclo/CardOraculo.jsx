@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react"
 import { obterDadosDoOraculo, obterTagsDoCiclo } from "../../../data/oraculoData";
 import "./CardOraculo.css"
+import Tag from "../../common/Tags/Tag";
 
 const CardOraculo = ({ diaDoCiclo, estaMenstruada}) => {
     const [faseAtual, setFaseAtual] = useState("Nova");
@@ -71,7 +72,11 @@ const CardOraculo = ({ diaDoCiclo, estaMenstruada}) => {
                 
                 <div className="oraculo-tags">
                     {tagsDoDia.map((tag, index) => (
-                        <span key={index} className="oraculo-tag-item">#{tag}</span>
+                        <Tag 
+                            key={index} 
+                            texto={tag} 
+                            variante="oraculo" 
+                        />
                     ))}
                 </div>
             </div>
