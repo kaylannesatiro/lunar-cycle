@@ -1,0 +1,120 @@
+/* =========================================
+   O WRAPPER PRINCIPAL (O Molde do Card)
+   ========================================= */
+.card-conta-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    /* Largura fluida, mas travada no máximo exigido pelo Figma */
+    width: 100%;
+    max-width: 27.416rem; /* 438.667px */
+    
+    /* Altura automática (auto) para esticar na tela de "Criar Conta" 
+       sem vazar os inputs para fora da caixa */
+    height: auto; 
+    padding: 3rem 2rem; 
+    
+    border-radius: 2rem; /* 32px */
+    
+    /* Fundo Escuro + Gradiente de Luz (Efeito de Vidro) */
+    background: 
+        radial-gradient(111.8% 111.8% at 50% 0%, rgba(224, 197, 143, 0.08) 0%, rgba(0, 0, 0, 0.00) 60%),
+        rgba(6, 8, 23, 0.6); 
+    
+    backdrop-filter: blur(12px); 
+    border: 1px solid rgba(224, 197, 143, 0.1); 
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================
+   CABEÇALHO (Ícone e Textos)
+   ========================================= */
+.card-conta-cabecalho {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1rem; /* Espaço uniforme entre ícone, título e subtítulo */
+}
+
+.card-conta-icone {
+    width: 4rem; /* 64px */
+    height: 4rem; /* 64px */
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.card-conta-titulo {
+    color: #E0C58F;
+    text-align: center;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 1.85rem; /* 29.6px */
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.22rem; /* 35.52px */
+    letter-spacing: 0.111rem; /* 1.776px */
+    margin: 0;
+}
+
+.card-conta-subtitulo {
+    color: #F5F0E9;
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.85rem; /* 13.6px */
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.36rem; /* 21.76px */
+    letter-spacing: 0.0425rem; /* 0.68px */
+    margin: 0;
+}
+
+/* =========================================
+   O MIOLO (Área onde os inputs e botões vão ficar)
+   ========================================= */
+.card-conta-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha os inputs à esquerda conforme o Figma */
+    
+    width: 100%;
+    max-width: 22.416rem; /* 358.667px */
+    
+    padding-top: 2.5rem; /* 40px */
+    gap: 1.3rem; /* 20.8px de espaço entre os formulários */
+}
+
+/* =========================================
+   RODAPÉ (Links Opcionais)
+   ========================================= */
+.card-conta-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    padding-top: 2.5rem;
+    gap: 1.5rem; /* 24px entre os links e os pontinhos */
+}
+
+.card-conta-link {
+    color: #E0C58F;
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.7rem; /* 11.2px */
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.05rem; /* 16.8px */
+    letter-spacing: 0.035rem; /* 0.56px */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.card-conta-link:hover {
+    color: #FFFFFF; /* Dá um brilho branco ao passar o mouse */
+}
+
+.card-conta-separador {
+    color: rgba(224, 197, 143, 0.4); /* Dourado escurecido para não chamar mais atenção que o link */
+    font-size: 0.7rem;
+}
