@@ -1,12 +1,21 @@
 /* Container Principal (Pai) */
 .oraculo-container {
   display: flex;
-  width: 918.667px;
-  height: 352.979px;
-  background: radial-gradient(111.8% 111.8% at 50% 0%, rgba(224, 197, 143, 0.04) 0%, rgba(0, 0, 0, 0.00) 55%);
   
-  /* Propriedades mantidas para garantir que os itens internos fiquem alinhados */
-  border-radius: 16px;
+  /* Dimensões e Alinhamento */
+  width: 918.667px; /* Mantido da sua especificação anterior */
+  height: 354.313px;
+  align-self: stretch;
+  
+  /* Estilização Visual (Fundo, Borda e Sombras) */
+  background: #0A1232;
+  border-radius: 26px;
+  border: 0.667px solid rgba(224, 197, 143, 0.28);
+  box-shadow: 
+    0 4.448px 35.748px 0 rgba(78, 69, 50, 0.16), /* Sombra externa (elevação) */
+    0 0.202px 17.552px 0 rgba(232, 212, 171, 0.02) inset; /* Brilho/sombra interna */
+  
+  /* Estrutura Interna (Flexbox para os filhos) */
   padding: 40px;
   box-sizing: border-box;
   justify-content: center;
