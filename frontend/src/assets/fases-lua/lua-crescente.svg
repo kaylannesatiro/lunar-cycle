@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" overflow="visible" fill="none">
+  <g filter="url(#glow_lua_crescente)">
+    <circle cx="50" cy="50" r="50" fill="#0E1637" fill-opacity="0.96" />
+    
+    <path d="M 50 0 A 50 50 0 0 0 50 100 A 25 50 0 0 1 50 0 Z" fill="url(#paint_crescente)"/>
+  </g>
+  <defs>
+    <filter id="glow_lua_crescente" x="-200%" y="-200%" width="500%" height="500%" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset/>
+      
+      <feGaussianBlur stdDeviation="129"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.878431 0 0 0 0 0.772549 0 0 0 0 0.560784 0 0 0 0.18 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset/>
+      
+      <feGaussianBlur stdDeviation="78"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.878431 0 0 0 0 0.772549 0 0 0 0 0.560784 0 0 0 0.55 0"/>
+      <feBlend mode="normal" in2="effect1_dropShadow" result="effect2_dropShadow"/>
+      
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset/>
+      
+      <feGaussianBlur stdDeviation="30"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.960784 0 0 0 0 0.941176 0 0 0 0 0.913725 0 0 0 0.88 0"/>
+      <feBlend mode="normal" in2="effect2_dropShadow" result="effect3_dropShadow"/>
+      
+      <feBlend mode="normal" in="SourceGraphic" in2="effect3_dropShadow" result="shape"/>
+    </filter>
+    
+    <radialGradient id="paint_crescente" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(30 50) scale(40 40)">
+      <stop stop-color="#F5F0E9"/>
+      <stop offset="0.62" stop-color="#E0C58F"/>
+      <stop offset="1" stop-color="#C4A060"/>
+    </radialGradient>
+  </defs>
+</svg>
