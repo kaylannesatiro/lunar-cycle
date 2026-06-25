@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const usuariaRepository = require('../repositories/usuariaRepository');
 const jwt = require('jsonwebtoken');
+const { da } = require('zod/v4/locales');
 
 
 //FUNÇÃO PARA CRIAR CONTA
@@ -90,8 +91,46 @@ const obterPerfil = async (id) => {
     return usuariaSemSenha;
 }
 
+
+const atualizarPerfil = async (id, dadosAtualizados) => {
+    const usuariaAtual = await usuariaRepository.buscarPorId(id);
+    if(!usuariaAtual) {
+        throw new Error('Usuária não encontrada.');
+    }
+
+    //Verficar se o email novo (se ela estiver tentando atualizar) já está em uso por outra usuária
+
+    if(dadosAtualizados.email !== usuariaAtual.email){
+        const emailExistente = await usuariaRepository.buscarPorEmail(dadosAtualizados.email);
+        if(emailExistente){
+            throw new Error('O email informado já está cadastrado');
+        }
+    }
+
+    //Logica para trocar de senha, só entra aqui se a usuária estiver tentando atualizar a senha. (precisa preencher a senha atual)
+
+    if (dadosAtualizados.senhaAtual) {
+        const senhaValida = await bcrypt.compare(dadosAtualizados.senhaAtual, usuariaAtual.senha);
+        if (!senhaValida){
+            throw new Error('A senha atual informada está incorreta.');
+        }
+        dadosAtualizados.senha = await bcrypt.hash(dadosAtualizados.novaSenha, 10);
+    }
+    //Limpar dados desnecessários antes de atualizar o perfil no bd
+    
+    delete dadosAtualizados.senhaAtual;
+    delete dadosAtualizados.novaSenha;
+    delete dadosAtualizados.confirmarNovaSenha;
+
+    //Mandar pro repository atualizar os dados da usuária no banco de dados
+    const usuariaAtualizada = await usuariaRepository.atualizarDados(id, dadosAtualizados);
+}
+
+
+
 module.exports = {
     criarConta,
     realizarLogin,
-    obterPerfil
+    obterPerfil,
+    atualizarPerfil
 };
