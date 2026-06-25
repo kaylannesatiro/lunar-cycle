@@ -167,3 +167,66 @@
         flex-direction: column;
     }
 }
+
+/* =========================================
+   PROTEÇÃO UNIVERSAL
+   ========================================= */
+/* Garante que o padding nunca faça o card ultrapassar 100% da tela */
+.card-conta-wrapper, .card-conta-conteudo {
+    box-sizing: border-box;
+}
+
+/* =========================================
+   RESPONSIVIDADE (Telas menores que 600px - Celulares)
+   ========================================= */
+@media (max-width: 37.5rem) {
+    /* 1. Reduzimos o respiro interno do card e suavizamos a borda */
+    .card-conta-wrapper {
+        padding: 2rem 1.25rem; 
+        border-radius: 1.5rem; 
+    }
+
+    /* 2. Diminuímos o ícone levemente para economizar espaço vertical */
+    .card-conta-icone {
+        width: 3rem; 
+        height: 3rem;
+    }
+
+    /* 3. Encolhemos o título para ele não quebrar as palavras no meio */
+    .card-conta-titulo {
+        font-size: 1.4rem; 
+        line-height: 1.3;
+        letter-spacing: 0.08rem;
+    }
+
+    .card-conta-subtitulo {
+        font-size: 0.75rem;
+    }
+
+    /* 4. Aproximamos os inputs e reduzimos o padding superior do miolo */
+    .card-conta-conteudo {
+        padding-top: 2rem;
+        gap: 1rem; 
+    }
+
+    /* 5. Proteção para os links não vazarem da tela (permite quebrar linha) */
+    .card-conta-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-top: 1.5rem;
+    }
+}
+
+/* =========================================
+   PROTEÇÃO PARA TELAS MUITO PEQUENAS (Ex: iPhone SE - 320px)
+   ========================================= */
+@media (max-width: 22.5rem) {
+    .card-conta-links {
+        flex-direction: column; /* Coloca um link embaixo do outro */
+        gap: 0.8rem;
+    }
+    
+    .card-conta-separador {
+        display: none; /* Esconde o pontinho (•) quando estiverem empilhados */
+    }
+}
