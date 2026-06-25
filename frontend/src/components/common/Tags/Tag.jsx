@@ -9,6 +9,8 @@ const Tag = ({ texto, variante = "sonho", ativa = false, aoRemover, aoClicar }) 
         estilosDeSeguranca = { height: "1.302rem" };
     } else if (variante === "registro") {
         estilosDeSeguranca = { height: "1.212rem" };
+    } else if (variante === "oraculo") {
+        estilosDeSeguranca = { height: "1.392rem" };
     }
 
     return (

@@ -138,3 +138,20 @@
 .tag-remover:hover {
     opacity: 1;
 }
+
+.tag--oraculo {
+    background: #E0C58F12;
+    border-color: transparent;
+    border: 0.042rem solid #E0C58F;
+    cursor: default;
+}
+
+.tag-texto--oraculo {
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+    font-size: 0.58rem;
+    line-height: 0.87rem;
+    letter-spacing: 0.0925rem;
+    text-transform: uppercase;
+    color: #E0C58F;
+}
