@@ -59,8 +59,47 @@ const obterDadosPerfil = async(req, res) =>{
     }
 }
 
+
+const atualizarPerfil = async(req, res) =>{
+    try{
+        //id garantido na req pelo middleware.
+        const id = req.usuariaId;
+        //dados chegam aqui limpos e validados pelo schema zod. Então já envio pro service.
+        const dadosAtualizados = req.body;
+        const perfilAtualizado =  await usuariaService.atualizarPerfil(id, dadosAtualizados);
+
+        const mensagemSucesso = dadosAtualizados.novaSenha ? 'Senha atualizada com sucesso!' : 'Perfil atualizado com sucesso!';
+        return res.status(200).json({
+            mensagem: mensagemSucesso,
+            perfil: perfilAtualizado
+        })
+
+    } catch (erro){
+        if(erro.message == 'Usuária não encontrada.'){
+            return res.status(404).json({
+                mensagem: erro.message
+            })
+        }
+        if(erro.message == 'Senha atual informada incorreta.'){
+            return res.status(400).json({
+                mensagem: erro.message
+            })
+        }
+        if(erro.message == 'O email informado já está cadastrado'){
+            return res.status(409).json({
+                mensagem: erro.message
+            })
+        }
+
+        return res.status(500).json({
+            mensagem: 'Ocorreu um erro ao atualizar o perfil. Por favor, tente novamente mais tarde.'
+        })
+    }
+}
+
 module.exports = {
     criarConta,
     realizarLogin,
-    obterDadosPerfil
+    obterDadosPerfil,
+    atualizarPerfil
 };
