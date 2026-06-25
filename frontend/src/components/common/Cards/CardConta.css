@@ -1,23 +1,20 @@
 /* =========================================
-   O WRAPPER PRINCIPAL (O Molde do Card)
+   O WRAPPER PRINCIPAL (Com a nova largura de 516px)
    ========================================= */
 .card-conta-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     
-    /* Largura fluida, mas travada no máximo exigido pelo Figma */
     width: 100%;
-    max-width: 27.416rem; /* 438.667px */
+    /* MUDANÇA AQUI: Ajustado para 516px em medida relativa */
+    max-width: 32.25rem; 
     
-    /* Altura automática (auto) para esticar na tela de "Criar Conta" 
-       sem vazar os inputs para fora da caixa */
     height: auto; 
-    padding: 3rem 2rem; 
+    padding: 3rem 2.5rem; /* Aumentei levemente o respiro lateral para 40px (2.5rem) */
     
     border-radius: 2rem; /* 32px */
     
-    /* Fundo Escuro + Gradiente de Luz (Efeito de Vidro) */
     background: 
         radial-gradient(111.8% 111.8% at 50% 0%, rgba(224, 197, 143, 0.08) 0%, rgba(0, 0, 0, 0.00) 60%),
         rgba(6, 8, 23, 0.6); 
@@ -70,18 +67,20 @@
 }
 
 /* =========================================
-   O MIOLO (Área onde os inputs e botões vão ficar)
+   O MIOLO (Ajustado para os inputs esticarem)
    ========================================= */
 .card-conta-conteudo {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Alinha os inputs à esquerda conforme o Figma */
+    align-items: flex-start;
     
     width: 100%;
-    max-width: 22.416rem; /* 358.667px */
+    /* MUDANÇA AQUI: Expandido para 436px em rem para os inputs ocuparem 
+       o novo espaço disponível no card maior */
+    max-width: 27.25rem; 
     
     padding-top: 2.5rem; /* 40px */
-    gap: 1.3rem; /* 20.8px de espaço entre os formulários */
+    gap: 1.3rem; /* 20.8px */
 }
 
 /* =========================================

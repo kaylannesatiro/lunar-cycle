@@ -45,7 +45,10 @@ function App() {
                 />
               </label>
 
-              <SelecaoSigno/>
+              <label className="card-conta-grupo-input">
+                <span className="card-conta-texto-label">Signo</span>
+                <SelecaoSigno/>
+              </label>
 
               <label className="card-conta-grupo-input">
                 <span className="card-conta-texto-label">Senha</span>
