@@ -44,13 +44,16 @@
 
 /* Estilos da Imagem da Lua Recalibrados */
 /* Estilos da Imagem da Lua com Brilho Expandido */
+/* Estilos da Imagem da Lua com Brilho Delicado e Calibrado */
 .oraculo-imagem {
   width: 110px;
   height: 110px;
   flex-shrink: 0;
   
-  /* Triplo drop-shadow do Figma que cria a atmosfera de luz difusa */
-  filter: drop-shadow(0 0 239.722px rgba(224, 197, 143, 0.18)) drop-shadow(0 0 143.921px rgba(224, 197, 143, 0.55)) drop-shadow(0 0 55.968px rgba(245, 240, 233, 0.88));
+  /* Versão suavizada: raios menores e opacidades reduzidas para um efeito etéreo */
+  filter: drop-shadow(0 0 40px rgba(224, 197, 143, 0.10)) 
+          drop-shadow(0 0 20px rgba(224, 197, 143, 0.25)) 
+          drop-shadow(0 0 6px rgba(245, 240, 233, 0.50));
 }
 
 /* Textos da Coluna Esquerda */
