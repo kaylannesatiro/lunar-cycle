@@ -2,9 +2,10 @@
 .oraculo-container {
   display: flex;
   
-  /* Dimensões e Alinhamento */
-  width: 918.667px; /* Mantido da sua especificação anterior */
-  height: 354.313px;
+  /* DIMENSÕES AJUSTADAS: max-width e min-height salvam o layout! */
+  width: 918.667px; 
+  max-width: 100%; /* Evita que o card vaze em telas menores */
+  min-height: 354.313px; /* Garante o tamanho do Figma, mas permite crescer se o texto for longo */
   align-self: stretch;
   
   /* Estilização Visual (Fundo, Borda e Sombras) */
@@ -12,30 +13,30 @@
   border-radius: 26px;
   border: 0.667px solid rgba(224, 197, 143, 0.28);
   box-shadow: 
-    0 4.448px 35.748px 0 rgba(78, 69, 50, 0.16), /* Sombra externa (elevação) */
-    0 0.202px 17.552px 0 rgba(232, 212, 171, 0.02) inset; /* Brilho/sombra interna */
+    0 4.448px 35.748px 0 rgba(78, 69, 50, 0.16), 
+    0 0.202px 17.552px 0 rgba(232, 212, 171, 0.02) inset;
   
-  /* Estrutura Interna (Flexbox para os filhos) */
+  /* Estrutura Interna */
   padding: 40px;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Garante que o padding não aumente o tamanho total do card */
   justify-content: center;
   align-items: center;
   gap: 40px; 
 }
 
-/* Coluna Esquerda (Alinhada ao centro) */
+/* Coluna Esquerda */
 .oraculo-coluna-esquerda {
   display: flex;
-  width: 377.72px;
+  flex: 1; /* <-- O SEGREDO: Faz a coluna ocupar exatamente metade do espaço livre, sem estourar */
   flex-direction: column;
   align-items: center;
   gap: 25.6px;
 }
 
-/* Coluna Direita (Alinhada ao início/esquerda) */
+/* Coluna Direita */
 .oraculo-coluna-direita {
   display: flex;
-  width: 377.74px;
+  flex: 1; /* <-- O SEGREDO: Faz a coluna ocupar a outra metade do espaço livre */
   flex-direction: column;
   align-items: flex-start;
   gap: 25.6px;
