@@ -24,7 +24,7 @@ export function obterDadosDoOraculo(faseDaLua, estaMenstruada) {
     return {
         nomeFase: faseDaLua,
         mensagem: mensagens[faseDaLua][estaMenstruada ? "menstruada" : "naoMenstruada"],
-        imagem: `/assets/fases-lua/lua-${faseDaLua.toLowerCase()}.png` 
+        imagem: `../assets/fases/lua-${faseDaLua.toLowerCase()}.svg`
     };
 }
 
