@@ -23,4 +23,4 @@ router.get('/perfil', verificarToken, authController.obterDadosPerfil);
 //PUT EM '/perfil' PARA ATUALIZAR DADOS DO PERFIL (HU-005)
 //privada, precisa de token JWT para acessar.
 router.put('/perfil', verificarToken, validaRequisicao(atualizarPerfilSchema), authController.atualizarPerfil);
-module.exports = router;
+module.exports = router; 
