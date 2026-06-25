@@ -1,4 +1,4 @@
-import "./PopUpAlert.css";
+import "./PopupAlert.css";
 
 const PopUpAlert = ({ isOpen, title, message, onClose, botao }) => {
     if (!isOpen) return null;
@@ -23,4 +23,4 @@ const PopUpAlert = ({ isOpen, title, message, onClose, botao }) => {
     );
 };
 
-export default PopUpAlert;
+export default PopupAlert;
