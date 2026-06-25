@@ -28,7 +28,10 @@
 }
 
 .popup-confirmacao-wrapper--sonho {
+    border: 0.67px solid #9B1C2652;
     background: #12082A;
+    box-shadow: 0px 0px 55px 0px #9616202E;
+    box-shadow: 0px 28px 90px 0px #0E0528E5;
 }
 
 .popup-confirmacao-area {
