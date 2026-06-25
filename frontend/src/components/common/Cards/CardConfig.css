@@ -45,3 +45,13 @@
     font-size: 0.62rem; 
     text-transform: uppercase; 
 }
+
+.card-config-conteudo--duplo {
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.card-config-conteudo--duplo .card-config-grupo-input {
+    flex: 1;
+    min-width: 10rem;
+}
