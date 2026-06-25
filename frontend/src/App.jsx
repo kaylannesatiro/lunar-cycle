@@ -1,20 +1,10 @@
 import './App.css'
-import Menu from './components/common/Base/Menu'
 import Background from './components/common/Base/Background'
-import Footer from './components/common/Base/Footer'
+import CardConta from './components/common/Cards/CardConta'
 
 const App = () => {
-
-  const linksNavegacao = [
-    { titulo: 'Diário dos Sonhos', rota: '/diario' },
-    { titulo: 'Calendário', rota: '/calendario' },
-    { titulo: 'Conta', rota: '/conta' }
-  ]
-
   return (
     <Background>
-      <Menu links={linksNavegacao} />
-
       <main
         style={{
           display: 'flex',
@@ -22,9 +12,9 @@ const App = () => {
           padding: '2rem'
         }}
       >
-      </main>
 
-      <Footer links={linksNavegacao} />
+        <CardConta/>
+      </main>
     </Background>
   )
 }
