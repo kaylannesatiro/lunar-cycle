@@ -1,4 +1,9 @@
-export function obterDadosDoOraculo(faseDaLua, estaMenstruada) {
+import imgLuaNova from '../assets/fases/lua-nova.svg'
+import imgLuaCrescente from '../assets/fases/lua-crescente.svg'
+import imgLuaCheia from '../assets/fases/lua-cheia.svg'
+import imgLuaMinguante from '../assets/fases/lua-minguante.svg'
+
+const obterDadosDoOraculo = (faseDaLua, estaMenstruada) => {
     const mensagens = {
         "Nova": {
             menstruada: "A lua se esconde no céu e convida ao silêncio, exatamente como o seu corpo agora. Ao sangrar sob a Lua Nova, você e a Terra compartilham o mesmo suspiro profundo de descanso e limpeza. Permita-se soltar o peso do último ciclo, recolha-se sem culpa e abrace a renovação silenciosa que acontece na escuridão.",
@@ -21,16 +26,25 @@ export function obterDadosDoOraculo(faseDaLua, estaMenstruada) {
         }
     };
 
+    const imagensMap = {
+        "Nova": imgLuaNova,
+        "Crescente": imgLuaCrescente,
+        "Cheia": imgLuaCheia,
+        "Minguante": imgLuaMinguante
+    };
+
     return {
         nomeFase: faseDaLua,
         mensagem: mensagens[faseDaLua][estaMenstruada ? "menstruada" : "naoMenstruada"],
-        imagem: `../assets/fases/lua-${faseDaLua.toLowerCase()}.svg`
+        imagem: imagensMap[faseDaLua]
     };
 }
 
-export function obterTagsDoCiclo(diaDoCiclo) {
+const obterTagsDoCiclo = (diaDoCiclo) => {
     if (diaDoCiclo >= 1 && diaDoCiclo <= 5) return [""];
     if (diaDoCiclo >= 6 && diaDoCiclo <= 12) return [""];
     if (diaDoCiclo >= 13 && diaDoCiclo <= 16) return [""];
     return [""];
 }
+
+export { obterDadosDoOraculo, obterTagsDoCiclo }
