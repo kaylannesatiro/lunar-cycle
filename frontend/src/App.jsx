@@ -1,5 +1,5 @@
 import CardConta from './components/common/Cards/CardConta';
-import IconeLua from './assets/Icon.svg';
+import IconeLua from './assets/Icon-Modal.svg';
 import Input from './components/common/Inputs/Input';
 import Button from './components/common/Buttons/Button';
 import Background from './components/common/Base/Background';

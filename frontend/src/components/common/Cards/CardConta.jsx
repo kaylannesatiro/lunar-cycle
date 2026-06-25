@@ -1,5 +1,5 @@
-import "./CardConta.css"
 import React from "react"
+import "./CardConta.css"
 
 const CardConta = ({ icone, titulo, subtitulo, children, linksRodape }) => {
     return (
