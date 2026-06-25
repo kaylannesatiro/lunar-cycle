@@ -10,7 +10,7 @@
 
 .popup-confirmacao-wrapper {
     width: 100%;
-    max-width: 28.42rem;
+    max-width: 23.75rem;
     height: auto;
     border-radius: 1.5rem;
     border: 0.67px solid transparent;
@@ -29,9 +29,6 @@
 
 .popup-confirmacao-wrapper--sonho {
     background: #12082A;
-    box-shadow:
-        0px 0px 55px 0px #9616202E,
-        0px 28px 90px 0px #0E0528E5;
 }
 
 .popup-confirmacao-area {
