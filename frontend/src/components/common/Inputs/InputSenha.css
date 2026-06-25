@@ -19,6 +19,22 @@
     box-sizing: border-box;
 }
 
+.input-senha-wrapper--cadastro {
+    border: 0.67px solid #E0C58F66;
+}
+
+.input-senha-wrapper--autenticacao {
+    border: 0.67px solid #E0C58F33;
+}
+
+.input-senha-wrapper--configuracao {
+    border: 0.67px solid #E0C58F4D;
+}
+
+.input-senha-wrapper--erro {
+    border: 0.67px solid #c0446a !important;
+}
+
 .input-senha-campo {
     flex: 1;
     height: 100%;
@@ -63,4 +79,11 @@
     font-size: 16px;
     color: #F5F0E9;
     user-select: none;
+}
+
+.input-senha-erro {
+    font-family: "Cinzel", serif;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: #c0446a;
 }
