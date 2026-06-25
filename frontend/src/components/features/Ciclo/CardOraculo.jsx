@@ -22,9 +22,24 @@ const CardOraculo = ({ diaDoCiclo, estaMenstruada}) => {
                 const valorFase = dados.days[0].moonphase; 
                 
                 let faseConvertida = "Nova";
-                if (valorFase > 0 && valorFase < 0.25) faseConvertida = "Crescente";
-                else if (valorFase >= 0.25 && valorFase <= 0.5) faseConvertida = "Cheia";
-                else if (valorFase > 0.5) faseConvertida = "Minguante";
+
+                if (valorFase === 0 || valorFase === 1) {
+                    faseConvertida = "Nova";
+                } else if (valorFase > 0 && valorFase < 0.25) {
+                    faseConvertida = "Crescente"; 
+                } else if (valorFase === 0.25) {
+                    faseConvertida = "Quarto Crescente"; 
+                } else if (valorFase > 0.25 && valorFase < 0.5) {
+                    faseConvertida = "Gibosa Crescente"; 
+                } else if (valorFase === 0.5) {
+                    faseConvertida = "Cheia"; 
+                } else if (valorFase > 0.5 && valorFase < 0.75) {
+                    faseConvertida = "Gibosa Minguante";
+                } else if (valorFase === 0.75) {
+                    faseConvertida = "Quarto Minguante"; 
+                } else if (valorFase > 0.75 && valorFase < 1) {
+                    faseConvertida = "Minguante"; 
+                }
 
                 setFaseAtual(faseConvertida);
             } catch (erro) {
