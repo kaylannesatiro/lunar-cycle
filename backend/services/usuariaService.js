@@ -124,6 +124,10 @@ const atualizarPerfil = async (id, dadosAtualizados) => {
 
     //Mandar pro repository atualizar os dados da usuária no banco de dados
     const usuariaAtualizada = await usuariaRepository.atualizarDados(id, dadosAtualizados);
+
+
+    const {senha, ...usuariaSemSenha} = usuariaAtualizada;
+    return usuariaSemSenha;
 }
 
 
