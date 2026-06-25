@@ -1,49 +1,40 @@
-.card-config-wrapper { 
-    display: flex; 
-    flex-direction: column; 
-    width: 100%; 
-    max-width: 58.34rem; 
-    padding: 2.44rem; 
-    border-radius: 1.5rem; 
-    background: #070C26; 
-    border: 0.67px solid #E0C58F66; 
-    box-sizing: border-box; 
-    gap: 1.44rem; 
+.card-config-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 58.34rem;
+    height: auto;
+    padding: 2.44rem;
+    border-radius: 1.5rem;
+    background: #070C26;
+    border: 0.67px solid transparent;
+    border-color: #E0C58F66;
+    box-sizing: border-box;
+    gap: 1.44rem;
 }
 
-.card-config-titulo { 
-    font-family: "Cinzel Decorative", serif; 
-    font-weight: 400; 
-    font-size: 1.2rem; 
-    color: #E0C58F; 
-    margin: 0; 
+.card-config-titulo {
+    font-family: "Cinzel Decorative", serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    letter-spacing: 0.072rem;
+    color: #E0C58F;
+    margin: 0;
 }
 
-.card-config-form { 
-    display: flex; 
-    flex-direction: column; 
-    width: 100%; 
-    gap: 1.44rem; 
+.card-config-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.44rem;
 }
 
-.card-config-conteudo { 
-    display: flex; 
-    flex-direction: column; 
-    width: 100%; 
-    gap: 1.44rem; 
-}
-
-.card-config-grupo-input { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 0.5rem; 
-}
-
-.card-config-texto-label { 
-    color: #E0C58F; 
-    font-family: "Cinzel", serif; 
-    font-size: 0.62rem; 
-    text-transform: uppercase; 
+.card-config-conteudo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.44rem;
 }
 
 .card-config-conteudo--duplo {
@@ -51,13 +42,42 @@
     align-items: flex-start;
     flex-wrap: wrap;
 }
+
 .card-config-conteudo--duplo .card-config-grupo-input {
     flex: 1;
     min-width: 10rem;
 }
 
+.card-config-grupo-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.card-config-texto-label {
+    color: #E0C58F;
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+    font-size: 0.62rem;
+    line-height: 0.93rem;
+    letter-spacing: 0.112rem;
+    text-transform: uppercase;
+}
+
 @media (max-width: 37.5rem) {
-    .card-config-wrapper { padding: 1.5rem 1.25rem; border-radius: 1rem; }
-    .card-config-titulo { font-size: 1rem; }
-    .card-config-conteudo--duplo { flex-direction: column; }
+    .card-config-wrapper {
+        padding: 1.5rem 1.25rem;
+        border-radius: 1rem;
+    }
+
+    .card-config-titulo {
+        font-size: 1rem;
+    }
+
+    .card-config-conteudo--duplo {
+        flex-direction: column;
+    }
 }
