@@ -116,3 +116,11 @@
   height: 1px;
   background: linear-gradient(90deg, rgba(224, 197, 143, 0.40) 0%, rgba(0, 0, 0, 0.00) 100%);
 }
+
+/* Grupo para aproximar a legenda do nome da fase */
+.oraculo-fase-grupo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5.6px; /* Distância exata do Figma que você pediu */
+}

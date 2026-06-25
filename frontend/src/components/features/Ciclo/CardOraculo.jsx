@@ -67,8 +67,11 @@ const CardOraculo = ({ estaMenstruada}) => {
                     alt={`Fase da lua: ${dadosOraculo.nomeFase}`} 
                     className="oraculo-imagem"
                 />
-                <span className="oraculo-legenda">FASE ATUAL</span>
-                <h3 className="oraculo-texto-fase">{dadosOraculo.nomeFase}</h3>
+                
+                <div className="oraculo-fase-grupo">
+                    <span className="oraculo-legenda">FASE ATUAL</span>
+                    <h3 className="oraculo-texto-fase">{dadosOraculo.nomeFase}</h3>
+                </div>
                 
                 <div className="oraculo-tags">
                     {tagsDoDia.map((tag, index) => (
