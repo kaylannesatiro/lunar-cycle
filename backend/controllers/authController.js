@@ -80,7 +80,7 @@ const atualizarPerfil = async(req, res) =>{
                 mensagem: erro.message
             })
         }
-        if(erro.message == 'Senha atual informada incorreta.'){
+        if(erro.message == 'A senha atual informada incorreta.'){
             return res.status(400).json({
                 mensagem: erro.message
             })
