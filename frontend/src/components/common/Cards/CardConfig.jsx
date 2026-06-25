@@ -1,4 +1,5 @@
 import React from "react";
+import "./CardConfig.css";
 
 const CardConfig = ({ titulo, campos = [], camposDuplos = false, botao }) => {
     return (
