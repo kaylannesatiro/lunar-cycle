@@ -14,6 +14,17 @@ const InputSenha = ({ placeholder = "", value, onChange, error = "", variante = 
                     onChange={onChange}
                     className="input-senha-campo"
                 />
+                
+                <button
+                    type="button"
+                    className="input-senha-olho"
+                    onClick={() => setVisivel(!visivel)}
+                    aria-label={visivel ? "Ocultar senha" : "Exibir senha"}
+                >
+                    <span className="material-symbols-outlined">
+                        {visivel ? "visibility" : "visibility_off"}
+                    </span>
+                </button>
             </div>
         </div>
     );
