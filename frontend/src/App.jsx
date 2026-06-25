@@ -4,7 +4,7 @@ import Input from './components/common/Inputs/Input';
 import Button from './components/common/Buttons/Button';
 import Background from './components/common/Base/Background';
 import InputSenha from './components/common/Inputs/InputSenha';
-
+import './App.css';
 
 function App() {
     return (
@@ -33,7 +33,7 @@ function App() {
                 />
               </label>
 
-              <Button variant = 'padrao'>Entrar</Button>
+              <Button variant = 'padrao'>◈ Entrar</Button>
             </CardConta>
         </div>
       </Background>
