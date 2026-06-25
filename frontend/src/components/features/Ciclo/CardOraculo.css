@@ -90,7 +90,9 @@
   color: rgba(224, 197, 143, 0.12);
   font-family: "Cinzel Decorative", serif;
   font-size: 72px;
-  line-height: 75%;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 54px; /* 75% */
 }
 
 .oraculo-mensagem {
