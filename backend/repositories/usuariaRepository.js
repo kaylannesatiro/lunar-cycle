@@ -28,8 +28,16 @@ const criarUsuaria = async (dadosUsuaria) => {
     });
 };
 
+const atualizarDados = async (id, dadosAtualizados) => {
+    return await prisma.usuaria.update({
+        where: { id },
+        data: dadosAtualizados
+    });
+};
+
 module.exports = {
     buscarPorEmail,
     criarUsuaria,
-    buscarPorId
+    buscarPorId,
+    atualizarDados
 };
