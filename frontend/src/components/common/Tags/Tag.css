@@ -1,0 +1,140 @@
+.tag-base {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0 0.75rem;
+    border-radius: 6.25rem;
+    border: 0.04rem solid transparent;
+    cursor: pointer;
+    box-sizing: border-box;
+    white-space: nowrap;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tag--sonho {
+    background: #2B1748;
+    border-color: #A58CFF;
+}
+
+.tag--sonho.tag--ativa {
+    background: #6E4CA3;
+    border-color: #A58CFF;
+    box-shadow: 0 0 0.75rem 0 rgba(110, 76, 163, 0.32);
+}
+
+.tag-texto--sonho {
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+    font-size: 0.48rem;
+    line-height: 0.72rem;
+    letter-spacing: 0.072rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: #A58CFF;
+}
+
+.tag-texto--sonho.tag-texto--ativa {
+    color: #D7CCFF;
+}
+
+.tag--visualizar {
+    background: rgba(110, 76, 163, 0.60);
+    border-color: #A58CFF;
+    cursor: default;
+}
+
+.tag-texto--visualizar {
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+    font-size: 0.46rem;
+    line-height: 0.69rem;
+    letter-spacing: 0.074rem;
+    text-transform: uppercase;
+    color: #D7CCFF;
+}
+
+.tag--filtro-periodo {
+    background: rgba(43, 23, 72, 0.38);
+    border-color: rgba(165, 140, 255, 0.45);
+}
+
+.tag--filtro-periodo.tag--ativa {
+    background: #6E4CA3;
+    border-color: #A58CFF;
+    box-shadow: 0 0 0.75rem 0 rgba(110, 76, 163, 0.32);
+}
+
+.tag-texto--filtro-periodo {
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+    font-size: 0.48rem;
+    line-height: 0.72rem;
+    letter-spacing: 0.072rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: #A58CFF;
+}
+
+.tag-texto--filtro-periodo.tag-texto--ativa {
+    color: #D7CCFF;
+}
+
+.tag--filtro-tag {
+    background: rgba(43, 23, 72, 0.38);
+    border-color: rgba(165, 140, 255, 0.45);
+}
+
+.tag--filtro-tag.tag--ativa {
+    background: #6E4CA3;
+    border-color: #A58CFF;
+    box-shadow: 0 0 0.75rem 0 rgba(110, 76, 163, 0.32);
+}
+
+.tag-texto--filtro-tag {
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+    font-size: 0.48rem;
+    line-height: 0.72rem;
+    letter-spacing: 0.072rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: #A58CFF;
+}
+
+.tag-texto--filtro-tag.tag-texto--ativa {
+    color: #D7CCFF;
+}
+
+.tag--registro {
+    background: rgba(110, 76, 163, 0.50);
+    border-color: #A58CFF;
+    cursor: default;
+}
+
+.tag-texto--registro {
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+    font-size: 0.46rem;
+    line-height: 0.69rem;
+    letter-spacing: 0.074rem;
+    text-transform: uppercase;
+    color: #D7CCFF;
+}
+
+.tag-remover {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #A58CFF;
+    font-size: 0.5rem;
+    line-height: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.tag-remover:hover {
+    opacity: 1;
+}
