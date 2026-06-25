@@ -42,15 +42,12 @@
   gap: 25.6px;
 }
 
-/* Estilos da Imagem da Lua */
+/* Estilos da Imagem da Lua Recalibrados */
 .oraculo-imagem {
   width: 110px;
   height: 110px;
   flex-shrink: 0;
-  /* Os múltiplos drop-shadows criam o efeito de brilho intenso */
-  filter: drop-shadow(0 0 239.72px rgba(224, 197, 143, 0.18)) 
-          drop-shadow(0 0 143.92px rgba(224, 197, 143, 0.55)) 
-          drop-shadow(0 0 55.96px rgba(245, 240, 233, 0.88));
+  /* Removemos os drop-shadows daqui, pois o SVG agora brilha sozinho perfeitamente! */
 }
 
 /* Textos da Coluna Esquerda */

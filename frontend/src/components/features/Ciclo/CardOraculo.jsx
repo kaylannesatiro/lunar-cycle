@@ -4,7 +4,7 @@ import "./CardOraculo.css"
 import Tag from "../../common/Tags/Tag";
 
 const CardOraculo = ({ estaMenstruada}) => {
-    const [faseAtual, setFaseAtual] = useState("Nova");
+    const [faseAtual, setFaseAtual] = useState("Crescente");
     const [carregando, setCarregando] = useState(true);
 
     useEffect(() => {
