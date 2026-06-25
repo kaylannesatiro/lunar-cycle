@@ -29,21 +29,23 @@ function App() {
                 />
               </label>
 
-              <label className="card-conta-grupo-input">
+              <div className="card-conta-linha-dupla">
+                <label className="card-conta-grupo-input">
                 <span className="card-conta-texto-label">Dias do ciclo</span>
                 <Input 
                     placeholder="ex: 28"
                     variante="cadastro-numero" 
                 />
-              </label>
+                </label>
 
-              <label className="card-conta-grupo-input">
-                <span className="card-conta-texto-label">Dias menstruação</span>
-                <Input 
-                    placeholder="ex: 5" 
-                    variante="cadastro-numero"
-                />
-              </label>
+                <label className="card-conta-grupo-input">
+                  <span className="card-conta-texto-label">Dias menstruação</span>
+                  <Input 
+                      placeholder="ex: 5" 
+                      variante="cadastro-numero"
+                  />
+                </label>
+              </div>
 
               <label className="card-conta-grupo-input">
                 <span className="card-conta-texto-label">Signo</span>

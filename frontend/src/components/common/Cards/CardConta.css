@@ -143,3 +143,27 @@
     letter-spacing: 0.15rem; /* 2.4px - Espaçamento elegante */
     text-transform: uppercase;
 }
+
+/* =========================================
+   LINHA DUPLA (Inputs lado a lado)
+   ========================================= */
+.card-conta-linha-dupla {
+    display: flex;
+    width: 100%;
+    gap: 1.3rem; /* O mesmo espaçamento do Figma, mas agora na horizontal */
+    align-items: flex-start;
+}
+
+/* A MÁGICA: Dizemos para as labels que estiverem dentro dessa 
+   linha dupla dividirem o espaço igualmente (50% para cada) */
+.card-conta-linha-dupla .card-conta-grupo-input {
+    flex: 1; 
+}
+
+/* PROTEÇÃO MOBILE: Se a tela for menor que ~448px, os inputs 
+   voltam a ficar um embaixo do outro para não quebrar o layout */
+@media (max-width: 28rem) {
+    .card-conta-linha-dupla {
+        flex-direction: column;
+    }
+}
