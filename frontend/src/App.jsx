@@ -35,18 +35,6 @@ function App() {
 
               <Button variant = 'padrao'>Entrar</Button>
             </CardConta>
-
-
-            <CardConta 
-                icone={IconeLua}
-                titulo="RECUPERE SUA CONEXÃO"
-                subtitulo="Informe seu e-mail para receber o código de recuperação."
-            >
-                <Input label="EMAIL" placeholder="DIGITE O E-MAIL DA SUA CONTA" />
-                <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
-                    <Button variant='padrao'>ENVIAR</Button>
-                </div>
-            </CardConta>
         </div>
       </Background>
     );
