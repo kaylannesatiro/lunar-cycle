@@ -23,53 +23,60 @@ const FiltroSonhos = ({tagsDoUsuario = [], dataPrimeiroSonho, onFilterChange}) =
                     </div>
 
                     <div className="filtro-sonhos-lista-tags">
-                        {opcoesPeriodo.map((opcao) => (
-                            <div key={opcao} className="filtro-sonhos-dropdown-wrapper">
-                                <Tag 
-                                    texto={opcao} 
-                                    variante="filtro-periodo"
-                                    ativa={isTagPeriodoAtiva(opcao)}
-                                    aoClicar={() => lidarComCliquePeriodoMenu(opcao)}
-                                />
-                                
-                                {menuAberto === opcao && (opcao === 'SEMANA' || opcao === 'MÊS' || opcao === 'ANO') && (
-                                    <div className="filtro-sonhos-dropdown-lista">
-                                        {obterOpcoesDropdown(opcao).map((itemHistorico) => (
-                                            <button 
-                                                key={itemHistorico}
-                                                className={`filtro-sonhos-dropdown-item ${periodoSelecionado === itemHistorico ? 'ativo' : ''}`}
-                                                onClick={() => lidarComSelecaoDropdown(itemHistorico)}
-                                            >
-                                                {itemHistorico}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
+                        {opcoesPeriodo.map((opcao) => {
+                            const textoExibido = (opcao === 'ESPECÍFICO' && tagPeriodoEspecifico) 
+                                ? tagPeriodoEspecifico 
+                                : opcao
 
-                        {tagPeriodoEspecifico && (
-                            <Tag 
-                                texto={tagPeriodoEspecifico}
-                                variante="filtro-periodo"
-                                ativa={periodoSelecionado === tagPeriodoEspecifico}
-                                aoClicar={() => lidarComCliquePeriodoMenu(tagPeriodoEspecifico)}
-                            />
-                        )}
+                            return (
+                                <div key={opcao} className="filtro-sonhos-dropdown-wrapper">
+                                    <Tag 
+                                        texto={textoExibido} 
+                                        variante="filtro-periodo"
+                                        ativa={isTagPeriodoAtiva(opcao)}
+                                        aoClicar={() => lidarComCliquePeriodoMenu(opcao)}
+                                    />
+                                    
+                                    {menuAberto === opcao && (opcao === 'SEMANA' || opcao === 'MÊS' || opcao === 'ANO') && (
+                                        <div className="filtro-sonhos-dropdown-lista">
+                                            {obterOpcoesDropdown(opcao).map((itemHistorico) => (
+                                                <button 
+                                                    key={itemHistorico}
+                                                    className={`filtro-sonhos-dropdown-item ${periodoSelecionado === itemHistorico ? 'ativo' : ''}`}
+                                                    onClick={() => lidarComSelecaoDropdown(itemHistorico)}
+                                                >
+                                                    {itemHistorico}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {menuAberto === 'ESPECÍFICO' && opcao === 'ESPECÍFICO' && (
+                                        <div className="filtro-sonhos-calendarios-dropdown">
+                                            <div className="filtro-sonhos-campo-data">
+                                                <label>DE:</label>
+                                                <input 
+                                                    type="date" 
+                                                    value={dataInicio} 
+                                                    onChange={lidarMudancaDataInicio} 
+                                                    className="filtro-sonhos-input-data" 
+                                                />
+                                            </div>
+                                            <div className="filtro-sonhos-campo-data">
+                                                <label>ATÉ:</label>
+                                                <input 
+                                                    type="date" 
+                                                    value={dataFim} 
+                                                    onChange={lidarMudancaDataFim} 
+                                                    className="filtro-sonhos-input-data" 
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )
+                        })}
                     </div>
-
-                    {(periodoSelecionado === 'ESPECÍFICO' || periodoSelecionado === tagPeriodoEspecifico) && (
-                        <div className="filtro-sonhos-calendarios">
-                            <div className="filtro-sonhos-campo-data">
-                                <label>DE:</label>
-                                <input type="date" value={dataInicio} onChange={lidarMudancaDataInicio} className="filtro-sonhos-input-data" />
-                            </div>
-                            <div className="filtro-sonhos-campo-data">
-                                <label>ATÉ:</label>
-                                <input type="date" value={dataFim} onChange={lidarMudancaDataFim} className="filtro-sonhos-input-data" />
-                            </div>
-                        </div>
-                    )}
                 </div>
 
                 {/* FILTRO POR TAG */}
