@@ -7,16 +7,8 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
 
     const [periodoSelecionado, setPeriodoSelecionado] = useState('TODOS')
     const [tagsSelecionadas, setTagsSelecionadas] = useState([])
-    const [listaCompletaDeTags, setListaCompletaDeTags] = useState([]);
     const opcoesPeriodo = ['TODOS', 'SEMANA', 'MÊS', 'ANO']
-
-    useEffect(() => {
-        const todasAsTags = [...tagsPreCadastradas, ...tagsDoUsuario]
-        
-        const tagsSemRepeticao = [...new Set(todasAsTags)]
-        
-        setListaCompletaDeTags(tagsSemRepeticao)
-    }, [tagsDoUsuario])
+    const listaCompletaDeTags = [...new Set([...tagsPreCadastradas, ...tagsDoUsuario])]
 
     const lidarComCliqueTag = (tagClicada) => {
         setTagsSelecionadas((tagsAntigas) => {
