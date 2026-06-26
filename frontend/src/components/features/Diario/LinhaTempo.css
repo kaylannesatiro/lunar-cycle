@@ -1,187 +1,160 @@
-/* ==========================================================================
-   CONTAINERS PRINCIPAIS (Fluidez Total)
-   ========================================================================== */
 .linha-tempo-pai {
-  display: flex;
-  width: 100%;
-  max-width: 51.25rem; /* 820px */
-  padding-bottom: 7.044rem;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  box-sizing: border-box;
-  
-  /* Proteção para telas de celulares muito antigos (ex: iPhone SE de 320px) */
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+    display: flex;
+    width: 100%;
+    max-width: 51.25rem;
+    padding-bottom: 7.044rem;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
 }
 
 .linha-tempo-conteudo {
-  display: flex;
-  width: 100%;
-  max-width: 48.25rem; /* 772px */
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 3rem; /* Espaço entre os meses */
+    display: flex;
+    width: 100%;
+    max-width: 48.25rem; 
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem; 
 }
 
-/* ==========================================================================
-   AGRUPAMENTO POR MÊS E CABEÇALHOS RESPONSIVOS
-   ========================================================================== */
 .linha-tempo-grupo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
 }
 
 .linha-tempo-cabecalho {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  align-self: stretch;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    align-self: stretch;
+    width: 100%;
 }
 
 .linha-tempo-titulo-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-  /* Impede que o nome do mês quebre no meio da palavra em telas pequenas */
-  flex-shrink: 0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    flex-shrink: 0; 
 }
 
 .linha-tempo-mes {
-  color: #D7CCFF;
-  text-align: center;
-  font-family: "Cinzel Decorative", serif;
-  font-size: 1.1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: 0.11rem;
-  margin: 0;
-  text-transform: uppercase;
+    color: #D7CCFF;
+    text-align: center;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 1.1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0.11rem;
+    margin: 0;
+    text-transform: uppercase;
 }
 
 .linha-tempo-ano {
-  color: #A58CFF;
-  text-align: center;
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.65rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: 0.195rem;
-  text-transform: uppercase;
+    color: #A58CFF;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.65rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0.195rem;
+    text-transform: uppercase;
 }
 
-/* Divisores Fluidos */
 .linha-tempo-divisor-esq,
 .linha-tempo-divisor-dir {
-  flex: 1; /* Crescem e encolhem dinamicamente ocupando o espaço que sobra */
-  height: 0.0625rem;
+    flex: 1;
+    height: 0.0625rem;
 }
 
 .linha-tempo-divisor-esq {
-  background: linear-gradient(90deg, rgba(165, 140, 255, 0.28) 0%, rgba(165, 140, 255, 0.08) 100%);
+    background: linear-gradient(90deg, rgba(165, 140, 255, 0.28) 0%, rgba(165, 140, 255, 0.08) 100%);
 }
 
 .linha-tempo-divisor-dir {
-  background: linear-gradient(270deg, rgba(165, 140, 255, 0.28) 0%, rgba(165, 140, 255, 0.08) 100%);
+    background: linear-gradient(270deg, rgba(165, 140, 255, 0.28) 0%, rgba(165, 140, 255, 0.08) 100%);
 }
 
-/* ==========================================================================
-   CONTAINER DE CARDS E A TRILHA VERTICAL
-   ========================================================================== */
 .linha-tempo-cards-container {
-  position: relative;
-  display: flex;
-  width: 100%;
-  padding-top: 2rem;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2rem; /* Espaço entre os cards */
-}
-
-/* Linha mística da linha do tempo */
-.linha-tempo-trilha {
-  position: absolute;
-  top: 2rem;
-  bottom: -2rem;
-  left: 2.125rem; /* 34px: Perfeitamente centralizada atrás da lua */
-  width: 0.0625rem;
-  background: linear-gradient(
-    180deg, 
-    rgba(165, 140, 255, 0) 0%, 
-    rgba(165, 140, 255, 0.3) 15%, 
-    rgba(165, 140, 255, 0.3) 85%, 
-    rgba(165, 140, 255, 0) 100
-  );
-  z-index: -1;
-}
-
-/* ==========================================================================
-   ESTADOS ALTERNATIVOS
-   ========================================================================== */
-.linha-tempo-vazia {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  padding: 5rem 1.5rem;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-/* ==========================================================================
-   BREAKPOINTS DE ESPECIALISTA (A Magia Responsiva)
-   ========================================================================== */
-
-/* --- TABLETS E TELAS MÉDIAS --- */
-@media (max-width: 48rem) { /* 768px */
-  .linha-tempo-conteudo {
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding-top: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 2rem;
-  }
-  
-  .linha-tempo-cabecalho {
-    gap: 0.8rem;
-  }
-  
-  .linha-tempo-mes {
-    font-size: 1rem;
-  }
 }
 
-/* --- SMARTPHONES (Abaixo de 540px) --- */
-@media (max-width: 33.75rem) { /* 540px */
-  .linha-tempo-pai {
-    /* Reduz o recuo lateral para aproveitar o máximo da tela do celular */
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    padding-bottom: 4rem;
-  }
+.linha-tempo-trilha {
+    position: absolute;
+    top: 2rem;
+    bottom: -2rem;
+    left: 2.125rem; 
+    width: 0.0625rem;
+    background: linear-gradient(
+        180deg, 
+        rgba(165, 140, 255, 0) 0%, 
+        rgba(165, 140, 255, 0.3) 15%, 
+        rgba(165, 140, 255, 0.3) 85%, 
+        rgba(165, 140, 255, 0) 100
+    );
+    z-index: -1;
+}
 
-  .linha-tempo-cabecalho {
-    gap: 0.5rem;
-  }
+.linha-tempo-vazia {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 5rem 1.5rem;
+    text-align: center;
+    box-sizing: border-box;
+}
 
-  .linha-tempo-mes {
-    font-size: 0.9rem;
-    letter-spacing: 0.08rem;
-  }
 
-  /* Como o CardSonho vira coluna e centraliza a lua no mobile, 
-    a linha lateral perderia o sentido físico. Escondemos ela aqui.
-  */
-  .linha-tempo-trilha {
-    display: none; 
-  }
+@media (max-width: 48rem) { 
+    .linha-tempo-conteudo {
+        gap: 2rem;
+    }
+    
+    .linha-tempo-cabecalho {
+        gap: 0.8rem;
+    }
+    
+    .linha-tempo-mes {
+        font-size: 1rem;
+    }
+}
 
-  .linha-tempo-cards-container {
-    padding-top: 1.5rem;
-    gap: 1.5rem;
-    /* Alinha o fluxo de cards verticalmente no centro do celular */
-    align-items: center; 
-  }
+@media (max-width: 33.75rem) { 
+    .linha-tempo-pai {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-bottom: 4rem;
+    }
+
+    .linha-tempo-cabecalho {
+        gap: 0.5rem;
+    }
+
+    .linha-tempo-mes {
+        font-size: 0.9rem;
+        letter-spacing: 0.08rem;
+    }
+
+    .linha-tempo-trilha {
+        display: none; 
+    }
+
+    .linha-tempo-cards-container {
+        padding-top: 1.5rem;
+        gap: 1.5rem;
+        align-items: center; 
+    }
 }
