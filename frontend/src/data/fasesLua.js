@@ -19,9 +19,7 @@ const obterIconFaseDaLua = (faseDaLua) => {
             "Gibosa Minguante": imgLuaGibosaMinguante
     }
 
-    return {
-        imagem: imagensMap[faseDaLua]
-    }
+    return imagensMap[faseDaLua];
 }
 
 export {obterIconFaseDaLua}
