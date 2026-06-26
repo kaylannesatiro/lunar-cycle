@@ -1,0 +1,100 @@
+/* ==========================================================================
+   RESET DE SEGURANÇA
+   ========================================================================== */
+.filtro-sonhos-container,
+.filtro-sonhos-container * {
+  box-sizing: border-box !important;
+}
+
+/* ==========================================================================
+   CONTAINER PAI (Efeito Glassmorphism Roxo)
+   ========================================================================== */
+.filtro-sonhos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  
+  width: 100%;
+  
+  /* Conversões do Figma: Padding e Bordas */
+  padding: 1.5rem 1.8rem;          /* 24px e 28.8px */
+  border-radius: 1.125rem;         /* 18px */
+  border: 0.041rem solid rgba(165, 140, 255, 0.45); /* 0.667px */
+  background: rgba(43, 23, 72, 0.42); /* Fundo Translúcido Roxo */
+}
+
+/* ==========================================================================
+   GRUPOS DE FILTRO (Período e Tags)
+   ========================================================================== */
+.filtro-sonhos-grupo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  /* Removemos larguras fixas de 713px para o layout ser 100% elástico */
+}
+
+/* Respiro exato do Figma entre a seção de Período e a de Tags */
+.filtro-tags-margem {
+  padding-top: 1.2rem;             /* 19.2px */
+}
+
+/* ==========================================================================
+   TÍTULOS DOS CONTAINERS ("PERÍODO" e "FILTRAR POR TAG")
+   ========================================================================== */
+.filtro-sonhos-cabecalho {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.filtro-sonhos-titulo {
+  color: #A58CFF;
+  font-family: 'Cinzel', serif;
+  font-size: 0.52rem;              /* 8.32px */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;               /* 12.48px */
+  letter-spacing: 0.145rem;        /* 2.33px */
+  text-transform: uppercase;
+  margin: 0;                       /* Remove margens padrão do <h4> */
+}
+
+/* ==========================================================================
+   ÁREA DAS TAGS (Alinhamento e Quebra de Linha)
+   ========================================================================== */
+.filtro-sonhos-lista-tags {
+  display: flex;
+  flex-wrap: wrap;                 /* O SEGREDO: Se faltar espaço, as tags pulam para a linha de baixo */
+  align-items: flex-start;
+  align-self: stretch;
+  
+  padding-top: 0.7rem;             /* 11.2px (Distância do título para as tags) */
+  gap: 0.75rem;                    /* Distância respirável entre uma tag e outra */
+}
+
+/* Estilo para quando a lista do backend vier vazia */
+.filtro-sonhos-vazio {
+  color: rgba(165, 140, 255, 0.5);
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (Mobile-First)
+   ========================================================================== */
+@media (max-width: 48rem) { /* Até 768px */
+  .filtro-sonhos-container {
+    padding: 1.2rem;               /* Reduz o padding para poupar espaço de tela */
+    border-radius: 1rem;
+  }
+}
+
+@media (max-width: 30rem) { /* Até 480px (Smartphones) */
+  .filtro-sonhos-lista-tags {
+    gap: 0.5rem;                   /* Aproxima mais as tags no celular */
+  }
+}
