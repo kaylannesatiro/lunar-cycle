@@ -1,0 +1,147 @@
+/* ==========================================================================
+   CONTAINER PAI (Timeline Alignment)
+   ========================================================================== */
+.card-sonho-pai {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem; /* 24px */
+  width: 100%;
+  max-width: 47.5rem; /* Limite seguro baseado no tamanho do conteúdo + ícone */
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s ease;
+}
+
+.card-sonho-pai:hover {
+  transform: translateY(-2px); /* Feedback sutil de clique no card */
+}
+
+/* ==========================================================================
+   ICON CONTAINER (Aura Mística da Lua)
+   ========================================================================== */
+.card-sonho-icon-container {
+  display: flex;
+  padding: 0.625rem; /* 10px */
+  flex-direction: column;
+  align-items: flex-start;
+  
+  border-radius: 1.729rem; /* 27.667px */
+  border: 0.042rem solid #A58CFF; /* 0.667px */
+  background: #1E0E3A;
+  
+  /* Box Shadows combinados do Figma */
+  box-shadow: 0px 0px 22px 0px rgba(110, 76, 163, 0.42), 
+              0px 0px 55px 0px rgba(110, 76, 163, 0.12);
+}
+
+.card-sonho-icon {
+  width: 2.125rem; /* 34px */
+  height: 2.125rem; /* 34px */
+  object-fit: contain;
+  
+  /* Triplo Drop Shadow do Figma para criar o brilho dourado/neon realístico */
+  filter: drop-shadow(0px 0px 54.483px rgba(224, 197, 143, 0.04)) 
+          drop-shadow(0px 0px 91.437px rgba(224, 197, 143, 0.34)) 
+          drop-shadow(0px 0px 34.356px rgba(245, 240, 233, 0.57));
+}
+
+/* ==========================================================================
+   CONTAINER DO CONTEÚDO (Card de Vidro Roxo)
+   ========================================================================== */
+.card-sonho-conteudo {
+  display: flex;
+  width: 100%;
+  max-width: 42.5rem; /* 680px */
+  min-height: 7.639rem; /* 122.229px */
+  padding: 2rem; /* 32px */
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  
+  border-radius: 1.375rem; /* 22px */
+  border: 0.042rem solid #A58CFF; /* 0.667px */
+  
+  /* Gradiente linear exato do Figma */
+  background: linear-gradient(148deg, rgba(43, 23, 72, 0.72) 7.21%, rgba(25, 12, 52, 0.60) 92.79%);
+}
+
+/* =========================================================================
+   TIPOGRAFIA DO TÍTULO
+   ========================================================================== */
+.card-sonho-titulo {
+  color: #D7CCFF;
+  font-family: "Cinzel Decorative", serif;
+  font-size: 1.15rem; /* 18.4px */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.495rem; /* 23.92px / 130% */
+  letter-spacing: 0.035rem; /* 0.552px */
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   CONTAINER DE TAGS (Chips)
+   ========================================================================== */
+.card-sonho-tags-container {
+  display: flex;
+  padding-top: 0.85rem; /* 13.6px */
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+/* Linha horizontal para organizar os chips lado a lado, respeitando o espaço */
+.card-sonho-tags-lista {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem; /* Mantém um respiro elegante entre os chips */
+}
+
+/* ==========================================================================
+   CONTAINER PAI (Timeline Alignment)
+   ========================================================================== */
+.card-sonho-pai {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem; /* 24px */
+  width: 100%;
+  max-width: 47.5rem;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s ease;
+}
+
+.card-sonho-pai:hover {
+  transform: translateY(-2px);
+}
+
+/* ─── NOVO: WRAPPER DO ÍCONE (Métricas exatas do seu Figma) ─── */
+.card-sonho-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 4.25rem;       /* 68px / 16 */
+  padding-top: 0.7rem;  /* 11.2px / 16 */
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   ICON CONTAINER (Aura Mística da Lua)
+   ========================================================================== */
+.card-sonho-icon-container {
+  display: flex;
+  padding: 0.625rem; /* 10px */
+  flex-direction: column;
+  align-items: flex-start;
+  
+  border-radius: 1.729rem; /* 27.667px */
+  border: 0.042rem solid #A58CFF;
+  background: #1E0E3A;
+  
+  box-shadow: 0px 0px 22px 0px rgba(110, 76, 163, 0.42), 
+              0px 0px 55px 0px rgba(110, 76, 163, 0.12);
+}
+
+/* O restante do arquivo CSS (card-sonho-icon, card-sonho-conteudo, etc.) permanece exatamente igual */

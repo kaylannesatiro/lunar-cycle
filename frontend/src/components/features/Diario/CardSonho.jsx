@@ -12,12 +12,14 @@ const obterIconeLua = (faseLunar) => {
 const CardSonho = ({faseLunar, titulo, data, tags = [], onClick}) => {
     return (
         <div className="card-sonho-pai" onClick={onClick} role="button" tabIndex={0}>
-            <div className="card-sonho-icon-container">
-                <img 
-                    src={obterIconeLua(faseLunar)} 
-                    alt={`Fase lunar: ${faseLunar}`} 
-                    className="card-sonho-icon"
-                />
+            <div className="card-sonho-icon-wrapper">
+                <div className="card-sonho-icon-container">
+                    <img 
+                        src={obterIconeLua(faseLunar)} 
+                        alt={`Fase lunar: ${faseLunar}`} 
+                        className="card-sonho-icon"
+                    />
+                </div>
             </div>
 
             <div className="card-sonho-conteudo">
