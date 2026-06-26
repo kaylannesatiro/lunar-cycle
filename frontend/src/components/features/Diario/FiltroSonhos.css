@@ -7,24 +7,38 @@
 }
 
 /* ==========================================================================
-   CONTAINER PAI (Com as novas métricas do Figma)
+   WRAPPER EXTERNO (Posicionamento na página: 820px)
+   ========================================================================== */
+.filtro-sonhos-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  width: 100%;
+  max-width: 51.25rem;       /* 820px / 16 */
+  padding: 2.5rem 1.5rem 1.5rem 1.5rem; /* 40px 24px 24px 24px */
+  
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   CONTAINER INTERNO (O Cartão de Vidro)
    ========================================================================== */
 .filtro-sonhos-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  align-self: stretch;       /* Se estica para preencher os 820px do pai */
   
-  /* Largura exata do Figma */
-  width: 100%;             
-  max-width: 51.25rem;     /* 820px / 16 */
+  /* O padding exato do Figma para o miolo: 24px e 28.8px */
+  padding: 1.5rem 1.8rem;    
   
-  /* Padding assimétrico do Figma (Topo Direita Baixo Esquerda) */
-  padding: 2.5rem 1.5rem 1.5rem 1.5rem; /* 40px 24px 24px 24px */
-  
-  /* O visual Glassmorphism que já tínhamos */
+  /* O visual Glassmorphism */
   border-radius: 1.125rem;
   border: 0.041rem solid rgba(165, 140, 255, 0.45);
   background: rgba(43, 23, 72, 0.42);
+  
+  box-sizing: border-box;
 }
 
 /* ==========================================================================

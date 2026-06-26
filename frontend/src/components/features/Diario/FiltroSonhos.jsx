@@ -28,46 +28,48 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
     }, [periodoSelecionado, tagsSelecionadas, onFilterChange])
 
     return (
-        <div className="filtro-sonhos-container">
-            {/* FILTRO POR PERÍODO */}
-            <div className="filtro-sonhos-grupo">
-                <div className="filtro-sonhos-cabecalho">
-                    <h4 className="filtro-sonhos-titulo">PERÍODO</h4>
+        <div className="filtro-sonhos-wrapper">
+            <div className="filtro-sonhos-container">
+                {/* FILTRO POR PERÍODO */}
+                <div className="filtro-sonhos-grupo">
+                    <div className="filtro-sonhos-cabecalho">
+                        <h4 className="filtro-sonhos-titulo">PERÍODO</h4>
+                    </div>
+
+                    <div className="filtro-sonhos-lista-tags">
+                        {opcoesPeriodo.map((opcao) => (
+                            <Tag 
+                                key={opcao} 
+                                texto={opcao} 
+                                variante="filtro-periodo"
+                                ativa={periodoSelecionado === opcao}
+                                aoClicar={() => setPeriodoSelecionado(opcao)}
+                            />
+                        ))}
+                    </div>
                 </div>
 
-                <div className="filtro-sonhos-lista-tags">
-                    {opcoesPeriodo.map((opcao) => (
-                        <Tag 
-                            key={opcao} 
-                            texto={opcao} 
-                            variante="filtro-periodo"
-                            ativa={periodoSelecionado === opcao}
-                            aoClicar={() => setPeriodoSelecionado(opcao)}
-                        />
-                    ))}
-                </div>
-            </div>
+                {/* FILTRO POR TAGS */}
+                <div className="filtro-sonhos-grupo filtro-tags-margem">
+                    <div className="filtro-sonhos-cabecalho">
+                        <h4 className="filtro-sonhos-titulo">FILTRAR POR TAG</h4>
+                    </div>
 
-            {/* FILTRO POR TAGS */}
-            <div className="filtro-sonhos-grupo filtro-tags-margem">
-                <div className="filtro-sonhos-cabecalho">
-                    <h4 className="filtro-sonhos-titulo">FILTRAR POR TAG</h4>
-                </div>
-
-                <div className="filtro-sonhos-lista-tags">
-                    {listaCompletaDeTags.map((tag) => (
-                        <Tag 
-                            key={tag} 
-                            texto={tag} 
-                            variante="filtro-tag"
-                            ativa={tagsSelecionadas.includes(tag)} 
-                            aoClicar={() => lidarComCliqueTag(tag)}
-                        />
-                    ))}
-                    
-                    {listaCompletaDeTags.length === 0 && (
-                        <span className="filtro-sonhos-vazio">Nenhuma tag encontrada</span>
-                    )}
+                    <div className="filtro-sonhos-lista-tags">
+                        {listaCompletaDeTags.map((tag) => (
+                            <Tag 
+                                key={tag} 
+                                texto={tag} 
+                                variante="filtro-tag"
+                                ativa={tagsSelecionadas.includes(tag)} 
+                                aoClicar={() => lidarComCliqueTag(tag)}
+                            />
+                        ))}
+                        
+                        {listaCompletaDeTags.length === 0 && (
+                            <span className="filtro-sonhos-vazio">Nenhuma tag encontrada</span>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
