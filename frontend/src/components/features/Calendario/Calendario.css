@@ -1,0 +1,128 @@
+.cal-wrapper,
+.cal-wrapper * {
+    box-sizing: border-box;
+}
+
+.cal-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    gap: 0;
+}
+
+.cal-titulo-externo {
+    width: 100%;
+    text-align: center;
+    color: #E0C58F;
+    font-family: 'Cinzel', serif;
+    font-size: 9.44px;
+    font-weight: 400;
+    line-height: 14.16px;
+    letter-spacing: 4.91px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.cal-container {
+    width: 100%;
+    border-radius: 28px;
+    border: 0.67px solid rgba(224, 197, 143, 0.1);
+    padding: 44.8px;
+    background: #070C26;
+    box-shadow:
+        0px 1px 0px 0px rgba(255, 255, 255, 0.024) inset,
+        0px 24px 90px 0px rgba(0, 0, 0, 0.52);
+    margin-top: 38.4px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.cal-cabecalho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 51.48px;
+}
+
+.cal-btn-nav {
+    width: 38px;
+    height: 38px;
+    border-radius: 19px;
+    border: 0.67px solid #E0C58F;
+    background: transparent;
+    color: #E0C58F;
+    font-family: 'Cinzel', serif;
+    font-size: 17.6px;
+    line-height: 26.4px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.cal-btn-nav:hover {
+    background: rgba(224, 197, 143, 0.08);
+}
+
+.cal-mes-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 4.48px;
+}
+
+.cal-mes-nome {
+    color: #E0C58F;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 30.8px;
+    letter-spacing: 3.36px;
+    text-align: center;
+}
+
+.cal-mes-ano {
+    color: #E0C58F;
+    font-family: 'Raleway', sans-serif;
+    font-size: 10.4px;
+    font-weight: 400;
+    line-height: 15.6px;
+    letter-spacing: 4.37px;
+    text-align: center;
+}
+
+.cal-divisor {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(224,197,143,0.18) 50%, rgba(0,0,0,0) 100%);
+    margin-top: 38.4px;
+}
+
+.cal-dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+    margin-top: 19.2px;
+}
+
+.cal-dia-semana-label {
+    color: #E0C58F;
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 1.28px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 7px 0;
+}
