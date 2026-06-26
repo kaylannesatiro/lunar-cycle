@@ -27,7 +27,7 @@ const CardSonho = ({faseLunar, titulo, data, tags = [], onClick}) => {
                                 key={`${tag}-${index}`} 
                                 texto={tag} 
                                 variante="sonho"
-                                ativa={false}
+                                ativa={true}
                             />
                         ))}
                     </div>
