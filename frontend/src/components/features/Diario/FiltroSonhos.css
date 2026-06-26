@@ -7,21 +7,24 @@
 }
 
 /* ==========================================================================
-   CONTAINER PAI (Efeito Glassmorphism Roxo)
+   CONTAINER PAI (Com as novas métricas do Figma)
    ========================================================================== */
 .filtro-sonhos-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  align-self: stretch;
   
-  width: 100%;
+  /* Largura exata do Figma */
+  width: 100%;             
+  max-width: 51.25rem;     /* 820px / 16 */
   
-  /* Conversões do Figma: Padding e Bordas */
-  padding: 1.5rem 1.8rem;          /* 24px e 28.8px */
-  border-radius: 1.125rem;         /* 18px */
-  border: 0.041rem solid rgba(165, 140, 255, 0.45); /* 0.667px */
-  background: rgba(43, 23, 72, 0.42); /* Fundo Translúcido Roxo */
+  /* Padding assimétrico do Figma (Topo Direita Baixo Esquerda) */
+  padding: 2.5rem 1.5rem 1.5rem 1.5rem; /* 40px 24px 24px 24px */
+  
+  /* O visual Glassmorphism que já tínhamos */
+  border-radius: 1.125rem;
+  border: 0.041rem solid rgba(165, 140, 255, 0.45);
+  background: rgba(43, 23, 72, 0.42);
 }
 
 /* ==========================================================================

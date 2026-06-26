@@ -4,7 +4,6 @@ import Tag from "../../common/Tags/Tag"
 import "./FiltroSonhos.css"
 
 const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
-
     const [periodoSelecionado, setPeriodoSelecionado] = useState('TODOS')
     const [tagsSelecionadas, setTagsSelecionadas] = useState([])
     const opcoesPeriodo = ['TODOS', 'SEMANA', 'MÊS', 'ANO']

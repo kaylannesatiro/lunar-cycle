@@ -4,7 +4,7 @@ import Background from './components/common/Base/Background';
 import FiltroSonhos from './components/features/Diario/FiltroSonhos';
 
 function App() {
-  const [tagsCustomizadas] = useState(["PESADELO", "LUCIDEZ EXTRA"]);
+  const [tagsCustomizadas] = useState(["PESADELO", "cebola"]);
 
   const lidarComMudancaDeFiltro = (filtros) => {
     console.log("Filtros ativos no momento:", filtros);
