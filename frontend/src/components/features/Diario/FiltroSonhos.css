@@ -117,27 +117,19 @@
 }
 
 /* ==========================================================================
-   ESTILIZAÇÃO DA TAG DE LIMPEZA
+   COMPORTAMENTO DA TAG DE LIMPEZA FIXA
    ========================================================================== */
 
-/* Quando há tags selecionadas, a tag de limpar fica normal e responsiva ao mouse */
-.container-tag-limpar .tag-base {
-    color: #F5F0E9 !important;
-  border-color: rgba(245, 240, 233, 0.50) !important; /* Um leve toque avermelhado na borda para indicar ação de apagar */
-  transition: all 0.2s ease;
+/* Apenas garante que a div de englobamento não quebre o layout flex da tag */
+.container-tag-limpar {
+  display: inline-flex;
 }
 
-.container-tag-limpar .tag-base:hover {
-    color: #F5F0E9 !important;
-  background: rgba(88, 8, 16, 0.22) !important;
-  border-color: rgba(245, 240, 233, 0.50) !important;
-}
-
-/* O SEGREDO: Quando NÃO há tags selecionadas (Filtro limpo) */
+/* Estado bloqueado: sem tags selecionadas */
 .tag-limpar--desativada {
-  opacity: 0.35;                /* Fica semi-transparente, indicando que está apagada */
-  pointer-events: none;         /* Bloqueia cliques físicos do mouse */
-  cursor: not-allowed !important; /* Mostra o ícone de bloqueado no ponteiro */
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: not-allowed !important;
 }
 
 .tag-limpar--desativada * {

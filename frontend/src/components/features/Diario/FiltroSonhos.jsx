@@ -7,6 +7,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
     const [periodoSelecionado, setPeriodoSelecionado] = useState('TODOS')
     const [tagsSelecionadas, setTagsSelecionadas] = useState([])
     const opcoesPeriodo = ['TODOS', 'SEMANA', 'MÊS', 'ANO']
+    const [hoverLimpar, setHoverLimpar] = useState(false)
     const listaCompletaDeTags = [...new Set([...tagsPreCadastradas, ...tagsDoUsuario])]
 
     const lidarComCliqueTag = (tagClicada) => {
@@ -21,6 +22,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
     const lidarComLimpezaTags = () => {
         if (tagsSelecionadas.length > 0) {
             setTagsSelecionadas([])
+            setHoverLimpar(false) 
             
             if (onFilterChange) {
                 onFilterChange({ periodo: periodoSelecionado, tags: [] })
@@ -66,11 +68,15 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                     </div>
 
                     <div className="filtro-sonhos-lista-tags">
-                        <div className={`container-tag-limpar ${tagsSelecionadas.length === 0 ? 'tag-limpar--desativada' : ''}`}>
+                        <div 
+                            className={`container-tag-limpar ${tagsSelecionadas.length === 0 ? 'tag-limpar--desativada' : ''}`}
+                            onMouseEnter={() => setHoverLimpar(true)}
+                            onMouseLeave={() => setHoverLimpar(false)}
+                        >
                             <Tag 
                                 texto="LIMPAR FILTROS" 
                                 variante="filtro-tag"
-                                ativa={false} 
+                                ativa={hoverLimpar && tagsSelecionadas.length > 0} 
                                 aoClicar={lidarComLimpezaTags}
                             />
                         </div>
