@@ -3,11 +3,20 @@ import { tagsPreCadastradas } from "../../../data/tagsData"
 import Tag from "../../common/Tags/Tag"
 import "./FiltroSonhos.css"
 
-const FiltroSonhos = ({onFilterChange}) => {
+const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
 
     const [periodoSelecionado, setPeriodoSelecionado] = useState('TODOS')
     const [tagsSelecionadas, setTagsSelecionadas] = useState([])
+    const [listaCompletaDeTags, setListaCompletaDeTags] = useState([]);
     const opcoesPeriodo = ['TODOS', 'SEMANA', 'MÊS', 'ANO']
+
+    useEffect(() => {
+        const todasAsTags = [...tagsPreCadastradas, ...tagsDoUsuario]
+        
+        const tagsSemRepeticao = [...new Set(todasAsTags)]
+        
+        setListaCompletaDeTags(tagsSemRepeticao)
+    }, [tagsDoUsuario])
 
     const lidarComCliqueTag = (tagClicada) => {
         setTagsSelecionadas((tagsAntigas) => {
@@ -23,9 +32,9 @@ const FiltroSonhos = ({onFilterChange}) => {
             onFilterChange({
                 periodo: periodoSelecionado,
                 tags: tagsSelecionadas
-            });
+            })
         }
-    }, [periodoSelecionado, tagsSelecionadas, onFilterChange]);
+    }, [periodoSelecionado, tagsSelecionadas, onFilterChange])
 
     return (
         <div className="filtro-sonhos-container">
@@ -55,7 +64,7 @@ const FiltroSonhos = ({onFilterChange}) => {
                 </div>
 
                 <div className="filtro-sonhos-lista-tags">
-                    {tagsDisponiveis.map((tag) => (
+                    {listaCompletaDeTags.map((tag) => (
                         <Tag 
                             key={tag} 
                             texto={tag} 
@@ -65,7 +74,7 @@ const FiltroSonhos = ({onFilterChange}) => {
                         />
                     ))}
                     
-                    {tagsDisponiveis.length === 0 && (
+                    {listaCompletaDeTags.length === 0 && (
                         <span className="filtro-sonhos-vazio">Nenhuma tag encontrada</span>
                     )}
                 </div>
