@@ -97,3 +97,63 @@
         gap: 0.5rem;            
     }
 }
+
+/* ==========================================================================
+   SEÇÃO DOS INPUTS DE CALENDÁRIO (NATIVO)
+   ========================================================================== */
+.filtro-sonhos-calendarios {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  
+  padding-top: 1rem;
+  animation: abrirSuave 0.2s ease-out; /* Dá um efeito sutil dele aparecendo */
+}
+
+.filtro-sonhos-campo-data {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filtro-sonhos-campo-data label {
+  color: #A58CFF;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+}
+
+/* Deixa o input combinando com os cards de vidro */
+.filtro-sonhos-input-data {
+  background: rgba(43, 23, 72, 0.6) !important;
+  border: 0.041rem solid rgba(165, 140, 255, 0.3) !important;
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  
+  color: #F5F0E9;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.75rem;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Altera a cor do ícone de calendário nativo para lilás */
+.filtro-sonhos-input-data::-webkit-calendar-picker-indicator {
+  filter: invert(64%) sepia(21%) saturate(1415%) hue-rotate(213deg) brightness(101%) contrast(101%);
+}
+
+@keyframes abrirSuave {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ajuste mobile para os calendários não quebrarem a tela */
+@media (max-width: 30rem) {
+  .filtro-sonhos-calendarios {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+}
