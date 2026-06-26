@@ -1,0 +1,164 @@
+/* ==========================================================================
+   CONTAINERS PRINCIPAIS
+   ========================================================================== */
+.linha-tempo-pai {
+  display: flex;
+  width: 100%;
+  max-width: 51.25rem; /* 820px */
+  padding-bottom: 7.044rem; /* 112.708px */
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto; /* Centraliza na tela da aplicação */
+  box-sizing: border-box;
+}
+
+.linha-tempo-conteudo {
+  display: flex;
+  width: 100%;
+  max-width: 48.25rem; /* 772px */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3rem; /* 48px entre os meses */
+}
+
+/* ==========================================================================
+   ESTADOS DE CARREGAMENTO / VAZIO
+   ========================================================================== */
+.linha-tempo-vazia {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.linha-tempo-mensagem {
+  color: rgba(215, 204, 255, 0.7);
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.05rem;
+}
+
+/* ==========================================================================
+   AGRUPAMENTO POR MÊS E CABEÇALHOS
+   ========================================================================== */
+.linha-tempo-grupo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.linha-tempo-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem; /* 19.2px */
+  align-self: stretch;
+  width: 100%;
+}
+
+.linha-tempo-titulo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.linha-tempo-mes {
+  color: #D7CCFF;
+  text-align: center;
+  font-family: "Cinzel Decorative", serif;
+  font-size: 1.1rem; /* 17.6px */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.65rem; /* 26.4px / 150% */
+  letter-spacing: 0.11rem; /* 1.76px */
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.linha-tempo-ano {
+  color: #A58CFF;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.65rem; /* 10.4px */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 0.975rem; /* 15.6px / 150% */
+  letter-spacing: 0.195rem; /* 3.12px */
+  text-transform: uppercase;
+}
+
+/* Divisores dinâmicos (flex: 1 faz com que eles preencham o espaço restante da tela) */
+.linha-tempo-divisor-esq,
+.linha-tempo-divisor-dir {
+  flex: 1;
+  height: 0.0625rem; /* 1px */
+}
+
+.linha-tempo-divisor-esq {
+  background: linear-gradient(90deg, rgba(165, 140, 255, 0.28) 0%, rgba(165, 140, 255, 0.08) 100%);
+}
+
+.linha-tempo-divisor-dir {
+  background: linear-gradient(270deg, rgba(165, 140, 255, 0.28) 0%, rgba(165, 140, 255, 0.08) 100%);
+}
+
+/* ==========================================================================
+   CARDS CONTAINER E A LINHA VERTICAL (TRILHA)
+   ========================================================================== */
+.linha-tempo-cards-container {
+  position: relative; /* Fundamental para a trilha funcionar */
+  display: flex;
+  width: 100%;
+  padding-top: 2rem; /* 32px */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem; /* Espaço entre os cards do mesmo mês */
+}
+
+/* A Linha Vertical Mágica */
+.linha-tempo-trilha {
+  position: absolute;
+  top: 2rem; /* Começa junto com o topo do primeiro card */
+  bottom: -2rem; /* Desce até o fim do último card (invade o gap) */
+  left: 2.125rem; /* 34px - Fica EXATAMENTE no centro do container do ícone do CardSonho */
+  width: 0.0625rem; /* 1px */
+  
+  /* Gradiente para a linha desaparecer suavemente nas pontas */
+  background: linear-gradient(
+    180deg, 
+    rgba(165, 140, 255, 0) 0%, 
+    rgba(165, 140, 255, 0.3) 10%, 
+    rgba(165, 140, 255, 0.3) 90%, 
+    rgba(165, 140, 255, 0) 100%
+  );
+  
+  z-index: -1; /* Joga a linha para trás dos ícones da lua */
+}
+
+/* ==========================================================================
+   ESPECIALISTA RESPONSIVO (Telas Menores)
+   ========================================================================== */
+@media (max-width: 33.75rem) {
+  .linha-tempo-pai {
+    padding: 1rem 1rem 4rem 1rem; /* Dá espaço nas bordas laterais do celular */
+  }
+
+  .linha-tempo-cabecalho {
+    gap: 0.8rem; /* Aperta um pouco o cabeçalho para caber */
+  }
+
+  .linha-tempo-mes {
+    font-size: 1rem; /* Reduz a fonte levemente */
+  }
+
+  /* Lembra que transformamos o layout do CardSonho no celular? A lua vai para o topo.
+    Sendo assim, a linha vertical lateral deixa de fazer sentido visual no mobile. 
+    Nós simplesmente a escondemos em celulares para um visual "stacked" mais limpo.
+  */
+  .linha-tempo-trilha {
+    display: none; 
+  }
+}
