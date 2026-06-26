@@ -1,6 +1,6 @@
 const diaMenstruacaoRepository = require('../repositories/diaMenstruacaoRepository');
 const usuariaRepository = require('../repositories/usuariaRepository');
-const {obterFaselunar} = require('../utils/fasesLunares');
+const { obterFaseLunar } = require('../utils/fasesLunares');
 
 const obterDadosHome = async (usuariaId) =>{
     // Verifica se a usuária existe
@@ -15,7 +15,7 @@ const obterDadosHome = async (usuariaId) =>{
 
     //calcular a fase da lua para o dia de hoje
     //função vindo de utils/fasesLunares.js
-    const faseLunar = obterFaselunar(hoje);
+    const faseLunar = obterFaseLunar(hoje);
 
     //verifica se hoje está marcado como dia de menstruação (para a Home saber o status do botão)
     const menstruandoHoje = await diaMenstruacaoRepository.verificarDiaMarcado(usuariaId, hoje);
@@ -23,14 +23,13 @@ const obterDadosHome = async (usuariaId) =>{
     //procura o registro de menstruacao mais recente para calcular o ciclo menstrual
     const ultimoRegistroMenstruacao = await diaMenstruacaoRepository.buscarUltimaMenstruacao(usuariaId);
 
-    //Caso 1: Se não houer nenhum registro no banco de dados
+    //Caso 1: Se não houver nenhum registro no banco de dados
     if(!ultimoRegistroMenstruacao){
         return{
             nomeUsuaria: usuaria.nome,
             faseLunar,
             menstruandoHoje,
-            possuiCicloMenstrual: false,
-            mensagemContextual:'Seja bem-vinda ao Lunar Cycle! Adicione o seu primeiro dia de menstruação para começar a acompanhar o seu ciclo e a sua conexão com a lua.'
+            possuiCicloMenstrual: false
         };
     }
 
@@ -58,30 +57,7 @@ const obterDadosHome = async (usuariaId) =>{
     const previsaoProximoCiclo = new Date(dataInicioCiclo);
     previsaoProximoCiclo.setDate(previsaoProximoCiclo.getDate() + usuaria.duracaoCiclo);
 
-    //Montar mensagem dinâmica contextial cruzando ciclo e fase da lua.
-
-    let mensagemContextual = '';
-    if (menstruandoHoje) {
-        if (faseLunar.nome === 'Cheia') {
-        mensagemContextual = "Sua menstruação coincide com a Lua Cheia (Ciclo da Lua Vermelha). É um momento de grande poder intuitivo e criatividade focada no exterior.";
-        } else if (faseLunar.nome === 'Nova') {
-        mensagemContextual = "Sua menstruação coincide com a Lua Nova (Ciclo da Lua Branca). Este é o alinhamento tradicional da natureza, ideal para descanso e renovação.";
-        } else if (faseLunar.nome.includes('Crescente')) {
-        mensagemContextual = "Menstruar na Lua Crescente traz uma dinâmica de renovação ativa. O seu corpo limpa o passado enquanto a lua impulsiona novos começos.";
-        } else {
-        mensagemContextual = "Menstruar na Lua Minguante potencializa a limpeza e o desapego. Excelente momento para libertar o que não serve mais.";
-        } }
-    else {
-        if (faseLunar.nome === 'Cheia') {
-        mensagemContextual = "A Lua Cheia brilha no céu e energia está no auge. Fase de alta sociabilidade e magnetismo pessoal expandido.";
-        } else if (faseLunar.nome === 'Nova') {
-        mensagemContextual = "A Lua Nova convida à quietude. Aproveite este momento fora do período menstrual para plantar intenções silenciosas.";
-        } else if (faseLunar.nome.includes('Crescente')) {
-        mensagemContextual = "Energia em expansão! A Lua Crescente impulsiona a agir, executar projetos e focar no crescimento.";
-        } else {
-        mensagemContextual = "Momento de transição. A Lua Minguante convida a desacelerar e a preparar o corpo com carinho para o próximo ciclo.";
-        }
-    }
+    // (O bloco de Montar mensagem dinâmica contextual foi removido para o Front-end)
 
     return {
         nomeUsuaria: usuaria.nome,
@@ -89,8 +65,7 @@ const obterDadosHome = async (usuariaId) =>{
         menstruandoHoje,
         possuiCicloMenstrual: true,
         diaDoCiclo: diaDoCiclo > 0 ? diaDoCiclo : 1, // Garante que o dia do ciclo seja pelo menos 1
-        previsaoProximoCiclo: previsaoProximoCiclo.toLocaleDateString('pt-BR'),
-        mensagemContextual
+        previsaoProximoCiclo: previsaoProximoCiclo.toLocaleDateString('pt-BR')
     };
 };
 
