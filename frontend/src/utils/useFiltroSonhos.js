@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 const formatarDataBR = (dataString) => {
     if (!dataString) return ''
-    const [, mes, dia] = dataString.split('-') 
+    const [, mes, dia] = dataString.split('-')
     return `${dia}/${mes}`
 }
 
@@ -54,18 +54,21 @@ export const useFiltroLogica = (tagsDoUsuario, tagsPreCadastradas, onFilterChang
     }
 
     const isTagPeriodoAtiva = (opcao) => {
-        if (periodoSelecionado === opcao) return true;
-        
-        if (opcao === 'SEMANA' || opcao === 'MÊS' || opcao === 'ANO') {
-            return obterOpcoesDropdown(opcao).includes(periodoSelecionado);
+        if (opcao === 'TODOS' && periodoSelecionado === 'TODOS') return true
+        if (opcao === 'ESPECÍFICO') {
+            return periodoSelecionado === 'ESPECÍFICO' || (tagPeriodoEspecifico && periodoSelecionado === tagPeriodoEspecifico)
         }
-        
-        return false;
+        if (opcao === 'SEMANA' || opcao === 'MÊS' || opcao === 'ANO') {
+            return obterOpcoesDropdown(opcao).includes(periodoSelecionado)
+        }
+        return false
     }
 
     const lidarComCliquePeriodoMenu = (opcao) => {
-        if (opcao === 'TODOS' || opcao === 'ESPECÍFICO') {
-            setPeriodoSelecionado(opcao)
+        if (opcao === 'TODOS') {
+            setPeriodoSelecionado('TODOS')
+            setDataInicio('') 
+            setDataFim('') 
             setMenuAberto(null)
         } else {
             setMenuAberto(menuAberto === opcao ? null : opcao)
@@ -80,13 +83,19 @@ export const useFiltroLogica = (tagsDoUsuario, tagsPreCadastradas, onFilterChang
     const lidarMudancaDataInicio = (e) => {
         const novaData = e.target.value
         setDataInicio(novaData)
-        if (novaData && dataFim) setPeriodoSelecionado(`${formatarDataBR(novaData)} A ${formatarDataBR(dataFim)}`)
+        if (novaData && dataFim) {
+            setPeriodoSelecionado(`${formatarDataBR(novaData)} A ${formatarDataBR(dataFim)}`)
+            setMenuAberto(null) 
+        }
     }
 
     const lidarMudancaDataFim = (e) => {
         const novaData = e.target.value
         setDataFim(novaData)
-        if (dataInicio && novaData) setPeriodoSelecionado(`${formatarDataBR(dataInicio)} A ${formatarDataBR(novaData)}`)
+        if (dataInicio && novaData) {
+            setPeriodoSelecionado(`${formatarDataBR(dataInicio)} A ${formatarDataBR(novaData)}`)
+            setMenuAberto(null) 
+        }
     }
 
     const lidarComCliqueTag = (tagClicada) => {
