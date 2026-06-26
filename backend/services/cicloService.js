@@ -71,7 +71,7 @@ const obterDadosHome = async (usuariaId) =>{
 
 
 // Função para alternar o status de menstruação do dia atual
-const alternarMenstruacaohoje = async (usuariaId) =>{
+const alternarMenstruacaoHoje = async (usuariaId) =>{
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
 
@@ -94,5 +94,5 @@ const alternarMenstruacaohoje = async (usuariaId) =>{
 
 module.exports = {
     obterDadosHome,
-    alternarMenstruacaohoje
+    alternarMenstruacaoHoje
 };
