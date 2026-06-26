@@ -64,6 +64,14 @@
 }
 
 /* ==========================================================================
+   SUFIXO (Unidades de medida menores: "dias" e "%")
+   ========================================================================== */
+.dados-extras-sufixo {
+  font-size: 0.65rem;        /* 10.4px / 16 - Exatamente o tamanho pedido */
+  /* Ele herda automaticamente a cor dourada e a fonte da classe pai */
+}
+
+/* ==========================================================================
    LEGENDA (O texto descritivo embaixo do número)
    ========================================================================== */
 .dados-extras-legenda {
