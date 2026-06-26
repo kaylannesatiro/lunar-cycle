@@ -98,148 +98,127 @@
     }
 }
 
-/* ==========================================================================
-   MENU FLUTUANTE DO CALENDÁRIO (ESPECÍFICO)
-   ========================================================================== */
 .filtro-sonhos-calendarios-dropdown {
-  position: absolute;
-  top: calc(100% + 0.4rem);
-  left: 0;
-  z-index: 100;
-  
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  padding: 0.7rem;
-  width: max-content;
-  
-  background: rgba(43, 23, 72, 0.95);
-  border: 0.041rem solid rgba(165, 140, 255, 0.45);
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  
-  animation: abrirDropdown 0.2s ease-out;
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0.7rem;
+    width: max-content;
+    background: rgba(43, 23, 72, 0.95);
+    border: 0.041rem solid rgba(165, 140, 255, 0.45);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: abrirDropdown 0.2s ease-out;
 }
 
 .filtro-sonhos-campo-data {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
 }
 
-/* ─── AQUI: Rótulos "DE" e "ATÉ" com a fonte Cinzel cravada ─── */
 .filtro-sonhos-campo-data label {
-  color: #A58CFF;
-  text-align: center;
-  font-family: 'Cinzel', serif;
-  font-size: 0.52rem;              /* Ajustado para ornar com os títulos (equivalente a ~8.3px) */
-  font-style: normal;
-  font-weight: 400;
-  line-height: 0.75rem;            /* ~12px proporcional ao tamanho */
-  letter-spacing: 0.08rem;
-  text-transform: uppercase;
-  min-width: 1.5rem;
+    color: #A58CFF;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.52rem;           
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0.75rem;          
+    letter-spacing: 0.08rem;
+    text-transform: uppercase;
+    min-width: 1.5rem;
 }
 
-/* ─── AQUI: Caixas de data mais clarinhas e proporcionais ─── */
 .filtro-sonhos-input-data {
-  /* Fundo e bordas mais suaves e transparentes (mais clarinho) */
-  background: rgba(255, 255, 255, 0.07) !important; 
-  border: 0.041rem solid rgba(165, 140, 255, 0.25) !important;
-  border-radius: 0.35rem;
-  padding: 0.25rem 0.5rem;
-  
-  color: rgba(245, 240, 233, 0.9); /* Texto levemente brilhante */
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.68rem;              /* Tamanho ligeiramente menor para ficar delicado */
-  outline: none;
-  cursor: pointer;
-  width: 6.8rem;
-  transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.07) !important; 
+    border: 0.041rem solid rgba(165, 140, 255, 0.25) !important;
+    border-radius: 0.35rem;
+    padding: 0.25rem 0.5rem;
+    color: rgba(245, 240, 233, 0.9);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.68rem;        
+    outline: none;
+    cursor: pointer;
+    width: 6.8rem;
+    transition: all 0.2s ease;
 }
 
-/* Efeito de foco quando o usuário clica no calendário */
 .filtro-sonhos-input-data:focus {
-  background: rgba(255, 255, 255, 0.12) !important;
-  border-color: rgba(165, 140, 255, 0.6) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(165, 140, 255, 0.6) !important;
 }
 
 .filtro-sonhos-input-data::-webkit-calendar-picker-indicator {
-  filter: invert(64%) sepia(21%) saturate(1415%) hue-rotate(213deg) brightness(101%) contrast(101%);
-  cursor: pointer;
-  opacity: 0.8;
+    filter: invert(64%) sepia(21%) saturate(1415%) hue-rotate(213deg) brightness(101%) contrast(101%);
+    cursor: pointer;
+    opacity: 0.8;
 }
 
-/* ==========================================================================
-   DROPDOWNS DE HISTÓRICO (MENU FLUTUANTE)
-   ========================================================================== */
 .filtro-sonhos-dropdown-wrapper {
-  position: relative; /* Segura o menu flutuante exatamente embaixo desta tag */
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .filtro-sonhos-dropdown-lista {
-  position: absolute;
-  top: calc(100% + 0.4rem); /* Fica logo abaixo da tag, com um respiro */
-  left: 0;
-  z-index: 100; /* Garante que fique por cima de tudo na tela */
-  
-  display: flex;
-  flex-direction: column;
-  width: max-content;
-  min-width: 6.5rem;
-  
-  /* O Scroll que você pediu */
-  max-height: 10rem;
-  overflow-y: auto;
-  
-  /* Estilo Glassmorphism Combinando com o Container Pai */
-  background: rgba(43, 23, 72, 0.95);
-  border: 0.041rem solid rgba(165, 140, 255, 0.45);
-  border-radius: 0.5rem;
-  padding: 0.4rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  
-  animation: abrirDropdown 0.2s ease-out;
+    position: absolute;
+    top: calc(100% + 0.4rem); 
+    left: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    min-width: 6.5rem;
+    max-height: 10rem;
+    overflow-y: auto;
+    background: rgba(43, 23, 72, 0.95);
+    border: 0.041rem solid rgba(165, 140, 255, 0.45);
+    border-radius: 0.5rem;
+    padding: 0.4rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: abrirDropdown 0.2s ease-out;
 }
 
 .filtro-sonhos-dropdown-item {
-  background: transparent;
-  border: none;
-  color: rgba(245, 240, 233, 0.7);
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.65rem;
-  text-align: left;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    background: transparent;
+    border: none;
+    color: rgba(245, 240, 233, 0.7);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.65rem;
+    text-align: left;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .filtro-sonhos-dropdown-item:hover,
-.filtro-sonhos-dropdown-item.ativo {
-  color: #E0C58F; /* Fica dourado quando o mouse passa ou está selecionado */
-  background: rgba(165, 140, 255, 0.15);
+    .filtro-sonhos-dropdown-item.ativo {
+    color: #E0C58F; 
+    background: rgba(165, 140, 255, 0.15);
 }
 
-/* --- SCROLLBAR MÍSTICA CUSTOMIZADA --- */
 .filtro-sonhos-dropdown-lista::-webkit-scrollbar {
-  width: 0.35rem;
+    width: 0.35rem;
 }
 .filtro-sonhos-dropdown-lista::-webkit-scrollbar-track {
-  background: rgba(43, 23, 72, 0.4);
-  border-radius: 1rem;
+    background: rgba(43, 23, 72, 0.4);
+    border-radius: 1rem;
 }
 .filtro-sonhos-dropdown-lista::-webkit-scrollbar-thumb {
-  background: rgba(165, 140, 255, 0.5);
-  border-radius: 1rem;
+    background: rgba(165, 140, 255, 0.5);
+    border-radius: 1rem;
 }
 .filtro-sonhos-dropdown-lista::-webkit-scrollbar-thumb:hover {
-  background: rgba(165, 140, 255, 0.8);
+    background: rgba(165, 140, 255, 0.8);
 }
 
 @keyframes abrirDropdown {
-  from { opacity: 0; transform: translateY(-0.5rem); }
-  to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(-0.5rem); }
+    to { opacity: 1; transform: translateY(0); }
 }
