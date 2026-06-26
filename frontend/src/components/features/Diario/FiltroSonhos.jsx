@@ -6,7 +6,9 @@ import "./FiltroSonhos.css"
 const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
     const [periodoSelecionado, setPeriodoSelecionado] = useState('TODOS')
     const [tagsSelecionadas, setTagsSelecionadas] = useState([])
+
     const opcoesPeriodo = ['TODOS', 'SEMANA', 'MÊS', 'ANO']
+    
     const [hoverLimpar, setHoverLimpar] = useState(false)
     const listaCompletaDeTags = [...new Set([...tagsPreCadastradas, ...tagsDoUsuario])]
 

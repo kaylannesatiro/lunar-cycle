@@ -1,137 +1,99 @@
-/* ==========================================================================
-   RESET DE SEGURANÇA
-   ========================================================================== */
 .filtro-sonhos-container,
 .filtro-sonhos-container * {
-  box-sizing: border-box !important;
+    box-sizing: border-box !important;
 }
 
-/* ==========================================================================
-   WRAPPER EXTERNO (Posicionamento na página: 820px)
-   ========================================================================== */
 .filtro-sonhos-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  
-  width: 100%;
-  max-width: 51.25rem;       /* 820px / 16 */
-  padding: 2.5rem 1.5rem 1.5rem 1.5rem; /* 40px 24px 24px 24px */
-  
-  box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 51.25rem;  
+    padding: 2.5rem 1.5rem 1.5rem 1.5rem; 
+    box-sizing: border-box;
 }
 
-/* ==========================================================================
-   CONTAINER INTERNO (O Cartão de Vidro)
-   ========================================================================== */
 .filtro-sonhos-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  align-self: stretch;       /* Se estica para preencher os 820px do pai */
-  
-  /* O padding exato do Figma para o miolo: 24px e 28.8px */
-  padding: 1.5rem 1.8rem;    
-  
-  /* O visual Glassmorphism */
-  border-radius: 1.125rem;
-  border: 0.041rem solid rgba(165, 140, 255, 0.45);
-  background: rgba(43, 23, 72, 0.42);
-  
-  box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;   
+    padding: 1.5rem 1.8rem;    
+    border-radius: 1.125rem;
+    border: 0.041rem solid rgba(165, 140, 255, 0.45);
+    background: rgba(43, 23, 72, 0.42);
+    box-sizing: border-box;
 }
 
-/* ==========================================================================
-   GRUPOS DE FILTRO (Período e Tags)
-   ========================================================================== */
 .filtro-sonhos-grupo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  /* Removemos larguras fixas de 713px para o layout ser 100% elástico */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
 }
 
-/* Respiro exato do Figma entre a seção de Período e a de Tags */
 .filtro-tags-margem {
-  padding-top: 1.2rem;             /* 19.2px */
+    padding-top: 1.2rem;       
 }
 
-/* ==========================================================================
-   TÍTULOS DOS CONTAINERS ("PERÍODO" e "FILTRAR POR TAG")
-   ========================================================================== */
 .filtro-sonhos-cabecalho {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
 }
 
 .filtro-sonhos-titulo {
-  color: #A58CFF;
-  font-family: 'Cinzel', serif;
-  font-size: 0.52rem;              /* 8.32px */
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;               /* 12.48px */
-  letter-spacing: 0.145rem;        /* 2.33px */
-  text-transform: uppercase;
-  margin: 0;                       /* Remove margens padrão do <h4> */
+    color: #A58CFF;
+    font-family: 'Cinzel', serif;
+    font-size: 0.52rem;           
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;        
+    letter-spacing: 0.145rem; 
+    text-transform: uppercase;
+    margin: 0;                     
 }
 
-/* ==========================================================================
-   ÁREA DAS TAGS (Alinhamento e Quebra de Linha)
-   ========================================================================== */
 .filtro-sonhos-lista-tags {
-  display: flex;
-  flex-wrap: wrap;                 /* O SEGREDO: Se faltar espaço, as tags pulam para a linha de baixo */
-  align-items: flex-start;
-  align-self: stretch;
-  
-  padding-top: 0.7rem;             /* 11.2px (Distância do título para as tags) */
-  gap: 0.75rem;                    /* Distância respirável entre uma tag e outra */
+    display: flex;
+    flex-wrap: wrap;            
+    align-items: flex-start;
+    align-self: stretch;
+    padding-top: 0.7rem;            
+    gap: 0.75rem;                  
 }
 
-/* Estilo para quando a lista do backend vier vazia */
 .filtro-sonhos-vazio {
-  color: rgba(165, 140, 255, 0.5);
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.8rem;
-  font-style: italic;
+    color: rgba(165, 140, 255, 0.5);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8rem;
+    font-style: italic;
 }
 
-/* ==========================================================================
-   RESPONSIVIDADE (Mobile-First)
-   ========================================================================== */
-@media (max-width: 48rem) { /* Até 768px */
-  .filtro-sonhos-container {
-    padding: 1.2rem;               /* Reduz o padding para poupar espaço de tela */
-    border-radius: 1rem;
-  }
-}
-
-@media (max-width: 30rem) { /* Até 480px (Smartphones) */
-  .filtro-sonhos-lista-tags {
-    gap: 0.5rem;                   /* Aproxima mais as tags no celular */
-  }
-}
-
-/* ==========================================================================
-   COMPORTAMENTO DA TAG DE LIMPEZA FIXA
-   ========================================================================== */
-
-/* Apenas garante que a div de englobamento não quebre o layout flex da tag */
 .container-tag-limpar {
-  display: inline-flex;
+    display: inline-flex;
 }
 
-/* Estado bloqueado: sem tags selecionadas */
 .tag-limpar--desativada {
-  opacity: 0.35;
-  pointer-events: none;
-  cursor: not-allowed !important;
+    opacity: 0.35;
+    pointer-events: none;
+    cursor: not-allowed !important;
 }
 
 .tag-limpar--desativada * {
-  cursor: not-allowed !important;
+    cursor: not-allowed !important;
+}
+
+@media (max-width: 48rem) { 
+    .filtro-sonhos-container {
+        padding: 1.2rem;           
+        border-radius: 1rem;
+    }
+}
+
+@media (max-width: 30rem) { 
+    .filtro-sonhos-lista-tags {
+        gap: 0.5rem;            
+    }
 }
