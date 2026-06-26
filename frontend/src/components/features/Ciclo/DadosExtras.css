@@ -1,0 +1,71 @@
+/* Reset de segurança para evitar cortes */
+.dados-extras-container,
+.dados-extras-container * {
+  box-sizing: border-box !important;
+}
+
+/* ==========================================================================
+   CONTAINER PRINCIPAL (Fundo Translúcido)
+   ========================================================================== */
+.dados-extras-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  /* Conversão de Pixels para Rem */
+  padding: 1.3rem;           /* 20.8px / 16 */
+  border-radius: 1.125rem;   /* 18px / 16 */
+  border: 0.041rem solid rgba(224, 197, 143, 0.40); /* 0.667px / 16 */
+  background: rgba(17, 34, 80, 0.40); /* Glassmorphism Azul */
+  
+  /* Largura e alinhamento responsivos */
+  width: 100%;
+  max-width: 15.817rem;      /* 253.083px / 16 (Tamanho da coluna no Figma) */
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   LISTA DE DADOS (Engloba os 3 cards)
+   ========================================================================== */
+.dados-extras-lista {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centralizado para melhor leitura mobile */
+  align-self: stretch;
+  
+  padding-top: 1.4rem;       /* 22.4px / 16 */
+  gap: 1.5rem;               /* Espaçamento entre as 3 métricas */
+}
+
+/* ==========================================================================
+   CADA ITEM DE DADO (O número e a legenda)
+   ========================================================================== */
+.dados-extras-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+/* O Valor em Destaque (Dourado) */
+.dados-extras-valor {
+  color: #E0C58F;
+  font-family: "Cinzel Decorative", serif;
+  font-size: 1.8rem;         /* Destaque visual numérico */
+  font-weight: 400;
+  line-height: 120%;
+}
+
+/* A Legenda Descritiva (Baseada no Figma) */
+.dados-extras-legenda {
+  color: #F5F0E9;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.58rem;        /* 9.28px / 16 */
+  font-weight: 400;
+  line-height: 150%;         /* 13.92px */
+  letter-spacing: 0.116rem;  /* 1.856px / 16 */
+  text-transform: uppercase;
+}
