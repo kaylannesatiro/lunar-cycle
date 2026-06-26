@@ -39,7 +39,7 @@
 }
 
 /* ==========================================================================
-   ÁREA DO DADO PRINCIPAL (Onde ficam os números dourados)
+   ÁREA DO DADO PRINCIPAL (Os números dourados)
    ========================================================================== */
 .dados-extras-dado {
   display: flex;
@@ -47,16 +47,20 @@
   align-items: center;
   
   width: 100%;
-  max-width: 15.817rem;      /* 253.083px / 16 */
-  margin-bottom: 0.5rem;     /* Pequeno respiro antes da legenda */
+  max-width: 15.817rem;
+  
+  /* A distância exata de 8.8px convertida para rem */
+  margin-bottom: 0.55rem;    /* 8.8px / 16 */
 }
 
 .dados-extras-valor {
   color: #E0C58F;
+  text-align: center;
   font-family: "Cinzel Decorative", serif;
-  font-size: 1.8rem;         
+  font-size: 1.65rem;        /* 26.4px / 16 */
+  font-style: normal;
   font-weight: 400;
-  line-height: 120%;
+  line-height: 100%;         /* Mantém a proporção exata pedida (26.4px) */
 }
 
 /* ==========================================================================
@@ -67,13 +71,14 @@
   text-align: center;
   font-family: 'Raleway', sans-serif;
   font-size: 0.58rem;        /* 9.28px / 16 */
+  font-style: normal;
   font-weight: 400;
   line-height: 150%;         /* 13.92px */
   letter-spacing: 0.116rem;  /* 1.856px / 16 */
   text-transform: uppercase;
   
   width: 100%;
-  max-width: 15.817rem;      /* Garante que a legenda fique perfeitamente centralizada sob o número */
+  max-width: 15.817rem;      /* Garante a centralização perfeita sob o número */
 }
 
 /* ==========================================================================

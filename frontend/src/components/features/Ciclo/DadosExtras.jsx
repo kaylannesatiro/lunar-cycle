@@ -10,7 +10,7 @@ const DadosExtras = () => {
             {/* Dia do Ciclo Lunar */}
             <div className="dados-extras-card">
                 <div className="dados-extras-dado">
-                    <span className="dados-extras-valor">{metricas.diaDoCicloLunar} dia</span>
+                    <span className="dados-extras-valor">{metricas.diaDoCicloLunar}dia</span>
                 </div>
                 <span className="dados-extras-legenda">CICLO LUNAR</span>
             </div>
@@ -18,7 +18,7 @@ const DadosExtras = () => {
             {/* Próxima Lua Cheia */}
             <div className="dados-extras-card">
                 <div className="dados-extras-dado">
-                    <span className="dados-extras-valor">{metricas.faltamParaCheia} dias</span>
+                    <span className="dados-extras-valor">{metricas.faltamParaCheia}dias</span>
                 </div>
                 <span className="dados-extras-legenda">PRÓXIMA LUA CHEIA</span>
             </div>
