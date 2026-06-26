@@ -122,13 +122,15 @@
 
 /* Quando há tags selecionadas, a tag de limpar fica normal e responsiva ao mouse */
 .container-tag-limpar .tag-base {
-  border-color: rgba(255, 107, 107, 0.5) !important; /* Um leve toque avermelhado na borda para indicar ação de apagar */
+    color: #F5F0E9 !important;
+  border-color: rgba(245, 240, 233, 0.50) !important; /* Um leve toque avermelhado na borda para indicar ação de apagar */
   transition: all 0.2s ease;
 }
 
 .container-tag-limpar .tag-base:hover {
-  background: rgba(255, 107, 107, 0.15) !important;
-  border-color: rgb(255, 107, 107) !important;
+    color: #F5F0E9 !important;
+  background: rgba(88, 8, 16, 0.22) !important;
+  border-color: rgba(245, 240, 233, 0.50) !important;
 }
 
 /* O SEGREDO: Quando NÃO há tags selecionadas (Filtro limpo) */
