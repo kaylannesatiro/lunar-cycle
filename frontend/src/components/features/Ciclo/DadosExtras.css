@@ -1,22 +1,22 @@
 /* ==========================================================================
    RESET DE SEGURANÇA
    ========================================================================== */
-.dados-extras-lista,
-.dados-extras-lista * {
+.oraculo-dados-grupo-pai,
+.oraculo-dados-grupo-pai * {
   box-sizing: border-box !important;
 }
 
 /* ==========================================================================
-   CONTAINER INVISÍVEL (Englobando os 3 cards)
+   CONTAINER PAI (Alinhamento Lado a Lado Rigoroso)
    ========================================================================== */
-.dados-extras-lista {
+.oraculo-dados-grupo-pai {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;   /* Alinhamento do Figma */
+  flex-direction: row;       /* O MÁGICO: Força os cards a ficarem lado a lado! */
+  justify-content: center;   /* Centraliza o bloco todo na tela */
+  align-items: flex-start;   /* Alinha pelo topo */
+  gap: 0.999rem;             /* A distância exata de 15.98px (15.98 / 16) */
   align-self: stretch;
   
-  padding-top: 1.4rem;       /* 22.4px / 16 */
-  gap: 1.2rem;               /* Distância entre um card e outro */
   width: 100%;
 }
 
@@ -27,14 +27,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex: 1;                   /* Faz cada um dos 3 cards ter exatamente o mesmo tamanho */
   
   padding: 1.3rem;           /* 20.8px / 16 */
   border-radius: 1.125rem;   /* 18px / 16 */
   border: 0.041rem solid rgba(224, 197, 143, 0.40); /* 0.667px / 16 */
   background: rgba(17, 34, 80, 0.40); /* Fundo Translúcido Independente */
   
-  /* Permite que o card se adapte ao tamanho da tela mobile sem vazar */
-  width: 100%;
   max-width: 18.5rem;        
 }
 
@@ -45,12 +44,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
   width: 100%;
-  max-width: 15.817rem;
-  
-  /* A distância exata de 8.8px convertida para rem */
-  margin-bottom: 0.55rem;    /* 8.8px / 16 */
+  max-width: 15.817rem;      /* 253.083px / 16 */
+  margin-bottom: 0.55rem;    /* 8.8px / 16 (Distância exata do Figma) */
 }
 
 .dados-extras-valor {
@@ -60,15 +56,12 @@
   font-size: 1.65rem;        /* 26.4px / 16 */
   font-style: normal;
   font-weight: 400;
-  line-height: 100%;         /* Mantém a proporção exata pedida (26.4px) */
+  line-height: 100%;         /* 26.4px (100%) */
 }
 
-/* ==========================================================================
-   SUFIXO (Unidades de medida menores: "dias" e "%")
-   ========================================================================== */
+/* Sufixo menor para "dias" e "%" */
 .dados-extras-sufixo {
-  font-size: 0.65rem;        /* 10.4px / 16 - Exatamente o tamanho pedido */
-  /* Ele herda automaticamente a cor dourada e a fonte da classe pai */
+  font-size: 0.65rem;        /* 10.4px / 16 */
 }
 
 /* ==========================================================================
@@ -81,24 +74,27 @@
   font-size: 0.58rem;        /* 9.28px / 16 */
   font-style: normal;
   font-weight: 400;
-  line-height: 150%;         /* 13.92px */
+  line-height: 150%;         /* 13.92px (150%) */
   letter-spacing: 0.116rem;  /* 1.856px / 16 */
   text-transform: uppercase;
-  
   width: 100%;
-  max-width: 15.817rem;      /* Garante a centralização perfeita sob o número */
 }
 
 /* ==========================================================================
-   RESPONSIVIDADE (Mobile First)
+   RESPONSIVIDADE PREMIUM (Mobile-First)
    ========================================================================== */
 @media (max-width: 48rem) {
-  /* Em telas menores, centralizamos os blocos para manter a harmonia do layout vertical */
-  .dados-extras-lista {
+  /* No celular, o container pai assume a direção de coluna para empilhar 
+     os cards verticalmente, respeitando o limite físico da tela */
+  .oraculo-dados-grupo-pai {
+    flex-direction: column;  
     align-items: center;
+    gap: 1.2rem;
   }
   
   .dados-extras-card {
     align-items: center;
+    width: 100%;             /* O card expande para ficar imponente no mobile */
+    max-width: 100%;
   }
 }

@@ -6,7 +6,7 @@ const DadosExtras = () => {
     const [metricas] = useState(() => obterMetricasLunares());
 
     return (
-        <div className="dados-extras-lista">
+        <div className="oraculo-dados-grupo-pai">
             {/* Dia do Ciclo Lunar */}
             <div className="dados-extras-card">
                 <div className="dados-extras-dado">
