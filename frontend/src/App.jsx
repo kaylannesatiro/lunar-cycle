@@ -5,25 +5,12 @@ import LinhaDoTempo from './components/features/Diario/LinhaTempo';
 import FiltroSonhos from './components/features/Diario/FiltroSonhos';
 
 function App() {
-  const [tagsCustomizadas] = useState(["PESADELO", "cebola"]);
+  const [tagsCustomizadas] = useState(["PESADELO", "cebola"])
 
   const lidarComMudancaDeFiltro = (filtros) => {
-    console.log("Filtros ativos no momento:", filtros);
-  };
+    console.log("Filtros ativos no momento:", filtros)
+  }
 
-  return (
-    <Background>
-      <div style={{ padding: '2rem' }}>
-        <FiltroSonhos 
-          tagsDoUsuario={tagsCustomizadas} 
-          onFilterChange={lidarComMudancaDeFiltro} 
-        />
-      </div>
-    </Background>
-  );
-import CardSonho from './components/features/Diario/CardSonho';
-
-function App() {
   const dadosMockDoBackend = [
     {
       mes: "JUNHO",
@@ -69,6 +56,13 @@ function App() {
 
   return (
     <Background> 
+      <div style={{ padding: '2rem' }}>
+        <FiltroSonhos 
+          tagsDoUsuario={tagsCustomizadas} 
+          onFilterChange={lidarComMudancaDeFiltro} 
+        />
+      </div>
+
       <div style={{ paddingTop: '4rem' }}>
         <LinhaDoTempo 
           sonhosAgrupados={dadosMockDoBackend} 
@@ -80,4 +74,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
