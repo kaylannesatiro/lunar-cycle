@@ -12,7 +12,6 @@ export const useFiltroLogica = (tagsDoUsuario, tagsPreCadastradas, onFilterChang
     const [hoverLimpar, setHoverLimpar] = useState(false)
     const [dataInicio, setDataInicio] = useState('')
     const [dataFim, setDataFim] = useState('')
-    
     const [menuAberto, setMenuAberto] = useState(null) 
 
     const tagsPadraoSeguras = tagsPreCadastradas || []
@@ -39,7 +38,7 @@ export const useFiltroLogica = (tagsDoUsuario, tagsPreCadastradas, onFilterChang
             
             while (dataAtual >= dataLimite) {
                 opcoes.push(`${meses[dataAtual.getMonth()]} ${dataAtual.getFullYear()}`)
-                dataAtual.setMonth(dataAtual.getMonth() - 1) 
+                dataAtual.setMonth(dataAtual.getMonth() - 1)
             }
         } else if (tipo === 'SEMANA') {
             for (let i = 0; i < 4; i++) {
@@ -54,6 +53,16 @@ export const useFiltroLogica = (tagsDoUsuario, tagsPreCadastradas, onFilterChang
         return opcoes
     }
 
+    const isTagPeriodoAtiva = (opcao) => {
+        if (periodoSelecionado === opcao) return true;
+        
+        if (opcao === 'SEMANA' || opcao === 'MÊS' || opcao === 'ANO') {
+            return obterOpcoesDropdown(opcao).includes(periodoSelecionado);
+        }
+        
+        return false;
+    }
+
     const lidarComCliquePeriodoMenu = (opcao) => {
         if (opcao === 'TODOS' || opcao === 'ESPECÍFICO') {
             setPeriodoSelecionado(opcao)
@@ -65,7 +74,7 @@ export const useFiltroLogica = (tagsDoUsuario, tagsPreCadastradas, onFilterChang
 
     const lidarComSelecaoDropdown = (valorFinal) => {
         setPeriodoSelecionado(valorFinal)
-        setMenuAberto(null)
+        setMenuAberto(null) 
     }
 
     const lidarMudancaDataInicio = (e) => {
@@ -106,6 +115,6 @@ export const useFiltroLogica = (tagsDoUsuario, tagsPreCadastradas, onFilterChang
         periodoSelecionado, tagsSelecionadas, listaCompletaDeTags, hoverLimpar, setHoverLimpar,
         dataInicio, dataFim, tagPeriodoEspecifico, menuAberto,
         lidarMudancaDataInicio, lidarMudancaDataFim, lidarComCliqueTag, lidarComLimpezaTags,
-        lidarComCliquePeriodoMenu, lidarComSelecaoDropdown, obterOpcoesDropdown
+        lidarComCliquePeriodoMenu, lidarComSelecaoDropdown, obterOpcoesDropdown, isTagPeriodoAtiva
     }
 }
