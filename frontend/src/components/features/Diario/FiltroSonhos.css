@@ -157,3 +157,76 @@
     gap: 0.8rem;
   }
 }
+
+/* ==========================================================================
+   DROPDOWNS DE HISTÓRICO (MENU FLUTUANTE)
+   ========================================================================== */
+.filtro-sonhos-dropdown-wrapper {
+  position: relative; /* Segura o menu flutuante exatamente embaixo desta tag */
+  display: inline-block;
+}
+
+.filtro-sonhos-dropdown-lista {
+  position: absolute;
+  top: calc(100% + 0.4rem); /* Fica logo abaixo da tag, com um respiro */
+  left: 0;
+  z-index: 100; /* Garante que fique por cima de tudo na tela */
+  
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  min-width: 6.5rem;
+  
+  /* O Scroll que você pediu */
+  max-height: 10rem;
+  overflow-y: auto;
+  
+  /* Estilo Glassmorphism Combinando com o Container Pai */
+  background: rgba(43, 23, 72, 0.95);
+  border: 0.041rem solid rgba(165, 140, 255, 0.45);
+  border-radius: 0.5rem;
+  padding: 0.4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+  animation: abrirDropdown 0.2s ease-out;
+}
+
+.filtro-sonhos-dropdown-item {
+  background: transparent;
+  border: none;
+  color: rgba(245, 240, 233, 0.7);
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.65rem;
+  text-align: left;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filtro-sonhos-dropdown-item:hover,
+.filtro-sonhos-dropdown-item.ativo {
+  color: #E0C58F; /* Fica dourado quando o mouse passa ou está selecionado */
+  background: rgba(165, 140, 255, 0.15);
+}
+
+/* --- SCROLLBAR MÍSTICA CUSTOMIZADA --- */
+.filtro-sonhos-dropdown-lista::-webkit-scrollbar {
+  width: 0.35rem;
+}
+.filtro-sonhos-dropdown-lista::-webkit-scrollbar-track {
+  background: rgba(43, 23, 72, 0.4);
+  border-radius: 1rem;
+}
+.filtro-sonhos-dropdown-lista::-webkit-scrollbar-thumb {
+  background: rgba(165, 140, 255, 0.5);
+  border-radius: 1rem;
+}
+.filtro-sonhos-dropdown-lista::-webkit-scrollbar-thumb:hover {
+  background: rgba(165, 140, 255, 0.8);
+}
+
+@keyframes abrirDropdown {
+  from { opacity: 0; transform: translateY(-0.5rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
