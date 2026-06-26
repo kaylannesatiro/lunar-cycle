@@ -18,6 +18,16 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
         })
     }
 
+    const lidarComLimpeza = () => {
+        setTagsSelecionadas([]) // Zera as tags
+        setPeriodoSelecionado('TODOS') // Volta o período para o padrão
+        
+        // Avisa o pai imediatamente que os filtros foram zerados
+        if (onFilterChange) {
+            onFilterChange({ periodo: 'TODOS', tags: [] })
+        }
+    }
+
     useEffect(() => {
         if (onFilterChange) {
             onFilterChange({
@@ -53,6 +63,16 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                 <div className="filtro-sonhos-grupo filtro-tags-margem">
                     <div className="filtro-sonhos-cabecalho">
                         <h4 className="filtro-sonhos-titulo">FILTRAR POR TAG</h4>
+                        
+                        {tagsSelecionadas.length > 0 && (
+                            <Tag  
+                                variante="filtro-periodo"
+                                texto="LIMPAR"
+                                className="filtro-sonhos-botao-limpar" 
+                                aoClicar={lidarComLimpeza}
+                                aria-label="Limpar todos os filtros"
+                            />
+                        )}
                     </div>
 
                     <div className="filtro-sonhos-lista-tags">
