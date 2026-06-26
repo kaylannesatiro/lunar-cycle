@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" fill="none">
+    <defs>
+        <filter id="brilho_gibosa_crescente" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur" />
+        <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+        </feMerge>
+        </filter>
+        <radialGradient id="paint_gibosa_crescente" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(42 50) scale(30 30)">
+        <stop stop-color="#F5F0E9"/>
+        <stop offset="0.62" stop-color="#E0C58F"/>
+        <stop offset="1" stop-color="#C4A060"/>
+        </radialGradient>
+    </defs>
+
+    <circle cx="50" cy="50" r="35" fill="rgba(224, 197, 143, 0.04)" stroke="rgba(224, 197, 143, 0.12)" stroke-width="0.5" />
+    
+    <path d="M 50 15 A 35 35 0 0 0 50 85 A 17.5 35 0 0 0 50 15 Z" fill="url(#paint_gibosa_crescente)" filter="url(#brilho_gibosa_crescente)" />
+</svg>
