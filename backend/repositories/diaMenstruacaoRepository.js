@@ -11,7 +11,7 @@ const buscarUltimaMenstruacao = async (usuariaId) => {
 }
 
 // Verifica se um dia especifico está marcado (para a Home saber o status do botao)
-/*const verificarDiaMarcado = async (usuariaId, data) => {
+const verificarDiaMarcado = async (usuariaId, data) => {
     const dia = await prisma.diaMenstruacao.findUnique({
         where:{
             usuariaId_data:{
@@ -21,4 +21,4 @@ const buscarUltimaMenstruacao = async (usuariaId) => {
         }
     });
     return dia !== null;
-};*/
+};
