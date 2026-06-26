@@ -20,5 +20,19 @@ const verificarDiaMarcado = async (usuariaId, data) => {
             }
         }
     });
+
+    // Retorna true se o dia estiver marcado, caso contrário retorna false
     return dia !== null;
 };
+
+
+// Marcar um dia de menstruação
+const registrarDia = async (usuariaId, data) => {
+    return await prisma.diaMenstruacao.create({
+        data: {
+            usuariaId,
+            data
+        }
+    });
+};
+
