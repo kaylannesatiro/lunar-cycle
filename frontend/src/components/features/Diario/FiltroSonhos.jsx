@@ -38,10 +38,10 @@ const FiltroSonhos = ({tagsDisponiveis = [], onFilterChange}) => {
                     {opcoesPeriodo.map((opcao) => (
                         <Tag 
                             key={opcao} 
-                            texto={opcao}
-                            ativo={periodoSelecionado === opcao} 
-                            onClick={() => setPeriodoSelecionado(opcao)}
-                            variante="filtro"
+                            texto={opcao} 
+                            variante="filtro-periodo"
+                            ativa={periodoSelecionado === opcao}
+                            aoClicar={() => setPeriodoSelecionado(opcao)}
                         />
                     ))}
                 </div>
