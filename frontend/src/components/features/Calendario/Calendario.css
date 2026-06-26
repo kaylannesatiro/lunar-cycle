@@ -255,3 +255,57 @@
 .cal-legenda-texto--previsto {
     opacity: 0.6;
 }
+
+/* ── Responsividade ── */
+@media (max-width: 768px) {
+    .cal-container {
+        padding: 24px 16px;
+        border-radius: 20px;
+    }
+
+    .cal-mes-nome {
+        font-size: 20px;
+        letter-spacing: 2px;
+    }
+
+    .cal-dia__icone-lua {
+        width: 20px;
+        height: 20px;
+    }
+
+    .cal-dia__numero {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cal-container {
+        padding: 16px 10px;
+        border-radius: 16px;
+    }
+
+    .cal-mes-nome {
+        font-size: 16px;
+        letter-spacing: 1.5px;
+    }
+
+    .cal-dia-semana-label {
+        font-size: 6px;
+        letter-spacing: 0.5px;
+    }
+
+    .cal-dia__icone-lua {
+        width: 14px;
+        height: 14px;
+    }
+
+    .cal-dia__numero {
+        font-size: 8px;
+    }
+
+    .cal-btn-nav {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+}
