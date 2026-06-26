@@ -27,7 +27,34 @@ const alternarMenstruacaoHoje = async (req, res) => {
     }
 };
 
+const obterCalendario = async (req, res) => {
+    try {
+        //usuariaId vem do middleware de autenticação
+        const usuariaId = req.usuariaId;
+        const mes = parseInt(req.query.mes);
+        const ano = parseInt(req.query.ano);
+
+        //validacaoes basicas
+        if (!mes || !ano || isNaN(mes) || isNaN(ano) || mes < 1 || mes > 12) {
+            return res.status(400).json({
+                erro: 'Informe um mês (1-12) e ano válidos como parâmetros.'
+            });
+        }
+
+        const calendario = await cicloService.obterCalendario(usuariaId, mes, ano);
+
+        return res.status(200).json(calendario);
+    } catch (erro) {
+        return res.status(500).json({
+            erro: 'ERRO_BUSCA_CALENDARIO'
+        });
+    }
+
+};
+
+
 module.exports = {
     obterDadosHome,
-    alternarMenstruacaoHoje
+    alternarMenstruacaoHoje,
+    obterCalendario
 }
