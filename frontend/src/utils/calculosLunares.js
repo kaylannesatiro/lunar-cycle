@@ -33,4 +33,4 @@ const obterMetricasLunares = () => {
     };
 }
 
-export default obterMetricasLunares
+export { obterMetricasLunares }

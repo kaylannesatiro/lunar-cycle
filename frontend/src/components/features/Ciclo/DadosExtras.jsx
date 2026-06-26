@@ -1,18 +1,9 @@
-import {useState, useEffect} from "react"
+import {useState} from "react"
 import {obterMetricasLunares} from "../../../utils/calculosLunares"
 import "./DadosExtras.css"
 
 const DadosExtras = () => {
-    const [metricas, setMetricas] = useState({
-        diaDoCicloLunar: 0,
-        faltamParaCheia: 0,
-        energia: 0
-    });
-
-    useEffect(() => {
-        const dadosCalculados = obterMetricasLunares();
-        setMetricas(dadosCalculados);
-    }, []);
+    const [metricas, setMetricas] = useState(() => obterMetricasLunares());
 
     return (
         <div className="dados-extras-container">
