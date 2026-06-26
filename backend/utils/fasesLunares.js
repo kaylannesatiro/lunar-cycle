@@ -1,4 +1,4 @@
-const obterFaselunar = (data) => {
+const obterFaseLunar = (data) => {
     //Duração exata de um ciclo lunar completo é de 29.530588853 dias, ou 29 dias, 12 horas, 44 minutos e 2,8 segundos.
     const CICLO_LUNAR_MS = 29.530588853 * 24 * 60 * 60 * 1000;
 
@@ -30,4 +30,8 @@ const obterFaselunar = (data) => {
         return { nome: 'Minguante', icone: '🌗' };
     }
 
+}
+
+module.exports = {
+    obterFaseLunar
 }

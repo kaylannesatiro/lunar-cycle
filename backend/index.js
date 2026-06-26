@@ -7,11 +7,11 @@ const ciclosRoutes = require('./routers/ciclosRoutes');
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use('/api/ciclos', ciclosRoutes);
 
 // Rotas
 // Rota para autenticação
 app.use('/api/auth', authRoutes);
+app.use('/api/ciclos', ciclosRoutes);
 
 
 const PORT = process.env.PORT || 3000;
