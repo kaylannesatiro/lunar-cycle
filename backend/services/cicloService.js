@@ -69,6 +69,30 @@ const obterDadosHome = async (usuariaId) =>{
     };
 };
 
+
+// Função para alternar o status de menstruação do dia atual
+const alternarMenstruacaohoje = async (usuariaId) =>{
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    const jaEstaMarcado = await diaMenstruacaoRepository.verificarDiaMarcado(usuariaId, hoje);
+
+    if(jaEstaMarcado){
+        await diaMenstruacaoRepository.desmarcarDia(usuariaId, hoje);
+    } else{
+        await diaMenstruacaoRepository.registrarDia(usuariaId, hoje);
+    }
+
+    //Pega os dados atualizados para devolver à tela
+    const dadosHomeAtualizados = await obterDadosHome(usuariaId);
+
+    return{
+        acao: jaEstaMarcado ? 'desmarcado' : 'registrado',
+        dadosHome: dadosHomeAtualizados
+    };
+};
+
 module.exports = {
-    obterDadosHome
+    obterDadosHome,
+    alternarMenstruacaohoje
 };
