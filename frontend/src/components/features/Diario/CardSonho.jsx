@@ -1,13 +1,6 @@
 import "./CardSonho.css"
 import Tag from "../../common/Tags/Tag"
-
-const obterIconeLua = (faseLunar) => {
-    try {
-        return require(`../../../assets/fases/lua-${faseLunar}.svg`).default
-    } catch (error) {
-        return 'https://api.iconify.design/lucide:moon-star.svg'; 
-    }
-}
+import {obterIconFaseDaLua} from "../../../data/fasesLua"
 
 const CardSonho = ({faseLunar, titulo, data, tags = [], onClick}) => {
     return (
@@ -15,7 +8,7 @@ const CardSonho = ({faseLunar, titulo, data, tags = [], onClick}) => {
             <div className="card-sonho-icon-wrapper">
                 <div className="card-sonho-icon-container">
                     <img 
-                        src={obterIconeLua(faseLunar)} 
+                        src={obterIconFaseDaLua(faseLunar)} 
                         alt={`Fase lunar: ${faseLunar}`} 
                         className="card-sonho-icon"
                     />
