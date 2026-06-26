@@ -36,3 +36,22 @@ const registrarDia = async (usuariaId, data) => {
     });
 };
 
+// desmarcar um dia de menstruação
+const desmarcarDia = async (usuariaId, data) => {
+    return await prisma.diaMenstruacao.delete({
+        where:{
+            usuariaId_data:{
+                usuariaId,
+                data
+            }
+        }
+    });
+};
+
+
+module.exports = {
+    buscarUltimaMenstruacao,
+    verificarDiaMarcado,
+    registrarDia,
+    desmarcarDia
+}
