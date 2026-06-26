@@ -99,63 +99,65 @@
 }
 
 /* ==========================================================================
-   SEÇÃO DOS INPUTS DE CALENDÁRIO (NATIVO)
+   MENU FLUTUANTE DO CALENDÁRIO (ESPECÍFICO)
    ========================================================================== */
-.filtro-sonhos-calendarios {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1.5rem;
+.filtro-sonhos-calendarios-dropdown {
+  position: absolute;
+  top: calc(100% + 0.4rem); /* Fixado exatamente abaixo do botão */
+  left: 0;
+  z-index: 100;
   
-  padding-top: 1rem;
-  animation: abrirSuave 0.2s ease-out; /* Dá um efeito sutil dele aparecendo */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.6rem;
+  width: max-content;
+  
+  /* Efeito de Vidro idêntico ao de histórico */
+  background: rgba(43, 23, 72, 0.95);
+  border: 0.041rem solid rgba(165, 140, 255, 0.45);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+  animation: abrirDropdown 0.2s ease-out;
 }
 
 .filtro-sonhos-campo-data {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
 }
 
+/* Rótulos "DE" e "ATÉ" ornando perfeitamente */
 .filtro-sonhos-campo-data label {
   color: #A58CFF;
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.65rem;
+  font-family: 'Raleway', sans-serif; /* Fonte padrão aplicada */
+  font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.05rem;
+  min-width: 1.2rem;
 }
 
-/* Deixa o input combinando com os cards de vidro */
+/* Caixas menores e minimalistas combinando com as tags */
 .filtro-sonhos-input-data {
-  background: rgba(43, 23, 72, 0.6) !important;
+  background: rgba(26, 13, 46, 0.8) !important;
   border: 0.041rem solid rgba(165, 140, 255, 0.3) !important;
-  border-radius: 0.5rem;
-  padding: 0.35rem 0.6rem;
+  border-radius: 0.35rem;
+  padding: 0.2rem 0.4rem; /* Padding reduzido para a caixinha ficar menor */
   
   color: #F5F0E9;
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.75rem;
+  font-family: 'Raleway', sans-serif; /* Fonte padrão aplicada */
+  font-size: 0.65rem; /* Letras compactas e limpas */
   outline: none;
   cursor: pointer;
+  width: 6.5rem; /* Largura controlada e sutil */
 }
 
-/* Altera a cor do ícone de calendário nativo para lilás */
+/* Ícone do calendário nativo */
 .filtro-sonhos-input-data::-webkit-calendar-picker-indicator {
   filter: invert(64%) sepia(21%) saturate(1415%) hue-rotate(213deg) brightness(101%) contrast(101%);
-}
-
-@keyframes abrirSuave {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Ajuste mobile para os calendários não quebrarem a tela */
-@media (max-width: 30rem) {
-  .filtro-sonhos-calendarios {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.8rem;
-  }
+  cursor: pointer;
 }
 
 /* ==========================================================================
