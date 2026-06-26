@@ -1,6 +1,27 @@
+import {useState} from 'react';
 import './App.css';
 import Background from './components/common/Base/Background';
 import LinhaDoTempo from './components/features/Diario/LinhaTempo';
+import FiltroSonhos from './components/features/Diario/FiltroSonhos';
+
+function App() {
+  const [tagsCustomizadas] = useState(["PESADELO", "cebola"]);
+
+  const lidarComMudancaDeFiltro = (filtros) => {
+    console.log("Filtros ativos no momento:", filtros);
+  };
+
+  return (
+    <Background>
+      <div style={{ padding: '2rem' }}>
+        <FiltroSonhos 
+          tagsDoUsuario={tagsCustomizadas} 
+          onFilterChange={lidarComMudancaDeFiltro} 
+        />
+      </div>
+    </Background>
+  );
+import CardSonho from './components/features/Diario/CardSonho';
 
 function App() {
   const dadosMockDoBackend = [
