@@ -46,11 +46,26 @@ const desmarcarDia = async (usuariaId, data) => {
         }
     });
 };
-
+//buscar todos os dias de menstruação de uma usuária dentro de um intervalo de datas
+const buscarDiasPorIntervalo = async (usuariaId, dataInicio, dataFim) =>{
+    return await prisma.diaMenstruacao.findMany({
+        where:{
+            usuariaId,
+            data: {
+                //maior ou igual que
+                gte: dataInicio,
+                //menor ou igual que
+                lte: dataFim
+            }
+        },
+        orderBy: {data: 'asc'}
+    });
+};
 
 module.exports = {
     buscarUltimaMenstruacao,
     verificarDiaMarcado,
     registrarDia,
-    desmarcarDia
+    desmarcarDia,
+    buscarDiasPorIntervalo
 }
