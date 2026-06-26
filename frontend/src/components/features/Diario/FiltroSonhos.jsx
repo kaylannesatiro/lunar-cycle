@@ -10,7 +10,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], dataPrimeiroSonho, onFilterChange}) =
         periodoSelecionado, tagsSelecionadas, listaCompletaDeTags, hoverLimpar, setHoverLimpar,
         dataInicio, dataFim, tagPeriodoEspecifico, menuAberto,
         lidarMudancaDataInicio, lidarMudancaDataFim, lidarComCliqueTag, lidarComLimpezaTags,
-        lidarComCliquePeriodoMenu, lidarComSelecaoDropdown, obterOpcoesDropdown
+        lidarComCliquePeriodoMenu, lidarComSelecaoDropdown, obterOpcoesDropdown, isTagPeriodoAtiva
     } = useFiltroLogica(tagsDoUsuario, tagsPreCadastradas, onFilterChange, dataPrimeiroSonho)
 
     return (
@@ -28,7 +28,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], dataPrimeiroSonho, onFilterChange}) =
                                 <Tag 
                                     texto={opcao} 
                                     variante="filtro-periodo"
-                                    ativa={periodoSelecionado === opcao}
+                                    ativa={isTagPeriodoAtiva(opcao)}
                                     aoClicar={() => lidarComCliquePeriodoMenu(opcao)}
                                 />
                                 
@@ -72,6 +72,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], dataPrimeiroSonho, onFilterChange}) =
                     )}
                 </div>
 
+                {/* FILTRO POR TAG */}
                 <div className="filtro-sonhos-grupo filtro-tags-margem">
                     <div className="filtro-sonhos-cabecalho">
                         <h4 className="filtro-sonhos-titulo">FILTRAR POR TAG</h4>
