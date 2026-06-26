@@ -17,4 +17,4 @@ const tagsPreCadastradas = [
     "ÊXTASE"
 ]
 
-export default tagsPreCadastradas
+export { tagsPreCadastradas }
