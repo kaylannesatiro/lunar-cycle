@@ -1,64 +1,67 @@
-/* Reset de segurança para evitar cortes */
-.dados-extras-container,
-.dados-extras-container * {
+/* ==========================================================================
+   RESET DE SEGURANÇA
+   ========================================================================== */
+.dados-extras-lista,
+.dados-extras-lista * {
   box-sizing: border-box !important;
 }
 
 /* ==========================================================================
-   CONTAINER PRINCIPAL (Fundo Translúcido)
-   ========================================================================== */
-.dados-extras-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  
-  /* Conversão de Pixels para Rem */
-  padding: 1.3rem;           /* 20.8px / 16 */
-  border-radius: 1.125rem;   /* 18px / 16 */
-  border: 0.041rem solid rgba(224, 197, 143, 0.40); /* 0.667px / 16 */
-  background: rgba(17, 34, 80, 0.40); /* Glassmorphism Azul */
-  
-  /* Largura e alinhamento responsivos */
-  width: 100%;
-  max-width: 15.817rem;      /* 253.083px / 16 (Tamanho da coluna no Figma) */
-  margin: 0 auto;
-}
-
-/* ==========================================================================
-   LISTA DE DADOS (Engloba os 3 cards)
+   CONTAINER INVISÍVEL (Englobando os 3 cards)
    ========================================================================== */
 .dados-extras-lista {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centralizado para melhor leitura mobile */
+  align-items: flex-start;   /* Alinhamento do Figma */
   align-self: stretch;
   
   padding-top: 1.4rem;       /* 22.4px / 16 */
-  gap: 1.5rem;               /* Espaçamento entre as 3 métricas */
-}
-
-/* ==========================================================================
-   CADA ITEM DE DADO (O número e a legenda)
-   ========================================================================== */
-.dados-extras-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25rem;
+  gap: 1.2rem;               /* Distância entre um card e outro */
   width: 100%;
 }
 
-/* O Valor em Destaque (Dourado) */
+/* ==========================================================================
+   CARD INDIVIDUAL (O efeito de vidro azul)
+   ========================================================================== */
+.dados-extras-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  padding: 1.3rem;           /* 20.8px / 16 */
+  border-radius: 1.125rem;   /* 18px / 16 */
+  border: 0.041rem solid rgba(224, 197, 143, 0.40); /* 0.667px / 16 */
+  background: rgba(17, 34, 80, 0.40); /* Fundo Translúcido Independente */
+  
+  /* Permite que o card se adapte ao tamanho da tela mobile sem vazar */
+  width: 100%;
+  max-width: 18.5rem;        
+}
+
+/* ==========================================================================
+   ÁREA DO DADO PRINCIPAL (Onde ficam os números dourados)
+   ========================================================================== */
+.dados-extras-dado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 100%;
+  max-width: 15.817rem;      /* 253.083px / 16 */
+  margin-bottom: 0.5rem;     /* Pequeno respiro antes da legenda */
+}
+
 .dados-extras-valor {
   color: #E0C58F;
   font-family: "Cinzel Decorative", serif;
-  font-size: 1.8rem;         /* Destaque visual numérico */
+  font-size: 1.8rem;         
   font-weight: 400;
   line-height: 120%;
 }
 
-/* A Legenda Descritiva (Baseada no Figma) */
+/* ==========================================================================
+   LEGENDA (O texto descritivo embaixo do número)
+   ========================================================================== */
 .dados-extras-legenda {
   color: #F5F0E9;
   text-align: center;
@@ -68,4 +71,21 @@
   line-height: 150%;         /* 13.92px */
   letter-spacing: 0.116rem;  /* 1.856px / 16 */
   text-transform: uppercase;
+  
+  width: 100%;
+  max-width: 15.817rem;      /* Garante que a legenda fique perfeitamente centralizada sob o número */
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (Mobile First)
+   ========================================================================== */
+@media (max-width: 48rem) {
+  /* Em telas menores, centralizamos os blocos para manter a harmonia do layout vertical */
+  .dados-extras-lista {
+    align-items: center;
+  }
+  
+  .dados-extras-card {
+    align-items: center;
+  }
 }

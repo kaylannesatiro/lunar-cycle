@@ -6,22 +6,29 @@ const DadosExtras = () => {
     const [metricas] = useState(() => obterMetricasLunares());
 
     return (
-        <div className="dados-extras-container">
-            <div className="dados-extras-lista">
-                <div className="dados-extras-item">
-                    <span className="dados-extras-valor">{metricas.diaDoCicloLunar}</span>
-                    <span className="dados-extras-legenda">CICLO LUNAR</span>
+        <div className="dados-extras-lista">
+            {/* Dia do Ciclo Lunar */}
+            <div className="dados-extras-card">
+                <div className="dados-extras-dado">
+                    <span className="dados-extras-valor">{metricas.diaDoCicloLunar} dia</span>
                 </div>
+                <span className="dados-extras-legenda">CICLO LUNAR</span>
+            </div>
 
-                <div className="dados-extras-item">
+            {/* Próxima Lua Cheia */}
+            <div className="dados-extras-card">
+                <div className="dados-extras-dado">
                     <span className="dados-extras-valor">{metricas.faltamParaCheia} dias</span>
-                    <span className="dados-extras-legenda">PRÓXIMA LUA CHEIA</span>
                 </div>
+                <span className="dados-extras-legenda">PRÓXIMA LUA CHEIA</span>
+            </div>
 
-                <div className="dados-extras-item">
+            {/* Energia Lunar */}
+            <div className="dados-extras-card">
+                <div className="dados-extras-dado">
                     <span className="dados-extras-valor">{metricas.energia}%</span>
-                    <span className="dados-extras-legenda">ENERGIA LUNAR</span>
                 </div>
+                <span className="dados-extras-legenda">ENERGIA LUNAR</span>
             </div>
         </div>
     )
