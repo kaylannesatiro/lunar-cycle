@@ -97,9 +97,24 @@ const atualizarPerfil = async(req, res) =>{
     }
 }
 
+//função simples de logout (maior trabalho é feito no frontend, que deve apagar o token do localStorage ou cookies)
+const logout = async(req, res) =>{
+    try{
+        //apenas confirmar que o logout foi realizado com sucesso. O frontend deve apagar o token do localStorage ou cookies.
+        return res.status(200).json({
+            mensagem: 'Logout realizado com sucesso!'
+        });
+    } catch (erro){
+        return res.status(500).json({
+            mensagem: 'Ocorreu um erro ao realizar o logout. Por favor, tente novamente mais tarde.'
+        });
+    }
+}
+
 module.exports = {
     criarConta,
     realizarLogin,
     obterDadosPerfil,
-    atualizarPerfil
+    atualizarPerfil,
+    logout
 };

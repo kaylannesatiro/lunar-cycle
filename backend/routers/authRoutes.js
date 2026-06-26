@@ -20,7 +20,12 @@ router.post('/login', validaRequisicao(loginSchema), authController.realizarLogi
 router.get('/perfil', verificarToken, authController.obterDadosPerfil);
 
 
-//PUT EM '/perfil' PARA ATUALIZAR DADOS DO PERFIL (HU-005)
+//PUT EM '/perfil' PARA ATUALIZAR DADOS DO PERFIL (HU-004)
 //privada, precisa de token JWT para acessar.
 router.put('/perfil', verificarToken, validaRequisicao(atualizarPerfilSchema), authController.atualizarPerfil);
+
+//POST EM '/logout' PARA FAZER LOGOUT (HU-005)
+router.post('/logout', verificarToken, authController.logout);
+
+
 module.exports = router; 
