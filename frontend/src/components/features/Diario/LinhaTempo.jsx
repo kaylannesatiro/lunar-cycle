@@ -19,6 +19,7 @@ const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick }) =>
             </div>
         )
     }
+    
     return (
         <div className="linha-tempo-pai">
             <div className="linha-tempo-conteudo">
