@@ -3,7 +3,7 @@ import {obterMetricasLunares} from "../../../utils/calculosLunares"
 import "./DadosExtras.css"
 
 const DadosExtras = () => {
-    const [metricas, setMetricas] = useState(() => obterMetricasLunares());
+    const [metricas] = useState(() => obterMetricasLunares());
 
     return (
         <div className="dados-extras-container">
