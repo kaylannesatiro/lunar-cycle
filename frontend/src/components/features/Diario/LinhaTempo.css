@@ -1,15 +1,19 @@
 /* ==========================================================================
-   CONTAINERS PRINCIPAIS
+   CONTAINERS PRINCIPAIS (Fluidez Total)
    ========================================================================== */
 .linha-tempo-pai {
   display: flex;
   width: 100%;
   max-width: 51.25rem; /* 820px */
-  padding-bottom: 7.044rem; /* 112.708px */
+  padding-bottom: 7.044rem;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto; /* Centraliza na tela da aplicação */
+  margin: 0 auto;
   box-sizing: border-box;
+  
+  /* Proteção para telas de celulares muito antigos (ex: iPhone SE de 320px) */
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .linha-tempo-conteudo {
@@ -18,30 +22,11 @@
   max-width: 48.25rem; /* 772px */
   flex-direction: column;
   align-items: flex-start;
-  gap: 3rem; /* 48px entre os meses */
+  gap: 3rem; /* Espaço entre os meses */
 }
 
 /* ==========================================================================
-   ESTADOS DE CARREGAMENTO / VAZIO
-   ========================================================================== */
-.linha-tempo-vazia {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  padding: 5rem 2rem;
-  text-align: center;
-}
-
-.linha-tempo-mensagem {
-  color: rgba(215, 204, 255, 0.7);
-  font-family: 'Raleway', sans-serif;
-  font-size: 1rem;
-  font-style: italic;
-  letter-spacing: 0.05rem;
-}
-
-/* ==========================================================================
-   AGRUPAMENTO POR MÊS E CABEÇALHOS
+   AGRUPAMENTO POR MÊS E CABEÇALHOS RESPONSIVOS
    ========================================================================== */
 .linha-tempo-grupo {
   display: flex;
@@ -53,7 +38,7 @@
 .linha-tempo-cabecalho {
   display: flex;
   align-items: center;
-  gap: 1.2rem; /* 19.2px */
+  gap: 1.2rem;
   align-self: stretch;
   width: 100%;
 }
@@ -63,17 +48,19 @@
   flex-direction: column;
   align-items: center;
   gap: 0.2rem;
+  /* Impede que o nome do mês quebre no meio da palavra em telas pequenas */
+  flex-shrink: 0; 
 }
 
 .linha-tempo-mes {
   color: #D7CCFF;
   text-align: center;
   font-family: "Cinzel Decorative", serif;
-  font-size: 1.1rem; /* 17.6px */
+  font-size: 1.1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.65rem; /* 26.4px / 150% */
-  letter-spacing: 0.11rem; /* 1.76px */
+  line-height: 150%;
+  letter-spacing: 0.11rem;
   margin: 0;
   text-transform: uppercase;
 }
@@ -82,19 +69,19 @@
   color: #A58CFF;
   text-align: center;
   font-family: 'Raleway', sans-serif;
-  font-size: 0.65rem; /* 10.4px */
+  font-size: 0.65rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 0.975rem; /* 15.6px / 150% */
-  letter-spacing: 0.195rem; /* 3.12px */
+  line-height: 150%;
+  letter-spacing: 0.195rem;
   text-transform: uppercase;
 }
 
-/* Divisores dinâmicos (flex: 1 faz com que eles preencham o espaço restante da tela) */
+/* Divisores Fluidos */
 .linha-tempo-divisor-esq,
 .linha-tempo-divisor-dir {
-  flex: 1;
-  height: 0.0625rem; /* 1px */
+  flex: 1; /* Crescem e encolhem dinamicamente ocupando o espaço que sobra */
+  height: 0.0625rem;
 }
 
 .linha-tempo-divisor-esq {
@@ -106,59 +93,95 @@
 }
 
 /* ==========================================================================
-   CARDS CONTAINER E A LINHA VERTICAL (TRILHA)
+   CONTAINER DE CARDS E A TRILHA VERTICAL
    ========================================================================== */
 .linha-tempo-cards-container {
-  position: relative; /* Fundamental para a trilha funcionar */
+  position: relative;
   display: flex;
   width: 100%;
-  padding-top: 2rem; /* 32px */
+  padding-top: 2rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2rem; /* Espaço entre os cards do mesmo mês */
+  gap: 2rem; /* Espaço entre os cards */
 }
 
-/* A Linha Vertical Mágica */
+/* Linha mística da linha do tempo */
 .linha-tempo-trilha {
   position: absolute;
-  top: 2rem; /* Começa junto com o topo do primeiro card */
-  bottom: -2rem; /* Desce até o fim do último card (invade o gap) */
-  left: 2.125rem; /* 34px - Fica EXATAMENTE no centro do container do ícone do CardSonho */
-  width: 0.0625rem; /* 1px */
-  
-  /* Gradiente para a linha desaparecer suavemente nas pontas */
+  top: 2rem;
+  bottom: -2rem;
+  left: 2.125rem; /* 34px: Perfeitamente centralizada atrás da lua */
+  width: 0.0625rem;
   background: linear-gradient(
     180deg, 
     rgba(165, 140, 255, 0) 0%, 
-    rgba(165, 140, 255, 0.3) 10%, 
-    rgba(165, 140, 255, 0.3) 90%, 
-    rgba(165, 140, 255, 0) 100%
+    rgba(165, 140, 255, 0.3) 15%, 
+    rgba(165, 140, 255, 0.3) 85%, 
+    rgba(165, 140, 255, 0) 100
   );
-  
-  z-index: -1; /* Joga a linha para trás dos ícones da lua */
+  z-index: -1;
 }
 
 /* ==========================================================================
-   ESPECIALISTA RESPONSIVO (Telas Menores)
+   ESTADOS ALTERNATIVOS
    ========================================================================== */
-@media (max-width: 33.75rem) {
+.linha-tempo-vazia {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 5rem 1.5rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   BREAKPOINTS DE ESPECIALISTA (A Magia Responsiva)
+   ========================================================================== */
+
+/* --- TABLETS E TELAS MÉDIAS --- */
+@media (max-width: 48rem) { /* 768px */
+  .linha-tempo-conteudo {
+    gap: 2rem;
+  }
+  
+  .linha-tempo-cabecalho {
+    gap: 0.8rem;
+  }
+  
+  .linha-tempo-mes {
+    font-size: 1rem;
+  }
+}
+
+/* --- SMARTPHONES (Abaixo de 540px) --- */
+@media (max-width: 33.75rem) { /* 540px */
   .linha-tempo-pai {
-    padding: 1rem 1rem 4rem 1rem; /* Dá espaço nas bordas laterais do celular */
+    /* Reduz o recuo lateral para aproveitar o máximo da tela do celular */
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-bottom: 4rem;
   }
 
   .linha-tempo-cabecalho {
-    gap: 0.8rem; /* Aperta um pouco o cabeçalho para caber */
+    gap: 0.5rem;
   }
 
   .linha-tempo-mes {
-    font-size: 1rem; /* Reduz a fonte levemente */
+    font-size: 0.9rem;
+    letter-spacing: 0.08rem;
   }
 
-  /* Lembra que transformamos o layout do CardSonho no celular? A lua vai para o topo.
-    Sendo assim, a linha vertical lateral deixa de fazer sentido visual no mobile. 
-    Nós simplesmente a escondemos em celulares para um visual "stacked" mais limpo.
+  /* Como o CardSonho vira coluna e centraliza a lua no mobile, 
+    a linha lateral perderia o sentido físico. Escondemos ela aqui.
   */
   .linha-tempo-trilha {
     display: none; 
+  }
+
+  .linha-tempo-cards-container {
+    padding-top: 1.5rem;
+    gap: 1.5rem;
+    /* Alinha o fluxo de cards verticalmente no centro do celular */
+    align-items: center; 
   }
 }
