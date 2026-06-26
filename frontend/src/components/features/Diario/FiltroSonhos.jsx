@@ -18,13 +18,13 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
         })
     }
 
-    const lidarComLimpeza = () => {
-        setTagsSelecionadas([]) // Zera as tags
-        setPeriodoSelecionado('TODOS') // Volta o período para o padrão
-        
-        // Avisa o pai imediatamente que os filtros foram zerados
-        if (onFilterChange) {
-            onFilterChange({ periodo: 'TODOS', tags: [] })
+    const lidarComLimpezaTags = () => {
+        if (tagsSelecionadas.length > 0) {
+            setTagsSelecionadas([])
+            
+            if (onFilterChange) {
+                onFilterChange({ periodo: periodoSelecionado, tags: [] })
+            }
         }
     }
 
@@ -59,23 +59,22 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                     </div>
                 </div>
 
-                {/* FILTRO POR TAGS */}
+               {/* FILTRO POR TAGS */}
                 <div className="filtro-sonhos-grupo filtro-tags-margem">
                     <div className="filtro-sonhos-cabecalho">
                         <h4 className="filtro-sonhos-titulo">FILTRAR POR TAG</h4>
-                        
-                        {tagsSelecionadas.length > 0 && (
-                            <Tag  
-                                variante="filtro-periodo"
-                                texto="LIMPAR"
-                                className="filtro-sonhos-botao-limpar" 
-                                aoClicar={lidarComLimpeza}
-                                aria-label="Limpar todos os filtros"
-                            />
-                        )}
                     </div>
 
                     <div className="filtro-sonhos-lista-tags">
+                        <div className={`container-tag-limpar ${tagsSelecionadas.length === 0 ? 'tag-limpar--desativada' : ''}`}>
+                            <Tag 
+                                texto="LIMPAR FILTROS" 
+                                variante="filtro-tag"
+                                ativa={false} 
+                                aoClicar={lidarComLimpezaTags}
+                            />
+                        </div>
+
                         {listaCompletaDeTags.map((tag) => (
                             <Tag 
                                 key={tag} 

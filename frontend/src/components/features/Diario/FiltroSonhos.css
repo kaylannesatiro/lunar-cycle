@@ -115,3 +115,29 @@
     gap: 0.5rem;                   /* Aproxima mais as tags no celular */
   }
 }
+
+/* ==========================================================================
+   ESTILIZAÇÃO DA TAG DE LIMPEZA
+   ========================================================================== */
+
+/* Quando há tags selecionadas, a tag de limpar fica normal e responsiva ao mouse */
+.container-tag-limpar .tag-base {
+  border-color: rgba(255, 107, 107, 0.5) !important; /* Um leve toque avermelhado na borda para indicar ação de apagar */
+  transition: all 0.2s ease;
+}
+
+.container-tag-limpar .tag-base:hover {
+  background: rgba(255, 107, 107, 0.15) !important;
+  border-color: rgb(255, 107, 107) !important;
+}
+
+/* O SEGREDO: Quando NÃO há tags selecionadas (Filtro limpo) */
+.tag-limpar--desativada {
+  opacity: 0.35;                /* Fica semi-transparente, indicando que está apagada */
+  pointer-events: none;         /* Bloqueia cliques físicos do mouse */
+  cursor: not-allowed !important; /* Mostra o ícone de bloqueado no ponteiro */
+}
+
+.tag-limpar--desativada * {
+  cursor: not-allowed !important;
+}
