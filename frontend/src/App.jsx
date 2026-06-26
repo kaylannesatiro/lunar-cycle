@@ -6,30 +6,30 @@ function App() {
     return (
       <Background> 
         <CardSonho 
-          faseLunar="Crescente" 
+          faseLunar="Minguante" 
           data="4"     
           titulo="O JARDIM DE CRISTAL"
           tags={["LÚCIDO", "NATUREZA", "PAZ", "LUZ"]}
         />
 
         <CardSonho 
-          faseLunar="Minguante" 
-          data="8"     
-          titulo="as bolas roxas"
-          tags={["cebola", "luz", "jesus"]}
+          faseLunar="Quarto Minguante" 
+          data="2"     
+          titulo="A Biblioteca Infinita"
+          tags={["misterioso", "infinito", "sabedoria", "profético"]}
         />
 
         <CardSonho 
           faseLunar="Cheia" 
-          data="28"     
-          titulo="grandes amigos"
-          tags={["vacas gordas", "anjos"]}
+          data="29"     
+          titulo="Dança com a Lua"
+          tags={["Espiritual", "Dança", "Lua Cheia", "Êxtase"]}
         />
 
         <CardSonho 
-          faseLunar="Nova" 
-          data="31"     
-          titulo="limao com sal"
+          faseLunar="Quarto Crescente" 
+          data="24"     
+          titulo="As Portas do Amanhecer"
           tags={["ranson", "meu", "amor"]}
         />
       </Background>
