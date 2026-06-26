@@ -58,9 +58,9 @@ const FiltroSonhos = ({tagsDisponiveis = [], onFilterChange}) => {
                         <Tag 
                             key={tag} 
                             texto={tag} 
-                            ativo={tagsSelecionadas.includes(tag)} 
-                            onClick={() => lidarComCliqueTag(tag)}
-                            variante="filtro"
+                            variante="filtro-tag"
+                            ativa={tagsSelecionadas.includes(tag)} 
+                            aoClicar={() => lidarComCliqueTag(tag)}
                         />
                     ))}
                     
