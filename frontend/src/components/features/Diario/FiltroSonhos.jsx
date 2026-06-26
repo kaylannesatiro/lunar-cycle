@@ -7,33 +7,40 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
     const [periodoSelecionado, setPeriodoSelecionado] = useState('TODOS')
     const [tagsSelecionadas, setTagsSelecionadas] = useState([])
     const [hoverLimpar, setHoverLimpar] = useState(false)
-    const listaCompletaDeTags = [...new Set([...tagsPreCadastradas, ...tagsDoUsuario])]
-
     const [dataInicio, setDataInicio] = useState('')
     const [dataFim, setDataFim] = useState('')
-    const [tagPeriodoEspecifico, setTagPeriodoEspecifico] = useState('') // Guarda o texto exato da tag gerada
 
-    const opcoesPeriodo = ['TODOS', 'SEMANA', 'MÊS', 'ANO', 'PERÍODO ESPECÍFICO']
+    const opcoesPeriodo = ['TODOS', 'SEMANA', 'MÊS', 'ANO', 'ESPECÍFICO']
+
+    const tagsPadraoSeguras = tagsPreCadastradas || []
+    const tagsUsuarioSeguras = tagsDoUsuario || []
+    const listaCompletaDeTags = [...new Set([...tagsPadraoSeguras, ...tagsUsuarioSeguras])]
 
     const formatarDataBR = (dataString) => {
         if (!dataString) return ''
-        const [ano, mes, dia] = dataString.split('-')
+        const [, mes, dia] = dataString.split('-')
         return `${dia}/${mes}`
     }
 
-    useEffect(() => {
-        const todasAsTags = [...tagsPreCadastradas, ...tagsDoUsuario]
-        const tagsSemRepeticao = [...new Set(todasAsTags)]
-        setListaCompletaDeTags(tagsSemRepeticao)
-    }, [tagsDoUsuario])
+    const tagPeriodoEspecifico = (dataInicio && dataFim) 
+        ? `${formatarDataBR(dataInicio)} A ${formatarDataBR(dataFim)}` 
+        : ''
 
-    useEffect(() => {
-        if (dataInicio && dataFim) {
-            const textoTag = `${formatarDataBR(dataInicio)} A ${formatarDataBR(dataFim)}`
-            setTagPeriodoEspecifico(textoTag)
-            setPeriodoSelecionado(textoTag)
+    const lidarMudancaDataInicio = (e) => {
+        const novaData = e.target.value
+        setDataInicio(novaData)
+        if (novaData && dataFim) {
+            setPeriodoSelecionado(`${formatarDataBR(novaData)} A ${formatarDataBR(dataFim)}`)
         }
-    }, [dataInicio, dataFim])
+    }
+
+    const lidarMudancaDataFim = (e) => {
+        const novaData = e.target.value
+        setDataFim(novaData)
+        if (dataInicio && novaData) {
+            setPeriodoSelecionado(`${formatarDataBR(dataInicio)} A ${formatarDataBR(novaData)}`)
+        }
+    }
 
     const lidarComCliqueTag = (tagClicada) => {
         setTagsSelecionadas((tagsAntigas) => {
@@ -47,30 +54,33 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
     const lidarComLimpezaTags = () => {
         if (tagsSelecionadas.length > 0) {
             setTagsSelecionadas([])
-            setHoverLimpar(false) 
+            setHoverLimpar(false)
             
             if (onFilterChange) {
-                onFilterChange({ periodo: periodoSelecionado, tags: [] })
+                let datasAtuais = null
+                if (periodoSelecionado === 'ESPECÍFICO' || periodoSelecionado === tagPeriodoEspecifico) {
+                    datasAtuais = { inicio: dataInicio, fim: dataFim }
+                }
+                onFilterChange({ periodo: periodoSelecionado, tags: [], datas: datasAtuais })
             }
         }
     }
 
-    const obterDatasFiltro = () => {
-        if (periodoSelecionado === 'PERÍODO ESPECÍFICO' || periodoSelecionado === tagPeriodoEspecifico) {
-            return { inicio: dataInicio, fim: dataFim }
-        }
-        return null
-    }
-
     useEffect(() => {
         if (onFilterChange) {
+            let datasSelecionadas = null
+            
+            if (periodoSelecionado === 'ESPECÍFICO' || (tagPeriodoEspecifico && periodoSelecionado === tagPeriodoEspecifico)) {
+                datasSelecionadas = { inicio: dataInicio, fim: dataFim }
+            }
+
             onFilterChange({
                 periodo: periodoSelecionado,
                 tags: tagsSelecionadas,
-                datas: obterDatasFiltro()
+                datas: datasSelecionadas
             })
         }
-    }, [periodoSelecionado, tagsSelecionadas, tagPeriodoEspecifico, dataInicio, dataFim, onFilterChange])
+    }, [periodoSelecionado, tagsSelecionadas, dataInicio, dataFim, tagPeriodoEspecifico, onFilterChange])
 
     return (
         <div className="filtro-sonhos-wrapper">
@@ -78,7 +88,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                 {/* FILTRO POR PERÍODO */}
                 <div className="filtro-sonhos-grupo">
                     <div className="filtro-sonhos-cabecalho">
-                        <h4 className="filtro-sonhos-titulo">FILTRAR POR PERÍODO</h4>
+                        <h4 className="filtro-sonhos-titulo">PERÍODO</h4>
                     </div>
 
                     <div className="filtro-sonhos-lista-tags">
@@ -92,6 +102,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                             />
                         ))}
 
+                        {/* TAG CALENDÁRIO */}
                         {tagPeriodoEspecifico && (
                             <Tag 
                                 texto={tagPeriodoEspecifico}
@@ -101,7 +112,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                             />
                         )}
                     </div>
-                    
+
                     {/* CALENDÁRIO CONDICIONAL */}
                     {(periodoSelecionado === 'PERÍODO ESPECÍFICO' || periodoSelecionado === tagPeriodoEspecifico) && (
                         <div className="filtro-sonhos-calendarios">
@@ -110,16 +121,17 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                                 <input 
                                     type="date" 
                                     value={dataInicio}
-                                    onChange={(e) => setDataInicio(e.target.value)}
+                                    onChange={lidarMudancaDataInicio}
                                     className="filtro-sonhos-input-data"
                                 />
                             </div>
+                            
                             <div className="filtro-sonhos-campo-data">
                                 <label>ATÉ:</label>
                                 <input 
                                     type="date" 
                                     value={dataFim}
-                                    onChange={(e) => setDataFim(e.target.value)}
+                                    onChange={lidarMudancaDataFim}
                                     className="filtro-sonhos-input-data"
                                 />
                             </div>
@@ -127,7 +139,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                     )}
                 </div>
 
-               {/* FILTRO POR TAGS */}
+                {/* FILTRO POR TAGS */}
                 <div className="filtro-sonhos-grupo filtro-tags-margem">
                     <div className="filtro-sonhos-cabecalho">
                         <h4 className="filtro-sonhos-titulo">FILTRAR POR TAG</h4>
@@ -140,7 +152,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                             onMouseLeave={() => setHoverLimpar(false)}
                         >
                             <Tag 
-                                texto="LIMPAR FILTROS" 
+                                texto="LIMPAR" 
                                 variante="filtro-tag"
                                 ativa={hoverLimpar && tagsSelecionadas.length > 0} 
                                 aoClicar={lidarComLimpezaTags}
