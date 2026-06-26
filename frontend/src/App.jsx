@@ -1,27 +1,18 @@
-import CardConta from './components/common/Cards/CardConta';
-import Input from './components/common/Inputs/Input';
-import Button from './components/common/Buttons/Button';
-import Background from './components/common/Base/Background';
 import './App.css';
+import Background from './components/common/Base/Background';
+import OraculoLunar from './components/features/Ciclo/CardOraculo';
 
 function App() {
     return (
       <Background>
-        <div style={{ padding: '50px', display: 'flex', gap: '50px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <CardConta 
-                titulo="Recupere sua conexão"
-                subtitulo="Informe seu email para receber o código de recuperação."
-            >
-              <label className="card-conta-grupo-input">
-                <span className="card-conta-texto-label">Emailo</span>
-                <Input
-                    placeholder="Digite o e-mail da sua conta" 
-                />
-              </label>
-
-              <Button variant = 'padrao'>◇ Voltar</Button>
-              <Button variant = 'padrao'>◈ Entrar</Button>
-            </CardConta>
+        <div style={{ 
+          width: '100%', 
+          padding: '1rem', 
+          boxSizing: 'border-box', 
+          display: 'flex', 
+          justifyContent: 'center' 
+        }}>
+          <OraculoLunar diaDoCiclo={14} estaMenstruada={false} />
         </div>
       </Background>
     );
