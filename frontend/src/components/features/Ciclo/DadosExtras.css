@@ -1,0 +1,80 @@
+.oraculo-dados-grupo-pai,
+.oraculo-dados-grupo-pai * {
+    box-sizing: border-box !important;
+}
+
+.oraculo-dados-grupo-pai {
+    display: flex;
+    flex-direction: row;     
+    justify-content: center; 
+    align-items: flex-start;   
+    gap: 0.999rem;         
+    align-self: stretch;
+    width: 100%;
+    flex-wrap: wrap;           
+}
+
+.dados-extras-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;     
+    padding: 1.3rem;      
+    border-radius: 1.125rem;  
+    border: 0.041rem solid rgba(224, 197, 143, 0.40); 
+    background: rgba(17, 34, 80, 0.40); 
+    width: 100%;              
+    max-width: 15.817rem;     
+}
+
+.dados-extras-dado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.55rem;   
+}
+
+.dados-extras-valor {
+    color: #E0C58F;
+    text-align: center;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 1.65rem;      
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;         
+}
+
+.dados-extras-sufixo {
+    font-size: 0.65rem;       
+}
+
+.dados-extras-legenda {
+    color: #F5F0E9;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.58rem;       
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;         
+    letter-spacing: 0.116rem; 
+    text-transform: uppercase;
+    width: 100%;
+}
+
+@media (max-width: 48rem) {
+    .oraculo-dados-grupo-pai {
+        flex-direction: column; 
+        align-items: center;    
+        gap: 1rem;
+    }
+    
+    .dados-extras-card {
+        max-width: 15.817rem; 
+    }
+}
+
+@media (max-width: 20rem) {
+    .dados-extras-card {
+        padding: 1rem;       
+    }
+}
