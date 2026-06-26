@@ -1,86 +1,19 @@
-import { useState, useEffect } from "react"
-import { tagsPreCadastradas } from "../../../data/tagsData"
-import Tag from "../../common/Tags/Tag"
 import "./FiltroSonhos.css"
+import { tagsPreCadastradas } from "../../../data/tagsData"
+import { useFiltroLogica } from "../../../utils/useFiltroSonhos"
+import Tag from "../../common/Tags/Tag"
 
 const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
-    const [periodoSelecionado, setPeriodoSelecionado] = useState('TODOS')
-    const [tagsSelecionadas, setTagsSelecionadas] = useState([])
-    const [hoverLimpar, setHoverLimpar] = useState(false)
-    const [dataInicio, setDataInicio] = useState('')
-    const [dataFim, setDataFim] = useState('')
-
     const opcoesPeriodo = ['TODOS', 'SEMANA', 'MÊS', 'ANO', 'ESPECÍFICO']
 
-    const tagsPadraoSeguras = tagsPreCadastradas || []
-    const tagsUsuarioSeguras = tagsDoUsuario || []
-    const listaCompletaDeTags = [...new Set([...tagsPadraoSeguras, ...tagsUsuarioSeguras])]
-
-    const formatarDataBR = (dataString) => {
-        if (!dataString) return ''
-        const [, mes, dia] = dataString.split('-')
-        return `${dia}/${mes}`
-    }
-
-    const tagPeriodoEspecifico = (dataInicio && dataFim) 
-        ? `${formatarDataBR(dataInicio)} A ${formatarDataBR(dataFim)}` 
-        : ''
-
-    const lidarMudancaDataInicio = (e) => {
-        const novaData = e.target.value
-        setDataInicio(novaData)
-        if (novaData && dataFim) {
-            setPeriodoSelecionado(`${formatarDataBR(novaData)} A ${formatarDataBR(dataFim)}`)
-        }
-    }
-
-    const lidarMudancaDataFim = (e) => {
-        const novaData = e.target.value
-        setDataFim(novaData)
-        if (dataInicio && novaData) {
-            setPeriodoSelecionado(`${formatarDataBR(dataInicio)} A ${formatarDataBR(novaData)}`)
-        }
-    }
-
-    const lidarComCliqueTag = (tagClicada) => {
-        setTagsSelecionadas((tagsAntigas) => {
-            if (tagsAntigas.includes(tagClicada)) {
-                return tagsAntigas.filter(t => t !== tagClicada)
-            }
-            return [...tagsAntigas, tagClicada]
-        })
-    }
-
-    const lidarComLimpezaTags = () => {
-        if (tagsSelecionadas.length > 0) {
-            setTagsSelecionadas([])
-            setHoverLimpar(false)
-            
-            if (onFilterChange) {
-                let datasAtuais = null
-                if (periodoSelecionado === 'ESPECÍFICO' || periodoSelecionado === tagPeriodoEspecifico) {
-                    datasAtuais = { inicio: dataInicio, fim: dataFim }
-                }
-                onFilterChange({ periodo: periodoSelecionado, tags: [], datas: datasAtuais })
-            }
-        }
-    }
-
-    useEffect(() => {
-        if (onFilterChange) {
-            let datasSelecionadas = null
-            
-            if (periodoSelecionado === 'ESPECÍFICO' || (tagPeriodoEspecifico && periodoSelecionado === tagPeriodoEspecifico)) {
-                datasSelecionadas = { inicio: dataInicio, fim: dataFim }
-            }
-
-            onFilterChange({
-                periodo: periodoSelecionado,
-                tags: tagsSelecionadas,
-                datas: datasSelecionadas
-            })
-        }
-    }, [periodoSelecionado, tagsSelecionadas, dataInicio, dataFim, tagPeriodoEspecifico, onFilterChange])
+    const {
+        periodoSelecionado, setPeriodoSelecionado,
+        tagsSelecionadas, listaCompletaDeTags,
+        hoverLimpar, setHoverLimpar,
+        dataInicio, dataFim, tagPeriodoEspecifico,
+        lidarMudancaDataInicio, lidarMudancaDataFim,
+        lidarComCliqueTag, lidarComLimpezaTags
+    } = useFiltroLogica(tagsDoUsuario, tagsPreCadastradas, onFilterChange)
 
     return (
         <div className="filtro-sonhos-wrapper">
@@ -102,7 +35,6 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                             />
                         ))}
 
-                        {/* TAG CALENDÁRIO */}
                         {tagPeriodoEspecifico && (
                             <Tag 
                                 texto={tagPeriodoEspecifico}
@@ -113,7 +45,6 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                         )}
                     </div>
 
-                    {/* CALENDÁRIO CONDICIONAL */}
                     {(periodoSelecionado === 'ESPECÍFICO' || periodoSelecionado === tagPeriodoEspecifico) && (
                         <div className="filtro-sonhos-calendarios">
                             <div className="filtro-sonhos-campo-data">
