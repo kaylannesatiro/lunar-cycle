@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import Tag from "../../common/Tag/Tag"
+import Tag from "../../common/Tags/Tag"
 import "./FiltroSonhos.css"
 
 const FiltroSonhos = ({tagsDisponiveis = [], onFilterChange}) => {
