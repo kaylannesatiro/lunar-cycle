@@ -114,7 +114,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                     </div>
 
                     {/* CALENDÁRIO CONDICIONAL */}
-                    {(periodoSelecionado === 'PERÍODO ESPECÍFICO' || periodoSelecionado === tagPeriodoEspecifico) && (
+                    {(periodoSelecionado === 'ESPECÍFICO' || periodoSelecionado === tagPeriodoEspecifico) && (
                         <div className="filtro-sonhos-calendarios">
                             <div className="filtro-sonhos-campo-data">
                                 <label>DE:</label>
@@ -125,7 +125,7 @@ const FiltroSonhos = ({tagsDoUsuario = [], onFilterChange}) => {
                                     className="filtro-sonhos-input-data"
                                 />
                             </div>
-                            
+
                             <div className="filtro-sonhos-campo-data">
                                 <label>ATÉ:</label>
                                 <input 
