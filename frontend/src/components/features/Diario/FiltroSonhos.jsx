@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
+import { tagsPreCadastradas } from "../../../data/tagsData"
 import Tag from "../../common/Tags/Tag"
 import "./FiltroSonhos.css"
 
-const FiltroSonhos = ({tagsDisponiveis = [], onFilterChange}) => {
+const FiltroSonhos = ({onFilterChange}) => {
 
     const [periodoSelecionado, setPeriodoSelecionado] = useState('TODOS')
     const [tagsSelecionadas, setTagsSelecionadas] = useState([])
