@@ -4,7 +4,7 @@
     min-height: 100vh;
     width: 100%; 
     position: relative;
-    overflow: visible; 
+    overflow: visible !important; 
 }
 
 .conteudo-principal {
@@ -18,7 +18,7 @@
     max-width: 85rem;
     margin: 0 auto;
     box-sizing: border-box;
-    overflow: visible; 
+    overflow: visible !important; 
 }
 
 .background-mistico {
