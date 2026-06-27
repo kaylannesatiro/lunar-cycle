@@ -75,15 +75,11 @@ const Home = () => {
 
             <div className="home-action-container">
                 <Button 
-                    variant="padrao"
+                    variant="redondo"
                     onClick={() => setIsModalOpen(true)}
-                    backgroundColor="linear-gradient(135deg, rgba(224, 197, 143, 0.12) 0%, rgba(224, 197, 143, 0.04) 100%)"
-                    color="rgba(224, 197, 143, 0.3)"
-                    textColor="#E0C58F"
                     maxWidth="280px"
-                    icone="✦"
                 >
-                    REGISTRAR MENSTRUAÇÃO
+                    ◈ Registrar Menstruação
                 </Button>
             </div>
 
