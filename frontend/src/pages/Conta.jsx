@@ -6,6 +6,8 @@ import Input from '../components/common/Inputs/Input'
 import InputSenha from '../components/common/Inputs/InputSenha'
 import SelecaoSigno from '../components/common/Inputs/SelecaoSigno'
 import CardConfig from '../components/common/Cards/CardConfig'
+import PopupAlert from '../components/common/Modals/PopupAlert'
+import PopupConfirmacao from '../components/common/Modals/PopupConfirmacao'
 import './Conta.css';
 
 const Conta = () => {
@@ -17,6 +19,20 @@ const Conta = () => {
     const [isSavingCiclo, setIsSavingCiclo] = useState(false)
 
     const [mostrarCamposSenha, setMostrarCamposSenha] = useState(false)
+
+    const [popupAlertConfig, setPopupAlertConfig] = useState({ 
+        isOpen: false, 
+        title: '', 
+        message: '' 
+    })
+    const [popupConfirmConfig, setPopupConfirmConfig] = useState({ 
+        isOpen: false, 
+        title: '', 
+        message: '', 
+        variante: 'confirmacao', 
+        textoConfirmar: '', 
+        onConfirm: null 
+    })
 
     const [dados, setDados] = useState({
         nome: '',
@@ -47,6 +63,28 @@ const Conta = () => {
     const atualizarDado = (campo, valor) => {
         setDados(prev => ({ ...prev, [campo]: valor }))
     }
+
+    const exibirSucesso = () => {
+        setPopupAlertConfig({
+            isOpen: true,
+            title: "DADOS SALVOS",
+            message: "Você atualizou seus dados com sucesso."
+        })
+    }
+
+    const exibirErro = (mensagemCustomizada, acaoTentarNovamente = null) => {
+        setPopupConfirmConfig({
+            isOpen: true,
+            title: "DADOS NÃO SALVOS",
+            message: mensagemCustomizada || "Ocorreu um problema ao atualizar seus dados.",
+            variante: "erro",
+            textoConfirmar: "TENTAR NOVAMENTE",
+            onConfirm: acaoTentarNovamente
+        })
+    }
+
+    const fecharAlert = () => setPopupAlertConfig(prev => ({ ...prev, isOpen: false }))
+    const fecharConfirm = () => setPopupConfirmConfig(prev => ({ ...prev, isOpen: false }))
 
     const handleSalvarPerfil = async () => {
         try {
@@ -108,21 +146,36 @@ const Conta = () => {
     }
 
     const handleLogout = () => {
-        localStorage.removeItem('token')
-        navigate('/login')
+        setPopupConfirmConfig({
+            isOpen: true,
+            title: "CONFIRMAR SAIR",
+            message: "Tem certeza que deseja apagar sair? Você terá que entrar novamente.",
+            variante: "confirmacao",
+            textoConfirmar: "SAIR DA CONTA",
+            onConfirm: () => {
+                localStorage.removeItem('token')
+                navigate('/login')
+            }
+        })
     }
 
-    const handleExcluirConta = async () => {
-        const confirmar = window.confirm("Tem certeza que deseja apagar sua conta? Todos os seus sonhos serão perdidos para sempre.")
-        if (!confirmar) return
-
-        try {
-            await authService.excluirConta()
-            localStorage.removeItem('token')
-            navigate('/cadastro')
-        } catch (error) {
-            alert(`Erro ao excluir conta. Verifique com o suporte. + ${error.message}`)
-        }
+    const handleExcluirConta = () => {
+        setPopupConfirmConfig({
+            isOpen: true,
+            title: "CONFIRMAR EXCLUSÃO",
+            message: <>Tem certeza que deseja apagar esta conta? <b>ESTA AÇÃO NÃO PODE SER DESFEITA.</b></>,
+            variante: "perigo",
+            textoConfirmar: "APAGAR CONTA",
+            onConfirm: async () => {
+                try {
+                    await authService.excluirConta()
+                    localStorage.removeItem('token')
+                    navigate('/cadastro')
+                } catch (error) {
+                    exibirErro(`Erro ao excluir conta: ${error.message}`)
+                }
+            }
+        })
     }
 
     const camposPerfil = [
@@ -326,6 +379,61 @@ const Conta = () => {
                     </Button>
                 </div>
             </div>
+
+            <PopupAlert
+                isOpen={popupAlertConfig.isOpen}
+                title={popupAlertConfig.title}
+                message={popupAlertConfig.message}
+                onClose={fecharAlert}
+                botao={
+                    <Button 
+                        variant="padrao" 
+                        width="180px"
+                        backgroundColor="transparent"
+                        color="rgba(224, 197, 143, 0.25)"
+                        textColor="#E0C58F"
+                        onClick={fecharAlert}
+                    >
+                        OK
+                    </Button>
+                }
+            />
+
+            <PopupConfirmacao
+                isOpen={popupConfirmConfig.isOpen}
+                title={popupConfirmConfig.title}
+                message={popupConfirmConfig.message}
+                variante={popupConfirmConfig.variante}
+                onCancel={fecharConfirm}
+                botaoCancelar={
+                    <Button
+                        variant="padrao"
+                        width="160px"
+                        backgroundColor="transparent"
+                        color="rgba(224, 197, 143, 0.2)"
+                        textColor="rgba(245, 240, 233, 0.6)"
+                        onClick={fecharConfirm}
+                    >
+                        CANCELAR
+                    </Button>
+                }
+
+                botaoConfirmar={
+                    <Button
+                        variant="padrao"
+                        width="180px"
+                        backgroundColor={popupConfirmConfig.variante === 'perigo' ? 'rgba(88, 8, 16, 0.25)' : 'transparent'}
+                        color={popupConfirmConfig.variante === 'perigo' ? 'rgba(215, 75, 85, 0.3)' : 'rgba(224, 197, 143, 0.25)'}
+                        textColor={popupConfirmConfig.variante === 'perigo' ? '#F5F0E9' : '#E0C58F'}
+                        onClick={() => {
+                            if (popupConfirmConfig.onConfirm) popupConfirmConfig.onConfirm();
+                            fecharConfirm();
+                        }}
+                    >
+                        {popupConfirmConfig.textoConfirmar}
+                    </Button>
+                }
+            />
         </div>
     )
 }
