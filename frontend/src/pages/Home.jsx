@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { cicloService } from "../services/cicloService"
 
 import Button from "../components/common/Buttons/Button"
 import CardOraculo from "../components/features/Ciclo/CardOraculo"
@@ -8,59 +9,100 @@ import "./Home.css"
 
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true)
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [faseLuaHoje, setFaseLuaHoje] = useState({ nome: '', icone: '', tags: [] })
-    
-    const [dadosCiclo, setDadosCiclo] = useState({
-        diaDoCiclo: '1º',
-        proximaLua: 'Carregando...',
-        energia: 'Carregando...'
+
+    const [dadosHome, setDadosHome] = useState({
+        nomeUsuaria: '',
+        faseLunar: { nome: 'Nova', icone: '🌑' },
+        menstruandoHoje: false,
+        possuiCicloMenstrual: false,
+        diaDoCiclo: 1,
+        previsaoProximoCiclo: '--/--/----'
     })
 
-    const hoje = new Date()
+    const hoje = new Date();
+    const [mesFiltro, setMesFiltro] = useState(hoje.getMonth() + 1)
+    const [anoFiltro, setAnoFiltro] = useState(hoje.getFullYear())
+    const [dadosCalendario, setDadosCalendario] = useState({ dias: [] })
+
     const diaDestaque = String(hoje.getDate()).padStart(2, '0')
     const mesSubtitulo = hoje.toLocaleDateString('pt-BR', { month: 'long' }).toUpperCase()
     const anoFrase = hoje.getFullYear()
 
-    const calcularFaseLuaReal = (date) => {
-        const cicloLunar = 29.530588853;
-        const baseLuaNova = new Date(2000, 0, 6);
-        const diffMs = date - baseLuaNova;
-        const diffDays = diffMs / (1000 * 60 * 60 * 24);
-        const diasFase = diffDays % cicloLunar;
-
-        if (diasFase < 1.84) return { nome: 'LUA NOVA', tags: ['INTUIÇÃO', 'RECOMEÇO', 'PLANEJAMENTO'] };
-        if (diasFase < 5.53) return { nome: 'LUA CRESCENTE CONVEXA', tags: ['AÇÃO', 'FORÇA', 'CRESCIMENTO'] };
-        if (diasFase < 9.22) return { nome: 'QUARTO CRESCENTE', tags: ['MOVIMENTO', 'EXECUÇÃO', 'PROGRESSE'] };
-        if (diasFase < 12.91) return { nome: 'LUA GIBOSA CRESCENTE', tags: ['REFINAMENTO', 'ANÁLISE', 'PRODUÇÃO'] };
-        if (diasFase < 16.60) return { nome: 'LUA CHEIA', tags: ['GRATIDÃO', 'COLHEITA', 'REFLEXÃO'] };
-        if (diasFase < 20.29) return { nome: 'LUA DISSEMINADORA', tags: ['PARTILHA', 'ENSINAMENTO', 'GRATIDÃO'] };
-        if (diasFase < 23.98) return { nome: 'QUARTO MINGUANTE', tags: ['BANIMENTO', 'LIMPEZA', 'REAVALIAÇÃO'] };
-        return { nome: 'LUA MINGUANTE BALSÂMICA', tags: ['DESCANSO', 'DESAPEGO', 'ENCERRAMENTO'] };
-    }
-
     useEffect(() => {
-        const carregarDashboardCosmico = async () => {
+        const iniciarDashboard = async () => {
             try {
                 setIsLoading(true)
+                const dadosHomeBrutos = await cicloService.obterDadosHome()
+                const dadosCalendarioBrutos = await cicloService.obterCalendario(mesFiltro, anoFiltro)
                 
-                if (cicloService && typeof cicloService.obterDadosCiclo === 'function') {
-                    const dadosDoBanco = await cicloService.obterDadosCiclo()
-                    setDadosCiclo(dadosDoBanco)
-                }
-
-                const resultadoLua = calcularFaseLuaReal(hoje)
-                setFaseLuaHoje(resultadoLua)
-
+                setDadosHome(dadosHomeBrutos)
+                setDadosCalendario(dadosCalendarioBrutos)
             } catch (error) {
-                console.error("Erro na leitura das órbitas cíclicas:", error)
+                console.error("Falha ao alinhar órbitas com o servidor:", error)
             } finally {
                 setIsLoading(false)
             }
         }
 
-        carregarDashboardCosmico()
+        iniciarDashboard()
     }, [])
+
+    useEffect(() => {
+        const atualizarMesCalendario = async () => {
+            try {
+                const dadosMes = await cicloService.obterCalendario(mesFiltro, anoFiltro)
+                setDadosCalendario(dadosMes)
+            } catch (error) {
+                console.error("Erro ao transicionar mês lunar:", error)
+            }
+        };
+
+        if (!isLoading) atualizarMesCalendario()
+    }, [mesFiltro, anoFiltro])
+
+    const handleToggleMenstruacaoHoje = async () => {
+        try {
+            const resposta = await cicloService.alternarMenstruacaoHoje()
+            setDadosHome(resposta.dadosHome)
+            
+            const dadosCalendarioAtualizados = await cicloService.obterCalendario(mesFiltro, anoFiltro)
+            setDadosCalendario(dadosCalendarioAtualizados)
+        } catch (error) {
+            console.error("Erro ao registrar pulsação de hoje:", error)
+        }
+    }
+
+    const handleToggleDiaCalendario = async (dataStr) => {
+        try {
+            const resposta = await cicloService.alternarMenstruacaoDia(dataStr, mesFiltro, anoFiltro)
+            setDadosCalendario(resposta.calendario)
+            
+            const dadosHomeAtualizados = await cicloService.obterDadosHome()
+            setDadosHome(dadosHomeAtualizados)
+        } catch (error) {
+            console.error("Erro ao alterar registro do dia:", error)
+        }
+    }
+
+    const normalizarFaseParaComponente = (nomeFaseBackend) => {
+        if (!nomeFaseBackend) return "Nova"
+        if (nomeFaseBackend.includes("Crescente Côncava")) return "Crescente"
+        if (nomeFaseBackend.includes("Minguante Côncava")) return "Minguante"
+        return nomeFaseBackend
+    }
+
+    const diasMenstruacaoFormatados = dadosCalendario.dias
+        .filter(d => d.registrada)
+        .map(d => d.data);
+
+    const diasPrevistosFormatados = dadosCalendario.dias
+        .filter(d => d.prevista)
+        .map(d => d.data);
+
+    const dicionarioFasesLunares = dadosCalendario.dias.reduce((acc, d) => {
+        acc[d.data] = normalizarFaseParaComponente(d.faseLunar?.nome)
+        return acc
+    }, {})
 
     if (isLoading) return <div className="home-loading">Alinhando eixos astrológicos...</div>
 
@@ -75,11 +117,14 @@ const Home = () => {
 
             <div className="home-action-container">
                 <Button 
+                    backgroundColor={dadosHome.menstruandoHoje ? "rgba(190, 38, 50, 0.2)": ''}
+                    color={dadosHome.menstruandoHoje ? "#BE2632": ''}
+                    textColor={dadosHome.menstruandoHoje ? "#FF8F97" : ""}
                     variant="redondo"
-                    onClick={() => setIsModalOpen(true)}
                     maxWidth="280px"
+                    onClick={handleToggleMenstruacaoHoje}
                 >
-                    ◈ Registrar Menstruação
+                    {dadosHome.menstruandoHoje ? "◈ MENSTRUAÇÃO REGISTRADA" : "◈ Registrar Menstruação"}
                 </Button>
             </div>
 
@@ -91,13 +136,21 @@ const Home = () => {
                 <span className="home-titulo-menor">✦ ORÁCULO LUNAR ✦</span>
                 <h3 className="home-titulo-sessao">MENSAGEM DO COSMOS</h3>
                 
-                <CardOraculo estaMenstruada={dadosCiclo.estaMenstruada}/>
+                <CardOraculo estaMenstruada={dadosHome.estaMenstruada}/>
                 <DadosExtras/>
             </section>
 
             <section className="home-secao-calendario">
+                <span className="home-titulo-menor">✦ CALENDÁRIO LUNAR ✦</span>
                 <div className="home-calendario-wrapper">
-                    <Calendario reduzido={true} />
+                    <Calendario 
+                        diasMenstruacao={diasMenstruacaoFormatados}
+                        diasPrevistos={diasPrevistosFormatados}
+                        fasesLunares={dicionarioFasesLunares}
+                        onDayClick={handleToggleDiaCalendario}
+                        onNextMonth={() => setMesFiltro(prev => prev === 12 ? 1 : prev + 1)}
+                        onPrevMonth={() => setMesFiltro(prev => prev === 1 ? 12 : prev - 1)}
+                    />
                 </div>
             </section>
         </div>
