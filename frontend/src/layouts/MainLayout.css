@@ -4,6 +4,8 @@
     min-height: 100vh; 
     width: 100%;
     box-sizing: border-box;
+    height: auto;
+    overflow: visible !important; 
 }
 
 .main-layout-paint-window {
@@ -17,6 +19,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    overflow: visible !important; 
 }
 
 .menu-wrapper {
