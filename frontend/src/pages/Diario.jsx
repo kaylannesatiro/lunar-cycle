@@ -9,7 +9,7 @@ const Diario = () => {
     const [filtrosAtivos, setFiltrosAtivos] = useState({ periodo: "TODOS", tags: [], datas: null })
     const [isLoading, setIsLoading] = useState(true)
     
-    const [modalAberto, setModalAberto] = useState(false)
+    const [ , setModalAberto] = useState(false)
 
     useEffect(() => {
         async function buscarDados() {
