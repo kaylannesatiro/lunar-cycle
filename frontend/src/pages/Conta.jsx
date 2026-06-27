@@ -90,9 +90,9 @@ const Conta = () => {
         try {
             setIsSavingPerfil(true)
             await authService.atualizarPerfil({ nome: dados.nome, signo: dados.signo })
-            alert("Perfil atualizado com sucesso!")
+            exibirSucesso()
         } catch (error) {
-            alert(error.message)
+            exibirErro(null, handleSalvarPerfil)
         } finally {
             setIsSavingPerfil(false)
         }
@@ -409,10 +409,11 @@ const Conta = () => {
                     <Button
                         variant="padrao"
                         width="160px"
-                        backgroundColor="transparent"
-                        color="rgba(224, 197, 143, 0.2)"
-                        textColor="rgba(245, 240, 233, 0.6)"
+                        backgroundColor="linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%)"
+                        color="rgba(224, 197, 143, 0.50)"
+                        textColor="#E0C58F"
                         onClick={fecharConfirm}
+
                     >
                         CANCELAR
                     </Button>
@@ -422,8 +423,9 @@ const Conta = () => {
                     <Button
                         variant="padrao"
                         width="180px"
-                        backgroundColor={popupConfirmConfig.variante === 'perigo' ? 'rgba(88, 8, 16, 0.25)' : 'transparent'}
-                        color={popupConfirmConfig.variante === 'perigo' ? 'rgba(215, 75, 85, 0.3)' : 'rgba(224, 197, 143, 0.25)'}
+                        backgroundColor={popupConfirmConfig.variante === 'perigo' ? 'rgba(88, 8, 16, 0.25)' : 'linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%)'}
+                        color={popupConfirmConfig.variante === 'perigo' ? 'rgba(215, 75, 85, 0.3)' : 'rgba(224, 197, 143, 0.50)'}
+
                         textColor={popupConfirmConfig.variante === 'perigo' ? '#F5F0E9' : '#E0C58F'}
                         onClick={() => {
                             if (popupConfirmConfig.onConfirm) popupConfirmConfig.onConfirm();
