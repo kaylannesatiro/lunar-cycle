@@ -16,13 +16,16 @@ const signosAstrologicos = [
 ];
 
 const SelecaoSigno = ({value, onChange}) => {
+
+    const signoAtivo = value ? value.toLowerCase() : ""
+
     return (
         <div className="signo-container">
             {signosAstrologicos.map((signo) => (
                 <button
                     key={signo.id}
                     type="button"
-                    className={`signo-caixa ${value === signo.id ? 'ativo' : ''}`}
+                    className={`signo-caixa ${signoAtivo === signo.id ? 'ativo' : ''}`}
                     onClick={() => onChange(signo.id)}
                     title={signo.nome} 
                 >
