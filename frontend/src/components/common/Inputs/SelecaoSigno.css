@@ -1,83 +1,71 @@
 /* =========================================================
-   CONTAINER DOS SIGNOS (Grid Simétrico de 12 Elementos)
+   CONTAINER DOS SIGNOS (Todos travados em uma única linha)
    ========================================================= */
 .signo-container {
     display: grid;
-    /* Divide perfeitamente em 6 colunas iguais no desktop (2 linhas de 6) */
-    grid-template-columns: repeat(6, 1fr); 
-    gap: 10px;
+    /* Força exatamente 12 colunas iguais, uma para cada signo */
+    grid-template-columns: repeat(12, 1fr); 
+    gap: 8px;
     width: 100%;
     box-sizing: border-box;
 }
 
 /* =========================================================
-   A CAIXINHA DO BOTÃO (Estilo Glassmorphism Premium)
+   A CAIXINHA DO BOTÃO (Tamanho original mantido)
    ========================================================= */
 .signo-caixa {
-    height: 52px; /* Um pouquinho mais alta para dar respiro ao ícone */
+    height: 48px; /* Altura original intocada */
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(13, 26, 61, 0.4); /* Fundo místico profundo */
-    border: 1px solid rgba(110, 165, 255, 0.15); /* Borda azulada sutil */
-    border-radius: 12px; /* Cantos levemente mais suaves */
+    background: rgba(13, 26, 61, 0.4); 
+    border: 1px solid rgba(110, 165, 255, 0.15); 
+    border-radius: 8px; 
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); /* Transição mais suave */
-}
-
-/* Efeito de Hover (Passar o mouse) */
-.signo-caixa:hover {
-    border-color: rgba(110, 165, 255, 0.5); /* Borda ganha brilho azul */
-    background: rgba(110, 165, 255, 0.05); /* Fundo acende de leve */
-    transform: translateY(-2px); /* Efeito flutuante elegante */
-}
-
-/* ─── ESTADO ATIVO (Selecionado e Sincronizado com o Banco) ─── */
-.signo-caixa.ativo {  
-    border: 1px solid #6EA5FF; /* Borda azul celestial pura */
-    /* Gradiente em azul místico substituindo o bege antigo */
-    background: linear-gradient(135deg, rgba(110, 165, 255, 0.25) 0%, rgba(110, 165, 255, 0.08) 100%);
-    box-shadow: 0 0 15px rgba(110, 165, 255, 0.35); /* Glow azulado de seleção */
-}
-
-/* =========================================================
-   ESTILIZAÇÃO DOS ÍCONES VETORIAIS
-   ========================================================= */
-
-/* Cor padrão do ícone desativado (Mais forte e visível) */
-.signo-icone {
-    font-size: 1.6rem; /* Ícone levemente maior para melhor leitura */
-    color: rgba(165, 195, 255, 0.70); /* Azul claro bem mais nítido e menos transparente */
-    display: flex;
-    align-items: center;
-    justify-content: center;
     transition: all 0.25s ease;
 }
 
-/* Ícone quando passa o mouse */
-.signo-caixa:hover .signo-icone {
-    color: rgba(110, 165, 255, 0.95); /* Quase 100% sólido no hover */
-    transform: scale(1.08); /* Pulsa levemente o tamanho do ícone */
+.signo-caixa:hover {
+    border-color: rgba(110, 165, 255, 0.5); 
+    background: rgba(110, 165, 255, 0.05); 
 }
 
-/* Ícone quando está ATIVO */
-.signo-caixa.ativo .signo-icone {
-    color: #6EA5FF !important; /* Azul celestial 100% aceso e opaco */
-    filter: drop-shadow(0px 0px 4px rgba(110, 165, 255, 0.6)); /* Brilho próprio do SVG */
+/* Estado ativo (Azul celestial) */
+.signo-caixa.ativo {  
+    border: 1px solid #6EA5FF; 
+    background: linear-gradient(135deg, rgba(110, 165, 255, 0.25) 0%, rgba(110, 165, 255, 0.08) 100%);
+    box-shadow: 0px 0px 12px rgba(110, 165, 255, 0.25);
 }
 
 /* =========================================================
-   RESPONSIVIDADE (Adaptação para Telas Menores)
+   ESTILIZAÇÃO DOS ÍCONES (Nítidos e fortes)
    ========================================================= */
-@media (max-width: 600px) {
-    .signo-container {
-        grid-template-columns: repeat(4, 1fr); /* 4 colunas em tablets/celulares grandes */
-        gap: 8px;
-    }
+.signo-icone {
+    font-size: 1.5rem; /* Tamanho original mantido */
+    color: rgba(165, 195, 255, 0.70); /* Azul forte e bem visível */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.25s ease;
 }
 
-@media (max-width: 400px) {
+.signo-caixa:hover .signo-icone {
+    color: rgba(110, 165, 255, 0.95); 
+}
+
+.signo-caixa.ativo .signo-icone {
+    color: #6EA5FF !important; /* Azul 100% opaco ao ativar */
+    filter: drop-shadow(0px 0px 4px rgba(110, 165, 255, 0.6)); 
+}
+
+/* =========================================================
+   RESPONSIVIDADE (Garante rolagem de lado em telas muito pequenas)
+   ========================================================= */
+@media (max-width: 768px) {
     .signo-container {
-        grid-template-columns: repeat(3, 1fr); /* 3 colunas em celulares bem pequenos */
+        /* Se a tela do celular for menor que os 12 botões, 
+           ele cria uma rolagem horizontal suave em vez de esmagar os ícones */
+        overflow-x: auto;
+        padding-bottom: 8px;
     }
 }
