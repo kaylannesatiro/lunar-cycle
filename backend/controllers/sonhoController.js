@@ -80,9 +80,26 @@ const excluir = async (req, res) => {
     }
 };
 
+const listarSonhos = async (req, res) => {
+    try {
+        const usuariaId = req.usuariaId; // Pegamos do token
+        
+        // Busca os sonhos no service
+        const sonhos = await sonhoService.listarSonhos(usuariaId);
+        
+        // Retorna sempre 200. Se não tiver sonhos, o service devolve [], o que é totalmente correto.
+        return res.status(200).json(sonhos);
+    } catch (error) {
+        return res.status(500).json({ 
+            erro: 'Ocorreu um erro ao carregar a listagem de sonhos.' 
+        });
+    }
+};
+
 module.exports = {
     criarSonho,
     buscarSonhoPorId,
     atualizarSonho,
-    excluir
+    excluir,
+    listarSonhos
 }

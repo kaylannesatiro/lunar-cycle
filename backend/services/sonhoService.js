@@ -143,9 +143,14 @@ const deletarSonho = async (id, usuariaId) =>{
 }
 
 
+const listarSonhos = async (usuariaId) => {
+    return await sonhoRepository.listarSonhos(usuariaId);
+}
+
 module.exports = {
     criarSonho,
     buscarSonhoPorId,
     atualizarSonho,
-    deletarSonho
+    deletarSonho,
+    listarSonhos
 };

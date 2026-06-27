@@ -86,9 +86,25 @@ const deletarSonho = async(id, usuariaId) =>{
     });
 };
 
+const listarSonhos = async(usuariaId) =>{
+    return await prisma.sonho.findMany({
+        where:{
+            usuariaId: usuariaId
+        },
+        orderBy:{
+            dataSonho: 'desc'
+        },
+        include:{
+            tags: true
+        }
+    });
+};
+
+
 module.exports = {
     criarSonho,
     buscarPorId,
     atualizarSonho,
-    deletarSonho
+    deletarSonho,
+    listarSonhos
 }
