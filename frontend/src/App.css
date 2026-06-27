@@ -1,1 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400&family=Cinzel+Decorative:wght@400;700&family=Raleway:ital,wght@0,400;0,500;1,400&display=swap');
+
+html, 
+body, 
+#root {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+div[className*="background"],
+.background-mistico,
+<Background> div {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.main-layout-shell,
+.main-layout-paint-window,
+.diario-page-container,
+.diario-conteudo {
+    height: auto !important;
+    max-height: none !important;
+    min-height: min-content !important;
+    overflow: visible !important; 
+    overflow-y: visible !important;
+}
