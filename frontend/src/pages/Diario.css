@@ -203,3 +203,19 @@
     padding: 0 1rem;
   }
 }
+
+/* ==========================================================================
+   LINHA DE DIVISÃO DO CABEÇALHO (Gradiente Suave)
+   ========================================================================== */
+.diario-divisor-principal {
+  width: 100%;
+  max-width: 35rem; /* 560px / 16 */
+  height: 1px;
+  
+  /* Gradiente exato do seu Figma */
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.00) 0%, rgba(165, 140, 255, 0.22) 50%, rgba(0, 0, 0, 0.00) 100%);
+  
+  /* Margem para dar um respiro perfeito entre o cabeçalho e os filtros */
+  margin: 1rem 0 3rem 0; 
+  flex-shrink: 0;
+}

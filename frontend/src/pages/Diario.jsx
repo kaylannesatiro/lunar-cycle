@@ -146,6 +146,8 @@ const Diario = () => {
                 </div>
             </header>
 
+            <div className="diario-divisor-principal"></div>
+
             <section className="diario-conteudo">
                 <FiltroSonhos 
                     tagsDoUsuario={tagsDaUsuaria} 
