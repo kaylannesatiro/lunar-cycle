@@ -62,6 +62,20 @@ const criarSonho = async (usuariaId, dados) => {
         tagsNormalizadas
     );
 };
+
+//bsucar sonho por ID e usuária
+const buscarSonhoPorId = async (id, usuariaId) => {
+    const sonho = await sonhoRepository.buscarPorId(id, usuariaId);
+    if (!sonho) {
+        // Criamos um erro customizado para o Controller poder responder com 404
+        const erro = new Error('Sonho não encontrado.');
+        erro.status = 404;
+        throw erro;
+    }
+    return sonho;
+}
+
 module.exports = {
-    criarSonho
+    criarSonho,
+    buscarSonhoPorId
 };
