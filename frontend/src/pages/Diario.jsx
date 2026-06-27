@@ -159,10 +159,12 @@ const Diario = () => {
             <div className="diario-divisor-principal"></div>
 
             <section className="diario-conteudo">
-                <FiltroSonhos 
-                    tagsDoUsuario={tagsDaUsuaria} 
-                    onFilterChange={setFiltrosAtivos} 
-                />
+                {!isLoading && sonhosBrutos.length > 0 && (
+                    <FiltroSonhos 
+                        tagsDoUsuario={tagsDaUsuaria} 
+                        onFilterChange={setFiltrosAtivos} 
+                    />
+                )}
                 
                 <LinhaDoTempo 
                     sonhosAgrupados={dadosProntos} 
