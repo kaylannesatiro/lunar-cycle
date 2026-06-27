@@ -47,9 +47,22 @@
     filter: drop-shadow(0px 0px 4px rgba(110, 165, 255, 0.6)); 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 740px) {
     .signo-container {
-        overflow-x: auto;
-        padding-bottom: 8px;
+        grid-template-columns: repeat(6, 1fr); 
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signo-container {
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 8px;
+    }
+}
+
+@media (max-width: 350px) {
+    .signo-container {
+        grid-template-columns: repeat(3, 1fr); /
     }
 }
