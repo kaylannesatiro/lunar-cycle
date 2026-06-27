@@ -90,20 +90,21 @@ const deletarSonho = async(id, usuariaId) =>{
 const listarSonhos = async(usuariaId, filtros = {}) =>{
     //adiconar querys
     //filtro vira um objeto com as propriedades tag, dataInicio e dataFim)
-    const {tag, dataInicio, dataFim} = filtros;
+    const {tags, dataInicio, dataFim} = filtros;
 
     //filtro base para garantir que só traga os sonhos da usuária
     let whereClause = {
         usuariaId: usuariaId
     };
 
-    //se vier tag, adiciona filtro para trazer apenas sonhos que tenham a tag especificada
-
-    if(tag){
+    //se vier tags, adiciona filtro para trazer apenas sonhos que tenham pelo menos uma das tags
+    if(tags && tags.length > 0){
         whereClause.tags = {
             //some sinifica que pelo menos uma das tags do sonho deve atender a condição(prisma )
             some:{
-                nomeTag: tag
+                nomeTag: {
+                    in: tags // "in" procura por qualquer valor dentro do array
+                }
             }
         };
     }

@@ -147,9 +147,13 @@ const listarSonhos = async (usuariaId, filtros = {}) => {
     const { tag, dataInicio, dataFim } = filtros;
     let filtrosFormatadados = {};
 
-    //Trata a tag, se existir
+    //Trata a tag, se existir (suporta array ou string separada por vírgula)
     if(tag){
-        filtrosFormatadados.tag = tag.trim().toLowerCase();
+        if (Array.isArray(tag)) {
+            filtrosFormatadados.tags = tag.map(t => t.trim().toLowerCase());
+        } else if (typeof tag === 'string') {
+            filtrosFormatadados.tags = tag.split(',').map(t => t.trim().toLowerCase());
+        }
     }
 
     //validar as datas cruzadas
