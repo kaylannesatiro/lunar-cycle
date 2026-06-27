@@ -60,8 +60,29 @@ const atualizarSonho = async (req, res) => {
     }
 };
 
+const excluir = async (req, res) => {
+    try {
+        const usuariaId = req.usuariaId; // Veio do token
+        const { id } = req.params; // Veio da URL
+
+        await sonhoService.deletarSonho(id, usuariaId);
+        
+        // Retorna 204 No Content (sucesso, mas sem corpo de resposta)
+        return res.status(204).send();
+    } catch (error) {
+        if (error.status === 404) {
+            return res.status(404).json({ erro: error.message });
+        }
+        
+        return res.status(500).json({ 
+            erro: 'Ocorreu um erro ao excluir o registro. Tente novamente.' 
+        });
+    }
+};
+
 module.exports = {
     criarSonho,
     buscarSonhoPorId,
-    atualizarSonho
+    atualizarSonho,
+    excluir
 }
