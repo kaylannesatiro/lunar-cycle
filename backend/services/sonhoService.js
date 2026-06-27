@@ -170,7 +170,7 @@ const listarSonhos = async (usuariaId, filtros = {}) => {
     if(dataFim){
         filtrosFormatadados.dataFim = new Date(dataFim+'T23:59:59Z');
     }
-    return await sonhoRepository.listarSonhos(usuariaId, filtros);
+    return await sonhoRepository.listarSonhos(usuariaId, filtrosFormatadados);
 }
 
 module.exports = {
