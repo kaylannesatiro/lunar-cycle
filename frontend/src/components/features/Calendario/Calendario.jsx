@@ -48,8 +48,11 @@ const formatarChaveData = (ano, mes, dia) => {
 };
 
 const obterDiasNoMes = (ano, mes) => new Date(ano, mes + 1, 0).getDate();
+
 const obterDiaDaSemanaInicial = (ano, mes) => new Date(ano, mes, 1).getDay();
+
 const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, eHoje, aoClicar }) => {
+
     let classeDoDia = "cal-dia";
     if (estaMenstruada) classeDoDia += " cal-dia--menstruacao";
     else if (estaPrevisto) classeDoDia += " cal-dia--previsto";
@@ -59,7 +62,16 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
 
     return (
         <div className={classeDoDia} onClick={aoClicar}>
-            <span className="cal-dia__numero">{numeroDia}</span>
+
+            <div className="cal-dia__topo">
+                <span className="cal-dia__numero">{numeroDia}</span>
+
+                {(estaMenstruada || estaPrevisto) && (
+                    <div className="cal-dia__icone-gota">
+                        <IconeGota />
+                    </div>
+                )}
+            </div>
 
             <img
                 src={imagemDaFase}
@@ -67,11 +79,6 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
                 className="cal-dia__icone-lua"
             />
 
-            {(estaMenstruada || estaPrevisto) && (
-                <div className="cal-dia__icone-gota">
-                    <IconeGota />
-                </div>
-            )}
         </div>
     );
 };
@@ -153,6 +160,7 @@ const Calendario = ({ diasMenstruacao = [], diasPrevistos = [], fasesLunares = {
                         }
 
                         const chaveData = formatarChaveData(anoAtual, mesAtual, dia);
+
                         const estaMenstruada = conjuntoMenstruacao.has(chaveData);
                         const estaPrevisto = conjuntoPrevistos.has(chaveData);
                         const faseDaLua = fasesLunares[chaveData] || "Nova";

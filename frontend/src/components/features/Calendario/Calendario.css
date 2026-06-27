@@ -140,7 +140,7 @@
     border-radius: 12px;
     border: 0.67px solid rgba(60, 80, 125, 0.149);
     background: rgba(17, 34, 80, 0.18);
-    padding: 6px;
+    padding: 2.88px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -153,6 +153,43 @@
 
 .cal-dia:hover {
     border-color: rgba(224, 197, 143, 0.3);
+}
+
+.cal-dia__topo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    padding: 2px 2px 0 2px;
+}
+
+.cal-dia__numero {
+    color: #F5F0E9;
+    font-family: 'Cinzel', serif;
+    font-size: 12.48px;
+    font-weight: 400;
+    line-height: 12.48px;
+    letter-spacing: 0px;
+}
+
+.cal-dia--menstruacao .cal-dia__numero {
+    font-weight: 700;
+}
+
+.cal-dia__icone-lua {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter:
+        drop-shadow(0 0 22.76px rgba(224, 197, 143, 0.016))
+        drop-shadow(0 0 30.66px rgba(245, 240, 233, 0.518));
+    margin: auto;
+}
+
+.cal-dia__icone-gota {
+    filter: drop-shadow(0px 0px 6px rgba(175, 30, 42, 0.851));
+    flex-shrink: 0;
 }
 
 .cal-dia--vazio {
@@ -185,31 +222,6 @@
 .cal-dia--hoje {
     outline: 1.5px solid rgba(224, 197, 143, 0.6);
     outline-offset: 2px;
-}
-
-.cal-dia__numero {
-    color: #F5F0E9;
-    font-family: 'Cinzel', serif;
-    font-size: 12.48px;
-    font-weight: 400;
-    line-height: 12.48px;
-    align-self: flex-start;
-}
-
-.cal-dia__icone-lua {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    filter:
-        drop-shadow(0 0 22.76px rgba(224, 197, 143, 0.016))
-        drop-shadow(0 0 30.66px rgba(245, 240, 233, 0.518));
-}
-
-.cal-dia__icone-gota {
-    position: absolute;
-    bottom: 6px;
-    right: 6px;
-    filter: drop-shadow(0px 0px 6px rgba(175, 30, 42, 0.851));
 }
 
 .cal-footer {
