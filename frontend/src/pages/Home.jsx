@@ -141,7 +141,6 @@ const Home = () => {
             </section>
 
             <section className="home-secao-calendario">
-                <span className="home-titulo-menor">✦ CALENDÁRIO LUNAR ✦</span>
                 <div className="home-calendario-wrapper">
                     <Calendario 
                         diasMenstruacao={diasMenstruacaoFormatados}
