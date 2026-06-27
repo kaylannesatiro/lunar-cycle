@@ -1,8 +1,8 @@
 import "./Diario.css"
 import { useState, useEffect } from "react"
-import { sonhosServiceFrontend } from "../../services/sonhosService" 
-import FiltroSonhos from "../../components/features/Diario/FiltroSonhos"
-import LinhaDoTempo from "../../components/features/Diario/LinhaDoTempo"
+import { sonhosServiceFrontend } from "../services/sonhoService" 
+import FiltroSonhos from "../components/features/Diario/FiltroSonhos"
+import LinhaDoTempo from "../components/features/Diario/LinhaTempo"
 
 const Diario = () => {
     const [sonhosBrutos, setSonhosBrutos] = useState([])
