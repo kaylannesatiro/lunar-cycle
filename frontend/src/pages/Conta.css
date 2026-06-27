@@ -1,0 +1,232 @@
+.conta-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 1rem 6rem 1rem;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.conta-loading {
+    color: #D7CCFF;
+    font-family: 'Raleway', sans-serif;
+    margin-top: 5rem;
+    font-style: italic;
+    animation: pulsar 2s infinite;
+}
+
+.conta-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.conta-badge {
+    color: #A58CFF;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.conta-titulo {
+    color: #D7CCFF;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    letter-spacing: 0.15rem;
+    margin: 0;
+}
+
+.conta-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 45rem; /* ~720px */
+}
+
+/* CARDS CONFIGURAÇÃO */
+.conta-card {
+    background: rgba(13, 26, 61, 0.3);
+    border: 1px solid rgba(165, 140, 255, 0.15);
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.conta-card-titulo {
+    color: #D7CCFF;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.1rem;
+    margin: 0 0 1.5rem 0;
+    font-weight: 400;
+}
+
+.conta-card-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.conta-card-footer {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* INPUTS E FORMS */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    color: #A58CFF;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
+
+.input-group input {
+    background: rgba(10, 16, 40, 0.6);
+    border: 1px solid rgba(165, 140, 255, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    color: #D7CCFF;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #A58CFF;
+    box-shadow: 0 0 10px rgba(165, 140, 255, 0.2);
+}
+
+/* GRID DE SIGNOS (Zodíaco) */
+.signos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: rgba(10, 16, 40, 0.6);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(165, 140, 255, 0.2);
+}
+
+.signo-btn {
+    background: rgba(165, 140, 255, 0.1);
+    border: 1px solid transparent;
+    color: #D7CCFF;
+    border-radius: 0.4rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+}
+
+.signo-btn:hover {
+    background: rgba(165, 140, 255, 0.2);
+}
+
+.signo-btn.ativo {
+    background: rgba(165, 140, 255, 0.3);
+    border-color: #A58CFF;
+    box-shadow: 0 0 8px rgba(165, 140, 255, 0.4);
+}
+
+/* LAYOUT DO CICLO */
+.ciclo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+/* FOOTER AÇÕES CRÍTICAS */
+.conta-actions-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+    .conta-titulo { font-size: 1.8rem; }
+    .ciclo-grid { grid-template-columns: 1fr; }
+    .conta-actions-footer { grid-template-columns: 1fr; }
+    .conta-card { padding: 1.5rem; }
+}
+
+@keyframes pulsar {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* =========================================================
+   INPUTS ESTILIZADOS ENVIADOS PARA O CARD
+   ========================================================= */
+.conta-input-estilizado {
+    background: rgba(10, 16, 40, 0.6);
+    border: 1px solid rgba(165, 140, 255, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    color: #D7CCFF;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.conta-input-estilizado:focus {
+    border-color: #A58CFF;
+    box-shadow: 0 0 10px rgba(165, 140, 255, 0.2);
+}
+
+/* =========================================================
+   GRID DE SIGNOS (Zodíaco) 
+   ========================================================= */
+.signos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: rgba(10, 16, 40, 0.6);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(165, 140, 255, 0.2);
+}
+
+.signo-btn {
+    background: rgba(165, 140, 255, 0.1);
+    border: 1px solid transparent;
+    color: #D7CCFF;
+    border-radius: 0.4rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+}
+
+.signo-btn:hover {
+    background: rgba(165, 140, 255, 0.2);
+}
+
+.signo-btn.ativo {
+    background: rgba(165, 140, 255, 0.3);
+    border-color: #A58CFF;
+    box-shadow: 0 0 8px rgba(165, 140, 255, 0.4);
+}
