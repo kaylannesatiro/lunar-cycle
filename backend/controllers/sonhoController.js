@@ -82,14 +82,19 @@ const excluir = async (req, res) => {
 
 const listarSonhos = async (req, res) => {
     try {
-        const usuariaId = req.usuariaId; // Pegamos do token
+        const usuariaId = req.usuariaId; 
+        // Pega as variáveis da Query String (ex: ?tag=voo&dataInicio=2026-06-01)
+        const { tag, dataInicio, dataFim } = req.query; 
+        // Empacota tudo num objeto e manda pro service
+        const filtros = { tag, dataInicio, dataFim };
+        const sonhos = await sonhoService.listarSonhos(usuariaId, filtros);
         
-        // Busca os sonhos no service
-        const sonhos = await sonhoService.listarSonhos(usuariaId);
-        
-        // Retorna sempre 200. Se não tiver sonhos, o service devolve [], o que é totalmente correto.
         return res.status(200).json(sonhos);
     } catch (error) {
+        // Se a validação de dataInicio > dataFim do Service estourar, devolvemos 400 Bad Request
+        if (error.message === 'A data de início não pode ser maior que a data de fim.') {
+            return res.status(400).json({ erro: error.message });
+        }
         return res.status(500).json({ 
             erro: 'Ocorreu um erro ao carregar a listagem de sonhos.' 
         });
