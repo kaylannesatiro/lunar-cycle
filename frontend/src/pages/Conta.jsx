@@ -91,7 +91,7 @@ const Conta = () => {
             setIsSavingPerfil(true)
             await authService.atualizarPerfil({ nome: dados.nome, signo: dados.signo })
             exibirSucesso()
-        } catch (error) {
+        } catch {
             exibirErro(null, handleSalvarPerfil)
         } finally {
             setIsSavingPerfil(false)
@@ -123,8 +123,8 @@ const Conta = () => {
             setDados(prev => ({ ...prev, senhaAtual: '', novaSenha: '', confirmarNovaSenha: '' }))
             setMostrarCamposSenha(false)
             
-        } catch (error) {
-            exibirErro(error.message || "Ocorreu um problema ao atualizar suas credenciais.", handleSalvarSeguranca)
+        } catch {
+            exibirErro("Ocorreu um problema ao atualizar suas credenciais.", handleSalvarSeguranca)
         } finally {
             setIsSavingSeguranca(false) 
         }
@@ -138,7 +138,7 @@ const Conta = () => {
                 duracaoMenstruacao: Number(dados.duracaoMenstruacao) 
             })
             exibirSucesso()
-        } catch (error) {
+        } catch {
             exibirErro(null, handleSalvarCiclo)
         } finally {
             setIsSavingCiclo(false) 
