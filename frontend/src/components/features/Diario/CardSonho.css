@@ -2,13 +2,15 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 1.5rem; 
+    gap: 1.5rem;
     width: 100%;
     max-width: 47.5rem;
     cursor: pointer;
     outline: none;
     transition: transform 0.2s ease;
-    box-sizing: border-box; 
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2; 
 }
 
 .card-sonho-pai:hover {
