@@ -77,8 +77,18 @@ const atualizarSonho = async(id, usuariaId, titulo, descricao, dataSonho, faseLu
 
 }
 
+const deletarSonho = async(id, usuariaId) =>{
+    return await prisma.sonho.deleteMany({
+        where: {
+            id: id,
+            usuariaId: usuariaId
+        }
+    });
+};
+
 module.exports = {
     criarSonho,
     buscarPorId,
-    atualizarSonho
+    atualizarSonho,
+    deletarSonho
 }
