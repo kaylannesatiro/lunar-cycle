@@ -9,6 +9,9 @@ const Diario = () => {
     const [sonhosBrutos, setSonhosBrutos] = useState([])
     const [filtrosAtivos, setFiltrosAtivos] = useState({ periodo: "TODOS", tags: [], datas: null })
     const [isLoading, setIsLoading] = useState(true)
+
+    const [pagina, setPagina] = useState(1);
+    const [temMaisSonhos, setTemMaisSonhos] = useState(true);
     
     const [ , setModalAberto] = useState(false)
 
@@ -32,6 +35,23 @@ const Diario = () => {
         }
         buscarDados();
     }, [])
+
+    const carregarProximaPagina = async () => {
+        try {
+            const limitePorPagina = 10;
+            const novosDados = await sonhosServiceFrontend.listarPorPagina(pagina, limitePorPagina);
+            
+            if (novosDados.length < limitePorPagina) {
+                setTemMaisSonhos(false);
+            }
+
+            setSonhosBrutos((sonhosAntigos) => [...sonhosAntigos, ...novosDados]);
+            setPagina((pagoAntiga) => pagoAntiga + 1); 
+            
+        } catch (error) {
+            console.error("Erro ao carregar mais sonhos:", error);
+        }
+    };
 
     const tagsDaUsuaria = [...new Set(
         sonhosBrutos.flatMap((sonho) => sonho.tags.map((t) => t.nomeTag.toUpperCase()))
@@ -166,11 +186,13 @@ const Diario = () => {
                     />
                 )}
                 
-                <LinhaDoTempo 
-                    sonhosAgrupados={dadosProntos} 
-                    isLoading={isLoading} 
-                    onCardClick={(id) => console.log(`Abrir visualização do sonho: ${id}`)}
-                />
+                <LinhaDoTempo sonhosAgrupados={dadosProntos} isLoading={isLoading} />
+
+                {temMaisSonhos && !isLoading && (
+                    <Button variant="padrao" onClick={carregarProximaPagina}>
+                        Carregar Jornadas Anteriores
+                    </Button>
+                )}
             </section>
         </div>
     )
