@@ -1,3 +1,6 @@
+/* =========================================================
+   CONTAINER GERAL DA PÁGINA
+   ========================================================= */
 .conta-page-container {
     display: flex;
     flex-direction: column;
@@ -9,224 +12,110 @@
 }
 
 .conta-loading {
-    color: #D7CCFF;
+    color: #E0C58F;
     font-family: 'Raleway', sans-serif;
     margin-top: 5rem;
     font-style: italic;
+    text-align: center;
     animation: pulsar 2s infinite;
 }
 
+/* =========================================================
+   CABEÇALHO E TÍTULOS (Ajustes do Figma)
+   ========================================================= */
 .conta-header {
-    text-align: center;
-    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.conta-badge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
 }
 
 .conta-badge {
-    color: #A58CFF;
+    color: #E0C58F;
+    text-align: center;
     font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.2rem;
-    margin-bottom: 1rem;
-}
-
-.conta-titulo {
-    color: #D7CCFF;
-    font-family: "Cinzel Decorative", serif;
-    font-size: 2.5rem;
-    line-height: 1.2;
-    letter-spacing: 0.15rem;
+    font-size: 9.6px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14.4px; /* 150% */
+    letter-spacing: 4.8px;
+    text-transform: uppercase;
     margin: 0;
 }
 
+.conta-titulo-container {
+    display: flex;
+    padding-top: 16px;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+}
+
+.conta-titulo {
+    color: #E0C58F;
+    text-align: center;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 44.8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 67.2px; /* 150% */
+    letter-spacing: 2.688px;
+    width: 100%;
+    max-width: 780px;
+    margin: 0;
+}
+
+/* =========================================================
+   CONTAINER DOS CARDS (Conteúdo Principal)
+   ========================================================= */
 .conta-conteudo {
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
     width: 100%;
-    max-width: 45rem; /* ~720px */
-}
-
-/* CARDS CONFIGURAÇÃO */
-.conta-card {
-    background: rgba(13, 26, 61, 0.3);
-    border: 1px solid rgba(165, 140, 255, 0.15);
-    border-radius: 1rem;
-    padding: 2rem;
-    backdrop-filter: blur(10px);
-}
-
-.conta-card-titulo {
-    color: #D7CCFF;
-    font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
-    letter-spacing: 0.1rem;
-    margin: 0 0 1.5rem 0;
-    font-weight: 400;
-}
-
-.conta-card-conteudo {
-    display: flex;
+    max-width: 780px; 
+    padding-top: 48px;
     flex-direction: column;
-    gap: 1.5rem;
+    align-items: flex-start;
+    gap: 32px;
 }
 
-.conta-card-footer {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-}
-
-/* INPUTS E FORMS */
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.input-group label {
-    color: #A58CFF;
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.1rem;
-    text-transform: uppercase;
-}
-
-.input-group input {
-    background: rgba(10, 16, 40, 0.6);
-    border: 1px solid rgba(165, 140, 255, 0.2);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    color: #D7CCFF;
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.9rem;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.input-group input:focus {
-    border-color: #A58CFF;
-    box-shadow: 0 0 10px rgba(165, 140, 255, 0.2);
-}
-
-/* GRID DE SIGNOS (Zodíaco) */
-.signos-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    background: rgba(10, 16, 40, 0.6);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid rgba(165, 140, 255, 0.2);
-}
-
-.signo-btn {
-    background: rgba(165, 140, 255, 0.1);
-    border: 1px solid transparent;
-    color: #D7CCFF;
-    border-radius: 0.4rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: all 0.2s;
-}
-
-.signo-btn:hover {
-    background: rgba(165, 140, 255, 0.2);
-}
-
-.signo-btn.ativo {
-    background: rgba(165, 140, 255, 0.3);
-    border-color: #A58CFF;
-    box-shadow: 0 0 8px rgba(165, 140, 255, 0.4);
-}
-
-/* LAYOUT DO CICLO */
-.ciclo-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-}
-
-/* FOOTER AÇÕES CRÍTICAS */
+/* =========================================================
+   CONTAINER DOS BOTÕES FINAIS (Ações)
+   ========================================================= */
 .conta-actions-footer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 1rem;
+    display: flex;
+    width: 100%;
+    max-width: 779px; 
+    padding: 0 20px;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box; /* Garante que o padding não estoure a largura total */
 }
 
-@media (max-width: 600px) {
-    .conta-titulo { font-size: 1.8rem; }
-    .ciclo-grid { grid-template-columns: 1fr; }
-    .conta-actions-footer { grid-template-columns: 1fr; }
-    .conta-card { padding: 1.5rem; }
+/* =========================================================
+   AJUSTES RESPONSIVOS (Mobile)
+   ========================================================= */
+@media (max-width: 768px) {
+    .conta-titulo {
+        font-size: 28px;
+        line-height: 42px;
+        letter-spacing: 1.5px;
+    }
+    
+    .conta-actions-footer {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0;
+    }
 }
 
 @keyframes pulsar {
     0%, 100% { opacity: 0.5; }
     50% { opacity: 1; }
-}
-
-/* =========================================================
-   INPUTS ESTILIZADOS ENVIADOS PARA O CARD
-   ========================================================= */
-.conta-input-estilizado {
-    background: rgba(10, 16, 40, 0.6);
-    border: 1px solid rgba(165, 140, 255, 0.2);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    color: #D7CCFF;
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.9rem;
-    outline: none;
-    transition: all 0.3s ease;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.conta-input-estilizado:focus {
-    border-color: #A58CFF;
-    box-shadow: 0 0 10px rgba(165, 140, 255, 0.2);
-}
-
-/* =========================================================
-   GRID DE SIGNOS (Zodíaco) 
-   ========================================================= */
-.signos-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    background: rgba(10, 16, 40, 0.6);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid rgba(165, 140, 255, 0.2);
-}
-
-.signo-btn {
-    background: rgba(165, 140, 255, 0.1);
-    border: 1px solid transparent;
-    color: #D7CCFF;
-    border-radius: 0.4rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: all 0.2s;
-}
-
-.signo-btn:hover {
-    background: rgba(165, 140, 255, 0.2);
-}
-
-.signo-btn.ativo {
-    background: rgba(165, 140, 255, 0.3);
-    border-color: #A58CFF;
-    box-shadow: 0 0 8px rgba(165, 140, 255, 0.4);
 }

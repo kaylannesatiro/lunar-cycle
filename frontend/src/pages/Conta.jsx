@@ -214,8 +214,13 @@ const Conta = () => {
     return (
         <div className="conta-page-container">
             <header className="conta-header">
-                <p className="conta-badge">✦ CONFIGURAÇÕES LUNARES ✦</p>
-                <h1 className="conta-titulo">PERSONALIZE SUA JORNADA<br/>CÓSMICA</h1>
+                <div className="conta-badge-container">
+                    <p className="conta-badge">✦ CONFIGURAÇÕES LUNARES ✦</p>
+                </div>
+                
+                <div className="conta-titulo-container">
+                    <h1 className="conta-titulo">PERSONALIZE SUA JORNADA<br/>CÓSMICA</h1>
+                </div>
             </header>
 
             <div className="conta-conteudo">
