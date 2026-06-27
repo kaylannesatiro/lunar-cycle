@@ -1,0 +1,240 @@
+/* ==========================================================================
+   CONTAINER PRINCIPAL DA PÁGINA
+   ========================================================================== */
+.diario-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 4rem;
+  box-sizing: border-box;
+
+  /* ─── ADICIONE ESTAS DUAS LINHAS: Bloqueio total de vazamento lateral ─── */
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ==========================================================================
+   CABEÇALHO (Dimensões exatas do Figma)
+   ========================================================================== */
+.diario-header {
+  position: relative; /* Segura os efeitos de luz absolutos dentro do cabeçalho */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 100%;
+  max-width: 57.5rem;   /* 920px */
+  min-height: 38.18rem; /* 610.979px */
+  margin-bottom: 2rem;
+  
+  /* Evita que o glow vaze e crie barra de rolagem horizontal indesejada */
+  overflow: hidden; 
+}
+
+/* O container que segura os textos na frente da luz */
+.diario-header-conteudo {
+  position: relative;
+  z-index: 10; /* Fica acima dos efeitos de fundo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ==========================================================================
+   EFEITOS DE LUZ (Glow Radial e Blur)
+   ========================================================================== */
+/* Container de títulos (Glow Externo) */
+.diario-glow-externo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centraliza perfeitamente atrás do texto */
+  
+  width: 32.5rem;  /* 520px */
+  height: 32.5rem; /* 520px */
+  border-radius: 50%; /* 260px */
+  
+  background: radial-gradient(70.71% 70.71% at 50% 50%, rgba(165, 140, 255, 0.10) 0%, rgba(110, 76, 163, 0.04) 55%, rgba(0, 0, 0, 0.00) 72%);
+  filter: blur(3.43rem); /* 55px */
+  z-index: 1;
+}
+
+/* Efeito atrás do título (Anel Interno) */
+.diario-glow-interno {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  width: 14.375rem;  /* 230px */
+  height: 14.375rem; /* 230px */
+  border-radius: 50%; /* 115px */
+  
+  border: 0.041rem solid rgba(165, 140, 255, 0.07); /* 0.667px */
+  background: radial-gradient(70.71% 70.71% at 50% 50%, rgba(165, 140, 255, 0.05) 0%, rgba(0, 0, 0, 0.00) 75%);
+  z-index: 2;
+}
+
+/* ==========================================================================
+   TIPOGRAFIA DO CABEÇALHO
+   ========================================================================== */
+.diario-badge-topo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.diario-estrelas {
+  color: #A58CFF;
+  font-size: 0.6rem;
+}
+
+/* Título Menor */
+.diario-badge-texto {
+  color: #A58CFF;
+  text-align: center;
+  font-family: 'Cinzel', serif; /* Nova fonte aplicada */
+  font-size: 0.6rem;            /* 9.6px */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 0.9rem;          /* 14.4px */
+  letter-spacing: 0.3rem;       /* 4.8px */
+  text-transform: uppercase;
+}
+
+/* Título Maior */
+.diario-titulo-principal {
+  color: #D7CCFF;
+  text-align: center;
+  font-family: "Cinzel Decorative", serif;
+  font-size: 6.5rem;            /* 104px */
+  font-style: normal;
+  font-weight: 700;
+  line-height: 6.5rem;          /* 104px */
+  letter-spacing: 0.26rem;      /* 4.16px */
+  
+  width: 100%;
+  max-width: 53.5rem;           /* 856px */
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+/* Frase */
+.diario-subtitulo {
+  color: #D7CCFF;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;              /* 16px */
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.85rem;         /* 29.6px */
+  letter-spacing: 0.05rem;      /* 0.8px */
+  
+  width: 25rem;                 /* 400px */
+  flex-shrink: 0;               
+  margin: 0 0 3rem 0;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE DO CABEÇALHO (Trava de segurança)
+   ========================================================================== */
+/* Para tablets e telas menores (abaixo de 768px) */
+@media (max-width: 48rem) {
+  .diario-header {
+    min-height: 25rem; /* Encolhe a área total */
+  }
+  
+  /* Escala o título de 104px pra não quebrar a tela */
+  .diario-titulo-principal {
+    font-size: 4rem; 
+    line-height: 4.5rem;
+  }
+  
+  /* Encolhe os efeitos de luz proporcionalmente */
+  .diario-glow-externo {
+    width: 25rem;
+    height: 25rem;
+  }
+  .diario-glow-interno {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+/* Para celulares pequenos (abaixo de 540px) */
+@media (max-width: 33.75rem) {
+  .diario-titulo-principal {
+    font-size: 3rem; /* 48px */
+    line-height: 3.5rem;
+    letter-spacing: 0.1rem;
+  }
+  
+  .diario-subtitulo {
+    width: 90%; /* Remove a trava de 400px no celular */
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+  }
+  
+  .diario-glow-externo {
+    width: 18rem;
+    height: 18rem;
+  }
+}
+
+/* ==========================================================================
+   SEÇÃO DE CONTEÚDO (Filtros e Linha do Tempo)
+   ========================================================================== */
+.diario-conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 3rem; /* Espaço entre o filtro e a linha do tempo */
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+   ========================================================================== */
+@media (max-width: 48rem) {
+  .diario-titulo-principal {
+    font-size: 3rem;
+  }
+  .diario-subtitulo {
+    font-size: 0.8rem;
+    padding: 0 1rem;
+  }
+}
+
+/* ==========================================================================
+   LINHA DE DIVISÃO DO CABEÇALHO (Gradiente Suave)
+   ========================================================================== */
+.diario-divisor-principal {
+  width: 100%;
+  max-width: 35rem; /* 560px / 16 */
+  height: 1px;
+  
+  /* Gradiente exato do seu Figma */
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.00) 0%, rgba(165, 140, 255, 0.22) 50%, rgba(0, 0, 0, 0.00) 100%);
+  
+  /* Margem para dar um respiro perfeito entre o cabeçalho e os filtros */
+  margin: 1rem 0 3rem 0; 
+  flex-shrink: 0;
+}
+
+@media (max-width: 33.75rem) { /* 540px */
+  .diario-titulo-principal {
+    font-size: 2.5rem; /* Encolhe o tamanho da letra no celular para caber em telas de 320px */
+    line-height: 3rem;
+    letter-spacing: 0.1rem;
+    width: 100%;       /* O título assume a largura da tela do celular */
+    max-width: 100%;
+  }
+  
+  .diario-header {
+    min-height: auto;  /* Remove a altura fixa de 610px no mobile para não gerar buracos brancos */
+    padding: 2rem 0;
+  }
+}
