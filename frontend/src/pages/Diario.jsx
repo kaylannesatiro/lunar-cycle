@@ -7,117 +7,112 @@ import "./Diario.css"
 
 const Diario = () => {
     const [sonhosBrutos, setSonhosBrutos] = useState([])
+    const [tagsDaUsuaria, setTagsDaUsuaria] = useState([])
     const [filtrosAtivos, setFiltrosAtivos] = useState({ periodo: "TODOS", tags: [], datas: null })
     const [isLoading, setIsLoading] = useState(true)
     const [pagina, setPagina] = useState(1)
-    const [temMaisSonhos, setTemMaisSonhos] = useState(true)
     const [, setModalAberto] = useState(false)
 
-    const LIMITE = 10; 
+    const LIMITE = 10
 
     useEffect(() => {
-        async function buscarDadosIniciais() {
+        async function carregarTagsIniciais() {
             try {
-                setIsLoading(true);
-                const dados = await sonhosServiceFrontend.listarTodos(1, LIMITE)
+                const dados = await sonhosServiceFrontend.listarTodos({})
+                
+                if (Array.isArray(dados)) {
+                    const tagsUnicas = [...new Set(
+                        dados.flatMap((sonho) => sonho.tags.map((t) => t.nomeTag.toUpperCase()))
+                    )];
+                    setTagsDaUsuaria(tagsUnicas)
+                }
+            } catch (error) {
+                console.error("Erro ao mapear tags da usuária:", error)
+            }
+        }
+        carregarTagsIniciais()
+    }, [])
+
+    const obterDatasDoPeriodo = (periodo, datas) => {
+        if (datas?.inicio && datas?.fim) {
+            return { dataInicio: datas.inicio, dataFim: datas.fim };
+        }
+        
+        const hoje = new Date();
+        const anoAtual = hoje.getFullYear();
+        
+        if (/^\d{4}$/.test(periodo)) {
+            return { dataInicio: `${periodo}-01-01`, dataFim: `${periodo}-12-31` };
+        }
+        
+        if (periodo.includes(" ")) {
+            const mesesMap = {
+                Jan: "01", Fev: "02", Mar: "03", Abr: "04", Mai: "05", Jun: "06",
+                Jul: "07", Ago: "08", Set: "09", Out: "10", Nov: "11", Dez: "12"
+            }
+
+            const [mesTexto, anoTexto] = periodo.split(" ")
+            const mesDigito = mesesMap[mesTexto]
+
+            if (mesDigito) {
+                const ultimoDia = new Date(Number(anoTexto), Number(mesDigito), 0).getDate()
+
+                return { 
+                    dataInicio: `${anoTexto}-${mesDigito}-01`, 
+                    dataFim: `${anoTexto}-${mesDigito}-${String(ultimoDia).padStart(2, '0')}` 
+                }
+            }
+        }
+        
+        if (periodo.includes("a") && periodo.includes("/")) {
+            const [inicioParte, fimParte] = periodo.split(" a ")
+            const [diaIni, mesIni] = inicioParte.split("/").map(Number)
+            const [diaFim, mesFim] = fimParte.split("/").map(Number)
+            
+            const dIni = `${anoAtual}-${String(mesIni).padStart(2, '0')}-${String(diaIni).padStart(2, '0')}`
+            const dFim = `${anoAtual}-${String(mesFim).padStart(2, '0')}-${String(diaFim).padStart(2, '0')}`
+            return { dataInicio: dIni, dataFim: dFim }
+        }
+        
+        return { dataInicio: undefined, dataFim: undefined }
+    };
+
+    useEffect(() => {
+        async function buscarDadosFiltrados() {
+            try {
+                setIsLoading(true)
+                const tagParam = filtrosAtivos.tags.length > 0 ? filtrosAtivos.tags.join(',') : undefined
+                const { dataInicio, dataFim } = obterDatasDoPeriodo(filtrosAtivos.periodo, filtrosAtivos.datas)
+                
+                const queryParams = {}
+                if (tagParam) queryParams.tag = tagParam
+                if (dataInicio) queryParams.dataInicio = dataInicio
+                if (dataFim) queryParams.dataFim = dataFim
+                
+                const dados = await sonhosServiceFrontend.listarTodos(queryParams);
                 
                 if (Array.isArray(dados)) {
                     setSonhosBrutos(dados)
-                    if (dados.length < LIMITE) {
-                        setTemMaisSonhos(false)
-                    }
+                    setPagina(1)
                 }
             } catch (error) {
-                console.error("Erro na comunicação inicial com a API:", error)
+                console.error("Erro ao consultar a listagem de sonhos do backend:", error)
                 setSonhosBrutos([])
             } finally {
                 setIsLoading(false)
             }
         }
-        buscarDadosIniciais()
-    }, []);
-
-    const carregarProximaPagina = async () => {
-        try {
-            const proximaPagina = pagina + 1;
-            const dadosNovos = await sonhosServiceFrontend.listarTodos(proximaPagina, LIMITE);
-            
-            if (Array.isArray(dadosNovos) && dadosNovos.length > 0) {
-                setSonhosBrutos((anteriores) => [...anteriores, ...dadosNovos]);
-                setPagina(proximaPagina);
-            }
-            
-            if (!Array.isArray(dadosNovos) || dadosNovos.length < LIMITE) {
-                setTemMaisSonhos(false);
-            }
-        } catch (error) {
-            console.error("Erro ao carregar mais sonhos da API:", error);
-        }
-    };
-
-    const tagsDaUsuaria = [...new Set(
-        sonhosBrutos.flatMap((sonho) => sonho.tags.map((t) => t.nomeTag.toUpperCase()))
-    )];
+        buscarDadosFiltrados();
+    }, [filtrosAtivos]);
 
     const processarSonhosParaATela = () => {
-        let filtrados = [...sonhosBrutos];
+        const limiteExibicao = pagina * LIMITE;
+        const sonhosFatiados = sonhosBrutos.slice(0, limiteExibicao);
+        
+        const nomesMeses = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"];
+        const grupos = [];
 
-        if (filtrosAtivos.tags.length > 0) {
-            filtrados = filtrados.filter((sonho) => {
-                const nomesDasTags = sonho.tags.map(t => t.nomeTag.toUpperCase());
-                return filtrosAtivos.tags.every(tagSelecionada => nomesDasTags.includes(tagSelecionada))
-            });
-        }
-
-        if (filtrosAtivos.periodo !== "TODOS") {
-            const hoje = new Date()
-
-            filtrados = filtrados.filter((sonho) => {
-                const dataDoSonho = new Date(sonho.dataSonho)
-                const periodo = filtrosAtivos.periodo
-
-                if (filtrosAtivos.datas?.inicio && filtrosAtivos.datas?.fim) {
-                    const inicio = new Date(filtrosAtivos.datas.inicio)
-                    const fim = new Date(filtrosAtivos.datas.fim)
-                    fim.setHours(23, 59, 59, 999)
-                    return dataDoSonho >= inicio && dataDoSonho <= fim
-                }
-
-                if (/^\d{4}$/.test(periodo)) {
-                    return dataDoSonho.getFullYear().toString() === periodo
-                }
-
-                if (periodo.includes(" ")) {
-                    const mesesMap = {
-                        Jan: 0, Fev: 1, Mar: 2, Abr: 3, Mai: 4, Jun: 5,
-                        Jul: 6, Ago: 7, Set: 8, Out: 9, Nov: 10, Dez: 11
-                    }
-                    const [mesTexto, anoTexto] = periodo.split(" ")
-                    const mesAlvo = mesesMap[mesTexto]
-                    
-                    return dataDoSonho.getMonth() === mesAlvo && dataDoSonho.getFullYear().toString() === anoTexto
-                }
-
-                if (periodo.includes("a") && periodo.includes("/")) {
-                    const [inicioParte, fimParte] = periodo.split(" a ")
-                    const [diaIni, mesIni] = inicioParte.split("/").map(Number)
-                    const [diaFim, mesFim] = fimParte.split("/").map(Number)
-
-                    const anoAtual = hoje.getFullYear()
-                    const dataInicioSemana = new Date(anoAtual, mesIni - 1, diaIni, 0, 0, 0)
-                    const dataFimSemana = new Date(anoAtual, mesFim - 1, diaFim, 23, 59, 59)
-
-                    return dataDoSonho >= dataInicioSemana && dataDoSonho <= dataFimSemana
-                }
-
-                return true
-            })
-        }
-
-        const nomesMeses = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"]
-        const grupos = []
-
-        filtrados.forEach((sonho) => {
+        sonhosFatiados.forEach((sonho) => {
             const dataObj = new Date(sonho.dataSonho)
             const mesNome = nomesMeses[dataObj.getMonth()]
             const anoNum = dataObj.getFullYear().toString()
@@ -125,14 +120,14 @@ const Diario = () => {
 
             const faseLimpa = sonho.faseLunar.substring(sonho.faseLunar.indexOf(' ') + 1)
 
-            let group = grupos.find(g => g.mes === mesNome && g.ano === anoNum)
+            let grupo = grupos.find(g => g.mes === mesNome && g.ano === anoNum)
 
-            if (!group) {
-                group = { mes: mesNome, ano: anoNum, itens: [] }
-                grupos.push(group)
+            if (!grupo) {
+                grupo = { mes: mesNome, ano: anoNum, itens: [] }
+                grupos.push(grupo)
             }
 
-            group.itens.push({
+            grupo.itens.push({
                 id: sonho.id,
                 diaFormatado: diaNum,
                 titulo: sonho.titulo,
@@ -142,9 +137,12 @@ const Diario = () => {
         })
 
         return grupos
-    }
+    };
 
+    const carregarProximaPagina = () => setPagina((p) => p + 1)
+    
     const dadosProntos = processarSonhosParaATela()
+    const temMaisSonhos = sonhosBrutos.length > pagina * LIMITE
 
     return (
         <div className="diario-page-container">
