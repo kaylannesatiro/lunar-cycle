@@ -9,13 +9,18 @@ const criarSonho = async (usuariaId, dados) => {
     if (!usuaria) throw new Error('Usuária não encontrada');
 
     // 2. Validações Básicas
-    //trim remove espaços em branco no início e no fim da string
-    if (!titulo || titulo.trim().length < 3 || titulo.length > 80) {
-        throw new Error('O título deve ter entre 3 e 80 caracteres.');
+    if (!titulo || titulo.trim().length < 3) {
+        throw new Error('O título deve ter pelo menos 3 caracteres.');
+    }
+    if (titulo.length > 80) {
+        throw new Error('O título pode ter no máximo 80 caracteres.');
     }
     
-    if (!descricao || descricao.trim().length < 10 || descricao.length > 5000) {
-        throw new Error('A descrição deve ter entre 10 e 5000 caracteres.');
+    if (!descricao || descricao.trim().length < 10) {
+        throw new Error('A descrição deve ter pelo menos 10 caracteres.');
+    }
+    if (descricao.length > 5000) {
+        throw new Error('A descrição pode ter no máximo 5.000 caracteres.');
     }
     if (!dataSonho) {
         throw new Error('Informe a data do sonho.');
