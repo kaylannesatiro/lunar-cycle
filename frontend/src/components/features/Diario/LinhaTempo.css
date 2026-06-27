@@ -1,17 +1,14 @@
 .linha-tempo-pai {
-  display: flex;
-  width: 100%;
-  max-width: 51.25rem;
-  
-  /* ─── CORRIGIDO: Reduzido de 7.044rem para 1rem ─── */
-  padding-bottom: 1rem; 
-  
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  box-sizing: border-box;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+    display: flex;
+    width: 100%;
+    max-width: 51.25rem;
+    padding-bottom: 1rem; 
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
 }
 
 .linha-tempo-conteudo {
