@@ -14,6 +14,11 @@ router.put('/:id', verificarToken, sonhoController.atualizarSonho);
 // ROTA DELETE /:id - Excluir um registro do diário de sonhos
 router.delete('/:id', verificarToken, sonhoController.excluir);
 // ROTA GET / - Listar todos os sonhos da usuária
+// Filtros opcionais via Query Params (?chave=valor):
+// - tag: string (busca sonhos que contenham a tag especificada)
+// - dataInicio: YYYY-MM-DD (busca sonhos a partir desta data)
+// - dataFim: YYYY-MM-DD (busca sonhos até esta data)
+// Exemplo: GET /?tag=pesadelo&dataInicio=2026-06-01&dataFim=2026-06-30
 router.get('/', verificarToken, sonhoController.listarSonhos);
 
 module.exports = router;
