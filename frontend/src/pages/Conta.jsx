@@ -24,25 +24,25 @@ const Conta = () => {
         duracaoMenstruacao: 5
     });
 
-    useEffect(() => {
-        carregarPerfil()
-    }, [])
-
     const carregarPerfil = async () => {
         try {
-            setIsLoading(true)
-            const perfil = await authService.obterPerfil()
-            setDados(prev => ({ ...prev, ...perfil }))
+            setIsLoading(true);
+            const perfil = await authService.obterPerfil();
+            setDados(prev => ({ ...prev, ...perfil }));
         } catch (error) {
-            console.error("Erro ao carregar perfil:", error)
+            console.error("Erro ao carregar perfil:", error);
         } finally {
-            setIsLoading(false)
+            setIsLoading(false);
         }
-    }
+    };
+
+    useEffect(() => {
+        carregarPerfil();
+    }, []);
 
     const atualizarDado = (campo, valor) => {
         setDados(prev => ({ ...prev, [campo]: valor }));
-    }
+    };
 
     const handleSalvarPerfil = async () => {
         try {
