@@ -16,6 +16,8 @@ const Conta = () => {
     const [isSavingSeguranca, setIsSavingSeguranca] = useState(false)
     const [isSavingCiclo, setIsSavingCiclo] = useState(false)
 
+    const [mostrarCamposSenha, setMostrarCamposSenha] = useState(false)
+
     const [dados, setDados] = useState({
         nome: '',
         signo: '',
@@ -25,7 +27,7 @@ const Conta = () => {
         confirmarNovaSenha: '',
         duracaoCiclo: 28,
         duracaoMenstruacao: 5
-    });
+    })
 
     useEffect(() => {
         const carregarPerfil = async () => {
@@ -59,24 +61,30 @@ const Conta = () => {
     }
 
     const handleSalvarSeguranca = async () => {
-        if (dados.novaSenha && dados.novaSenha !== dados.confirmarNovaSenha) {
-            return alert("A nova senha e a confirmação não coincidem.")
-        }
-        if (dados.novaSenha && !dados.senhaAtual) {
-            return alert("Digite sua senha atual para alterar a senha.")
+        if (mostrarCamposSenha) {
+            if (dados.novaSenha && dados.novaSenha !== dados.confirmarNovaSenha) {
+                return alert("A nova senha e a confirmação não coincidem.")
+            }
+            if (dados.novaSenha && !dados.senhaAtual) {
+                return alert("Digite sua senha atual para alterar a senha.")
+            }
         }
 
         try {
             setIsSavingSeguranca(true) 
             const payload = { email: dados.email }
 
-            if (dados.novaSenha) {
+            if (mostrarCamposSenha && dados.novaSenha) {
                 payload.senhaAtual = dados.senhaAtual
                 payload.novaSenha = dados.novaSenha
             }
+            
             await authService.atualizarPerfil(payload)
             alert("Segurança atualizada com sucesso!")
+            
             setDados(prev => ({ ...prev, senhaAtual: '', novaSenha: '', confirmarNovaSenha: '' }));
+            setMostrarCamposSenha(false);
+            
         } catch (error) {
             alert(error.message)
         } finally {
@@ -151,41 +159,65 @@ const Conta = () => {
                     onChange={(e) => atualizarDado('email', e.target.value)} 
                 />
             )
-        },
-        {
-            label: "SENHA ATUAL",
-            input: (
-                <InputSenha 
-                    variante="configuracao" 
-                    placeholder="Digite a senha atual" 
-                    value={dados.senhaAtual} 
-                    onChange={(e) => atualizarDado('senhaAtual', e.target.value)} 
-                />
-            )
-        },
-        {
-            label: "NOVA SENHA",
-            input: (
-                <InputSenha 
-                    variante="configuracao" 
-                    placeholder="Digite sua nova senha" 
-                    value={dados.novaSenha} 
-                    onChange={(e) => atualizarDado('novaSenha', e.target.value)} 
-                />
-            )
-        },
-        {
-            label: "CONFIRMAR SENHA",
-            input: (
-                <InputSenha 
-                    variante="configuracao" 
-                    placeholder="Confirme sua nova senha" 
-                    value={dados.confirmarNovaSenha} 
-                    onChange={(e) => atualizarDado('confirmarNovaSenha', e.target.value)} 
-                />
-            )
         }
     ]
+
+    if (!mostrarCamposSenha) {
+        camposSeguranca.push({
+            label: "", 
+            input: (
+                <Button 
+                    variant="padrao" 
+                    onClick={() => setMostrarCamposSenha(true)} 
+                    backgroundColor="transparent" 
+                    color="rgba(224, 197, 143, 0.40)" 
+                    textColor="#E0C58F"
+                    maxWidth="100%"
+                >
+                    ◈ Mudar Senha
+                </Button>
+            )
+        })
+    } 
+    else {
+        camposSeguranca.push(
+            {
+                label: "SENHA ATUAL",
+                input: (
+                    <InputSenha 
+                        variante="configuracao" 
+                        placeholder="Digite a senha atual" 
+                        value={dados.senhaAtual} 
+                        onChange={(e) => atualizarDado('senhaAtual', e.target.value)} 
+                    />
+                )
+            },
+
+            {
+                label: "NOVA SENHA",
+                input: (
+                    <InputSenha 
+                        variante="configuracao" 
+                        placeholder="Digite sua nova senha" 
+                        value={dados.novaSenha} 
+                        onChange={(e) => atualizarDado('novaSenha', e.target.value)} 
+                    />
+                )
+            },
+
+            {
+                label: "CONFIRMAR SENHA",
+                input: (
+                    <InputSenha 
+                        variante="configuracao" 
+                        placeholder="Confirme sua nova senha" 
+                        value={dados.confirmarNovaSenha} 
+                        onChange={(e) => atualizarDado('confirmarNovaSenha', e.target.value)} 
+                    />
+                )
+            }
+        )
+    }
 
     const camposCiclo = [
         {
