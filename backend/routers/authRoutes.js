@@ -27,5 +27,8 @@ router.put('/perfil', verificarToken, validaRequisicao(atualizarPerfilSchema), a
 //POST EM '/logout' PARA FAZER LOGOUT (HU-005)
 router.post('/logout', verificarToken, authController.logout);
 
+// DELETE EM '/perfil' PARA DELETAR A CONTA DA USUÁRIA
+// privada, precisa de token JWT para acessar.
+router.delete('/perfil', verificarToken, authController.deletarConta);
 
 module.exports = router; 
