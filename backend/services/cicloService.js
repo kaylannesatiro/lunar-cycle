@@ -171,8 +171,30 @@ const obterCalendario = async (usuariaId, mes, ano) => {
     };
 };
 
+//Alternar status de menstruacao de qualquer dia do calendario
+const alternarMenstruacaoDia = async (usuariaId, dataStr, mes, ano) => {
+    const data = new Date(dataStr);
+    data.setUTCHours(0, 0, 0, 0);
+
+    const jaEstaMarcado = await diaMenstruacaoRepository.verificarDiaMarcado(usuariaId, data);
+    
+    if(jaEstaMarcado){
+        await diaMenstruacaoRepository.desmarcarDia(usuariaId, data);
+    } else{
+        await diaMenstruacaoRepository.registrarDia(usuariaId, data);
+    }
+
+    const calendarioAtualizado = await obterCalendario(usuariaId, mes, ano);
+
+    return{
+        acao: jaEstaMarcado ? 'desmarcado' : 'registrado',
+        calendario: calendarioAtualizado
+    }
+} 
+
 module.exports = {
     obterDadosHome,
     alternarMenstruacaoHoje,
-    obterCalendario
+    obterCalendario,
+    alternarMenstruacaoDia
 };

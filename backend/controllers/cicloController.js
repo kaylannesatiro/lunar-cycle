@@ -52,9 +52,31 @@ const obterCalendario = async (req, res) => {
 
 };
 
+const alternarMenstruacaoDia = async (req, res) => {
+    try {
+        const usuariaid = req.usuariaId;
+        const {data, mes, ano} = req.body;
+
+        //validacao basica
+        if(!data || !mes || !ano || isNaN(mes) || isNaN(ano)){
+            return res.status(400).json({
+                erro: 'Informe a data, mês e ano válidos no corpo da requisição.'
+            });
+        }
+        //chamar logica do service
+        //delegar responsabilidade pro service
+        const resultado = await cicloService.alternarMenstruacaoDia(usuariaid, data, mes, ano);
+        return res.status(200).json(resultado);
+    } catch (erro) {
+        return res.status(500).json({
+            erro: 'ERRO_ALTERNAR_MENSTRUACAO_DIA'
+        });
+    }
+}
 
 module.exports = {
     obterDadosHome,
     alternarMenstruacaoHoje,
-    obterCalendario
+    obterCalendario,
+    alternarMenstruacaoDia
 }
