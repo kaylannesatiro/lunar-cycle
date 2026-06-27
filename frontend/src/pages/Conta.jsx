@@ -24,25 +24,24 @@ const Conta = () => {
         duracaoMenstruacao: 5
     });
 
-    const carregarPerfil = async () => {
-        try {
-            setIsLoading(true);
-            const perfil = await authService.obterPerfil();
-            setDados(prev => ({ ...prev, ...perfil }));
-        } catch (error) {
-            console.error("Erro ao carregar perfil:", error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
     useEffect(() => {
-        carregarPerfil();
-    }, []);
+        const carregarPerfil = async () => {
+            try {
+                const perfil = await authService.obterPerfil()
+                setDados(prev => ({ ...prev, ...perfil }))
+            } catch (error) {
+                console.error("Erro ao carregar perfil:", error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        carregarPerfil()
+    }, [])
 
     const atualizarDado = (campo, valor) => {
-        setDados(prev => ({ ...prev, [campo]: valor }));
-    };
+        setDados(prev => ({ ...prev, [campo]: valor }))
+    }
 
     const handleSalvarPerfil = async () => {
         try {
@@ -111,7 +110,7 @@ const Conta = () => {
             localStorage.removeItem('token')
             navigate('/cadastro')
         } catch (error) {
-            alert("Erro ao excluir conta. Verifique com o suporte.")
+            alert(`Erro ao excluir conta. Verifique com o suporte. + ${error.message}`)
         }
     }
 
@@ -136,7 +135,7 @@ const Conta = () => {
                 />
             )
         }
-    ];
+    ]
 
     const camposSeguranca = [
         {
@@ -183,7 +182,7 @@ const Conta = () => {
                 />
             )
         }
-    ];
+    ]
 
     const camposCiclo = [
         {
@@ -208,7 +207,7 @@ const Conta = () => {
                 />
             )
         }
-    ];
+    ]
 
     if (isLoading) return <div className="conta-loading">Acessando os registros...</div>;
 
