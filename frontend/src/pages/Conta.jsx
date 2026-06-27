@@ -11,7 +11,10 @@ import './Conta.css';
 const Conta = () => {
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(true)
-    const [isSaving, setIsSaving] = useState(false)
+    
+    const [isSavingPerfil, setIsSavingPerfil] = useState(false)
+    const [isSavingSeguranca, setIsSavingSeguranca] = useState(false)
+    const [isSavingCiclo, setIsSavingCiclo] = useState(false)
 
     const [dados, setDados] = useState({
         nome: '',
@@ -45,13 +48,13 @@ const Conta = () => {
 
     const handleSalvarPerfil = async () => {
         try {
-            setIsSaving(true)
+            setIsSavingPerfil(true)
             await authService.atualizarPerfil({ nome: dados.nome, signo: dados.signo })
             alert("Perfil atualizado com sucesso!")
         } catch (error) {
             alert(error.message)
         } finally {
-            setIsSaving(false)
+            setIsSavingPerfil(false)
         }
     }
 
@@ -64,7 +67,7 @@ const Conta = () => {
         }
 
         try {
-            setIsSaving(true)
+            setIsSavingSeguranca(true) 
             const payload = { email: dados.email }
 
             if (dados.novaSenha) {
@@ -77,13 +80,13 @@ const Conta = () => {
         } catch (error) {
             alert(error.message)
         } finally {
-            setIsSaving(false)
+            setIsSavingSeguranca(false) 
         }
     }
 
     const handleSalvarCiclo = async () => {
         try {
-            setIsSaving(true)
+            setIsSavingCiclo(true) 
             await authService.atualizarPerfil({ 
                 duracaoCiclo: Number(dados.duracaoCiclo), 
                 duracaoMenstruacao: Number(dados.duracaoMenstruacao) 
@@ -92,7 +95,7 @@ const Conta = () => {
         } catch (error) {
             alert(error.message)
         } finally {
-            setIsSaving(false)
+            setIsSavingCiclo(false) 
         }
     }
 
@@ -231,7 +234,7 @@ const Conta = () => {
                         <Button 
                             variant="padrao" 
                             onClick={handleSalvarPerfil} 
-                            isLoading={isSaving}
+                            isLoading={isSavingPerfil}
                             maxWidth="100%"
                         >
                             ◈ SALVAR PERFIL
@@ -246,7 +249,7 @@ const Conta = () => {
                         <Button 
                             variant="padrao" 
                             onClick={handleSalvarSeguranca} 
-                            isLoading={isSaving}
+                            isLoading={isSavingSeguranca}
                             maxWidth="100%"
                         >
                             ◈ Atualizar credenciais
@@ -262,7 +265,7 @@ const Conta = () => {
                         <Button 
                             variant="padrao" 
                             onClick={handleSalvarCiclo} 
-                            isLoading={isSaving}
+                            isLoading={isSavingCiclo}
                             maxWidth="100%"
                         >
                             ◈ Salvar ciclo
