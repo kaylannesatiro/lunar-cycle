@@ -6,7 +6,6 @@ import Button from "../components/common/Buttons/Button"
 import "./Diario.css"
 
 const Diario = () => {
-    // --- ESTADOS ---
     const [sonhosBrutos, setSonhosBrutos] = useState([])
     const [filtrosAtivos, setFiltrosAtivos] = useState({ periodo: "TODOS", tags: [], datas: null })
     const [isLoading, setIsLoading] = useState(true)
@@ -53,9 +52,8 @@ const Diario = () => {
         { id: 30, titulo: "DESPERTAR FINAL", descricao: "O universo piscando e sumindo.", dataSonho: "2026-04-01T12:00:00.000Z", faseLunar: "🌕 Cheia", tags: [{ nomeTag: "LUZ" }, { nomeTag: "PAZ" }] }
     ];
 
-    const LIMITE = 10; // Quantos sonhos renderizar por página no teste
+    const LIMITE = 10;
 
-    // Carregamento Inicial (Pega os primeiros 10 itens do mock)
     useEffect(() => {
         setIsLoading(true);
         const primeiraFatia = MOCK_GRANDE.slice(0, LIMITE);
@@ -63,7 +61,6 @@ const Diario = () => {
         setIsLoading(false);
     }, []);
 
-    // Função que simula o botão "Carregar Mais" fatiando o Mock Grande
     const carregarProximaPagina = () => {
         const proximaPagina = pagina + 1;
         const indiceInicio = pagina * LIMITE;
@@ -76,13 +73,11 @@ const Diario = () => {
             setPagina(proximaPagina);
         }
         
-        // Se a próxima fatia chegar ao fim do mock grande, esconde o botão
         if (indiceFim >= MOCK_GRANDE.length) {
             setTemMaisSonhos(false);
         }
     };
 
-    // Extrai as tags com base em todos os 30 sonhos para popular o filtro completo
     const tagsDaUsuaria = [...new Set(
         MOCK_GRANDE.flatMap((sonho) => sonho.tags.map((t) => t.nomeTag.toUpperCase()))
     )];
@@ -187,7 +182,7 @@ const Diario = () => {
                         <span className="diario-estrelas">✦</span>
                     </div>
                     
-                    <h1 className="diario-titulo-principal">MEUS SONHOS</h1>
+                    <h1 className="diario-titulo-principal">MEUS<br/>SONHOS</h1>
                     
                     <p className="diario-subtitulo">
                         "A lua guarda os segredos que sua alma sussurrou<br/>enquanto você sonhava."
@@ -230,6 +225,7 @@ const Diario = () => {
                             backgroundColor="linear-gradient(135deg, rgba(110, 76, 163, 0.28) 0%, rgba(75, 45, 115, 0.16) 100%)"
                             color="#A58CFF" 
                             textColor="#D7CCFF"
+                            onClick={carregarProximaPagina}
                         >
                             Carregar Mais Sonhos
                         </Button>
