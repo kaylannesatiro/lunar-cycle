@@ -278,25 +278,22 @@ const Conta = () => {
 
                 <div className="conta-actions-footer">
                     <Button 
-                        variant="padrao" 
-                        backgroundColor="rgba(255, 68, 68, 0.1)" 
-                        color="rgba(255, 68, 68, 0.4)" 
-                        textColor="#FF8888"
+                        variant="redondo" 
+                        backgroundColor="rgba(88, 8, 16, 0.22)" 
+                        color="rgba(245, 240, 233, 0.50)" 
+                        textColor="#F5F0E9"
                         onClick={handleExcluirConta}
-                        icone="⊗"
                     >
-                        APAGAR CONTA
+                        ◈ APAGAR CONTA
                     </Button>
                     
                     <Button 
-                        variant="padrao" 
-                        backgroundColor="transparent" 
-                        color="rgba(165, 140, 255, 0.3)" 
-                        textColor="#D7CCFF"
+                        variant="redondo" 
+                        color="#E0C58F" 
+                        textColor="#F5F0E9"
                         onClick={handleLogout}
-                        icone="⊗"
                     >
-                        SAIR DA CONTA
+                        ◈ SAIR DA CONTA
                     </Button>
                 </div>
             </div>
