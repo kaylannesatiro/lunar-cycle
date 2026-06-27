@@ -1,14 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { authService } from '../../services/authService';
-import Button from '../../components/common/Buttons/Button';
-import CardConfig from '../../components/features/Conta/CardConfig';
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { authService } from '../services/authService'
+import Button from '../components/common/Buttons/Button'
+import Input from '../components/common/Inputs/Input'
+import InputSenha from '../components/common/Inputs/InputSenha'
+import SelecaoSigno from '../components/common/Inputs/SelecaoSigno'
+import CardConfig from '../components/common/Cards/CardConfig'
 import './Conta.css';
 
 const Conta = () => {
-    const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(true);
-    const [isSaving, setIsSaving] = useState(false);
+    const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(true)
+    const [isSaving, setIsSaving] = useState(false)
 
     const [dados, setDados] = useState({
         nome: '',
@@ -21,126 +24,116 @@ const Conta = () => {
         duracaoMenstruacao: 5
     });
 
-    const signos = [
-        { id: 'Aries', icone: '♈' }, { id: 'Touro', icone: '♉' }, { id: 'Gemeos', icone: '♊' },
-        { id: 'Cancer', icone: '♋' }, { id: 'Leao', icone: '♌' }, { id: 'Virgem', icone: '♍' },
-        { id: 'Libra', icone: '♎' }, { id: 'Escorpiao', icone: '♏' }, { id: 'Sagitario', icone: '♐' },
-        { id: 'Capricornio', icone: '♑' }, { id: 'Aquario', icone: '♒' }, { id: 'Peixes', icone: '♓' }
-    ];
-
     useEffect(() => {
-        carregarPerfil();
-    }, []);
+        carregarPerfil()
+    }, [])
 
     const carregarPerfil = async () => {
         try {
-            setIsLoading(true);
-            const perfil = await authService.obterPerfil();
-            setDados(prev => ({ ...prev, ...perfil }));
+            setIsLoading(true)
+            const perfil = await authService.obterPerfil()
+            setDados(prev => ({ ...prev, ...perfil }))
         } catch (error) {
-            console.error("Erro ao carregar perfil:", error);
+            console.error("Erro ao carregar perfil:", error)
         } finally {
-            setIsLoading(false);
+            setIsLoading(false)
         }
-    };
+    }
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setDados(prev => ({ ...prev, [name]: value }));
-    };
+    const atualizarDado = (campo, valor) => {
+        setDados(prev => ({ ...prev, [campo]: valor }));
+    }
 
     const handleSalvarPerfil = async () => {
         try {
-            setIsSaving(true);
-            await authService.atualizarPerfil({ nome: dados.nome, signo: dados.signo });
-            alert("Perfil atualizado com sucesso!");
+            setIsSaving(true)
+            await authService.atualizarPerfil({ nome: dados.nome, signo: dados.signo })
+            alert("Perfil atualizado com sucesso!")
         } catch (error) {
-            alert(error.message);
+            alert(error.message)
         } finally {
-            setIsSaving(false);
+            setIsSaving(false)
         }
-    };
+    }
 
     const handleSalvarSeguranca = async () => {
         if (dados.novaSenha && dados.novaSenha !== dados.confirmarNovaSenha) {
-            return alert("A nova senha e a confirmação não coincidem.");
+            return alert("A nova senha e a confirmação não coincidem.")
         }
         if (dados.novaSenha && !dados.senhaAtual) {
-            return alert("Digite sua senha atual para alterar a senha.");
+            return alert("Digite sua senha atual para alterar a senha.")
         }
 
         try {
-            setIsSaving(true);
-            const payload = { email: dados.email };
+            setIsSaving(true)
+            const payload = { email: dados.email }
+
             if (dados.novaSenha) {
-                payload.senhaAtual = dados.senhaAtual;
-                payload.novaSenha = dados.novaSenha;
+                payload.senhaAtual = dados.senhaAtual
+                payload.novaSenha = dados.novaSenha
             }
-            await authService.atualizarPerfil(payload);
-            alert("Segurança atualizada com sucesso!");
+            await authService.atualizarPerfil(payload)
+            alert("Segurança atualizada com sucesso!")
             setDados(prev => ({ ...prev, senhaAtual: '', novaSenha: '', confirmarNovaSenha: '' }));
         } catch (error) {
-            alert(error.message);
+            alert(error.message)
         } finally {
-            setIsSaving(false);
+            setIsSaving(false)
         }
-    };
+    }
 
     const handleSalvarCiclo = async () => {
         try {
-            setIsSaving(true);
+            setIsSaving(true)
             await authService.atualizarPerfil({ 
                 duracaoCiclo: Number(dados.duracaoCiclo), 
                 duracaoMenstruacao: Number(dados.duracaoMenstruacao) 
             });
-            alert("Ciclo atualizado com sucesso!");
+            alert("Ciclo atualizado com sucesso!")
         } catch (error) {
-            alert(error.message);
+            alert(error.message)
         } finally {
-            setIsSaving(false);
+            setIsSaving(false)
         }
-    };
+    }
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        navigate('/login');
-    };
+        localStorage.removeItem('token')
+        navigate('/login')
+    }
 
     const handleExcluirConta = async () => {
-        const confirmar = window.confirm("Tem certeza que deseja apagar sua conta? Todos os seus sonhos serão perdidos para sempre.");
-        if (!confirmar) return;
+        const confirmar = window.confirm("Tem certeza que deseja apagar sua conta? Todos os seus sonhos serão perdidos para sempre.")
+        if (!confirmar) return
 
         try {
-            await authService.excluirConta();
-            localStorage.removeItem('token');
-            navigate('/cadastro');
+            await authService.excluirConta()
+            localStorage.removeItem('token')
+            navigate('/cadastro')
         } catch (error) {
-            alert("Erro ao excluir conta. Verifique com o suporte.");
+            alert("Erro ao excluir conta. Verifique com o suporte.")
         }
-    };
-
-    // ─── CONFIGURAÇÃO DOS ARRAYS DE CAMPOS PARA O SEU COMPONENTE ───
+    }
 
     const camposPerfil = [
         {
             label: "NOME DE EXIBIÇÃO",
-            input: <input className="conta-input-estilizado" type="text" name="nome" value={dados.nome} onChange={handleChange} />
+            input: (
+                <Input 
+                    type="text" 
+                    variante="configuracao" 
+                    value={dados.nome} 
+                    onChange={(e) => atualizarDado('nome', e.target.value)} 
+                />
+            )
         },
         {
             label: "SIGNO",
             input: (
-                <div className="signos-grid">
-                    {signos.map(s => (
-                        <button 
-                            key={s.id} 
-                            className={`signo-btn ${dados.signo === s.id ? 'ativo' : ''}`}
-                            onClick={() => setDados({ ...dados, signo: s.id })}
-                            title={s.id}
-                        >
-                            {s.icone}
-                        </button>
-                    ))}
-                </div>
+                <SelecaoSigno 
+                    value={dados.signo} 
+                    onChange={(valor) => atualizarDado('signo', valor)} 
+                />
             )
         }
     ];
@@ -148,34 +141,76 @@ const Conta = () => {
     const camposSeguranca = [
         {
             label: "EMAIL",
-            input: <input className="conta-input-estilizado" type="email" name="email" value={dados.email} onChange={handleChange} />
+            input: (
+                <Input 
+                    type="email" 
+                    variante="configuracao" 
+                    value={dados.email} 
+                    onChange={(e) => atualizarDado('email', e.target.value)} 
+                />
+            )
         },
         {
-            label: "SENHA ATUAL (Obrigatória para alterar senha)",
-            input: <input className="conta-input-estilizado" type="password" name="senhaAtual" placeholder="Digite a senha atual" value={dados.senhaAtual} onChange={handleChange} />
+            label: "SENHA ATUAL",
+            input: (
+                <InputSenha 
+                    variante="configuracao" 
+                    placeholder="Digite a senha atual" 
+                    value={dados.senhaAtual} 
+                    onChange={(e) => atualizarDado('senhaAtual', e.target.value)} 
+                />
+            )
         },
         {
             label: "NOVA SENHA",
-            input: <input className="conta-input-estilizado" type="password" name="novaSenha" placeholder="Digite sua nova senha" value={dados.novaSenha} onChange={handleChange} />
+            input: (
+                <InputSenha 
+                    variante="configuracao" 
+                    placeholder="Digite sua nova senha" 
+                    value={dados.novaSenha} 
+                    onChange={(e) => atualizarDado('novaSenha', e.target.value)} 
+                />
+            )
         },
         {
             label: "CONFIRMAR SENHA",
-            input: <input className="conta-input-estilizado" type="password" name="confirmarNovaSenha" placeholder="Confirme sua nova senha" value={dados.confirmarNovaSenha} onChange={handleChange} />
+            input: (
+                <InputSenha 
+                    variante="configuracao" 
+                    placeholder="Confirme sua nova senha" 
+                    value={dados.confirmarNovaSenha} 
+                    onChange={(e) => atualizarDado('confirmarNovaSenha', e.target.value)} 
+                />
+            )
         }
     ];
 
     const camposCiclo = [
         {
             label: "DIAS DO CICLO",
-            input: <input className="conta-input-estilizado" type="number" name="duracaoCiclo" value={dados.duracaoCiclo} onChange={handleChange} />
+            input: (
+                <Input 
+                    type="number" 
+                    variante="configuracao-numero" 
+                    value={dados.duracaoCiclo} 
+                    onChange={(e) => atualizarDado('duracaoCiclo', e.target.value)} 
+                />
+            )
         },
         {
             label: "DIAS DA MENSTRUAÇÃO",
-            input: <input className="conta-input-estilizado" type="number" name="duracaoMenstruacao" value={dados.duracaoMenstruacao} onChange={handleChange} />
+            input: (
+                <Input 
+                    type="number" 
+                    variante="configuracao-numero" 
+                    value={dados.duracaoMenstruacao} 
+                    onChange={(e) => atualizarDado('duracaoMenstruacao', e.target.value)} 
+                />
+            )
         }
     ];
 
-    if (isLoading) return <div className="conta-loading">Acessando os registros akáshicos...</div>;
+    if (isLoading) return <div className="conta-loading">Acessando os registros...</div>;
 
     return (
         <div className="conta-page-container">
@@ -185,8 +220,6 @@ const Conta = () => {
             </header>
 
             <div className="conta-conteudo">
-                
-                {/* 1. PERFIL */}
                 <CardConfig 
                     titulo="PERFIL" 
                     campos={camposPerfil} 
@@ -198,13 +231,13 @@ const Conta = () => {
                             backgroundColor="rgba(165, 140, 255, 0.05)"
                             color="rgba(165, 140, 255, 0.4)"
                             textColor="#D7CCFF"
+                            icone="✦"
                         >
-                            ✦ SALVAR PERFIL
+                            SALVAR PERFIL
                         </Button>
                     }
                 />
 
-                {/* 2. SEGURANÇA */}
                 <CardConfig 
                     titulo="SEGURANÇA" 
                     campos={camposSeguranca} 
@@ -216,13 +249,13 @@ const Conta = () => {
                             backgroundColor="rgba(165, 140, 255, 0.05)"
                             color="rgba(165, 140, 255, 0.4)"
                             textColor="#D7CCFF"
+                            icone="✦"
                         >
-                            ✦ ATUALIZAR CREDENCIAIS
+                            ATUALIZAR CREDENCIAIS
                         </Button>
                     }
                 />
 
-                {/* 3. CICLO (Aproveitando a prop camposDuplos para dividir as colunas!) */}
                 <CardConfig 
                     titulo="CICLO" 
                     campos={camposCiclo} 
@@ -235,13 +268,13 @@ const Conta = () => {
                             backgroundColor="rgba(165, 140, 255, 0.05)"
                             color="rgba(165, 140, 255, 0.4)"
                             textColor="#D7CCFF"
+                            icone="✦"
                         >
-                            ✦ SALVAR CICLO
+                            SALVAR CICLO
                         </Button>
                     }
                 />
 
-                {/* BOTÕES DE PERIGO/SAÍDA */}
                 <div className="conta-actions-footer">
                     <Button 
                         variant="padrao" 
@@ -249,22 +282,25 @@ const Conta = () => {
                         color="rgba(255, 68, 68, 0.4)" 
                         textColor="#FF8888"
                         onClick={handleExcluirConta}
+                        icone="⊗"
                     >
-                        ⊗ APAGAR CONTA
+                        APAGAR CONTA
                     </Button>
+                    
                     <Button 
                         variant="padrao" 
                         backgroundColor="transparent" 
                         color="rgba(165, 140, 255, 0.3)" 
                         textColor="#D7CCFF"
                         onClick={handleLogout}
+                        icone="⊗"
                     >
-                        ⊗ SAIR DA CONTA
+                        SAIR DA CONTA
                     </Button>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Conta;
+export default Conta
