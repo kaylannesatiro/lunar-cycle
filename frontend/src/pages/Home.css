@@ -1,0 +1,152 @@
+/* =========================================================
+   SHELL DO DASHBOARD PRINCIPAL
+   ========================================================= */
+.home-dashboard-shell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 7rem 1rem;
+    box-sizing: border-box;
+}
+
+.home-loading {
+    color: #E0C58F;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 10rem;
+    animation: pulsarSuave 2s infinite ease-in-out;
+}
+
+/* =========================================================
+   TEXTOS DO CABEÇALHO (CRONOS)
+   ========================================================= */
+.home-cronos-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.home-titulo-menor {
+    color: #E0C58F;
+    font-family: 'Cinzel', serif;
+    font-size: 9.6px;
+    font-weight: 400;
+    line-height: 14.4px;
+    letter-spacing: 4.8px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.home-dia-destaque {
+    color: #E0C58F;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 72px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 2.5px;
+    margin: 0;
+    text-shadow: 0 0 20px rgba(224, 197, 143, 0.15);
+}
+
+.home-mes-subtitulo {
+    color: #E0C58F;
+    font-family: "Cinzel", serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 6px;
+    margin: 0.2rem 0 0 0;
+}
+
+.home-frase-ano {
+    font-family: "Raleway", sans-serif;
+    font-size: 11px;
+    color: rgba(245, 240, 233, 0.5);
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+}
+
+/* =========================================================
+   BOTÃO E ÁREA DE AÇÃO
+   ========================================================= */
+.home-action-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+/* =========================================================
+   A ÓRBITA CURVA (Separador Estelar do Figma)
+   ========================================================= */
+.home-orbita-separador {
+    position: relative;
+    width: 120%; /* Estoura um pouco as pontas para dar profundidade infinita */
+    height: 60px;
+    margin: 1rem 0 3rem 0;
+    border-top: 0.667px solid rgba(224, 197, 143, 0.12);
+    border-radius: 50% / 15px 15px 0 0; /* Cria a curvatura parabólica de órbita */
+    display: flex;
+    justify-content: center;
+}
+
+.home-planeta-focal {
+    position: absolute;
+    top: -6px;
+    width: 11px;
+    height: 11px;
+    background: #FFF9ED;
+    border-radius: 50%;
+    box-shadow: 0 0 14px 4px rgba(224, 197, 143, 0.6);
+}
+
+/* =========================================================
+   SEÇÃO DO ORÁCULO E CALENDÁRIO
+   ========================================================= */
+.home-secao-oraculo,
+.home-secao-calendario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 3.5rem;
+}
+
+.home-titulo-sessao {
+    color: #E0C58F;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 0.4rem 0 2rem 0;
+}
+
+.home-calendario-wrapper {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+/* =========================================================
+   RESPONSIVIDADE INTELIGENTE
+   ========================================================= */
+@media (max-width: 768px) {
+    .home-dia-destaque { font-size: 56px; }
+    .home-mes-subtitulo { font-size: 18px; letter-spacing: 4px; }
+    .home-titulo-sessao { font-size: 16px; }
+    .home-orbita-separador { width: 100%; }
+}
+
+@keyframes pulsarSuave {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
