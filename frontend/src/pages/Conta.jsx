@@ -232,9 +232,6 @@ const Conta = () => {
                             variant="padrao" 
                             onClick={handleSalvarPerfil} 
                             isLoading={isSaving}
-                            backgroundColor="linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%)"
-                            color="rgba(224, 197, 143, 0.30)" 
-                            textColor="#E0C58F"
                             maxWidth="100%"
                         >
                             ◈ SALVAR PERFIL
@@ -248,11 +245,8 @@ const Conta = () => {
                     botao={
                         <Button 
                             variant="padrao" 
-                            onClick={handleSalvarPerfil} 
+                            onClick={handleSalvarSeguranca} 
                             isLoading={isSaving}
-                            backgroundColor="linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%)"
-                            color="rgba(224, 197, 143, 0.30)" 
-                            textColor="#E0C58F"
                             maxWidth="100%"
                         >
                             ◈ Atualizar credenciais
@@ -267,11 +261,8 @@ const Conta = () => {
                     botao={
                         <Button 
                             variant="padrao" 
-                            onClick={handleSalvarPerfil} 
+                            onClick={handleSalvarCiclo} 
                             isLoading={isSaving}
-                            backgroundColor="linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%)"
-                            color="rgba(224, 197, 143, 0.30)" 
-                            textColor="#E0C58F"
                             maxWidth="100%"
                         >
                             ◈ Salvar ciclo
