@@ -41,7 +41,7 @@ const buscarPorId = async(id, idUsuaria) => {
 
 const atualizarSonho = async(id, usuariaId, titulo, descricao, dataSonho, faseLunar, tags) => {
     //Retorna o resultado da segunda operacao (o update) ignorando o resultado do deleteMany
-
+    //const usa _ para ignorar o primeiro resultado do array retornado pelo prisma.$transaction (destucturing)
     const [_, sonhoAtualizado] = await prisma.$transaction([
         //deletar as tags antigas associadas ao sonho
         prisma.tagSonho.deleteMany({
