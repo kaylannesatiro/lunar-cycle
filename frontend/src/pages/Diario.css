@@ -9,6 +9,10 @@
   min-height: 100vh;
   padding-top: 4rem;
   box-sizing: border-box;
+
+  /* ─── ADICIONE ESTAS DUAS LINHAS: Bloqueio total de vazamento lateral ─── */
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* ==========================================================================
@@ -218,4 +222,19 @@
   /* Margem para dar um respiro perfeito entre o cabeçalho e os filtros */
   margin: 1rem 0 3rem 0; 
   flex-shrink: 0;
+}
+
+@media (max-width: 33.75rem) { /* 540px */
+  .diario-titulo-principal {
+    font-size: 2.5rem; /* Encolhe o tamanho da letra no celular para caber em telas de 320px */
+    line-height: 3rem;
+    letter-spacing: 0.1rem;
+    width: 100%;       /* O título assume a largura da tela do celular */
+    max-width: 100%;
+  }
+  
+  .diario-header {
+    min-height: auto;  /* Remove a altura fixa de 610px no mobile para não gerar buracos brancos */
+    padding: 2rem 0;
+  }
 }

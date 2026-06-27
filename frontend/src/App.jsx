@@ -19,14 +19,3 @@ function App() {
 }
 
 export default App;
-
-/*
-  <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route path="home" element={<h1>Home</h1>} />
-          <Route path="diario" element={<Diario/>} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-*/
