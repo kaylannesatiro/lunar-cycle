@@ -137,10 +137,15 @@ const atualizarSonho = async (id, usuariaId, dados) => {
     //praticamente reaproveitei a função de criar sonho, mas com a diferença de que aqui chamamos o método de atualizar do repositório, que já cuida de deletar as tags antigas e criar as novas, garantindo o isolamento da usuária.
 };
 
+const deletarSonho = async (id, usuariaId) =>{
+    await buscarSonhoPorId(id, usuariaId); //verifica se o sonho existe e pertence à usuária, se falhar, lança erro 404 automaticamente
+    return await sonhoRepository.deletarSonho(id, usuariaId);
+}
+
 
 module.exports = {
     criarSonho,
     buscarSonhoPorId,
-    atualizarSonho
-
+    atualizarSonho,
+    deletarSonho
 };
