@@ -50,7 +50,6 @@ const formatarChaveData = (ano, mes, dia) => {
 const obterDiasNoMes = (ano, mes) => new Date(ano, mes + 1, 0).getDate();
 
 const obterDiaDaSemanaInicial = (ano, mes) => new Date(ano, mes, 1).getDay();
-
 const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, eHoje, aoClicar }) => {
 
     let classeDoDia = "cal-dia";
@@ -63,15 +62,15 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
     return (
         <div className={classeDoDia} onClick={aoClicar}>
 
-            <div className="cal-dia__topo">
-                <span className="cal-dia__numero">{numeroDia}</span>
-
-                {(estaMenstruada || estaPrevisto) && (
+            {(estaMenstruada || estaPrevisto) && (
+                <div className="cal-dia__topo">
                     <div className="cal-dia__icone-gota">
                         <IconeGota />
                     </div>
-                )}
-            </div>
+                </div>
+            )}
+
+            <span className="cal-dia__numero">{numeroDia}</span>
 
             <img
                 src={imagemDaFase}
