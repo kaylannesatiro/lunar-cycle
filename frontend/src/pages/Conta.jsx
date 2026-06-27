@@ -1,6 +1,6 @@
-import "./Diario.css"
+import "./Conta.css"
 
-const Diario = () => {
+const Conta = () => {
     return (
         <>
             <h1>Teste</h1>
@@ -8,4 +8,4 @@ const Diario = () => {
     )
 }
 
-export default Diario
+export default Conta
