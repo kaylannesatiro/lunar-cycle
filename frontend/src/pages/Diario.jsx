@@ -223,15 +223,15 @@ const Diario = () => {
                 />
 
                 {temMaisSonhos && !isLoading && sonhosBrutos.length > 0 && (
-                    <div style={{ marginTop: '2rem', marginBottom: '4rem', display: 'flex', width: '100%', justifyContent: 'center' }}>
+                    <div className="diario-wrapper-paginacao">
                         <Button 
-                            variant="padrao" 
-                            onClick={carregarProximaPagina}
-                            backgroundColor="rgba(165, 140, 255, 0.05)"
-                            color="rgba(165, 140, 255, 0.4)"
+                            variant="redondo" 
+                            icone="✦"
+                            backgroundColor="linear-gradient(135deg, rgba(110, 76, 163, 0.28) 0%, rgba(75, 45, 115, 0.16) 100%)"
+                            color="#A58CFF" 
                             textColor="#D7CCFF"
                         >
-                            Carregar Jornadas Anteriores
+                            Carregar Mais Sonhos
                         </Button>
                     </div>
                 )}

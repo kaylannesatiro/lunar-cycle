@@ -238,3 +238,29 @@
     padding: 2rem 0;
   }
 }
+
+/* ==========================================================================
+   CONTAINER DO BOTÃO CARREGAR MAIS (Alinhamento Perfeito)
+   ========================================================================== */
+.diario-wrapper-paginacao {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  
+  /* Margem negativa sutil para neutralizar o recuo de fundo da linha do tempo */
+  margin-top: -3.5rem; 
+  margin-bottom: 5rem;
+  
+  /* Garante que o botão fique na camada interativa correta */
+  position: relative;
+  z-index: 10; 
+}
+
+/* Ajuste responsivo para o botão não ficar colado no rodapé no celular */
+@media (max-width: 33.75rem) {
+  .diario-wrapper-paginacao {
+    margin-top: -1rem;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+  }
+}
