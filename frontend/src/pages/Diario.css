@@ -1,32 +1,24 @@
-/* ==========================================================================
-   CONTAINER PRINCIPAL DA PÁGINA (Blindagem de Rolagem)
-   ========================================================================== */
 .diario-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 100vw; /* Força a página a nunca ser maior que o vidro da tela */
+  max-width: 100vw; 
   min-height: 100vh;
   padding-top: 4rem;
   box-sizing: border-box;
   position: relative;
-  
-  /* ─── ANTIDOTO DA ROLAGEM: Corta qualquer vazamento horizontal do título ou glows ─── */
   overflow-x: hidden; 
 }
 
-/* ==========================================================================
-   CABEÇALHO E EFEITOS DE LUZ
-   ========================================================================== */
 .diario-header {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 57.5rem;   /* 920px */
-  min-height: 38.18rem; /* 610.979px */
+  max-width: 57.5rem;
+  min-height: 38.18rem; 
   margin-bottom: 2rem;
   overflow: hidden; 
 }
@@ -67,9 +59,6 @@
   z-index: 2;
 }
 
-/* ==========================================================================
-   TIPOGRAFIA DO CABEÇALHO
-   ========================================================================== */
 .diario-badge-topo {
   display: flex;
   align-items: center;
@@ -122,9 +111,6 @@
   margin: 0 0 3rem 0;
 }
 
-/* ==========================================================================
-   DIVISOR E ELEMENTOS DE CONTEÚDO
-   ========================================================================== */
 .diario-divisor-principal {
   width: 100%;
   max-width: 35rem;
@@ -143,26 +129,16 @@
   box-sizing: border-box;
 }
 
-/* ==========================================================================
-   CONTAINER DO BOTÃO CARREGAR MAIS (Cliques Livres e Protegidos)
-   ========================================================================== */
 .diario-wrapper-paginacao {
   display: flex;
   width: 100%;
   justify-content: center;
-  
-  /* ─── CORRIGIDO: Removido o negativo! Agora usa espaçamento real e limpo ─── */
   margin-top: 1.5rem; 
   margin-bottom: 5rem;
-  
   position: relative;
-  /* ─── CORRIGIDO: Z-index alto garante que ele flutue acima de qualquer coisa ─── */
   z-index: 50; 
 }
 
-/* ==========================================================================
-   RESPONSIVIDADE PREMIUM
-   ========================================================================== */
 @media (max-width: 48rem) {
   .diario-header {
     min-height: 25rem;
