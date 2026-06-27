@@ -1,55 +1,68 @@
 .signo-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); 
+    gap: 8px;
     width: 100%;
-    max-width: 27.25rem;
-    justify-content: space-between; 
-    align-items: center;
-    flex-wrap: wrap; 
+    box-sizing: border-box;
 }
 
 .signo-caixa {
+    height: 48px;
     display: flex;
-    width: 1.875rem; 
-    height: 1.875rem; 
-    justify-content: center;
     align-items: center;
-    flex-shrink: 0;
-    border-radius: 0.75rem;
-    border: 0.04rem solid rgba(224, 197, 143, 0.30);
+    justify-content: center;
     background: rgba(17, 34, 80, 0.40);
-    box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
+    border: 0.67px solid #E0C58F66; 
+    border-radius: 8px; 
     cursor: pointer;
-    padding: 0; 
-    transition: all 0.3s ease; 
+    transition: all 0.25s ease;
 }
 
 .signo-caixa:hover {
-    background: rgba(224, 197, 143, 0.2);
-    border-color: #E0C58F;
+    border-color: rgba(110, 165, 255, 0.5); 
+    background: rgba(110, 165, 255, 0.05); 
 }
 
-.signo-caixa.ativo {
-    background: rgba(224, 197, 143, 0.5); 
-    border-color: #E0C58F;
-    box-shadow: 0 0 0.5rem rgba(224, 197, 143, 0.6); 
+.signo-caixa.ativo {  
+    border: 1px solid #E0C58F; 
+    background: linear-gradient(135deg, rgba(110, 165, 255, 0.25) 0%, rgba(110, 165, 255, 0.08) 100%);
+    box-shadow: 0px 0px 12px rgba(110, 165, 255, 0.25);
 }
 
 .signo-icone {
-    width: 1.5rem; 
-    flex-shrink: 0;
-    color: #F5F0E9;
-    text-align: center;
-    font-family: "Cinzel", serif;
-    font-size: 1rem; 
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.0525rem; 
+    font-size: 1.5rem; 
+    color: rgba(165, 195, 255, 0.70); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.25s ease;
 }
 
-@media (max-width: 28rem) {
+.signo-caixa:hover .signo-icone {
+    color: rgba(110, 165, 255, 0.95); 
+}
+
+.signo-caixa.ativo .signo-icone {
+    color: #E0C58F !important; 
+    filter: drop-shadow(0px 0px 4px rgba(110, 165, 255, 0.6)); 
+}
+
+@media (max-width: 740px) {
     .signo-container {
-        gap: 0.5rem;
-        justify-content: center; 
+        grid-template-columns: repeat(6, 1fr); 
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signo-container {
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 8px;
+    }
+}
+
+@media (max-width: 350px) {
+    .signo-container {
+        grid-template-columns: repeat(3, 1fr); /
     }
 }
