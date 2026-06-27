@@ -8,5 +8,8 @@ const verificarToken = require('../middlewares/autenticacao');
 router.post('/', verificarToken, sonhoController.criarSonho);
 // ROTA GET /:id - Buscar detalhes de um sonho específico
 router.get('/:id', verificarToken, sonhoController.buscarSonhoPorId);
+// ROTA PUT /:id - Editar um registro do diário de sonhos
+// Body esperado: { titulo, descricao, dataSonho, tags }
+router.put('/:id', verificarToken, sonhoController.atualizarSonho);
 
 module.exports = router;

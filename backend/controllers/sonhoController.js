@@ -33,8 +33,35 @@ const buscarSonhoPorId = async (req, res) => {
     }
 };
 
+const atualizarSonho = async (req, res) => {
+    try {
+        const usuariaId = req.usuariaId; // Veio do token
+        const { id } = req.params; // Veio da URL
+        const dados = req.body; // Dados novos do sonho
+
+        const sonhoAtualizado = await sonhoService.atualizarSonho(id, usuariaId, dados);
+        
+        return res.status(200).json(sonhoAtualizado);
+    } catch (error) {
+        // Se for erro de 404 (Sonho não encontrado)
+        if (error.status === 404) {
+            return res.status(404).json({ erro: error.message });
+        }
+        
+        // Se for erro de validação (tamanho, data, etc)
+        if (error.message && error.message !== 'Usuária não encontrada') {
+            return res.status(400).json({ erro: error.message });
+        }
+        
+        // Erro genérico
+        return res.status(500).json({ 
+            erro: 'Ocorreu um erro ao salvar a edição.' 
+        });
+    }
+};
 
 module.exports = {
     criarSonho,
-    buscarSonhoPorId
+    buscarSonhoPorId,
+    atualizarSonho
 }
