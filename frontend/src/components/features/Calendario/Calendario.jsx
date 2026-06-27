@@ -48,7 +48,6 @@ const formatarChaveData = (ano, mes, dia) => {
 };
 
 const obterDiasNoMes = (ano, mes) => new Date(ano, mes + 1, 0).getDate();
-
 const obterDiaDaSemanaInicial = (ano, mes) => new Date(ano, mes, 1).getDay();
 const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, eHoje, aoClicar }) => {
 
@@ -72,17 +71,20 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
 
             <span className="cal-dia__numero">{numeroDia}</span>
 
-            <img
-                src={imagemDaFase}
-                alt={faseDaLua}
-                className="cal-dia__icone-lua"
-            />
+            <div className="cal-dia__lua-wrapper">
+                <img
+                    src={imagemDaFase}
+                    alt={faseDaLua}
+                    className="cal-dia__icone-lua"
+                />
+            </div>
 
         </div>
     );
 };
 
 const Calendario = ({ diasMenstruacao = [], diasPrevistos = [], fasesLunares = {}, onDayClick }) => {
+
     const hoje = new Date();
     const [mesAtual, setMesAtual] = useState(hoje.getMonth());
     const [anoAtual, setAnoAtual] = useState(hoje.getFullYear());

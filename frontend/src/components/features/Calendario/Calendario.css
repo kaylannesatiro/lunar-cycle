@@ -175,14 +175,23 @@
     font-weight: 700;
 }
 
+.cal-dia__lua-wrapper {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    box-shadow:
+        0px 0px 22.76px 0px rgba(224, 197, 143, 0.016),
+        0px 0px 82.45px 0px rgba(224, 197, 143, 0.306),
+        0px 0px 30.66px 0px rgba(245, 240, 233, 0.518);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .cal-dia__icone-lua {
     width: 28px;
     height: 28px;
     object-fit: contain;
-    filter:
-        drop-shadow(0px 0px 22.76px rgba(224, 197, 143, 0.016))
-        drop-shadow(0px 0px 82.45px rgba(224, 197, 143, 0.306))
-        drop-shadow(0px 0px 30.66px rgba(245, 240, 233, 0.518));
 }
 
 .cal-dia__icone-gota {
