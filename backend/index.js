@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const authRoutes = require('./routers/authRoutes');
 const ciclosRoutes = require('./routers/ciclosRoutes');
+const sonhoRoutes = require('./routers/sonhoRoutes');
 
 // Middleware
 app.use(cors());
@@ -12,6 +13,7 @@ app.use(express.json());
 // Rota para autenticação
 app.use('/api/auth', authRoutes);
 app.use('/api/ciclos', ciclosRoutes);
+app.use('/api/sonhos', sonhoRoutes);
 
 
 const PORT = process.env.PORT || 3000;
