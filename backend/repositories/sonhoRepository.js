@@ -37,7 +37,48 @@ const buscarPorId = async(id, idUsuaria) => {
     });
 }
 
+//Atualizar um sonho e substitui suas tags, garantindo isolamento da usuaria
+
+const atualizarSonho = async(id, usuariaId, titulo, descricao, dataSonho, faseLunar, tags) => {
+    //Retorna o resultado da segunda operacao (o update) ignorando o resultado do deleteMany
+    //const usa _ para ignorar o primeiro resultado do array retornado pelo prisma.$transaction (destucturing)
+    const [_, sonhoAtualizado] = await prisma.$transaction([
+        //deletar as tags antigas associadas ao sonho
+        prisma.tagSonho.deleteMany({
+            where:{
+                sonhoId: id
+            }
+        }),
+        //atualizar o sonho com os novos dados e criar as novas tags
+        prisma.sonho.update({
+            where:{
+                id: id,
+                //garante que a usuaria so possa atualizar seus proprios sonhos
+                usuariaId: usuariaId
+            },
+            data:{
+                titulo,
+                descricao,
+                dataSonho,
+                faseLunar,
+                tags:{
+                    create: tags.map(tag => ({
+                        nomeTag: tag
+                    }))
+                }
+            },
+            include:{
+                tags: true
+            }
+        })
+    ]);
+
+    return sonhoAtualizado;
+
+}
+
 module.exports = {
     criarSonho,
-    buscarPorId
+    buscarPorId,
+    atualizarSonho
 }
