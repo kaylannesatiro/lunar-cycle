@@ -143,8 +143,38 @@ const deletarSonho = async (id, usuariaId) =>{
 }
 
 
-const listarSonhos = async (usuariaId) => {
-    return await sonhoRepository.listarSonhos(usuariaId);
+const listarSonhos = async (usuariaId, filtros = {}) => {
+    const { tag, dataInicio, dataFim } = filtros;
+    let filtrosFormatadados = {};
+
+    //Trata a tag, se existir (suporta array ou string separada por vírgula)
+    if(tag){
+        if (Array.isArray(tag)) {
+            filtrosFormatadados.tags = tag.map(t => t.trim().toLowerCase());
+        } else if (typeof tag === 'string') {
+            filtrosFormatadados.tags = tag.split(',').map(t => t.trim().toLowerCase());
+        }
+    }
+
+    //validar as datas cruzadas
+    if(dataInicio && dataFim){
+        const inicio = new Date(dataInicio+'T00:00:00Z');
+        const fim = new Date(dataFim+'T23:59:59Z');
+        if(inicio > fim){
+            throw new Error('A data de início não pode ser maior que a data de fim.');
+        }
+    }
+
+    //Formata as datas oara abranger o dia inteiro (Inclusivo)
+
+    if(dataInicio){
+        filtrosFormatadados.dataInicio = new Date(dataInicio+'T00:00:00Z');
+    }
+
+    if(dataFim){
+        filtrosFormatadados.dataFim = new Date(dataFim+'T23:59:59Z');
+    }
+    return await sonhoRepository.listarSonhos(usuariaId, filtrosFormatadados);
 }
 
 module.exports = {
