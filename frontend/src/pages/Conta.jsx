@@ -230,9 +230,8 @@ const Conta = () => {
                             backgroundColor="rgba(165, 140, 255, 0.05)"
                             color="rgba(165, 140, 255, 0.4)"
                             textColor="#D7CCFF"
-                            icone="✦"
                         >
-                            SALVAR PERFIL
+                            ◈ Salvar perfil
                         </Button>
                     }
                 />
@@ -248,9 +247,8 @@ const Conta = () => {
                             backgroundColor="rgba(165, 140, 255, 0.05)"
                             color="rgba(165, 140, 255, 0.4)"
                             textColor="#D7CCFF"
-                            icone="✦"
                         >
-                            ATUALIZAR CREDENCIAIS
+                            ◈ Atualizar credenciais
                         </Button>
                     }
                 />
@@ -267,9 +265,8 @@ const Conta = () => {
                             backgroundColor="rgba(165, 140, 255, 0.05)"
                             color="rgba(165, 140, 255, 0.4)"
                             textColor="#D7CCFF"
-                            icone="✦"
                         >
-                            SALVAR CICLO
+                            ◈ Salvar ciclo
                         </Button>
                     }
                 />
