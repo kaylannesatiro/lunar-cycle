@@ -14,6 +14,6 @@ router.put('/:id', verificarToken, sonhoController.atualizarSonho);
 // ROTA DELETE /:id - Excluir um registro do diário de sonhos
 router.delete('/:id', verificarToken, sonhoController.excluir);
 // ROTA GET / - Listar todos os sonhos da usuária
-router.get('/', verificarToken, sonhoController.listar);
+router.get('/', verificarToken, sonhoController.listarSonhos);
 
 module.exports = router;
