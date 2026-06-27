@@ -196,7 +196,7 @@ const Diario = () => {
                     mensagemVazia={
                         filtrosAtivos.tags.length > 0 || filtrosAtivos.periodo !== "TODOS"
                             ? "Nenhuma jornada astral sintonizada com os filtros aplicados..."
-                            : "Seu diário ainda está em branco..."
+                            : "Seu diário ainda está em branco, sonhe e registre suas aventuras noturnas!"
                     }
                 />
 
