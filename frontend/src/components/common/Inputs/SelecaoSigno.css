@@ -1,25 +1,18 @@
-/* =========================================================
-   CONTAINER DOS SIGNOS (Todos travados em uma única linha)
-   ========================================================= */
 .signo-container {
     display: grid;
-    /* Força exatamente 12 colunas iguais, uma para cada signo */
     grid-template-columns: repeat(12, 1fr); 
     gap: 8px;
     width: 100%;
     box-sizing: border-box;
 }
 
-/* =========================================================
-   A CAIXINHA DO BOTÃO (Tamanho original mantido)
-   ========================================================= */
 .signo-caixa {
-    height: 48px; /* Altura original intocada */
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(13, 26, 61, 0.4); 
-    border: 1px solid rgba(110, 165, 255, 0.15); 
+    background: rgba(17, 34, 80, 0.40);
+    border: 0.67px solid #E0C58F66; 
     border-radius: 8px; 
     cursor: pointer;
     transition: all 0.25s ease;
@@ -30,19 +23,15 @@
     background: rgba(110, 165, 255, 0.05); 
 }
 
-/* Estado ativo (Azul celestial) */
 .signo-caixa.ativo {  
-    border: 1px solid #6EA5FF; 
+    border: 1px solid #E0C58F; 
     background: linear-gradient(135deg, rgba(110, 165, 255, 0.25) 0%, rgba(110, 165, 255, 0.08) 100%);
     box-shadow: 0px 0px 12px rgba(110, 165, 255, 0.25);
 }
 
-/* =========================================================
-   ESTILIZAÇÃO DOS ÍCONES (Nítidos e fortes)
-   ========================================================= */
 .signo-icone {
-    font-size: 1.5rem; /* Tamanho original mantido */
-    color: rgba(165, 195, 255, 0.70); /* Azul forte e bem visível */
+    font-size: 1.5rem; 
+    color: rgba(165, 195, 255, 0.70); 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,17 +43,12 @@
 }
 
 .signo-caixa.ativo .signo-icone {
-    color: #6EA5FF !important; /* Azul 100% opaco ao ativar */
+    color: #E0C58F !important; 
     filter: drop-shadow(0px 0px 4px rgba(110, 165, 255, 0.6)); 
 }
 
-/* =========================================================
-   RESPONSIVIDADE (Garante rolagem de lado em telas muito pequenas)
-   ========================================================= */
 @media (max-width: 768px) {
     .signo-container {
-        /* Se a tela do celular for menor que os 12 botões, 
-           ele cria uma rolagem horizontal suave em vez de esmagar os ícones */
         overflow-x: auto;
         padding-bottom: 8px;
     }
