@@ -1,4 +1,3 @@
-const { id } = require('zod/v4/locales');
 const prisma = require('../config/prisma');
 
 // Cria um registro de sonho e suas respectivas tags no banco de dados
