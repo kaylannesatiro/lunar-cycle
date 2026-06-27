@@ -1,6 +1,3 @@
-/* =========================================================
-   CONTAINER GERAL DA PÁGINA
-   ========================================================= */
 .conta-page-container {
     display: flex;
     flex-direction: column;
@@ -20,9 +17,6 @@
     animation: pulsar 2s infinite;
 }
 
-/* =========================================================
-   CABEÇALHO E TÍTULOS (Ajustes do Figma)
-   ========================================================= */
 .conta-header {
     display: flex;
     flex-direction: column;
@@ -44,7 +38,7 @@
     font-size: 9.6px;
     font-style: normal;
     font-weight: 400;
-    line-height: 14.4px; /* 150% */
+    line-height: 14.4px; 
     letter-spacing: 4.8px;
     text-transform: uppercase;
     margin: 0;
@@ -65,16 +59,13 @@
     font-size: 44.8px;
     font-style: normal;
     font-weight: 400;
-    line-height: 67.2px; /* 150% */
+    line-height: 67.2px;
     letter-spacing: 2.688px;
     width: 100%;
     max-width: 780px;
     margin: 0;
 }
 
-/* =========================================================
-   CONTAINER DOS CARDS (Conteúdo Principal)
-   ========================================================= */
 .conta-conteudo {
     display: flex;
     width: 100%;
@@ -85,9 +76,6 @@
     gap: 32px;
 }
 
-/* =========================================================
-   CONTAINER DOS BOTÕES FINAIS (Ações)
-   ========================================================= */
 .conta-actions-footer {
     display: flex;
     width: 100%;
@@ -95,12 +83,9 @@
     padding: 0 20px;
     justify-content: space-between;
     align-items: center;
-    box-sizing: border-box; /* Garante que o padding não estoure a largura total */
+    box-sizing: border-box;
 }
 
-/* =========================================================
-   AJUSTES RESPONSIVOS (Mobile)
-   ========================================================= */
 @media (max-width: 768px) {
     .conta-titulo {
         font-size: 28px;
