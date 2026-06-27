@@ -1,21 +1,21 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import MainLayout from './layouts/MainLayout'
+import Diario from './pages/Diario'
 import './App.css';
-import Background from './components/common/Base/Background';
-import OraculoLunar from './components/features/Ciclo/CardOraculo';
 
 function App() {
-    return (
-      <Background>
-        <div style={{ 
-          width: '100%', 
-          padding: '1rem', 
-          boxSizing: 'border-box', 
-          display: 'flex', 
-          justifyContent: 'center' 
-        }}>
-          <OraculoLunar diaDoCiclo={14} estaMenstruada={false} />
-        </div>
-      </Background>
-    );
+  return (
+    <>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route path="home" element={<h1>Home</h1>} />
+          <Route path="diario" element={<Diario/>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    </>
+  );
 }
 
 export default App;

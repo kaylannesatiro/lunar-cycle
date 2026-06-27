@@ -1,0 +1,31 @@
+.main-layout-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.main-layout-paint-window {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.menu-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.footer-wrapper {
+    width: 100%;
+    margin-top: auto;
+}
