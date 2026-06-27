@@ -101,10 +101,10 @@ const Conta = () => {
     const handleSalvarSeguranca = async () => {
         if (mostrarCamposSenha) {
             if (dados.novaSenha && dados.novaSenha !== dados.confirmarNovaSenha) {
-                return alert("A nova senha e a confirmação não coincidem.")
+                return exibirErro("A nova senha e a confirmação não coincidem.", handleSalvarSeguranca)
             }
             if (dados.novaSenha && !dados.senhaAtual) {
-                return alert("Digite sua senha atual para alterar a senha.")
+                return exibirErro("Digite sua senha atual para alterar a senha.", handleSalvarSeguranca)
             }
         }
 
@@ -118,13 +118,13 @@ const Conta = () => {
             }
             
             await authService.atualizarPerfil(payload)
-            alert("Segurança atualizada com sucesso!")
+            exibirSucesso()
             
             setDados(prev => ({ ...prev, senhaAtual: '', novaSenha: '', confirmarNovaSenha: '' }));
             setMostrarCamposSenha(false);
             
         } catch (error) {
-            alert(error.message)
+            exibirErro(error.message || "Ocorreu um problema ao atualizar suas credenciais.", handleSalvarSeguranca)
         } finally {
             setIsSavingSeguranca(false) 
         }
