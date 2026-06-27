@@ -1,35 +1,38 @@
 const obterFaseLunar = (data) => {
-    //Duração exata de um ciclo lunar completo é de 29.530588853 dias, ou 29 dias, 12 horas, 44 minutos e 2,8 segundos.
-    const CICLO_LUNAR_MS = 29.530588853 * 24 * 60 * 60 * 1000;
+    // Duração exata de um ciclo lunar completo
+    const CICLO_LUNAR_DIAS = 29.530588853;
+    const CICLO_LUNAR_MS = CICLO_LUNAR_DIAS * 24 * 60 * 60 * 1000;
 
-    //Data histórica de uma lua nova de referencia(6 de janeiro de 2000)
+    // Data histórica de uma lua nova de referência (6 de janeiro de 2000)
     const LUA_NOVA_REFERENCIA = new Date('2000-01-06T18:14:00Z').getTime();
 
-    //Tempo decorrido desde a lua nova de referência até a data fornecida
+    // Tempo decorrido desde a lua nova de referência até a data fornecida
     const tempoDecorrido = data.getTime() - LUA_NOVA_REFERENCIA;
 
-    //Quantos dias se passaram dentro do ciclo atual de 29.5 dias
-
+    // Quantos dias se passaram dentro do ciclo atual de 29.5 dias
     let diasDoCiclo = (tempoDecorrido % CICLO_LUNAR_MS) / (24 * 60 * 60 * 1000);
 
     // Se for negativo, ajusta para o ciclo positivo
-
     if (diasDoCiclo < 0) {
-        diasDoCiclo += 29.530588853;
+        diasDoCiclo += CICLO_LUNAR_DIAS;
     }
 
+    // O ciclo tem 8 fases. Em vez de vários "if/else", criamos 8 "fatias" matemáticas.
+    // Adicionamos meia fatia (CICLO_LUNAR_DIAS / 16) para centralizar a Lua Nova no dia 0.
+    const indice = Math.floor(((diasDoCiclo + (CICLO_LUNAR_DIAS / 16)) / CICLO_LUNAR_DIAS) * 8) % 8;
 
-    // Determina a fase da lua com base nos dias do ciclo
-    if (diasDoCiclo >= 0 && diasDoCiclo < 7.38) {
-        return { nome: 'Nova', icone: '🌑' };
-    } else if (diasDoCiclo >= 7.38 && diasDoCiclo < 14.76) {
-        return { nome: 'Crescente', icone: '🌓' };
-    } else if (diasDoCiclo >= 14.76 && diasDoCiclo < 22.14) {
-        return { nome: 'Cheia', icone: '🌕' };
-    } else {
-        return { nome: 'Minguante', icone: '🌗' };
-    }
+    const fases = [
+        { nome: 'Nova', icone: '🌑' },
+        { nome: 'Crescente Côncava', icone: '🌒' },
+        { nome: 'Quarto Crescente', icone: '🌓' },
+        { nome: 'Gibosa Crescente', icone: '🌔' },
+        { nome: 'Cheia', icone: '🌕' },
+        { nome: 'Gibosa Minguante', icone: '🌖' },
+        { nome: 'Quarto Minguante', icone: '🌗' },
+        { nome: 'Minguante Côncava', icone: '🌘' }
+    ];
 
+    return fases[indice];
 }
 
 module.exports = {
