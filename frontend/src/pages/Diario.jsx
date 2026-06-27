@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { sonhosServiceFrontend } from "../services/sonhoService" 
 import FiltroSonhos from "../components/features/Diario/FiltroSonhos"
 import LinhaDoTempo from "../components/features/Diario/LinhaTempo"
+import Button from "../components/common/Buttons/Button"
 
 const Diario = () => {
     const [sonhosBrutos, setSonhosBrutos] = useState([])
@@ -132,12 +133,16 @@ const Diario = () => {
                         "A lua guarda os segredos que sua alma sussurrou<br/>enquanto você sonhava."
                     </p>
                     
-                    <button 
-                        className="diario-btn-registrar" 
+                    <Button 
+                        variant="redondo" 
+                        icone="✦"
+                        backgroundColor="linear-gradient(135deg, rgba(110, 76, 163, 0.28) 0%, rgba(75, 45, 115, 0.16) 100%)"
+                        color="#A58CFF" 
+                        textColor="#D7CCFF"
                         onClick={() => setModalAberto(true)}
                     >
-                        ✦ REGISTRAR SONHO
-                    </button>
+                        REGISTRAR SONHO
+                    </Button>
                 </div>
             </header>
 
