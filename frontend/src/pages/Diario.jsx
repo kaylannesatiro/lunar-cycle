@@ -167,32 +167,43 @@ const Diario = () => {
 
         if (filtrosAtivos.periodo !== "TODOS") {
             const hoje = new Date()
+
             filtrados = filtrados.filter((sonho) => {
                 const dataDoSonho = new Date(sonho.dataSonho)
+                const periodo = filtrosAtivos.periodo
 
-                if (filtrosAtivos.datas && filtrosAtivos.datas.inicio && filtrosAtivos.datas.fim) {
+                if (filtrosAtivos.datas?.inicio && filtrosAtivos.datas?.fim) {
                     const inicio = new Date(filtrosAtivos.datas.inicio)
                     const fim = new Date(filtrosAtivos.datas.fim)
                     fim.setHours(23, 59, 59, 999)
                     return dataDoSonho >= inicio && dataDoSonho <= fim
                 }
 
-                if (filtrosAtivos.periodo === "SEMANA") {
-                    const semanaPassada = new Date()
-                    semanaPassada.setDate(hoje.getDate() - 7)
-                    return dataDoSonho >= semanaPassada
+                if (/^\d{4}$/.test(periodo)) {
+                    return dataDoSonho.getFullYear().toString() === periodo
                 }
 
-                if (filtrosAtivos.periodo === "MÊS") {
-                    const mesPassado = new Date()
-                    mesPassado.setMonth(hoje.getMonth() - 1)
-                    return dataDoSonho >= mesPassado
+                if (periodo.includes(" ")) {
+                    const mesesMap = {
+                        Jan: 0, Fev: 1, Mar: 2, Abr: 3, Mai: 4, Jun: 5,
+                        Jul: 6, Ago: 7, Set: 8, Out: 9, Nov: 10, Dez: 11
+                    }
+                    const [mesTexto, anoTexto] = periodo.split(" ")
+                    const mesAlvo = mesesMap[mesTexto]
+                    
+                    return dataDoSonho.getMonth() === mesAlvo && dataDoSonho.getFullYear().toString() === anoTexto
                 }
 
-                if (filtrosAtivos.periodo === "ANO") {
-                    const anoPassado = new Date()
-                    anoPassado.setFullYear(hoje.getFullYear() - 1)
-                    return dataDoSonho >= anoPassado;
+                if (periodo.includes("a") && periodo.includes("/")) {
+                    const [inicioParte, fimParte] = periodo.split(" a ")
+                    const [diaIni, mesIni] = inicioParte.split("/").map(Number)
+                    const [diaFim, mesFim] = fimParte.split("/").map(Number)
+
+                    const anoAtual = hoje.getFullYear()
+                    const dataInicioSemana = new Date(anoAtual, mesIni - 1, diaIni, 0, 0, 0)
+                    const dataFimSemana = new Date(anoAtual, mesFim - 1, diaFim, 23, 59, 59)
+
+                    return dataDoSonho >= dataInicioSemana && dataDoSonho <= dataFimSemana
                 }
 
                 return true
