@@ -192,6 +192,12 @@ const Diario = () => {
                     sonhosAgrupados={dadosProntos} 
                     isLoading={isLoading} 
                     onCardClick={(id) => console.log(`Abrir visualização do sonho: ${id}`)}
+        
+                    mensagemVazia={
+                        filtrosAtivos.tags.length > 0 || filtrosAtivos.periodo !== "TODOS"
+                            ? "Nenhuma jornada astral sintonizada com os filtros aplicados..."
+                            : "Seu diário ainda está em branco..."
+                    }
                 />
 
                 {temMaisSonhos && !isLoading && sonhosBrutos.length > 0 && (
