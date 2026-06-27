@@ -1,8 +1,8 @@
 import "./Diario.css"
 import { useState, useEffect } from "react"
-import { sonhosService} from "../../../backend/services/sonhoService"
-import FiltroSonhos from "../components/features/Diario/FiltroSonhos"
-import LinhaDoTempo from "../components/features/Diario/LinhaTempo"
+import { sonhosServiceFrontend } from "../../services/sonhosService" 
+import FiltroSonhos from "../../components/features/Diario/FiltroSonhos"
+import LinhaDoTempo from "../../components/features/Diario/LinhaDoTempo"
 
 const Diario = () => {
     const [sonhosBrutos, setSonhosBrutos] = useState([])
@@ -15,15 +15,22 @@ const Diario = () => {
         async function buscarDados() {
             try {
                 setIsLoading(true)
-                const dados = await sonhosService.listarTodos()
-                setSonhosBrutos(dados)
+                const dados = await sonhosServiceFrontend.listarTodos()
+                
+                if (Array.isArray(dados)) {
+                    setSonhosBrutos(dados)
+                } else {
+                    setSonhosBrutos([]) 
+                }
+                
             } catch (error) {
                 console.error("Erro na comunicação com a API:", error)
+                setSonhosBrutos([]) 
             } finally {
                 setIsLoading(false)
             }
         }
-        buscarDados();
+        buscarDados()
     }, [])
 
     const tagsDaUsuaria = [...new Set(
