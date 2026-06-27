@@ -35,9 +35,19 @@ const atualizarDados = async (id, dadosAtualizados) => {
     });
 };
 
+//deletar usuaria (apaga tudo associado a ela)
+const deletarConta = async (id) =>{
+    return await prisma.usuaria.delete({
+        where:{
+            id:id
+        }
+    })
+}
+
 module.exports = {
     buscarPorEmail,
     criarUsuaria,
     buscarPorId,
-    atualizarDados
+    atualizarDados,
+    deletarConta
 };
