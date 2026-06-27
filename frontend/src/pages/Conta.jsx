@@ -232,11 +232,12 @@ const Conta = () => {
                             variant="padrao" 
                             onClick={handleSalvarPerfil} 
                             isLoading={isSaving}
-                            backgroundColor="rgba(165, 140, 255, 0.05)"
-                            color="rgba(165, 140, 255, 0.4)"
-                            textColor="#D7CCFF"
+                            backgroundColor="linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%)"
+                            color="rgba(224, 197, 143, 0.30)" 
+                            textColor="#E0C58F"
+                            maxWidth="100%"
                         >
-                            ◈ Salvar perfil
+                            ◈ SALVAR PERFIL
                         </Button>
                     }
                 />
@@ -247,11 +248,12 @@ const Conta = () => {
                     botao={
                         <Button 
                             variant="padrao" 
-                            onClick={handleSalvarSeguranca} 
+                            onClick={handleSalvarPerfil} 
                             isLoading={isSaving}
-                            backgroundColor="rgba(165, 140, 255, 0.05)"
-                            color="rgba(165, 140, 255, 0.4)"
-                            textColor="#D7CCFF"
+                            backgroundColor="linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%)"
+                            color="rgba(224, 197, 143, 0.30)" 
+                            textColor="#E0C58F"
+                            maxWidth="100%"
                         >
                             ◈ Atualizar credenciais
                         </Button>
@@ -265,11 +267,12 @@ const Conta = () => {
                     botao={
                         <Button 
                             variant="padrao" 
-                            onClick={handleSalvarCiclo} 
+                            onClick={handleSalvarPerfil} 
                             isLoading={isSaving}
-                            backgroundColor="rgba(165, 140, 255, 0.05)"
-                            color="rgba(165, 140, 255, 0.4)"
-                            textColor="#D7CCFF"
+                            backgroundColor="linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%)"
+                            color="rgba(224, 197, 143, 0.30)" 
+                            textColor="#E0C58F"
+                            maxWidth="100%"
                         >
                             ◈ Salvar ciclo
                         </Button>
