@@ -11,5 +11,7 @@ router.get('/:id', verificarToken, sonhoController.buscarSonhoPorId);
 // ROTA PUT /:id - Editar um registro do diário de sonhos
 // Body esperado: { titulo, descricao, dataSonho, tags }
 router.put('/:id', verificarToken, sonhoController.atualizarSonho);
+// ROTA DELETE /:id - Excluir um registro do diário de sonhos
+router.delete('/:id', verificarToken, sonhoController.excluir);
 
 module.exports = router;
