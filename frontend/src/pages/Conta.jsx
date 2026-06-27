@@ -120,8 +120,8 @@ const Conta = () => {
             await authService.atualizarPerfil(payload)
             exibirSucesso()
             
-            setDados(prev => ({ ...prev, senhaAtual: '', novaSenha: '', confirmarNovaSenha: '' }));
-            setMostrarCamposSenha(false);
+            setDados(prev => ({ ...prev, senhaAtual: '', novaSenha: '', confirmarNovaSenha: '' }))
+            setMostrarCamposSenha(false)
             
         } catch (error) {
             exibirErro(error.message || "Ocorreu um problema ao atualizar suas credenciais.", handleSalvarSeguranca)
@@ -136,10 +136,10 @@ const Conta = () => {
             await authService.atualizarPerfil({ 
                 duracaoCiclo: Number(dados.duracaoCiclo), 
                 duracaoMenstruacao: Number(dados.duracaoMenstruacao) 
-            });
-            alert("Ciclo atualizado com sucesso!")
+            })
+            exibirSucesso()
         } catch (error) {
-            alert(error.message)
+            exibirErro(null, handleSalvarCiclo)
         } finally {
             setIsSavingCiclo(false) 
         }
@@ -297,7 +297,7 @@ const Conta = () => {
         }
     ]
 
-    if (isLoading) return <div className="conta-loading">Acessando os registros...</div>;
+    if (isLoading) return <div className="conta-loading">✦ Aguarde um momento, estamos buscando suas informações cósmicas ✦</div>;
 
     return (
         <div className="conta-page-container">
