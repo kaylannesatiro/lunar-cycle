@@ -1,7 +1,7 @@
 import "./LinhaTempo.css"
 import CardSonho from "../Diario/CardSonho"
 
-const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick }) => {
+const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, mensagemVazia = "Seu diário ainda está em branco..." }) => {
     if (isLoading) {
         return (
             <div className="linha-tempo-vazia">
@@ -14,10 +14,10 @@ const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick }) =>
         return (
             <div className="linha-tempo-vazia">
                 <p className="linha-tempo-mensagem">
-                    Seu diário ainda está em branco. Volte a dormir, sonhe e registre sua primeira jornada.
+                    {mensagemVazia}
                 </p>
             </div>
-        )
+        );
     }
     
     return (
