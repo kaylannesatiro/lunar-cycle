@@ -20,6 +20,17 @@ const imagensDasFases = {
     "Gibosa Minguante": imgLuaGibosaMinguante,
 };
 
+const clipPathsDasFases = {
+    "Nova":             "circle(48% at 50% 50%)",
+    "Cheia":            "circle(48% at 50% 50%)",
+    "Crescente":        "ellipse(30% 48% at 65% 50%)",
+    "Minguante":        "ellipse(30% 48% at 35% 50%)",
+    "Quarto Crescente": "ellipse(48% 48% at 65% 50%)",
+    "Quarto Minguante": "ellipse(48% 48% at 35% 50%)",
+    "Gibosa Crescente": "ellipse(44% 48% at 55% 50%)",
+    "Gibosa Minguante": "ellipse(44% 48% at 45% 50%)",
+};
+
 const NOMES_DOS_MESES = [
     "Janeiro", "Fevereiro", "Março", "Abril",
     "Maio", "Junho", "Julho", "Agosto",
@@ -57,7 +68,7 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
     if (eHoje) classeDoDia += " cal-dia--hoje";
 
     const imagemDaFase = imagensDasFases[faseDaLua] || imgLuaNova;
-
+    const clipPath = clipPathsDasFases[faseDaLua] || "circle(48% at 50% 50%)";
     return (
         <div className={classeDoDia} onClick={aoClicar}>
 
@@ -70,8 +81,7 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
             )}
 
             <span className="cal-dia__numero">{numeroDia}</span>
-
-            <div className="cal-dia__lua-wrapper">
+            <div className="cal-dia__lua-container">
                 <img
                     src={imagemDaFase}
                     alt={faseDaLua}
@@ -90,21 +100,13 @@ const Calendario = ({ diasMenstruacao = [], diasPrevistos = [], fasesLunares = {
     const [anoAtual, setAnoAtual] = useState(hoje.getFullYear());
 
     const irParaProximoMes = () => {
-        if (mesAtual === 11) {
-            setMesAtual(0);
-            setAnoAtual(anoAtual + 1);
-        } else {
-            setMesAtual(mesAtual + 1);
-        }
+        if (mesAtual === 11) { setMesAtual(0); setAnoAtual(anoAtual + 1); }
+        else { setMesAtual(mesAtual + 1); }
     };
 
     const irParaMesAnterior = () => {
-        if (mesAtual === 0) {
-            setMesAtual(11);
-            setAnoAtual(anoAtual - 1);
-        } else {
-            setMesAtual(mesAtual - 1);
-        }
+        if (mesAtual === 0) { setMesAtual(11); setAnoAtual(anoAtual - 1); }
+        else { setMesAtual(mesAtual - 1); }
     };
 
     const totalDeDias = obterDiasNoMes(anoAtual, mesAtual);
@@ -112,13 +114,8 @@ const Calendario = ({ diasMenstruacao = [], diasPrevistos = [], fasesLunares = {
 
     const celulas = [];
 
-    for (let i = 0; i < diaInicialDaSemana; i++) {
-        celulas.push(null);
-    }
-
-    for (let dia = 1; dia <= totalDeDias; dia++) {
-        celulas.push(dia);
-    }
+    for (let i = 0; i < diaInicialDaSemana; i++) { celulas.push(null); }
+    for (let dia = 1; dia <= totalDeDias; dia++) { celulas.push(dia); }
 
     const conjuntoMenstruacao = new Set(diasMenstruacao);
     const conjuntoPrevistos = new Set(diasPrevistos);
@@ -132,18 +129,12 @@ const Calendario = ({ diasMenstruacao = [], diasPrevistos = [], fasesLunares = {
             <div className="cal-container">
 
                 <div className="cal-cabecalho">
-                    <button className="cal-btn-nav" onClick={irParaMesAnterior} aria-label="Mês anterior">
-                        ‹
-                    </button>
-
+                    <button className="cal-btn-nav" onClick={irParaMesAnterior} aria-label="Mês anterior">‹</button>
                     <div className="cal-mes-info">
                         <span className="cal-mes-nome">{NOMES_DOS_MESES[mesAtual].toUpperCase()}</span>
                         <span className="cal-mes-ano">{anoAtual}</span>
                     </div>
-
-                    <button className="cal-btn-nav" onClick={irParaProximoMes} aria-label="Próximo mês">
-                        ›
-                    </button>
+                    <button className="cal-btn-nav" onClick={irParaProximoMes} aria-label="Próximo mês">›</button>
                 </div>
 
                 <div className="cal-divisor" />
@@ -159,13 +150,13 @@ const Calendario = ({ diasMenstruacao = [], diasPrevistos = [], fasesLunares = {
                         if (dia === null) {
                             return <div key={`vazio-${index}`} className="cal-dia cal-dia--vazio" />;
                         }
-
+                        
                         const chaveData = formatarChaveData(anoAtual, mesAtual, dia);
 
                         const estaMenstruada = conjuntoMenstruacao.has(chaveData);
                         const estaPrevisto = conjuntoPrevistos.has(chaveData);
                         const faseDaLua = fasesLunares[chaveData] || "Nova";
-
+                        
                         const eHoje =
                             dia === hoje.getDate() &&
                             mesAtual === hoje.getMonth() &&
