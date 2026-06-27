@@ -1,3 +1,4 @@
+const { ca } = require('zod/v4/locales');
 const usuariaService = require('../services/usuariaService');
 
 const criarConta = async (req, res) => {
@@ -111,10 +112,31 @@ const logout = async(req, res) =>{
     }
 }
 
+const deletarConta = async(req, res) =>{
+    try{
+        const usuariaId = req.usuariaId;
+        await usuariaService.deletarConta(usuariaId);
+
+        return res.status(200).json({
+            mensagem: 'Conta deletada com sucesso!'
+        });
+    } catch (erro){
+        if(erro.message == 'Usuária não encontrada.'){
+            return res.status(404).json({
+                mensagem: erro.message
+            })
+        }
+        return res.status(500).json({
+            mensagem: 'Ocorreu um erro ao deletar a conta. Por favor, tente novamente mais tarde.'
+        });
+    }
+}
+
 module.exports = {
     criarConta,
     realizarLogin,
     obterDadosPerfil,
     atualizarPerfil,
-    logout
+    logout,
+    deletarConta
 };

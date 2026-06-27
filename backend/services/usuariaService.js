@@ -131,10 +131,19 @@ const atualizarPerfil = async (id, dadosAtualizados) => {
 }
 
 
+const deletarConta = async(id) =>{
+    const usuaria = await usuariaRepository.buscarPorId(id);
+    if(!usuaria){
+        throw new Error('Usuária não encontrada.');
+    }
+    await usuariaRepository.deletarConta(id);
+}
+
 
 module.exports = {
     criarConta,
     realizarLogin,
     obterPerfil,
-    atualizarPerfil
+    atualizarPerfil,
+    deletarConta
 };
