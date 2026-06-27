@@ -10,9 +10,9 @@ const criarSonho = async (req, res) => {
     } catch (error) {
         //Se o erro vier do serviço, ele será capturado aqui e retornado como resposta
         if (error.message && error.message !== 'Usuária não encontrada') {
-            res.status(400).json({ error: error.message });
+            return res.status(400).json({ erro: error.message });
         }
-        return res.status(500).json({ error: 'Erro interno do servidor' });
+        return res.status(500).json({ erro: 'Ocorreu um erro ao salvar o sonho. Tente novamente.' });
     }
 }
 
