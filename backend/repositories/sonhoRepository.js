@@ -1,3 +1,4 @@
+const { id } = require('zod/v4/locales');
 const prisma = require('../config/prisma');
 
 // Cria um registro de sonho e suas respectivas tags no banco de dados
@@ -24,6 +25,20 @@ const criarSonho = async (usuariaId, titulo, descricao, dataSonho, faseLunar, ta
 
 };
 
+//Buscar sonho especifco por ID
+const buscarPorId = async(id, idUsuaria) => {
+    return await prisma.sonho.findFirst({
+        where:{
+            id: id,
+            usuariaId: idUsuaria
+        },
+        include:{
+            tags: true // ja traz as tags associadas ao sonho
+        }
+    });
+}
+
 module.exports = {
-    criarSonho
+    criarSonho,
+    buscarPorId
 }
