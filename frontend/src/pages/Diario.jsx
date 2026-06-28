@@ -233,12 +233,18 @@ const Diario = () => {
                     sonhosAgrupados={MOCK_SONHOS} 
                     isLoading={isLoading} 
                     onCardClick={(id) => console.log(`Abrir visualização do sonho: ${id}`)}
-        
-                    mensagemVazia={
-                        filtrosAtivos.tags.length > 0 || filtrosAtivos.periodo !== "TODOS"
-                            ? "Nenhuma jornada astral sintonizada com os filtros aplicados..."
-                            : "Seu diário ainda está em branco, sonhe e registre suas aventuras noturnas!"
-                    }
+                    
+                    onDeletarSonho={async (idSonho) => {
+                        try {
+                            setSonhosBrutos((sonhosAntigos) => 
+                                sonhosAntigos.filter(sonho => sonho.id !== idSonho)
+                            )
+                            
+                            console.log(`Sonho ${idSonho} apagado com sucesso!`)
+                        } catch (erro) {
+                            console.error("Erro ao apagar sonho:", erro)
+                        }
+                    }}
                 />
 
                 {temMaisSonhos && !isLoading && sonhosBrutos.length > 0 && (

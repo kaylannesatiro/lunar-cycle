@@ -2,9 +2,12 @@ import { useState } from "react"
 import "./LinhaTempo.css"
 import CardSonho from "../Diario/CardSonho"
 import ModalVisualizarSonho from "../Modals/VisualizarSonho"
+import PopupConfirmacao from "../../common/Modals/PopupConfirmacao"
+import Button from "../../common/Buttons/Button"
 
-const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, mensagemVazia = "Seu diário ainda está em branco..." }) => {
+const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, onDeletarSonho, mensagemVazia = "Seu diário ainda está em branco..." }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isPopupApagarAberto, setIsPopupApagarAberto] = useState(false)
     const [sonhoSelecionado, setSonhoSelecionado] = useState(null)
 
     const handleAbrirModal = (sonho) => {
@@ -15,6 +18,19 @@ const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, mens
 
     const handleFecharModal = () => {
         setIsModalOpen(false)
+        setTimeout(() => setSonhoSelecionado(null), 200)
+    }
+
+    const handleAbrirConfirmacaoApagar = () => {
+        setIsModalOpen(false)
+        setTimeout(() => setIsPopupApagarAberto(true), 200)
+    };
+
+    const handleConfirmarDelete = () => {
+        if (onDeletarSonho && sonhoSelecionado) {
+            onDeletarSonho(sonhoSelecionado.id)
+        }
+        setIsPopupApagarAberto(false)
         setTimeout(() => setSonhoSelecionado(null), 200)
     }
 
@@ -70,10 +86,41 @@ const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, mens
 
             <ModalVisualizarSonho 
                 isOpen={isModalOpen}
-                sonho={sonhoSelecionado || {}}
+                sonho={sonhoSelecionado || {}} 
                 onFechar={handleFecharModal}
                 onEditClick={() => console.log("Editar sonho:", sonhoSelecionado?.id)}
-                onDeleteClick={() => console.log("Apagar sonho:", sonhoSelecionado?.id)}
+                onDeleteClick={handleAbrirConfirmacaoApagar}
+            />
+
+            <PopupConfirmacao
+                isOpen={isPopupApagarAberto}
+                variante="perigo"
+                title="Confirmar Exclusão"
+                message={`Você tem certeza que deseja apagar o sonho "${sonhoSelecionado?.titulo}"? Essa ação não pode ser desfeita.`}
+                onCancel={() => setIsPopupApagarAberto(false)}
+                botaoCancelar={
+                    <Button 
+                        variant="padrao"
+                        width="160px"
+                        backgroundColor="linear-gradient(135deg, rgba(110, 76, 163, 0.28) 0%, rgba(75, 45, 115, 0.16) 100%)"
+                        color="#A58CFF"
+                        textColor="#D7CCFF"
+                        onClick={() => setIsPopupApagarAberto(false)} 
+                    >
+                        Cancelar
+                    </Button>
+                }
+                botaoConfirmar={
+                    <Button 
+                        variant="padrao"
+                        width="180px"
+                        backgroundColor="rgba(88, 8, 16, 0.22)"
+                        color="rgba(245, 240, 233, 0.50)"
+                        textColor="#F5F0E9"
+                    >
+                        Apagar Sonho
+                    </Button>
+                }
             />
         </div>
     )

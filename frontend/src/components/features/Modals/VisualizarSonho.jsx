@@ -98,24 +98,22 @@ const ModalVisualizarSonho = ({ isOpen, sonho = {}, onEditClick, onDeleteClick, 
                         <div className="modal-sonho__botoes">
                             <Button
                                 variant="padrao"
-                                onClick={onEditClick}
+                                onClick={() => setModo("editar")}
                                 backgroundColor="linear-gradient(135deg, rgba(110, 76, 163, 0.28) 0%, rgba(75, 45, 115, 0.16) 100%)"
                                 color="rgba(165, 140, 255, 0.5)"
                                 textColor="rgba(215, 204, 255, 1)"
-                                width="100%"
-                                maxWidth="14.859rem"
+                                width="100%" maxWidth="14.859rem"
                             >
                                 ✎ Editar
                             </Button>
 
                             <Button
                                 variant="padrao"
-                                onClick={onDeleteClick}
+                                onClick={onDeleteClick} 
                                 backgroundColor="rgba(88, 8, 16, 0.22)"
                                 color="rgba(245, 240, 233, 0.5)"
                                 textColor="rgba(245, 240, 233, 1)"
-                                width="100%"
-                                maxWidth="14.859rem"
+                                width="100%" maxWidth="14.859rem"
                             >
                                 ✕ Apagar
                             </Button>
