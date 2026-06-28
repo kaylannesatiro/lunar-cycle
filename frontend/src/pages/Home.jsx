@@ -149,9 +149,11 @@ const Home = () => {
                         textColor={dadosHome.menstruandoHoje ? "#F5F0E9" : ''}
                         variant="redondo"
                         maxWidth="280px"
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={dadosHome.menstruandoHoje ? undefined : () => setIsModalOpen(true)}
+                        style={dadosHome.menstruandoHoje ? { pointerEvents: 'none', cursor: 'default' } : {}}
+                        disabled={dadosHome.menstruandoHoje}
                     >
-                        {dadosHome.menstruandoHoje ? "◈ MENSTRUAÇÃO REGISTRADA" : "◈ Registrar Menstruação"}
+                        {dadosHome.menstruandoHoje ? " ✦ SUA MENSTRUAÇÃO ESTÁ REGISTRADA" : "◈ Registrar Menstruação"}
                     </Button>
                 </div>
             </header>
