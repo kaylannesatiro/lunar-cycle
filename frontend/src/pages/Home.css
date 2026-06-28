@@ -27,7 +27,7 @@
 .home-header-container {
     display: flex;
     height: 621.333px;
-    padding: 112px 24px 24px 24px;
+    padding: 54px 24px 24px 24px; /* <--- Topo reduzido para 54px */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -60,13 +60,28 @@
     letter-spacing: -2.18px;
     margin: 0;
     
-    /* =========================================================
-       LUZ DOURADA (EFEITO GLOW DO FIGMA)
-       ========================================================= */
-    text-shadow: 
-        0px 0px 20px rgba(224, 197, 143, 0.35),  /* Brilho interno mais forte */
-        0px 0px 60px rgba(224, 197, 143, 0.15),  /* Brilho externo espalhado */
-        0px 0px 100px rgba(224, 197, 143, 0.10); /* Nuvem de luz bem suave ao fundo */
+    /* Chama a animação que criamos abaixo, durando 3 segundos em loop infinito de vai e volta */
+    animation: pulsarLuzDourada 3s infinite alternate ease-in-out;
+}
+
+/* =========================================================
+   KEYFRAMES - LUZ DOURADA PULSANTE
+   ========================================================= */
+@keyframes pulsarLuzDourada {
+    0% {
+        /* Brilho mais fraco (apagando) */
+        text-shadow: 
+            0px 0px 15px rgba(224, 197, 143, 0.20),
+            0px 0px 40px rgba(224, 197, 143, 0.10),
+            0px 0px 80px rgba(224, 197, 143, 0.05);
+    }
+    100% {
+        /* Brilho mais forte e espalhado (aceso) */
+        text-shadow: 
+            0px 0px 25px rgba(224, 197, 143, 0.45),
+            0px 0px 70px rgba(224, 197, 143, 0.25),
+            0px 0px 120px rgba(224, 197, 143, 0.15);
+    }
 }
 
 .home-mes-subtitulo {
