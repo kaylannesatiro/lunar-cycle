@@ -191,8 +191,11 @@ const Diario = () => {
                     sonhosAgrupados={dadosProntos} 
                     isLoading={isLoading} 
                     onCardClick={(id) => console.log(`Abrir visualização: ${id}`)}
+
                     onDeletarSonho={async (idSonho) => {
                         try {
+                            await sonhosServiceFrontend.excluir(idSonho)
+                            
                             setSonhosBrutos((sonhosAntigos) => 
                                 sonhosAntigos.filter(sonho => sonho.id !== idSonho)
                             )
@@ -200,14 +203,24 @@ const Diario = () => {
                             console.log(`Sonho ${idSonho} apagado com sucesso!`)
                         } catch (erro) {
                             console.error("Erro ao apagar sonho:", erro)
+                            alert("Não foi possível apagar o sonho. Tente novamente.")
                         }
                     }}
 
                     onEditarSonho={async (dadosAtualizados) => {
                         try {
-                            console.log("Dados enviados para edição:", dadosAtualizados)
+                            const sonhoAtualizado = await sonhosServiceFrontend.atualizar(dadosAtualizados.id, dadosAtualizados)
+                            
+                            console.log("Sonho atualizado no backend:", sonhoAtualizado)
+                            
+                            setSonhosBrutos((sonhosAntigos) => 
+                                sonhosAntigos.map(sonho => 
+                                    sonho.id === dadosAtualizados.id ? { ...sonho, ...dadosAtualizados } : sonho
+                                )
+                            )
                         } catch (erro) {
                             console.error("Erro ao editar o sonho:", erro)
+                            alert("Não foi possível salvar as alterações.")
                         }
                     }}
                 />
@@ -232,9 +245,19 @@ const Diario = () => {
                 isOpen={modalAberto}
                 modo="criar"
                 onFechar={() => setModalAberto(false)}
-                onSave={(dados) => {
-                    console.log("Salvar novo sonho:", dados)
-                    setModalAberto(false)
+                onSave={async (dadosNovos) => {
+                    try {
+                        const sonhoCriado = await sonhosServiceFrontend.criar(dadosNovos)
+                        
+                        console.log("Novo sonho salvo no banco:", sonhoCriado)
+                    
+                        setSonhosBrutos(sonhosAntigos => [sonhoCriado, ...sonhosAntigos])
+                        
+                        setModalAberto(false);
+                    } catch (erro) {
+                        console.error("Erro ao criar novo sonho:", erro)
+                        alert("Não foi possível registrar o sonho. Tente novamente.")
+                    }
                 }}
             />
         </div>
