@@ -173,22 +173,28 @@
     margin: 0;
 }
 
-/* ─── ESPAÇAMENTOS INTERNOS DE FLUXO DO FIGMA ─── */
+/* =========================================================
+   CONTÊINERES DE ALINHAMENTO (Larguras Idênticas)
+   ========================================================= */
 
-/* Oráculo: a uma distância de 48px do container título da sessão */
+/* Força o Oráculo a ter uma largura máxima controlada e centralizada */
 .home-oraculo-component-wrapper {
     width: 100%;
-    margin-top: 48px;
+    max-width: 780px; /* Alinha com o padrão de largura dos cards do seu projeto */
     display: flex;
     justify-content: center;
+    margin-top: 48px;
+    box-sizing: border-box;
 }
 
-/* Dados Extras: a uma distância de 22.4px do container do oráculo */
+/* Força os Dados Extras a seguirem exatamente a mesma linha do Oráculo */
 .home-dadosextras-component-wrapper {
     width: 100%;
-    margin-top: 22.4px;
+    max-width: 780px; /* Exatamente o mesmo tamanho do contêiner de cima */
     display: flex;
     justify-content: center;
+    margin-top: 22.4px;
+    box-sizing: border-box;
 }
 
 /* =========================================================
