@@ -1,152 +1,221 @@
 /* =========================================================
-   SHELL DO DASHBOARD PRINCIPAL
+   SHELL E CORE DA PÁGINA HOME
    ========================================================= */
 .home-dashboard-shell {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 780px;
+    /* Permitindo expansão até 920px para casar com o container do título da sessão */
+    max-width: 920px; 
     margin: 0 auto;
-    padding: 2.5rem 1rem 7rem 1rem;
     box-sizing: border-box;
 }
 
 .home-loading {
     color: #E0C58F;
     font-family: 'Cinzel', serif;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     font-size: 1rem;
     text-align: center;
-    margin-top: 10rem;
-    animation: pulsarSuave 2s infinite ease-in-out;
+    margin-top: 15rem;
 }
 
 /* =========================================================
-   TEXTOS DO CABEÇALHO (CRONOS)
+   CONTAINER CABEÇALHO
    ========================================================= */
-.home-cronos-header {
+.home-header-container {
     display: flex;
+    height: 621.333px;
+    padding: 112px 24px 24px 24px;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
+    flex-shrink: 0;
     width: 100%;
+    box-sizing: border-box;
 }
 
-.home-titulo-menor {
+.home-titulo-menor-topo {
     color: #E0C58F;
+    text-align: center;
     font-family: 'Cinzel', serif;
-    font-size: 9.6px;
+    font-size: 9.92px;
+    font-style: normal;
     font-weight: 400;
-    line-height: 14.4px;
-    letter-spacing: 4.8px;
+    line-height: 14.88px; /* 150% */
+    letter-spacing: 5.158px;
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    opacity: 0.8;
 }
 
 .home-dia-destaque {
     color: #E0C58F;
+    text-align: center;
     font-family: "Cinzel Decorative", serif;
-    font-size: 72px;
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: 2.5px;
+    font-size: 218px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 178.76px; /* 82% */
+    letter-spacing: -2.18px;
     margin: 0;
-    text-shadow: 0 0 20px rgba(224, 197, 143, 0.15);
 }
 
 .home-mes-subtitulo {
-    color: #E0C58F;
-    font-family: "Cinzel", serif;
-    font-size: 24px;
+    color: #F5F0E9;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 46px;
+    font-style: normal;
     font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: 6px;
-    margin: 0.2rem 0 0 0;
+    line-height: 69px; /* 150% */
+    /* Adiciona o recuo à esquerda proporcional para balancear o letter-spacing extremo do Figma */
+    padding-left: 31.28px; 
+    letter-spacing: 31.28px;
+    text-transform: uppercase;
+    margin: 0;
 }
 
 .home-frase-ano {
-    font-family: "Raleway", sans-serif;
-    font-size: 11px;
-    color: rgba(245, 240, 233, 0.5);
-    letter-spacing: 1px;
-    margin-top: 0.5rem;
+    color: #E0C58F;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 10.88px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16.32px; /* 150% */
+    letter-spacing: 4.134px;
+    margin: 8px 0 0 0;
 }
 
 /* =========================================================
-   BOTÃO E ÁREA DE AÇÃO
+   CONTAINER DIVISÃO
    ========================================================= */
+.home-container-divisao {
+    display: flex;
+    padding: 35.2px 0;
+    flex-direction: column;
+    align-items: center; /* Alinhado ao centro para casar com a simetria do header */
+    width: 100%;
+}
+
+.home-linha-divisao {
+    width: 130px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.00) 0%, rgba(224, 197, 143, 0.40) 50%, rgba(0, 0, 0, 0.00) 100%);
+}
+
 .home-action-container {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 1.8rem;
-    margin-bottom: 2rem;
 }
 
 /* =========================================================
-   A ÓRBITA CURVA (Separador Estelar do Figma)
+   ANIMAÇÃO LUA (ZONA ESPERANDO RENDERIZAÇÃO FUTURA)
    ========================================================= */
-.home-orbita-separador {
-    position: relative;
-    width: 120%; /* Estoura um pouco as pontas para dar profundidade infinita */
-    height: 60px;
-    margin: 1rem 0 3rem 0;
-    border-top: 0.667px solid rgba(224, 197, 143, 0.12);
-    border-radius: 50% / 15px 15px 0 0; /* Cria a curvatura parabólica de órbita */
-    display: flex;
-    justify-content: center;
-}
-
-.home-planeta-focal {
-    position: absolute;
-    top: -6px;
-    width: 11px;
-    height: 11px;
-    background: #FFF9ED;
-    border-radius: 50%;
-    box-shadow: 0 0 14px 4px rgba(224, 197, 143, 0.6);
+.home-animacao-lua-placeholder {
+    height: 310px;
+    align-self: stretch;
+    width: 100%;
 }
 
 /* =========================================================
-   SEÇÃO DO ORÁCULO E CALENDÁRIO
+   SEÇÃO ORÁCULO LUNAR
    ========================================================= */
-.home-secao-oraculo,
-.home-secao-calendario {
+.home-secao-oraculo {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-bottom: 3.5rem;
+}
+
+.home-container-titulo-menor {
+    height: 310px;
+    align-self: stretch;
+    display: flex;
+    align-items: flex-end; /* Senta o título na base do bloco de respiro */
+    justify-content: center;
+    width: 100%;
+}
+
+.home-titulo-menor-sessao {
+    color: #E0C58F;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 9.44px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14.16px; /* 150% */
+    letter-spacing: 4.909px;
+    text-transform: uppercase;
+}
+
+.home-container-titulo-sessao {
+    display: flex;
+    width: 920px;
+    height: 64.6px;
+    padding-top: 13.6px;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .home-titulo-sessao {
-    color: #E0C58F;
-    font-family: "Cinzel Decorative", serif;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 2px;
+    color: #F5F0E9;
     text-align: center;
-    margin: 0.4rem 0 2rem 0;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 33.6px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 50.4px; /* 150% */
+    letter-spacing: 2.688px;
+    margin: 0;
 }
 
-.home-calendario-wrapper {
+/* ─── ESPAÇAMENTOS INTERNOS DE FLUXO DO FIGMA ─── */
+
+/* Oráculo: a uma distância de 48px do container título da sessão */
+.home-oraculo-component-wrapper {
     width: 100%;
-    margin-top: 1.5rem;
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Dados Extras: a uma distância de 22.4px do container do oráculo */
+.home-dadosextras-component-wrapper {
+    width: 100%;
+    margin-top: 22.4px;
+    display: flex;
+    justify-content: center;
 }
 
 /* =========================================================
-   RESPONSIVIDADE INTELIGENTE
+   SEÇÃO CALENDÁRIO
    ========================================================= */
-@media (max-width: 768px) {
-    .home-dia-destaque { font-size: 56px; }
-    .home-mes-subtitulo { font-size: 18px; letter-spacing: 4px; }
-    .home-titulo-sessao { font-size: 16px; }
-    .home-orbita-separador { width: 100%; }
+
+/* Calendário: a uma distância de 63.98px + 32px do dados extras */
+.home-secao-calendario {
+    width: 100%;
+    margin-top: calc(63.98px + 32px); /* Mantém o cálculo exato do Figma */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 8rem;
 }
 
-@keyframes pulsarSuave {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
+/* =========================================================
+   RESPONSIVIDADE FORÇADA PARA MOBILE COMPACTO
+   ========================================================= */
+@media (max-width: 960px) {
+    .home-container-titulo-sessao { width: 100%; }
+}
+
+@media (max-width: 600px) {
+    .home-header-container { height: auto; padding: 60px 16px 24px 16px; }
+    .home-dia-destaque { font-size: 140px; line-height: 120px; }
+    .home-mes-subtitulo { font-size: 28px; letter-spacing: 12px; padding-left: 12px; }
+    .home-animacao-lua-placeholder { height: 160px; }
+    .home-container-titulo-menor { height: 160px; }
+    .home-titulo-sessao { font-size: 22px; line-height: 32px; }
 }
