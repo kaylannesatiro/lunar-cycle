@@ -48,9 +48,6 @@ const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFech
         if (!data.trim()) {
             novosErros.data = "Informe a data do sonho.";
         }
-        if (!descricao.trim() || descricao.trim().length < 10) {
-            novosErros.descricao = "A descrição deve ter pelo menos 10 caracteres.";
-        }
 
         setErros(novosErros);
         return Object.keys(novosErros).length === 0;
