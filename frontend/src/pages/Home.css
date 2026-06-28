@@ -59,6 +59,14 @@
     line-height: 178.76px; /* 82% */
     letter-spacing: -2.18px;
     margin: 0;
+    
+    /* =========================================================
+       LUZ DOURADA (EFEITO GLOW DO FIGMA)
+       ========================================================= */
+    text-shadow: 
+        0px 0px 20px rgba(224, 197, 143, 0.35),  /* Brilho interno mais forte */
+        0px 0px 60px rgba(224, 197, 143, 0.15),  /* Brilho externo espalhado */
+        0px 0px 100px rgba(224, 197, 143, 0.10); /* Nuvem de luz bem suave ao fundo */
 }
 
 .home-mes-subtitulo {
