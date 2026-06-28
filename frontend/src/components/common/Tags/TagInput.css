@@ -1,3 +1,7 @@
+.input-tags-wrapper {
+    width: 100%;
+}
+
 .input-tags-lista {
     display: flex;
     flex-wrap: wrap;
@@ -5,20 +9,27 @@
     align-items: center;
 }
 
-.tag-sonho {
+.tag-item {
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
     padding: 0 0.75rem;
-    height: 1.302rem;
+    height: 1.303rem;
     border-radius: 6.25rem;
     background: #2B1748;
-    border: 0.04rem solid #A58CFF;
+    border: 0.042rem solid #A58CFF;
     box-sizing: border-box;
     white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
-.tag-sonho-texto {
+.tag-item--ativa {
+    background: #6E4CA3;
+    box-shadow: 0 0 0.75rem 0 rgba(110, 76, 163, 0.32);
+}
+
+.tag-item-texto {
     font-family: "Cinzel", serif;
     font-weight: 400;
     font-size: 0.48rem;
@@ -29,11 +40,15 @@
     color: #A58CFF;
 }
 
-.tag-sonho-remover {
+.tag-item-texto--ativa {
+    color: #D7CCFF;
+}
+
+.tag-item-remover {
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #A58CFF;
+    color: #D7CCFF;
     font-size: 0.5rem;
     line-height: 1;
     padding: 0;
@@ -43,7 +58,7 @@
     transition: opacity 0.2s ease;
 }
 
-.tag-sonho-remover:hover {
+.tag-item-remover:hover {
     opacity: 1;
 }
 
@@ -53,10 +68,10 @@
     align-items: center;
     justify-content: center;
     padding: 0 0.75rem;
-    height: 1.302rem;
+    height: 1.303rem;
     border-radius: 6.25rem;
     background: #2B1748;
-    border: 0.04rem solid #A58CFF;
+    border: 0.042rem solid #A58CFF;
     box-sizing: border-box;
     cursor: pointer;
     white-space: nowrap;
@@ -123,36 +138,4 @@
     letter-spacing: 0.03rem;
     color: #A58CFF;
     opacity: 0.7;
-}
-
-.input-tags-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    width: 100%;
-    max-width: 28rem;
-}
-
-.input-tags-secao {
-    display: flex;
-    flex-direction: column;
-    gap: 0.375rem;
-}
-
-.input-tags-secao-label {
-    font-family: "Cinzel", serif;
-    font-size: 0.5rem;
-    letter-spacing: 0.06rem;
-    text-transform: uppercase;
-    color: #A58CFF;
-    opacity: 0.5;
-}
-
-.tag-sonho--ativa {
-    background: #6E4CA3;
-    box-shadow: 0 0 0.75rem 0 rgba(110, 76, 163, 0.32);
-}
-
-.tag-sonho-texto--ativa {
-    color: #D7CCFF;
 }
