@@ -4,6 +4,8 @@ import "./ModalMenstruacao.css";
 import Button from "../../common/Buttons/Button";
 import InputData from "../../common/Inputs/InputData";
 
+const DIAS_POR_MES = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
 const ModalMenstruacao = ({ isOpen, modo = "registrar", dadosIniciais = {}, onSave, onDelete, onFechar }) => {
     const [dataInicio, setDataInicio] = useState("");
     const [dataFim, setDataFim] = useState("");
@@ -25,14 +27,89 @@ const ModalMenstruacao = ({ isOpen, modo = "registrar", dadosIniciais = {}, onSa
         }
     }, [isOpen, modo]);
 
+    const eBissexto = (ano) => {
+        return (ano % 4 === 0 && ano % 100 !== 0) || (ano % 400 === 0);
+    };
+
+    const validarData = (valor) => {
+        if (!valor || valor.length < 10) {
+            return "Data incompleta. Use o formato DD/MM/AAAA.";
+        }
+
+        const partes = valor.split("/");
+        const dia = parseInt(partes[0], 10);
+        const mes = parseInt(partes[1], 10);
+        const ano = parseInt(partes[2], 10);
+
+        if (mes < 1 || mes > 12) {
+            return "Mês inválido. Informe um valor entre 01 e 12.";
+        }
+
+        if (ano < 1900 || ano > 2100) {
+            return "Ano inválido. Informe um ano entre 1900 e 2100.";
+        }
+
+        let maxDias = DIAS_POR_MES[mes - 1];
+        if (mes === 2 && eBissexto(ano)) {
+            maxDias = 29;
+        }
+
+        if (dia < 1 || dia > maxDias) {
+            return `Dia inválido. ${mes === 2
+                ? `Fevereiro de ${ano} tem ${maxDias} dias.`
+                : `O mês informado tem ${maxDias} dias.`}`;
+        }
+
+        const dataInformada = new Date(ano, mes - 1, dia);
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+
+        if (dataInformada > hoje) {
+            return "A data não pode ser no futuro.";
+        }
+
+        return "";
+    };
+
+    const converterParaDate = (valor) => {
+        const partes = valor.split("/");
+        return new Date(
+            parseInt(partes[2], 10),
+            parseInt(partes[1], 10) - 1,
+            parseInt(partes[0], 10)
+        );
+    };
+
     const validar = () => {
         const novosErros = {};
 
         if (!dataInicio.trim()) {
             novosErros.dataInicio = "Informe a data de início.";
+        } else {
+            const erroInicio = validarData(dataInicio);
+            if (erroInicio) novosErros.dataInicio = erroInicio;
         }
-        if (mostrarDataFim && !dataFim.trim()) {
-            novosErros.dataFim = "Informe a data de fim ou remova o campo.";
+
+        if (mostrarDataFim) {
+            if (!dataFim.trim()) {
+                novosErros.dataFim = "Informe a data de fim ou remova o campo.";
+            } else {
+                const erroFim = validarData(dataFim);
+                if (erroFim) {
+                    novosErros.dataFim = erroFim;
+                } else if (!novosErros.dataInicio) {
+                    const inicio = converterParaDate(dataInicio);
+                    const fim = converterParaDate(dataFim);
+
+                    if (fim < inicio) {
+                        novosErros.dataFim = "A data de fim não pode ser anterior à data de início.";
+                    }
+
+                    if (fim.getTime() === inicio.getTime()) {
+                        novosErros.dataFim = "A data de fim deve ser diferente da data de início.";
+                    }
+                }
+            }
         }
 
         setErros(novosErros);
@@ -99,7 +176,10 @@ const ModalMenstruacao = ({ isOpen, modo = "registrar", dadosIniciais = {}, onSa
                                 <InputData
                                     variante="menstruacao"
                                     value={dataInicio}
-                                    onChange={(e) => setDataInicio(e.target.value)}
+                                    onChange={(e) => {
+                                        setDataInicio(e.target.value);
+                                        if (erros.dataInicio) setErros({ ...erros, dataInicio: "" });
+                                    }}
                                     error={erros.dataInicio}
                                 />
                             </div>
@@ -120,14 +200,16 @@ const ModalMenstruacao = ({ isOpen, modo = "registrar", dadosIniciais = {}, onSa
                                     <InputData
                                         variante="menstruacao"
                                         value={dataFim}
-                                        onChange={(e) => setDataFim(e.target.value)}
+                                        onChange={(e) => {
+                                            setDataFim(e.target.value);
+                                            if (erros.dataFim) setErros({ ...erros, dataFim: "" });
+                                        }}
                                         error={erros.dataFim}
                                     />
                                 </div>
                             )}
 
                             <div className={`modal-mens__botoes ${modo === "editar" ? "modal-mens__botoes--editar" : ""}`}>
-
                                 {modo === "editar" && (
                                     <Button
                                         variant="padrao"
