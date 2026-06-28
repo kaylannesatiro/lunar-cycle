@@ -63,6 +63,18 @@ const Home = () => {
         if (!isLoading) atualizarMesCalendario()
     }, [mesFiltro, anoFiltro])
 
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'auto'
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto'
+        }
+    }, [isModalOpen])
+
     const handleSalvarModal = async (dadosDoModal) => {
         try {
             console.log("Dados recebidos do modal:", dadosDoModal);
