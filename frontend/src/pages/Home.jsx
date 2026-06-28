@@ -106,51 +106,62 @@ const Home = () => {
 
     if (isLoading) return <div className="home-loading">Alinhando eixos astrológicos...</div>
 
+
     return (
         <div className="home-dashboard-shell">
-            <header className="home-cronos-header">
-                <span className="home-titulo-menor">✦ CICLO ATUAL ✦</span>
+            <header className="home-header-container">
+                <span className="home-titulo-menor-topo">✦ CICLO ATUAL ✦</span>
                 <h1 className="home-dia-destaque">{diaDestaque}</h1>
                 <h2 className="home-mes-subtitulo">{mesSubtitulo}</h2>
                 <p className="home-frase-ano">{anoFrase}</p>
+                
+                <div className="home-container-divisao">
+                    <div className="home-linha-divisao" />
+                </div>
+
+                <div className="home-action-container">
+                    <Button 
+                        backgroundColor={dadosHome.menstruandoHoje ? "rgba(190, 38, 50, 0.2)": ''}
+                        color={dadosHome.menstruandoHoje ? "#BE2632": ''}
+                        textColor={dadosHome.menstruandoHoje ? "#FF8F97" : ""}
+                        variant="redondo"
+                        maxWidth="280px"
+                        onClick={handleToggleMenstruacaoHoje}
+                    >
+                        {dadosHome.menstruandoHoje ? "◈ MENSTRUAÇÃO REGISTRADA" : "◈ Registrar Menstruação"}
+                    </Button>
+                </div>
             </header>
 
-            <div className="home-action-container">
-                <Button 
-                    backgroundColor={dadosHome.menstruandoHoje ? "rgba(190, 38, 50, 0.2)": ''}
-                    color={dadosHome.menstruandoHoje ? "#BE2632": ''}
-                    textColor={dadosHome.menstruandoHoje ? "#FF8F97" : ""}
-                    variant="redondo"
-                    maxWidth="280px"
-                    onClick={handleToggleMenstruacaoHoje}
-                >
-                    {dadosHome.menstruandoHoje ? "◈ MENSTRUAÇÃO REGISTRADA" : "◈ Registrar Menstruação"}
-                </Button>
-            </div>
-
-            <div className="home-orbita-separador">
-                <div className="home-planeta-focal" />
-            </div>
+            <div className="home-animacao-lua-placeholder" />
 
             <section className="home-secao-oraculo">
-                <span className="home-titulo-menor">✦ ORÁCULO LUNAR ✦</span>
-                <h3 className="home-titulo-sessao">MENSAGEM DO COSMOS</h3>
+                <div className="home-container-titulo-menor">
+                    <span className="home-titulo-menor-sessao">✦ ORÁCULO LUNAR ✦</span>
+                </div>
                 
-                <CardOraculo estaMenstruada={dadosHome.estaMenstruada}/>
-                <DadosExtras/>
+                <div className="home-container-titulo-sessao">
+                    <h3 className="home-titulo-sessao">MENSAGEM DO COSMOS</h3>
+                </div>
+                
+                <div className="home-oraculo-component-wrapper">
+                    <CardOraculo estaMenstruada={dadosHome.estaMenstruada}/>
+                </div>
+
+                <div className="home-dadosextras-component-wrapper">
+                    <DadosExtras/>
+                </div>
             </section>
 
             <section className="home-secao-calendario">
-                <div className="home-calendario-wrapper">
-                    <Calendario 
-                        diasMenstruacao={diasMenstruacaoFormatados}
-                        diasPrevistos={diasPrevistosFormatados}
-                        fasesLunares={dicionarioFasesLunares}
-                        onDayClick={handleToggleDiaCalendario}
-                        onNextMonth={() => setMesFiltro(prev => prev === 12 ? 1 : prev + 1)}
-                        onPrevMonth={() => setMesFiltro(prev => prev === 1 ? 12 : prev - 1)}
-                    />
-                </div>
+                <Calendario 
+                    diasMenstruacao={diasMenstruacaoFormatados}
+                    diasPrevistos={diasPrevistosFormatados}
+                    fasesLunares={dicionarioFasesLunares}
+                    onDayClick={handleToggleDiaCalendario}
+                    onNextMonth={() => setMesFiltro(prev => prev === 12 ? 1 : prev + 1)}
+                    onPrevMonth={() => setMesFiltro(prev => prev === 1 ? 12 : prev - 1)}
+                />
             </section>
         </div>
     )
