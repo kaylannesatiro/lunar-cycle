@@ -1,0 +1,78 @@
+.criar-conta-conteudo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.2rem;
+    padding-top: 2.5rem;
+    box-sizing: border-box;
+}
+
+.criar-conta-campo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.criar-conta-label {
+    font-family: "Cinzel", serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(224, 197, 143, 1);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.criar-conta-linha-dupla {
+    display: flex;
+    width: 100%;
+    gap: 1.3rem;
+    align-items: flex-start;
+}
+
+.criar-conta-linha-dupla .criar-conta-campo {
+    flex: 1;
+}
+
+.criar-conta-erro-signo {
+    font-family: "Cinzel", serif;
+    font-size: 0.625rem;
+    letter-spacing: 0.03rem;
+    color: #c0446a;
+    margin-top: 0.375rem;
+}
+
+.criar-conta-erro-geral {
+    font-family: "Cinzel", serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.05rem;
+    color: rgba(220, 80, 80, 0.9);
+    text-align: center;
+    line-height: 1.4;
+}
+
+.criar-conta-botoes {
+    display: flex;
+    width: 100%;
+    gap: 0.8rem;
+    padding-top: 0.8rem;
+}
+
+.criar-conta-botoes > * {
+    flex: 1;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+@media (max-width: 30rem) {
+    .criar-conta-linha-dupla {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .criar-conta-botoes {
+        flex-direction: column;
+    }
+}

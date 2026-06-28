@@ -7,18 +7,29 @@ const PopupConfirmacao = ({
     onCancel,
     botaoConfirmar,
     botaoCancelar,
-    variante = "confirmacao" // variantes suportadas: "confirmacao", "erro", "perigo"
+    variante = "confirmacao", // variantes suportadas: "confirmacao", "erro", "perigo"
+    backgroundColor,
+    borderColor,
+    textColor
 }) => {
     if (!isOpen) return null;
 
     // O ícone de atenção triangular só aparece em confirmações críticas (excluir ou sair da conta)
     const temIcone = variante === "confirmacao" || variante === "perigo";
 
+    const wrapperStyle = {
+        ...(backgroundColor ? { backgroundColor: backgroundColor } : {}),
+        ...(borderColor ? { borderColor: borderColor, borderWidth: "1px", borderStyle: "solid" } : {})
+    };
+
+    const textStyle = textColor ? { color: textColor } : {};
+
     return (
         <div className="popup-confirmacao-overlay" onClick={onCancel}>
             <div
                 className={`popup-confirmacao-wrapper popup-confirmacao-wrapper--${variante}`}
                 onClick={e => e.stopPropagation()}
+                style={wrapperStyle} 
             >
                 <div className="popup-confirmacao-area">
 
@@ -31,11 +42,17 @@ const PopupConfirmacao = ({
                             </div>
                         )}
 
-                        <h3 className={`popup-confirmacao-titulo popup-confirmacao-titulo--${variante}`}>
+                        <h3 
+                            className={`popup-confirmacao-titulo popup-confirmacao-titulo--${variante}`}
+                            style={{ textColor: "#D74B55" }} 
+                        >
                             {title}
                         </h3>
 
-                        <p className={`popup-confirmacao-mensagem popup-confirmacao-mensagem--${variante}`}>
+                        <p 
+                            className={`popup-confirmacao-mensagem popup-confirmacao-mensagem--${variante}`}
+                            style={textStyle} 
+                        >
                             {message}
                         </p>
                     </div>

@@ -1,29 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { obterIconFaseDaLua } from "../../../data/fasesLua";
 import "./VisualizarSonho.css";
 import Button from "../../common/Buttons/Button";
 import Tag from "../../common/Tags/Tag";
-import imgLuaNova from "../../../assets/fases/lua-nova.svg";
-import imgLuaCrescente from "../../../assets/fases/lua-crescente.svg";
-import imgLuaCheia from "../../../assets/fases/lua-cheia.svg";
-import imgLuaMinguante from "../../../assets/fases/lua-minguante.svg";
-import imgLuaQuartoCrescente from "../../../assets/fases/lua-quarto-crescente.svg";
-import imgLuaQuartoMinguante from "../../../assets/fases/lua-quarto-minguante.svg";
-import imgLuaGibosaCrescente from "../../../assets/fases/lua-gibosa-crescente.svg";
-import imgLuaGibosaMinguante from "../../../assets/fases/lua-gibosa-minguante.svg";
-
-const MAPA_FASES = {
-    "lua-nova": { img: imgLuaNova, nome: "Lua Nova" },
-    "lua-crescente": { img: imgLuaCrescente, nome: "Crescente" },
-    "lua-cheia": { img: imgLuaCheia, nome: "Lua Cheia" },
-    "lua-minguante": { img: imgLuaMinguante, nome: "Minguante" },
-    "lua-quarto-crescente": { img: imgLuaQuartoCrescente, nome: "Quarto Crescente" },
-    "lua-quarto-minguante": { img: imgLuaQuartoMinguante, nome: "Quarto Minguante" },
-    "lua-gibosa-crescente": { img: imgLuaGibosaCrescente, nome: "Gibosa Crescente" },
-    "lua-gibosa-minguante": { img: imgLuaGibosaMinguante, nome: "Gibosa Minguante" },
-};
 
 const ModalVisualizarSonho = ({ isOpen, sonho = {}, onEditClick, onDeleteClick, onFechar }) => {
-    const fase = MAPA_FASES[sonho.faseId] || null;
+    const fase = sonho.faseLunar || null;
 
     const aoClicarOverlay = (e) => {
         if (e.target === e.currentTarget) onFechar();
@@ -54,15 +36,15 @@ const ModalVisualizarSonho = ({ isOpen, sonho = {}, onEditClick, onDeleteClick, 
                                 {fase && (
                                     <div className="modal-sonho__icone-container">
                                         <img
-                                            src={fase.img}
-                                            alt={fase.nome}
+                                            src={obterIconFaseDaLua(fase)} 
+                                            alt={`Fase lunar: ${sonho.faseLunar}`}
                                             className="modal-sonho__icone-lua"
                                         />
                                     </div>
                                 )}
                                 <div className="modal-sonho__titulos">
                                     <span className="modal-sonho__fase-nome">
-                                        {fase ? fase.nome : "—"}
+                                        {fase ? fase : "—"}
                                     </span>
                                     <span className="modal-sonho__data">
                                         {sonho.dataFormatada || "—"}
@@ -120,20 +102,18 @@ const ModalVisualizarSonho = ({ isOpen, sonho = {}, onEditClick, onDeleteClick, 
                                 backgroundColor="linear-gradient(135deg, rgba(110, 76, 163, 0.28) 0%, rgba(75, 45, 115, 0.16) 100%)"
                                 color="rgba(165, 140, 255, 0.5)"
                                 textColor="rgba(215, 204, 255, 1)"
-                                width="100%"
-                                maxWidth="14.859rem"
+                                width="100%" maxWidth="14.859rem"
                             >
                                 ✎ Editar
                             </Button>
 
                             <Button
                                 variant="padrao"
-                                onClick={onDeleteClick}
+                                onClick={onDeleteClick} 
                                 backgroundColor="rgba(88, 8, 16, 0.22)"
                                 color="rgba(245, 240, 233, 0.5)"
                                 textColor="rgba(245, 240, 233, 1)"
-                                width="100%"
-                                maxWidth="14.859rem"
+                                width="100%" maxWidth="14.859rem"
                             >
                                 ✕ Apagar
                             </Button>

@@ -181,3 +181,16 @@
         width: 100% !important;
     }
 }
+
+.modal-sonho-overlay,
+.modal-sonho,
+.modal-sonho__conteudo {
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+.modal-sonho-overlay::-webkit-scrollbar,
+.modal-sonho::-webkit-scrollbar,
+.modal-sonho__conteudo::-webkit-scrollbar {
+    display: none; 
+}

@@ -3,6 +3,7 @@ import { sonhosServiceFrontend } from "../services/sonhoService"
 import FiltroSonhos from "../components/features/Diario/FiltroSonhos"
 import LinhaDoTempo from "../components/features/Diario/LinhaTempo"
 import Button from "../components/common/Buttons/Button"
+import ModalSonho from "../components/features/Modals/ModalSonho"
 import "./Diario.css"
 
 const Diario = () => {
@@ -11,7 +12,7 @@ const Diario = () => {
     const [filtrosAtivos, setFiltrosAtivos] = useState({ periodo: "TODOS", tags: [], datas: null })
     const [isLoading, setIsLoading] = useState(true)
     const [pagina, setPagina] = useState(1)
-    const [, setModalAberto] = useState(false)
+    const [modalAberto, setModalAberto] = useState(false)
 
     const LIMITE = 10
 
@@ -102,15 +103,15 @@ const Diario = () => {
                 setIsLoading(false)
             }
         }
-        buscarDadosFiltrados();
-    }, [filtrosAtivos]);
+        buscarDadosFiltrados()
+    }, [filtrosAtivos])
 
     const processarSonhosParaATela = () => {
         const limiteExibicao = pagina * LIMITE;
-        const sonhosFatiados = sonhosBrutos.slice(0, limiteExibicao);
+        const sonhosFatiados = sonhosBrutos.slice(0, limiteExibicao)
         
         const nomesMeses = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"];
-        const grupos = [];
+        const grupos = []
 
         sonhosFatiados.forEach((sonho) => {
             const dataObj = new Date(sonho.dataSonho)
@@ -137,7 +138,7 @@ const Diario = () => {
         })
 
         return grupos
-    };
+    }
 
     const carregarProximaPagina = () => setPagina((p) => p + 1)
     
@@ -185,17 +186,43 @@ const Diario = () => {
                         onFilterChange={setFiltrosAtivos} 
                     />
                 )}
-                
+
                 <LinhaDoTempo 
                     sonhosAgrupados={dadosProntos} 
                     isLoading={isLoading} 
-                    onCardClick={(id) => console.log(`Abrir visualização do sonho: ${id}`)}
-        
-                    mensagemVazia={
-                        filtrosAtivos.tags.length > 0 || filtrosAtivos.periodo !== "TODOS"
-                            ? "Nenhuma jornada astral sintonizada com os filtros aplicados..."
-                            : "Seu diário ainda está em branco, sonhe e registre suas aventuras noturnas!"
-                    }
+                    onCardClick={(id) => console.log(`Abrir visualização: ${id}`)}
+
+                    onDeletarSonho={async (idSonho) => {
+                        try {
+                            await sonhosServiceFrontend.excluir(idSonho)
+                            
+                            setSonhosBrutos((sonhosAntigos) => 
+                                sonhosAntigos.filter(sonho => sonho.id !== idSonho)
+                            )
+                            
+                            console.log(`Sonho ${idSonho} apagado com sucesso!`)
+                        } catch (erro) {
+                            console.error("Erro ao apagar sonho:", erro)
+                            alert("Não foi possível apagar o sonho. Tente novamente.")
+                        }
+                    }}
+
+                    onEditarSonho={async (dadosAtualizados) => {
+                        try {
+                            const sonhoAtualizado = await sonhosServiceFrontend.atualizar(dadosAtualizados.id, dadosAtualizados)
+                            
+                            console.log("Sonho atualizado no backend:", sonhoAtualizado)
+                            
+                            setSonhosBrutos((sonhosAntigos) => 
+                                sonhosAntigos.map(sonho => 
+                                    sonho.id === dadosAtualizados.id ? { ...sonho, ...dadosAtualizados } : sonho
+                                )
+                            )
+                        } catch (erro) {
+                            console.error("Erro ao editar o sonho:", erro)
+                            alert("Não foi possível salvar as alterações.")
+                        }
+                    }}
                 />
 
                 {temMaisSonhos && !isLoading && sonhosBrutos.length > 0 && (
@@ -213,6 +240,26 @@ const Diario = () => {
                     </div>
                 )}
             </section>
+
+            <ModalSonho 
+                isOpen={modalAberto}
+                modo="criar"
+                onFechar={() => setModalAberto(false)}
+                onSave={async (dadosNovos) => {
+                    try {
+                        const sonhoCriado = await sonhosServiceFrontend.criar(dadosNovos)
+                        
+                        console.log("Novo sonho salvo no banco:", sonhoCriado)
+                    
+                        setSonhosBrutos(sonhosAntigos => [sonhoCriado, ...sonhosAntigos])
+                        
+                        setModalAberto(false);
+                    } catch (erro) {
+                        console.error("Erro ao criar novo sonho:", erro)
+                        alert("Não foi possível registrar o sonho. Tente novamente.")
+                    }
+                }}
+            />
         </div>
     )
 }
