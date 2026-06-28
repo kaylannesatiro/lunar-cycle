@@ -189,3 +189,33 @@
 .modal-mens__btn-remover-fim:hover {
     color: rgba(224, 197, 143, 0.8);
 }
+
+@media (max-width: 480px) {
+    .modal-mens {
+        padding: 2rem 1.6rem 1.8rem 1.6rem;
+    }
+
+    .modal-mens--registrar {
+        height: auto;
+    }
+
+    .modal-mens--editar {
+        height: auto;
+    }
+
+    .modal-mens__subtitulo {
+        font-size: 0.95rem;
+        line-height: 1.4rem;
+    }
+
+    .modal-mens__botoes--editar {
+        flex-direction: column-reverse;
+        gap: 0.6rem;
+    }
+
+    .modal-mens__botoes--editar .modal-mens__btn-salvar,
+    .modal-mens__botoes--editar .modal-mens__btn-apagar {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
