@@ -13,8 +13,8 @@ const CriarConta = () => {
 
     const [nome, setNome] = useState("")
     const [email, setEmail] = useState("")
-    const [diasCiclo, setDiasCiclo] = useState("")
-    const [diasMenstruacao, setDiasMenstruacao] = useState("")
+    const [duracaoCiclo, setDuracaoCiclo] = useState("")
+    const [duracaoMenstruacao, setDuracaoMenstruacao] = useState("")
     const [signo, setSigno] = useState("")
     const [senha, setSenha] = useState("")
     const [confirmarSenha, setConfirmarSenha] = useState("")
@@ -39,17 +39,17 @@ const CriarConta = () => {
         if (!email.trim())
             novosErros.email = "Informe seu e-mail."
 
-        const ciclo = parseInt(diasCiclo)
-        const menstruacao = parseInt(diasMenstruacao)
+        const ciclo = parseInt(duracaoCiclo)
+        const menstruacao = parseInt(duracaoMenstruacao)
 
-        if (!diasCiclo || isNaN(ciclo) || ciclo < 1)
-            novosErros.diasCiclo = "Informe os dias do ciclo."
+        if (!duracaoCiclo || isNaN(ciclo) || ciclo < 1)
+            novosErros.duracaoCiclo = "Informe os dias do ciclo."
 
-        if (!diasMenstruacao || isNaN(menstruacao) || menstruacao < 1)
-            novosErros.diasMenstruacao = "Informe os dias de menstruação."
+        if (!duracaoMenstruacao || isNaN(menstruacao) || menstruacao < 1)
+            novosErros.duracaoMenstruacao = "Informe os dias de menstruação."
 
-        if (diasCiclo && diasMenstruacao && !isNaN(ciclo) && !isNaN(menstruacao) && menstruacao >= ciclo)
-            novosErros.diasMenstruacao = "Deve ser menor que os dias do ciclo."
+        if (duracaoCiclo && duracaoMenstruacao && !isNaN(ciclo) && !isNaN(menstruacao) && menstruacao >= ciclo)
+            novosErros.duracaoMenstruacao = "Deve ser menor que os dias do ciclo."
 
         if (!signo)
             novosErros.signo = "Selecione seu signo."
@@ -72,18 +72,29 @@ const CriarConta = () => {
         setIsLoading(true)
         setErros(prev => ({ ...prev, geral: "" }))
         try {
-            await authService.criarConta({
+            const resposta = await authService.criarConta({
                 nome,
                 email: email.toLowerCase(),
-                diasCiclo: parseInt(diasCiclo),
-                diasMenstruacao: parseInt(diasMenstruacao),
+                duracaoCiclo: parseInt(duracaoCiclo),
+                duracaoMenstruacao: parseInt(duracaoMenstruacao),
                 signo,
                 senha
             })
+
+            if (resposta?.token) {
+                localStorage.setItem("token", resposta.token)
+                navigate("/home")
+                return
+            }
+
             await authService.login({ email: email.toLowerCase(), senha })
             navigate("/home")
+
         } catch (erro) {
-            setErros(prev => ({ ...prev, geral: erro.message || "Ocorreu um erro ao criar a conta. Tente novamente." }))
+            setErros(prev => ({
+                ...prev,
+                geral: erro.message || "Ocorreu um erro ao criar a conta. Tente novamente."
+            }))
         } finally {
             setIsLoading(false)
         }
@@ -129,13 +140,13 @@ const CriarConta = () => {
                         variante="cadastro-numero"
                         type="number"
                         placeholder="ex: 28"
-                        value={diasCiclo}
+                        value={duracaoCiclo}
                         onChange={(e) => {
-                            setDiasCiclo(e.target.value)
-                            if (erros.diasCiclo) setErros(prev => ({ ...prev, diasCiclo: "" }))
-                            if (erros.diasMenstruacao) setErros(prev => ({ ...prev, diasMenstruacao: "" }))
+                            setDuracaoCiclo(e.target.value)
+                            if (erros.duracaoCiclo) setErros(prev => ({ ...prev, duracaoCiclo: "" }))
+                            if (erros.duracaoMenstruacao) setErros(prev => ({ ...prev, duracaoMenstruacao: "" }))
                         }}
-                        error={erros.diasCiclo}
+                        error={erros.duracaoCiclo}
                     />
                 </div>
 
@@ -145,12 +156,12 @@ const CriarConta = () => {
                         variante="cadastro-numero"
                         type="number"
                         placeholder="ex: 5"
-                        value={diasMenstruacao}
+                        value={duracaoMenstruacao}
                         onChange={(e) => {
-                            setDiasMenstruacao(e.target.value)
-                            if (erros.diasMenstruacao) setErros(prev => ({ ...prev, diasMenstruacao: "" }))
+                            setDuracaoMenstruacao(e.target.value)
+                            if (erros.duracaoMenstruacao) setErros(prev => ({ ...prev, duracaoMenstruacao: "" }))
                         }}
-                        error={erros.diasMenstruacao}
+                        error={erros.duracaoMenstruacao}
                     />
                 </div>
             </div>
