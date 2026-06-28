@@ -66,12 +66,19 @@ const Home = () => {
     useEffect(() => {
         if (isModalOpen) {
             document.body.style.overflow = 'hidden'
+            document.documentElement.style.overflow = 'hidden'
+            
+            document.body.classList.add('travar-scroll')
         } else {
             document.body.style.overflow = 'auto'
+            document.documentElement.style.overflow = 'auto'
+            document.body.classList.remove('travar-scroll')
         }
 
         return () => {
             document.body.style.overflow = 'auto'
+            document.documentElement.style.overflow = 'auto'
+            document.body.classList.remove('travar-scroll')
         }
     }, [isModalOpen])
 

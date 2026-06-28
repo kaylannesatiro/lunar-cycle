@@ -237,3 +237,31 @@
     .home-container-titulo-menor { height: 160px; }
     .home-titulo-sessao { font-size: 20px; line-height: 30px; }
 }
+
+/* =========================================================
+   OCULTAR SCROLLBAR DO MODAL (Sem mexer no arquivo original)
+   ========================================================= */
+
+/* Para Firefox e navegadores genéricos */
+.modal-mens-overlay,
+.modal-mens,
+.modal-mens__conteudo {
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+/* Para navegadores baseados em WebKit (Chrome, Edge, Safari) */
+.modal-mens-overlay::-webkit-scrollbar,
+.modal-mens::-webkit-scrollbar,
+.modal-mens__conteudo::-webkit-scrollbar {
+    display: none; 
+}
+
+/* =========================================================
+   TRAVA DE SCROLL GLOBAL 
+   ========================================================= */
+.travar-scroll, 
+.travar-scroll * {
+    /* Impede que containers filhos continuem rolando escondidos */
+    overscroll-behavior: none; 
+}
