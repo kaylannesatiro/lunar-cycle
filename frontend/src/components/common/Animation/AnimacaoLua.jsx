@@ -3,25 +3,22 @@ import React from 'react';
 const AnimacaoLua = () => (
   <div 
     style={{ 
-      /* TRUQUE PARA QUEBRAR O CONTAINER E VAZAR PRA TELA TODA */
-      width: "100vw",
-      position: "relative",
-      left: "50%",
-      right: "50%",
-      marginLeft: "-50vw",
-      marginRight: "-50vw",
-      height: "310px",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      overflow: "visible" /* Deixa o brilho da lua vazar sem ser cortado */
+      position: "relative", 
+      width: "100%", 
+      height: "310px", 
+      display: "flex", 
+      justifyContent: "center", 
+      alignItems: "center"
     }}
   >
+    {/* O SVG ocupa 100vw, forçando o vazamento lateral, mas centrado pelo Flexbox acima */}
     <svg
       style={{ 
-        /* Trava a largura mínima para a curva não ser "esmagada" no celular */
-        minWidth: "1440px", 
-        width: "100%", 
+        position: "absolute",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "100vw",
+        minWidth: "1440px", /* Mantém a integridade da curva original */
         height: "100%", 
         overflow: "visible" 
       }}
