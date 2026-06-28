@@ -16,7 +16,7 @@
     max-height: 90vh;
     border-radius: 1.75rem;
     border: 0.042rem solid rgba(165, 140, 255, 1);
-    border-bottom-color: rgba(165, 140, 255, 0.2);
+    border-color: rgba(165, 140, 255, 0.2);
     border-left-color: rgba(165, 140, 255, 0.2);
     border-right-color: rgba(165, 140, 255, 0.2);
     padding: 2.5rem 2.2rem 2.2rem 2.2rem;
