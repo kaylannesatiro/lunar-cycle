@@ -16,3 +16,19 @@
     height: 100%; 
     overflow: visible; 
 }
+
+/* =========================================================
+   RESPONSIVIDADE DA ÓRBITA
+   ========================================================= */
+
+@media (max-width: 768px) {
+    .orbital-moon-container {
+        height: 220px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .orbital-moon-container {
+        height: 140px; /* Corta o buraco invisível no celular e aproxima os componentes */
+    }
+}

@@ -278,3 +278,73 @@
     /* Impede que containers filhos continuem rolando escondidos */
     overscroll-behavior: none; 
 }
+
+/* =========================================================
+   RESPONSIVIDADE CAPRICHADA (TABLETS E MOBILE)
+   ========================================================= */
+
+/* Telas até 960px (Tablets e Notebooks menores) */
+@media (max-width: 960px) {
+    .home-container-titulo-sessao { 
+        width: 100%; 
+    }
+    .home-oraculo-component-wrapper,
+    .home-dadosextras-component-wrapper {
+        /* Adiciona um respiro nas bordas para os cards não colarem na tela */
+        max-width: calc(100% - 32px); 
+    }
+}
+
+/* Telas até 768px (Tablets em pé e Celulares grandes) */
+@media (max-width: 768px) {
+    .home-dia-destaque { 
+        font-size: 150px; 
+        line-height: 130px; 
+    }
+    .home-mes-subtitulo { 
+        font-size: 32px; 
+        letter-spacing: 18px; 
+        padding-left: 18px; 
+    }
+    .home-container-titulo-menor { 
+        margin-top: 50px; /* Reduz o espaço vazio antes do oráculo */
+    }
+}
+
+/* Telas até 480px (Celulares padrão) */
+@media (max-width: 480px) {
+    .home-header-container { 
+        padding: 32px 16px 16px 16px; /* Sobe os elementos para a lua aparecer mais cedo */
+    }
+    
+    .home-dia-destaque { 
+        font-size: 110px; /* Encaixa perfeitamente sem quebrar a tela */
+        line-height: 90px; 
+    }
+    
+    .home-mes-subtitulo { 
+        font-size: 22px; 
+        letter-spacing: 10px; 
+        padding-left: 10px; 
+    }
+    
+    .home-frase-ano {
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+    
+    .home-container-titulo-menor { 
+        margin-top: 32px; /* Junta mais as seções no mobile */
+    }
+    
+    .home-titulo-sessao { 
+        font-size: 24px; 
+        line-height: 34px; 
+        letter-spacing: 1.5px;
+    }
+    
+    .home-secao-calendario {
+        margin-top: 40px; /* Reduz a distância gigante antes do calendário */
+        padding-bottom: 4rem;
+    }
+}
