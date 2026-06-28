@@ -102,40 +102,41 @@ const ModalVisualizarSonho = ({ isOpen, sonho = {}, onEditClick, onDeleteClick, 
                                                 <Tag
                                                     key={i}
                                                     texto={tag}
-                                                    variante="sonho-ativa"
+                                                    variante="sonho"
+                                                    ativa={true}
                                                 />
                                             ))}
                                         </div>
                                     </div>
                                 )}
 
-                                <div className="modal-sonho__botoes">
-                                    <Button
-                                        variant="padrao"
-                                        onClick={onEditClick}
-                                        backgroundColor="linear-gradient(135deg, rgba(110, 76, 163, 0.28) 0%, rgba(75, 45, 115, 0.16) 100%)"
-                                        color="rgba(165, 140, 255, 0.5)"
-                                        textColor="rgba(215, 204, 255, 1)"
-                                        width="100%"
-                                        maxWidth="14.859rem"
-                                    >
-                                        ✎ Editar
-                                    </Button>
-
-                                    <Button
-                                        variant="padrao"
-                                        onClick={onDeleteClick}
-                                        backgroundColor="rgba(88, 8, 16, 0.22)"
-                                        color="rgba(245, 240, 233, 0.5)"
-                                        textColor="rgba(245, 240, 233, 1)"
-                                        width="100%"
-                                        maxWidth="14.859rem"
-                                    >
-                                        ✕ Apagar
-                                    </Button>
-                                </div>
-
                             </div>
+                        </div>
+
+                        <div className="modal-sonho__botoes">
+                            <Button
+                                variant="padrao"
+                                onClick={onEditClick}
+                                backgroundColor="linear-gradient(135deg, rgba(110, 76, 163, 0.28) 0%, rgba(75, 45, 115, 0.16) 100%)"
+                                color="rgba(165, 140, 255, 0.5)"
+                                textColor="rgba(215, 204, 255, 1)"
+                                width="100%"
+                                maxWidth="14.859rem"
+                            >
+                                ✎ Editar
+                            </Button>
+
+                            <Button
+                                variant="padrao"
+                                onClick={onDeleteClick}
+                                backgroundColor="rgba(88, 8, 16, 0.22)"
+                                color="rgba(245, 240, 233, 0.5)"
+                                textColor="rgba(245, 240, 233, 1)"
+                                width="100%"
+                                maxWidth="14.859rem"
+                            >
+                                ✕ Apagar
+                            </Button>
                         </div>
                     </motion.div>
                 </motion.div>
