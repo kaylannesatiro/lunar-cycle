@@ -153,10 +153,8 @@
 }
 
 .home-container-titulo-menor {
-    height: 310px;
-    align-self: stretch;
+    margin-top: 80px; /* Distância exata entre a animação da lua e o título do oráculo */
     display: flex;
-    align-items: flex-end; 
     justify-content: center;
     width: 100%;
 }
