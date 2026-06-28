@@ -1,0 +1,18 @@
+.orbital-moon-container {
+    position: relative; 
+    width: 100%; 
+    height: 310px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.orbital-moon-svg {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    min-width: 1440px; 
+    height: 100%; 
+    overflow: visible; 
+}
