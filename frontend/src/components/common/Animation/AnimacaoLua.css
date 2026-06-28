@@ -1,0 +1,37 @@
+.orbital-moon-container {
+    position: relative; 
+    width: 100%; 
+    height: 19.375rem; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.orbital-moon-svg {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    /* 1440px / 16 */
+    min-width: 90rem; 
+    height: 100%; 
+    overflow: visible; 
+}
+
+/* =========================================================
+   RESPONSIVIDADE DA ÓRBITA
+   ========================================================= */
+
+/* Até 768px */
+@media (max-width: 48em) {
+    .orbital-moon-container {
+        height: 13.75rem; 
+    }
+}
+
+/* Até 480px */
+@media (max-width: 30em) {
+    .orbital-moon-container {
+        height: 8.75rem; 
+    }
+}
