@@ -228,12 +228,11 @@ const Diario = () => {
                         onFilterChange={setFiltrosAtivos} 
                     />
                 )}
-                
+
                 <LinhaDoTempo 
                     sonhosAgrupados={MOCK_SONHOS} 
                     isLoading={isLoading} 
-                    onCardClick={(id) => console.log(`Abrir visualização do sonho: ${id}`)}
-                    
+                    onCardClick={(id) => console.log(`Abrir visualização: ${id}`)}
                     onDeletarSonho={async (idSonho) => {
                         try {
                             setSonhosBrutos((sonhosAntigos) => 
@@ -243,6 +242,14 @@ const Diario = () => {
                             console.log(`Sonho ${idSonho} apagado com sucesso!`)
                         } catch (erro) {
                             console.error("Erro ao apagar sonho:", erro)
+                        }
+                    }}
+
+                    onEditarSonho={async (dadosAtualizados) => {
+                        try {
+                            console.log("Dados enviados para edição:", dadosAtualizados)
+                        } catch (erro) {
+                            console.error("Erro ao editar o sonho:", erro)
                         }
                     }}
                 />

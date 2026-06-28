@@ -3,35 +3,55 @@ import "./LinhaTempo.css"
 import CardSonho from "../Diario/CardSonho"
 import ModalVisualizarSonho from "../Modals/VisualizarSonho"
 import PopupConfirmacao from "../../common/Modals/PopupConfirmacao"
+import ModalSonho from "../Modals/ModalSonho"
 import Button from "../../common/Buttons/Button"
 
-const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, onDeletarSonho, mensagemVazia = "Seu diário ainda está em branco..." }) => {
+const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, onEditarSonho, onDeletarSonho, mensagemVazia = "Seu diário ainda está em branco..." }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isPopupApagarAberto, setIsPopupApagarAberto] = useState(false)
+    const [isModalEditarAberto, setIsModalEditarAberto] = useState(false)
     const [sonhoSelecionado, setSonhoSelecionado] = useState(null)
 
     const handleAbrirModal = (sonho) => {
         setSonhoSelecionado(sonho)
         setIsModalOpen(true)
         if (onCardClick) onCardClick(sonho.id)
-    }
+    };
 
-    const handleFecharModal = () => {
+    const handleFecharModalVisualizar = () => {
         setIsModalOpen(false)
         setTimeout(() => setSonhoSelecionado(null), 200)
+    };
+
+    const handleFecharTodos = () => {
+        setIsModalOpen(false)
+        setIsModalEditarAberto(false)
+        setIsPopupApagarAberto(false)
+        setTimeout(() => setSonhoSelecionado(null), 200)
+    }
+
+    const handleAbrirEdicao = () => {
+        setIsModalOpen(false)
+        setTimeout(() => setIsModalEditarAberto(true), 200)
     }
 
     const handleAbrirConfirmacaoApagar = () => {
         setIsModalOpen(false)
         setTimeout(() => setIsPopupApagarAberto(true), 200)
-    };
+    }
 
     const handleConfirmarDelete = () => {
         if (onDeletarSonho && sonhoSelecionado) {
             onDeletarSonho(sonhoSelecionado.id)
         }
-        setIsPopupApagarAberto(false)
-        setTimeout(() => setSonhoSelecionado(null), 200)
+        handleFecharTodos()
+    }
+
+    const handleSalvarEdicao = (dadosEditados) => {
+        if (onEditarSonho && sonhoSelecionado) {
+            onEditarSonho({ id: sonhoSelecionado.id, ...dadosEditados })
+        }
+        handleFecharTodos()
     }
 
     if (isLoading) {
@@ -87,9 +107,17 @@ const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, onDe
             <ModalVisualizarSonho 
                 isOpen={isModalOpen}
                 sonho={sonhoSelecionado || {}} 
-                onFechar={handleFecharModal}
-                onEditClick={() => console.log("Editar sonho:", sonhoSelecionado?.id)}
-                onDeleteClick={handleAbrirConfirmacaoApagar}
+                onFechar={handleFecharModalVisualizar}
+                onEditClick={handleAbrirEdicao}
+                onDeleteClick={handleAbrirConfirmacaoApagar} 
+            />
+
+            <ModalSonho 
+                isOpen={isModalEditarAberto}
+                modo="editar" 
+                dadosIniciais={sonhoSelecionado || {}}
+                onFechar={handleFecharTodos}
+                onSave={handleSalvarEdicao} 
             />
 
             <PopupConfirmacao
@@ -107,7 +135,7 @@ const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, onDe
                         backgroundColor="linear-gradient(135deg, rgba(110, 76, 163, 0.28) 0%, rgba(75, 45, 115, 0.16) 100%)"
                         color="#A58CFF"
                         textColor="#D7CCFF"
-                        onClick={() => setIsPopupApagarAberto(false)} 
+                        onClick={() => setIsPopupApagarAberto(false)}
                     >
                         Cancelar
                     </Button>
@@ -119,7 +147,7 @@ const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, onDe
                         backgroundColor="rgba(88, 8, 16, 0.22)"
                         color="rgba(245, 240, 233, 0.50)"
                         textColor="#F5F0E9"
-                        onClick={() => handleConfirmarDelete(false)} 
+                        onClick={handleConfirmarDelete} 
                     >
                         Apagar Sonho
                     </Button>
