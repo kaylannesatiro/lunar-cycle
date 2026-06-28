@@ -181,6 +181,8 @@
     color: rgba(215, 204, 255, 1);
     margin: 0;
     padding-top: 1.3rem;
+    font-family: Raleway;
+    font-style: Italic;
 }
 
 .modal-sonho__divisor-interno-container {
