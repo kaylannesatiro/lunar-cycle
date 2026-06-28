@@ -1,3 +1,11 @@
+.entrar-conteudo {
+    display: flex;
+    flex-direction: column;
+    width: 22.417rem;
+    gap: 1.3rem;
+    padding-top: 2.5rem;
+}
+
 .entrar-campo {
     display: flex;
     flex-direction: column;
@@ -18,15 +26,19 @@
 
 .entrar-botao {
     display: flex;
-    justify-content: center;
-    padding-top: 0.5rem;
     width: 100%;
+    padding-top: 0.5rem;
+}
+
+.entrar-botao > * {
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 .entrar-erro-geral {
     font-family: 'Cinzel', serif;
     font-size: 0.6rem;
+    letter-spacing: 0.05rem;
     color: rgba(220, 80, 80, 0.9);
     text-align: center;
-    letter-spacing: 0.05rem;
 }

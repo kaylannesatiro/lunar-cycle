@@ -1,17 +1,30 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import CardConta from "../../components/common/Cards/CardConta"
-import Input from "../../components/common/Inputs/Input"
-import InputSenha from "../../components/common/Inputs/InputSenha"
-import Button from "../../components/common/Buttons/Button"
-import { autenticar } from "../../services/authService"
+import { useState, useEffect } from "react"
+import { useNavigate, useOutletContext } from "react-router-dom"
+import Input from "../components/common/Inputs/Input"
+import InputSenha from "../components/common/Inputs/InputSenha"
+import Button from "../components/common/Buttons/Button"
+import { authService } from "../services/authService"
+import "./Entrar.css"
 
-const Autenticar = () => {
+const Entrar = () => {
     const navigate = useNavigate()
+    const { setCardProps } = useOutletContext()
+
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
     const [erros, setErros] = useState({})
     const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        setCardProps({
+            titulo: "Bem-vinda ao seu universo lunar",
+            subtitulo: "Acompanhe seus ciclos sob a luz da Lua",
+            linksRodape: [
+                { texto: "Esqueci a senha", rota: "/recuperar-senha" },
+                { texto: "Criar conta",     rota: "/criar-conta"     }
+            ]
+        })
+    }, [])
 
     const validar = () => {
         const novosErros = {}
@@ -21,32 +34,24 @@ const Autenticar = () => {
         return Object.keys(novosErros).length === 0
     }
 
-    const aoAutenticar = async () => {
+    const aoEntrar = async () => {
         if (!validar()) return
         setIsLoading(true)
         try {
-            await autenticar({ email, senha })
+            await authService.login({ email, senha })
             navigate("/home")
         } catch (erro) {
-            setErros({ geral: "E-mail ou senha incorretos." })
+            setErros({ geral: erro.message || "Erro ao realizar login." })
         } finally {
             setIsLoading(false)
         }
     }
 
-    const linksRodape = [
-        { texto: "Esqueci a senha", rota: "/recuperar-senha" },
-        { texto: "Criar conta",     rota: "/criar-conta"     }
-    ]
-
     return (
-        <CardConta
-            titulo="Bem-vinda ao seu universo lunar"
-            subtitulo="Acompanhe seus ciclos sob a luz da Lua"
-            linksRodape={linksRodape}
-        >
-            <div className="autenticar-campo">
-                <label className="autenticar-label">E-mail</label>
+        <div className="entrar-conteudo">
+
+            <div className="entrar-campo">
+                <label className="entrar-label">E-mail</label>
                 <Input
                     variante="autenticacao"
                     placeholder="Digite seu email"
@@ -59,8 +64,8 @@ const Autenticar = () => {
                 />
             </div>
 
-            <div className="autenticar-campo">
-                <label className="autenticar-label">Senha</label>
+            <div className="entrar-campo">
+                <label className="entrar-label">Senha</label>
                 <InputSenha
                     variante="autenticacao"
                     placeholder="Digite sua senha"
@@ -73,24 +78,27 @@ const Autenticar = () => {
                 />
             </div>
 
-            {erros.geral && <span className="autenticar-erro-geral">{erros.geral}</span>}
+            {erros.geral && (
+                <span className="entrar-erro-geral">{erros.geral}</span>
+            )}
 
-            <div className="autenticar-botao">
+            <div className="entrar-botao">
                 <Button
                     variant="padrao"
-                    onClick={aoAutenticar}
+                    onClick={aoEntrar}
                     isLoading={isLoading}
                     backgroundColor="linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%)"
                     color="rgba(224, 197, 143, 0.3)"
                     textColor="rgba(224, 197, 143, 1)"
                     width="100%"
-                    maxWidth="22.417rem"
+                    maxWidth="100%"
                 >
                     ◈ Entrar
                 </Button>
             </div>
-        </CardConta>
+
+        </div>
     )
 }
 
-export default Autenticar
+export default Entrar
