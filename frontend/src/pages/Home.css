@@ -6,7 +6,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    /* Permitindo expansão até 920px para casar com o container do título da sessão */
+    /* Permitindo expansão total para casar com o contêiner do título da sessão */
     max-width: 920px; 
     margin: 0 auto;
     box-sizing: border-box;
@@ -69,7 +69,6 @@
     font-style: normal;
     font-weight: 400;
     line-height: 69px; /* 150% */
-    /* Adiciona o recuo à esquerda proporcional para balancear o letter-spacing extremo do Figma */
     padding-left: 31.28px; 
     letter-spacing: 31.28px;
     text-transform: uppercase;
@@ -95,7 +94,7 @@
     display: flex;
     padding: 35.2px 0;
     flex-direction: column;
-    align-items: center; /* Alinhado ao centro para casar com a simetria do header */
+    align-items: center; 
     width: 100%;
 }
 
@@ -112,7 +111,7 @@
 }
 
 /* =========================================================
-   ANIMAÇÃO LUA (ZONA ESPERANDO RENDERIZAÇÃO FUTURA)
+   ANIMAÇÃO LUA (ZONA DE RESERVA EM ESPERA)
    ========================================================= */
 .home-animacao-lua-placeholder {
     height: 310px;
@@ -134,7 +133,7 @@
     height: 310px;
     align-self: stretch;
     display: flex;
-    align-items: flex-end; /* Senta o título na base do bloco de respiro */
+    align-items: flex-end; 
     justify-content: center;
     width: 100%;
 }
@@ -174,23 +173,23 @@
 }
 
 /* =========================================================
-   CONTÊINERES DE ALINHAMENTO (Larguras Idênticas)
+   CONTÊINERES DE ALINHAMENTO (Larguras Idênticas em rem)
    ========================================================= */
 
-/* Força o Oráculo a ter uma largura máxima controlada e centralizada */
+/* Oráculo: Distância exata de 48px do container de título da sessão */
 .home-oraculo-component-wrapper {
     width: 100%;
-    max-width: 780px; /* Alinha com o padrão de largura dos cards do seu projeto */
+    max-width: 57.416rem; /* Casando perfeitamente com o contêiner interno do oráculo */
     display: flex;
     justify-content: center;
     margin-top: 48px;
     box-sizing: border-box;
 }
 
-/* Força os Dados Extras a seguirem exatamente a mesma linha do Oráculo */
+/* Dados Extras: Distância exata de 22.4px do container do oráculo */
 .home-dadosextras-component-wrapper {
     width: 100%;
-    max-width: 780px; /* Exatamente o mesmo tamanho do contêiner de cima */
+    max-width: 57.416rem; /* Casando perfeitamente para manter o alinhamento em bloco */
     display: flex;
     justify-content: center;
     margin-top: 22.4px;
@@ -201,10 +200,10 @@
    SEÇÃO CALENDÁRIO
    ========================================================= */
 
-/* Calendário: a uma distância de 63.98px + 32px do dados extras */
+/* Calendário: Distância exata de 63.98px + 32px dos dados extras */
 .home-secao-calendario {
     width: 100%;
-    margin-top: calc(63.98px + 32px); /* Mantém o cálculo exato do Figma */
+    margin-top: calc(63.98px + 32px); 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -216,13 +215,17 @@
    ========================================================= */
 @media (max-width: 960px) {
     .home-container-titulo-sessao { width: 100%; }
+    .home-oraculo-component-wrapper,
+    .home-dadosextras-component-wrapper {
+        max-width: calc(100% - 2rem);
+    }
 }
 
 @media (max-width: 600px) {
     .home-header-container { height: auto; padding: 60px 16px 24px 16px; }
-    .home-dia-destaque { font-size: 140px; line-height: 120px; }
-    .home-mes-subtitulo { font-size: 28px; letter-spacing: 12px; padding-left: 12px; }
+    .home-dia-destaque { font-size: 130px; line-height: 110px; }
+    .home-mes-subtitulo { font-size: 26px; letter-spacing: 12px; padding-left: 12px; }
     .home-animacao-lua-placeholder { height: 160px; }
     .home-container-titulo-menor { height: 160px; }
-    .home-titulo-sessao { font-size: 22px; line-height: 32px; }
+    .home-titulo-sessao { font-size: 20px; line-height: 30px; }
 }
