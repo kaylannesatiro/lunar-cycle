@@ -6,7 +6,7 @@ import PopupConfirmacao from "../../common/Modals/PopupConfirmacao"
 import ModalSonho from "../Modals/ModalSonho"
 import Button from "../../common/Buttons/Button"
 
-const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, onEditarSonho, onDeletarSonho, mensagemVazia = "Seu diário ainda está em branco..." }) => {
+const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, onEditarSonho, onDeletarSonho, mensagemVazia = "Volte a sonhar e registre aqui suas aventuras noturnas..." }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isPopupApagarAberto, setIsPopupApagarAberto] = useState(false)
     const [isModalEditarAberto, setIsModalEditarAberto] = useState(false)
