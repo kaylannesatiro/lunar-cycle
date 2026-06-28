@@ -26,8 +26,8 @@
    ========================================================= */
 .home-header-container {
     display: flex;
-    height: 621.333px;
-    padding: 0px 24px 24px 24px; /* <--- Topo reduzido para 54px */
+    height: auto; /* A MÁGICA ESTÁ AQUI: Remove o paredão invisível gigante */
+    padding: 54px 24px 20px 24px; /* O 20px no final dá o respiro exato antes da lua */
     flex-direction: column;
     justify-content: center;
     align-items: center;
