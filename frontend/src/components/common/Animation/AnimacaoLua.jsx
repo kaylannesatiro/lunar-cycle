@@ -1,16 +1,30 @@
+import React from 'react';
+
 const AnimacaoLua = () => (
   <div 
     style={{ 
-      width: "100vw", /* Força a ocupar a tela inteira, ignorando o container pai */
-      height: "310px", 
+      /* TRUQUE PARA QUEBRAR O CONTAINER E VAZAR PRA TELA TODA */
+      width: "100vw",
       position: "relative",
       left: "50%",
-      transform: "translateX(-50%)", /* Centraliza perfeitamente na tela */
-      overflow: "hidden" /* Evita criar barra de rolagem horizontal se a tela for menor */
+      right: "50%",
+      marginLeft: "-50vw",
+      marginRight: "-50vw",
+      height: "310px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      overflow: "visible" /* Deixa o brilho da lua vazar sem ser cortado */
     }}
   >
     <svg
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }}
+      style={{ 
+        /* Trava a largura mínima para a curva não ser "esmagada" no celular */
+        minWidth: "1440px", 
+        width: "100%", 
+        height: "100%", 
+        overflow: "visible" 
+      }}
       viewBox="0 0 1440 310"
       preserveAspectRatio="xMidYMid meet"
     >
