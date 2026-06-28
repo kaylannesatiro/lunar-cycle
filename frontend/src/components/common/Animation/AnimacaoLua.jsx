@@ -1,53 +1,106 @@
-import './AnimacaoLua.css'
+const AnimacaoLua = () => (
+  <div style={{ width: "100%", height: "310px", position: "relative" }}>
+    <svg
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }}
+      viewBox="0 0 1440 310"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <defs>
+        <radialGradient id="moonBodyG" cx="34%" cy="32%" r="66%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="38%" stopColor="#f5f0e9" />
+          <stop offset="100%" stopColor="#e0c58f" />
+        </radialGradient>
+        <filter id="mGlow" x="-120%" y="-120%" width="340%" height="340%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        <filter id="arcGF" x="-5%" y="-60%" width="110%" height="220%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        <linearGradient id="arcLG" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stopColor="rgba(224,197,143,0)" />
+          <stop offset="18%"  stopColor="rgba(224,197,143,0.5)" />
+          <stop offset="50%"  stopColor="rgba(224,197,143,0.72)" />
+          <stop offset="82%"  stopColor="rgba(224,197,143,0.5)" />
+          <stop offset="100%" stopColor="rgba(224,197,143,0)" />
+        </linearGradient>
+      </defs>
 
-const AnimacaoLua = () => {
-    return (
-        <div className="animacao-lua-container">
-            <div className="animacao-lua-trilha-wrapper">
-                <svg 
-                    className="animacao-lua-orbita" 
-                    width="1502" 
-                    height="160" 
-                    viewBox="0 0 1502 160" 
-                    fill="none" 
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path 
-                        d="M 0 159.8 Q 750.7 -160 1501.5 159.8" 
-                        stroke="rgba(224, 197, 143, 0.11)" 
-                        strokeWidth="4.634" 
-                    />
-                </svg>
+      <path
+        id="orbitPath"
+        d="M -90 290 Q 720 -55 1530 290"
+        fill="none"
+        stroke="url(#arcLG)"
+        strokeWidth="1"
+        strokeDasharray="4 11"
+      />
+      <path
+        d="M -90 290 Q 720 -55 1530 290"
+        fill="none"
+        stroke="rgba(224,197,143,0.11)"
+        strokeWidth="5"
+        filter="url(#arcGF)"
+      />
+      
+      {/* Loop corrigido para rodar liso no React JS */}
+      {[0.18, 0.38, 0.5, 0.62, 0.82].map((t, i) => {
+        const x = (1-t)*(1-t)*(-90) + 2*(1-t)*t*720 + t*t*1530;
+        const y = (1-t)*(1-t)*290 + 2*(1-t)*t*(-55) + t*t*290;
+        return (
+          <circle
+            key={i}
+            cx={x} cy={y}
+            r={i === 2 ? 3.2 : 1.6}
+            fill={`rgba(224,197,143,${i === 2 ? 0.55 : 0.28})`}
+          />
+        );
+      })}
 
-                <div className="animacao-lua-planeta">
-                    <div className="animacao-lua-glow animacao-lua-glow--maior">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="108" height="108" viewBox="0 0 108 108" fill="none">
-                            <path d="M53.7575 107.515C83.447 107.515 107.515 83.447 107.515 53.7575C107.515 24.0681 83.447 0 53.7575 0C24.0681 0 0 24.0681 0 53.7575C0 83.447 24.0681 107.515 53.7575 107.515Z" fill="#E0C58F" fillOpacity="0.04"/>
-                        </svg>
-                    </div>
+      <g>
+        <circle cx="0" cy="0" r="58" fill="rgba(224,197,143,0.038)" />
+        <circle cx="0" cy="0" r="38" fill="rgba(245,240,233,0.065)" />
+        <g filter="url(#mGlow)">
+          <circle cx="0" cy="0" r="24" fill="url(#moonBodyG)" />
+          <circle cx="-7" cy="-5" r="5.5" fill="rgba(172,148,95,0.2)" />
+          <circle cx="9" cy="8" r="3.5" fill="rgba(172,148,95,0.17)" />
+          <circle cx="-2" cy="12" r="2.5" fill="rgba(172,148,95,0.14)" />
+        </g>
+        <animateMotion dur="22s" repeatCount="indefinite" calcMode="linear">
+          <mpath href="#orbitPath" />
+        </animateMotion>
+        <animate
+          attributeName="opacity"
+          values="0;0;1;1;1;1;0;0"
+          keyTimes="0;0.045;0.085;0.44;0.56;0.915;0.955;1"
+          dur="22s"
+          repeatCount="indefinite"
+        />
+      </g>
 
-                    <div className="animacao-lua-glow animacao-lua-glow--medio">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="71" height="71" viewBox="0 0 71 71" fill="none">
-                            <path d="M35.2205 70.4409C54.6722 70.4409 70.4409 54.6722 70.4409 35.2205C70.4409 15.7687 54.6722 0 35.2205 0C15.7687 0 0 15.7687 0 35.2205C0 54.6722 15.7687 70.4409 35.2205 70.4409Z" fill="#F5F0E9" fillOpacity="0.067"/>
-                        </svg>
-                    </div>
-
-                    <div className="animacao-lua-glow animacao-lua-glow--nucleo">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
-                            <path d="M22.2445 44.489C34.5298 44.489 44.489 34.5298 44.489 22.2445C44.489 9.9592 34.5298 0 22.2445 0C9.9592 0 0 9.9592 0 22.2445C0 34.5298 9.9592 44.489 22.2445 44.489Z" fill="url(#paint0_radial_38_20884)"/>
-                            <defs>
-                                <radialGradient id="paint0_radial_38_20884" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(15.1263 14.2365) scale(29.3627)">
-                                <stop stopColor="white"/>
-                                <stop offset="0.38" stopColor="#F5F0E9"/>
-                                <stop offset="1" stopColor="#E0C58F"/>
-                                </radialGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
+      <g>
+        <circle cx="0" cy="0" r="9" fill="rgba(245,240,233,0.14)" />
+        <animateMotion dur="22s" repeatCount="indefinite" calcMode="linear" begin="-0.55s">
+          <mpath href="#orbitPath" />
+        </animateMotion>
+        <animate
+          attributeName="opacity"
+          values="0;0;0.65;0.65;0.65;0.65;0;0"
+          keyTimes="0;0.045;0.085;0.44;0.56;0.915;0.955;1"
+          dur="22s"
+          repeatCount="indefinite"
+        />
+      </g>
+    </svg>
+  </div>
+);
 
 export default AnimacaoLua;
