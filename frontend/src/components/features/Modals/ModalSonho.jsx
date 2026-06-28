@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { tagsPreCadastradas } from "../../../data/tagsData";
 import "./ModalSonho.css";
 import Button from "../../common/Buttons/Button";
 import Input from "../../common/Inputs/Input";
 import InputData from "../../common/Inputs/InputData";
 import TextArea from "../../common/Inputs/TextArea";
 import InputTags from "../../common/Tags/TagInput";
-
-const TAGS_SUGERIDAS = ["lúcido", "recorrente", "profético", "simbólico", "espiritual", "transformação", "natureza", "voar", "água", "luz", "sombra", "amor", "medo", "paz", "magia"];
 
 const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFechar }) => {
     const [titulo, setTitulo] = useState("");
@@ -159,7 +158,7 @@ const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFech
                                     tags={tags}
                                     onAddTag={adicionarTag}
                                     onRemoveTag={removerTag}
-                                    tagsDoSistema={TAGS_SUGERIDAS}
+                                    tagsDoSistema={tagsPreCadastradas}
                                     tagsSelecionadas={tagsSelecionadas}
                                     onToggleTagSistema={alternarTagSistema}
                                 />
