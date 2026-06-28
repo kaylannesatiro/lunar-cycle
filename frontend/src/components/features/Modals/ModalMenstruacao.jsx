@@ -196,7 +196,22 @@ const ModalMenstruacao = ({ isOpen, modo = "registrar", dadosIniciais = {}, onSa
 
                             {mostrarDataFim && (
                                 <div className="modal-mens__campo">
-                                    <label className="modal-mens__label">Data de Fim</label>
+                                    <div className="modal-mens__label-row">
+                                        <label className="modal-mens__label">Data de Fim</label>
+                                        {modo === "registrar" && (
+                                            <button
+                                                type="button"
+                                                className="modal-mens__btn-remover-fim"
+                                                onClick={() => {
+                                                    setMostrarDataFim(false);
+                                                    setDataFim("");
+                                                    if (erros.dataFim) setErros({ ...erros, dataFim: "" });
+                                                }}
+                                            >
+                                                ✕ Remover
+                                            </button>
+                                        )}
+                                    </div>
                                     <InputData
                                         variante="menstruacao"
                                         value={dataFim}

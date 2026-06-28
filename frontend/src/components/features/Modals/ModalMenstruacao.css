@@ -160,3 +160,32 @@
     justify-content: space-between;
     gap: 0.7rem;
 }
+
+.modal-mens__label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.55rem;
+}
+
+.modal-mens__label-row .modal-mens__label {
+    margin-bottom: 0;
+}
+
+.modal-mens__btn-remover-fim {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 0.52rem;
+    font-weight: 400;
+    letter-spacing: 0.12rem;
+    text-transform: uppercase;
+    color: rgba(224, 197, 143, 0.45);
+    padding: 0;
+    transition: color 0.2s ease;
+}
+
+.modal-mens__btn-remover-fim:hover {
+    color: rgba(224, 197, 143, 0.8);
+}
