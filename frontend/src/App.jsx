@@ -5,6 +5,7 @@ import Diario from './pages/Diario'
 import Conta from './pages/Conta'
 import Home from './pages/Home'
 import Entrar from './pages/Entrar'
+import CriarConta from './pages/CriarConta'
 
 import './App.css';
 
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route element={<AuthLayout />}>
             <Route path="/entrar" element={<Entrar />} />
+            <Route path="/criar-conta" element={<CriarConta />} />
           </Route>
 
           <Route path="/" element={<MainLayout />}>

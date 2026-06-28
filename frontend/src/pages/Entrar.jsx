@@ -24,7 +24,7 @@ const Entrar = () => {
                 { texto: "Criar conta",     rota: "/criar-conta"     }
             ]
         })
-    }, [])
+    }, [setCardProps])
 
     const validar = () => {
         const novosErros = {}
@@ -47,6 +47,7 @@ const Entrar = () => {
             } else {
                 setErros(prev => ({ ...prev, geral: "Ocorreu um erro ao tentar entrar. Tente novamente." }))
             }
+            console.error("Erro ao realizar login:", erro)
         } finally {
             setIsLoading(false)
         }
