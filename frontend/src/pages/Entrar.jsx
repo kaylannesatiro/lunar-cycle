@@ -37,11 +37,16 @@ const Entrar = () => {
     const aoEntrar = async () => {
         if (!validar()) return
         setIsLoading(true)
+        setErros(prev => ({ ...prev, geral: "" }))
         try {
-            await authService.login({ email, senha })
+            await authService.login({ email: email.toLowerCase(), senha })
             navigate("/home")
         } catch (erro) {
-            setErros({ geral: erro.message || "Erro ao realizar login." })
+            if (erro.status === 401 || erro.message === "CREDENCIAIS_INVALIDAS") {
+                setErros(prev => ({ ...prev, geral: "E-mail ou senha incorretos." }))
+            } else {
+                setErros(prev => ({ ...prev, geral: "Ocorreu um erro ao tentar entrar. Tente novamente." }))
+            }
         } finally {
             setIsLoading(false)
         }
@@ -54,11 +59,12 @@ const Entrar = () => {
                 <label className="entrar-label">E-mail</label>
                 <Input
                     variante="autenticacao"
+                    type="email"
                     placeholder="Digite seu email"
                     value={email}
                     onChange={(e) => {
                         setEmail(e.target.value)
-                        if (erros.email) setErros({ ...erros, email: "" })
+                        if (erros.email) setErros(prev => ({ ...prev, email: "" }))
                     }}
                     error={erros.email}
                 />
@@ -72,7 +78,7 @@ const Entrar = () => {
                     value={senha}
                     onChange={(e) => {
                         setSenha(e.target.value)
-                        if (erros.senha) setErros({ ...erros, senha: "" })
+                        if (erros.senha) setErros(prev => ({ ...prev, senha: "" }))
                     }}
                     error={erros.senha}
                 />

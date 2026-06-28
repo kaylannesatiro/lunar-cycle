@@ -1,9 +1,10 @@
 .entrar-conteudo {
     display: flex;
     flex-direction: column;
-    width: 22.417rem;
+    width: 100%;
     gap: 1.3rem;
     padding-top: 2.5rem;
+    box-sizing: border-box;
 }
 
 .entrar-campo {
@@ -13,16 +14,18 @@
 }
 
 .entrar-label {
-    font-family: 'Cinzel', serif;
+    font-family: "Cinzel", serif;
     font-size: 0.65rem;
     font-weight: 400;
-    line-height: 0.975rem;
-    letter-spacing: 0.13rem;
+    line-height: 1.5;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(224, 197, 143, 1);
     margin-bottom: 0.6rem;
     display: block;
 }
+
+
 
 .entrar-botao {
     display: flex;
@@ -36,9 +39,10 @@
 }
 
 .entrar-erro-geral {
-    font-family: 'Cinzel', serif;
+    font-family: "Cinzel", serif;
     font-size: 0.6rem;
     letter-spacing: 0.05rem;
     color: rgba(220, 80, 80, 0.9);
     text-align: center;
+    line-height: 1.4;
 }
