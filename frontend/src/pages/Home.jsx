@@ -6,6 +6,7 @@ import CardOraculo from "../components/features/Ciclo/CardOraculo"
 import DadosExtras from "../components/features/Ciclo/DadosExtras"
 import Calendario from "../components/features/Calendario/Calendario"
 import ModalMenstruacao from "../components/features/Modals/ModalMenstruacao"
+import AnimacaoLua from "../components/common/Animation/AnimacaoLua"
 import "./Home.css"
 
 const Home = () => {
@@ -155,7 +156,7 @@ const Home = () => {
                 </div>
             </header>
 
-            <div className="home-animacao-lua-placeholder" />
+            <AnimacaoLua />
 
             <section className="home-secao-oraculo">
                 <div className="home-container-titulo-menor">
