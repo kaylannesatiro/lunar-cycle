@@ -27,7 +27,7 @@
 .home-header-container {
     display: flex;
     height: 621.333px;
-    padding: 54px 24px 24px 24px; /* <--- Topo reduzido para 54px */
+    padding: 0px 24px 24px 24px; /* <--- Topo reduzido para 54px */
     flex-direction: column;
     justify-content: center;
     align-items: center;
