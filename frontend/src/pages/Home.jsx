@@ -5,10 +5,13 @@ import Button from "../components/common/Buttons/Button"
 import CardOraculo from "../components/features/Ciclo/CardOraculo"
 import DadosExtras from "../components/features/Ciclo/DadosExtras"
 import Calendario from "../components/features/Calendario/Calendario"
+import ModalMenstruacao from "../components/features/Modals/ModalMenstruacao"
 import "./Home.css"
 
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true)
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [dadosHome, setDadosHome] = useState({
         nomeUsuaria: '',
@@ -60,15 +63,15 @@ const Home = () => {
         if (!isLoading) atualizarMesCalendario()
     }, [mesFiltro, anoFiltro])
 
-    const handleToggleMenstruacaoHoje = async () => {
+    const handleSalvarModal = async (dadosDoModal) => {
         try {
-            const resposta = await cicloService.alternarMenstruacaoHoje()
-            setDadosHome(resposta.dadosHome)
-            
+            console.log("Dados recebidos do modal:", dadosDoModal);
             const dadosCalendarioAtualizados = await cicloService.obterCalendario(mesFiltro, anoFiltro)
             setDadosCalendario(dadosCalendarioAtualizados)
+            setIsModalOpen(false)
+            
         } catch (error) {
-            console.error("Erro ao registrar pulsação de hoje:", error)
+            console.error("Erro ao salvar período pelo modal:", error)
         }
     }
 
@@ -126,7 +129,7 @@ const Home = () => {
                         textColor={dadosHome.menstruandoHoje ? "#FF8F97" : ""}
                         variant="redondo"
                         maxWidth="280px"
-                        onClick={handleToggleMenstruacaoHoje}
+                        onClick={() => setIsModalOpen(true)}
                     >
                         {dadosHome.menstruandoHoje ? "◈ MENSTRUAÇÃO REGISTRADA" : "◈ Registrar Menstruação"}
                     </Button>
@@ -163,6 +166,13 @@ const Home = () => {
                     onPrevMonth={() => setMesFiltro(prev => prev === 1 ? 12 : prev - 1)}
                 />
             </section>
+
+            <ModalMenstruacao 
+                isOpen={isModalOpen}
+                modo="registrar"
+                onFechar={() => setIsModalOpen(false)}
+                onSave={handleSalvarModal}
+            />
         </div>
     )
 }
