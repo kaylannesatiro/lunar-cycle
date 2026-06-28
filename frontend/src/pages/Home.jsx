@@ -144,9 +144,9 @@ const Home = () => {
 
                 <div className="home-action-container">
                     <Button 
-                        backgroundColor={dadosHome.menstruandoHoje ? "rgba(190, 38, 50, 0.2)": ''}
-                        color={dadosHome.menstruandoHoje ? "#BE2632": ''}
-                        textColor={dadosHome.menstruandoHoje ? "#FF8F97" : ""}
+                        backgroundColor={dadosHome.menstruandoHoje ? "rgba(120, 12, 22, 0.22)": ''}
+                        color={dadosHome.menstruandoHoje ? "rgba(245, 240, 233, 0.50)": ''}
+                        textColor={dadosHome.menstruandoHoje ? "#F5F0E9" : ''}
                         variant="redondo"
                         maxWidth="280px"
                         onClick={() => setIsModalOpen(true)}
