@@ -97,6 +97,8 @@ const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, onDe
                 variante="perigo"
                 title="Confirmar Exclusão"
                 message={`Você tem certeza que deseja apagar o sonho "${sonhoSelecionado?.titulo}"? Essa ação não pode ser desfeita.`}
+                backgroundColor="radial-gradient(111.8% 111.8% at 50% 0%, rgba(150, 22, 32, 0.08) 0%, rgba(0, 0, 0, 0.00) 58%)"
+                textColor="#D7CCFF"
                 onCancel={() => setIsPopupApagarAberto(false)}
                 botaoCancelar={
                     <Button 

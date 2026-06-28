@@ -7,18 +7,30 @@ const PopupConfirmacao = ({
     onCancel,
     botaoConfirmar,
     botaoCancelar,
-    variante = "confirmacao" // variantes suportadas: "confirmacao", "erro", "perigo"
+    variante = "confirmacao", // variantes suportadas: "confirmacao", "erro", "perigo"
+    backgroundColor,
+    borderColor,
+    textColor
 }) => {
     if (!isOpen) return null;
 
     // O ícone de atenção triangular só aparece em confirmações críticas (excluir ou sair da conta)
     const temIcone = variante === "confirmacao" || variante === "perigo";
 
+    // Monta o objeto de estilo apenas se as props forem passadas
+    const wrapperStyle = {
+        ...(backgroundColor ? { backgroundColor: backgroundColor } : {}),
+        ...(borderColor ? { borderColor: borderColor, borderWidth: "1px", borderStyle: "solid" } : {})
+    };
+
+    const textStyle = textColor ? { color: textColor } : {};
+
     return (
         <div className="popup-confirmacao-overlay" onClick={onCancel}>
             <div
                 className={`popup-confirmacao-wrapper popup-confirmacao-wrapper--${variante}`}
                 onClick={e => e.stopPropagation()}
+                style={wrapperStyle} /* <-- Aplica Background e Borda aqui */
             >
                 <div className="popup-confirmacao-area">
 
@@ -31,11 +43,17 @@ const PopupConfirmacao = ({
                             </div>
                         )}
 
-                        <h3 className={`popup-confirmacao-titulo popup-confirmacao-titulo--${variante}`}>
+                        <h3 
+                            className={`popup-confirmacao-titulo popup-confirmacao-titulo--${variante}`}
+                            style={textStyle} /* <-- Aplica Cor do Texto aqui */
+                        >
                             {title}
                         </h3>
 
-                        <p className={`popup-confirmacao-mensagem popup-confirmacao-mensagem--${variante}`}>
+                        <p 
+                            className={`popup-confirmacao-mensagem popup-confirmacao-mensagem--${variante}`}
+                            style={textStyle} /* <-- Aplica Cor do Texto aqui */
+                        >
                             {message}
                         </p>
                     </div>
