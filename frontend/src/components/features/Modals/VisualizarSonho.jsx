@@ -5,7 +5,7 @@ import Button from "../../common/Buttons/Button";
 import Tag from "../../common/Tags/Tag";
 
 const ModalVisualizarSonho = ({ isOpen, sonho = {}, onEditClick, onDeleteClick, onFechar }) => {
-    const fase = obterIconFaseDaLua(sonho.faseId) || null;
+    const fase = obterIconFaseDaLua(sonho.faseLunar) || null;
 
     const aoClicarOverlay = (e) => {
         if (e.target === e.currentTarget) onFechar();
@@ -37,7 +37,7 @@ const ModalVisualizarSonho = ({ isOpen, sonho = {}, onEditClick, onDeleteClick, 
                                     <div className="modal-sonho__icone-container">
                                         <img
                                             src={obterIconFaseDaLua(fase)} 
-                                            alt={`Fase lunar: ${sonho.faseId}`}
+                                            alt={`Fase lunar: ${sonho.faseLunar}`}
                                             className="modal-sonho__icone-lua"
                                         />
                                     </div>

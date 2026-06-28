@@ -6,6 +6,48 @@ import Button from "../components/common/Buttons/Button"
 import ModalSonho from "../components/features/Modals/ModalSonho"
 import "./Diario.css"
 
+const MOCK_SONHOS = [
+    {
+        mes: "JUNHO",
+        ano: "2026",
+        itens: [
+            {
+                id: 1,
+                diaFormatado: "14",
+                dataFormatada: "14/06/2026",
+                faseLunar: "nova",
+                titulo: "Sementes no Escuro",
+                descricao: "Sonhei que estava plantando sementes luminosas em um solo escuro e muito fértil. Havia uma sensação profunda de recomeço e paz.",
+                tags: ["Lúcido", "Natureza", "Paz"]
+            },
+            {
+                id: 2,
+                diaFormatado: "21",
+                dataFormatada: "21/06/2026",
+                faseLunar: "crescente",
+                titulo: "O Voo Sobre as Águas",
+                descricao: "Eu conseguia planar sobre um oceano prateado. A água acompanhava o movimento das minhas mãos como se fosse mágica.",
+                tags: ["Voo", "Água", "Controle"]
+            }
+        ]
+    },
+    {
+        mes: "MAIO",
+        ano: "2026",
+        itens: [
+            {
+                id: 3,
+                diaFormatado: "05",
+                dataFormatada: "05/05/2026",
+                faseLunar: "cheia",
+                titulo: "A Dança dos Lobos",
+                descricao: "Corria por uma floresta iluminada por uma lua gigantesca no céu. Eu não tinha medo, me sentia parte da matilha.",
+                tags: ["Intenso", "Animais", "Floresta"]
+            }
+        ]
+    }
+];
+
 const Diario = () => {
     const [sonhosBrutos, setSonhosBrutos] = useState([])
     const [tagsDaUsuaria, setTagsDaUsuaria] = useState([])
@@ -188,7 +230,7 @@ const Diario = () => {
                 )}
                 
                 <LinhaDoTempo 
-                    sonhosAgrupados={dadosProntos} 
+                    sonhosAgrupados={MOCK_SONHOS} 
                     isLoading={isLoading} 
                     onCardClick={(id) => console.log(`Abrir visualização do sonho: ${id}`)}
         

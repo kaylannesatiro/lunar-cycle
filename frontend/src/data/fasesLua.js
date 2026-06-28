@@ -9,14 +9,14 @@ import imgLuaGibosaMinguante from '../assets/fases/lua-gibosa-minguante.svg'
 
 const obterIconFaseDaLua = (faseDaLua) => {
     const imagensMap = {
-            "Nova": imgLuaNova,
-            "Crescente": imgLuaCrescente,
-            "Quarto Crescente": imgLuaQuartoCrescente,
-            "Gibosa Crescente": imgLuaGibosaCrescente,
-            "Cheia": imgLuaCheia,
-            "Minguante": imgLuaMinguante,
-            "Quarto Minguante": imgLuaQuartoMinguante,
-            "Gibosa Minguante": imgLuaGibosaMinguante
+            "nova": imgLuaNova,
+            "crescente": imgLuaCrescente,
+            "quarto Crescente": imgLuaQuartoCrescente,
+            "gibosa Crescente": imgLuaGibosaCrescente,
+            "cheia": imgLuaCheia,
+            "minguante": imgLuaMinguante,
+            "quarto Minguante": imgLuaQuartoMinguante,
+            "gibosa Minguante": imgLuaGibosaMinguante
     }
 
     return imagensMap[faseDaLua];
