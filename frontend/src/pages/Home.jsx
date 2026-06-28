@@ -17,7 +17,7 @@ const Home = () => {
     const [dadosHome, setDadosHome] = useState({
         nomeUsuaria: '',
         faseLunar: { nome: 'Nova', icone: '🌑' },
-        menstruandoHoje: true,
+        menstruandoHoje: false,
         possuiCicloMenstrual: false,
         diaDoCiclo: 1,
         previsaoProximoCiclo: '--/--/----'
