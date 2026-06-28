@@ -33,5 +33,37 @@ export const authService = {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!resposta.ok) throw new Error('Erro ao excluir conta');
+    },
+
+    login: async ({ email, senha }) => {
+        const resposta = await fetch(`${BASE_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, senha })
+        });
+        const dados = await resposta.json();
+        if (!resposta.ok) throw new Error(dados.mensagem || 'Erro ao realizar login.');
+        localStorage.setItem('token', dados.token);
+        return dados;
+    },
+
+    criarConta: async (dadosCadastro) => {
+        const resposta = await fetch(`${BASE_URL}/cadastro`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dadosCadastro)
+        });
+        const dados = await resposta.json();
+        if (!resposta.ok) throw new Error(dados.mensagem || 'Erro ao criar conta.');
+        return dados;
+    },
+
+    logout: async () => {
+        const token = localStorage.getItem('token');
+        await fetch(`${BASE_URL}/logout`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        localStorage.removeItem('token');
     }
 };
