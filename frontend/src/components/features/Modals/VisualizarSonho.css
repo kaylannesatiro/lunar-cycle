@@ -1,0 +1,285 @@
+.modal-sonho-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal-sonho {
+    position: relative;
+    width: 100%;
+    max-width: 35rem;      
+    max-height: 90vh;
+    border-radius: 1.75rem;   
+    border: 0.042rem solid rgba(165, 140, 255, 1);
+    border-bottom-color: rgba(165, 140, 255, 0.2);
+    border-left-color: rgba(165, 140, 255, 0.2);
+    border-right-color: rgba(165, 140, 255, 0.2);
+    padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+    background: rgba(18, 8, 42, 1);
+    box-shadow:
+        0 0 4.0625rem 0 rgba(110, 76, 163, 0.1),
+        0 2rem 6.875rem 0 rgba(14, 5, 40, 0.85);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;       
+}
+
+.modal-sonho__gradiente {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.75rem;
+    background: radial-gradient(111.8% 111.8% at 50% 0%, rgba(110, 76, 163, 0.12) 0%, rgba(0, 0, 0, 0) 52%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.modal-sonho__cabecalho,
+.modal-sonho__divisor-container,
+.modal-sonho__conteudo {
+    position: relative;
+    z-index: 1;
+}
+
+.modal-sonho__cabecalho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.modal-sonho__cabecalho-esquerda {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.9rem;             
+}
+
+.modal-sonho__icone-container {
+    width: 3.083rem;         
+    height: 3.083rem;
+    border-radius: 1.542rem;   
+    border: 0.042rem solid rgba(165, 140, 255, 1);
+    padding: 0.5625rem;   
+    background: rgba(30, 14, 58, 1);
+    box-shadow: 0 0 1.125rem 0 rgba(110, 76, 163, 0.38);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.modal-sonho__icone-lua {
+    width: 1.875rem;    
+    height: 1.875rem;
+    filter:
+        drop-shadow(0 0 14.939rem rgba(224, 197, 143, 0.18))
+        drop-shadow(0 0 8.983rem rgba(224, 197, 143, 0.55))
+        drop-shadow(0 0 3.493rem rgba(245, 240, 233, 0.88));
+}
+
+.modal-sonho__titulos {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.modal-sonho__fase-nome {
+    font-family: 'Cinzel', serif;
+    font-size: 0.49rem;
+    font-weight: 400;
+    line-height: 0.735rem; 
+    letter-spacing: 0.1275rem;
+    text-transform: uppercase;
+    color: rgba(165, 140, 255, 1);
+}
+
+.modal-sonho__data {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    line-height: 0.93rem;
+    letter-spacing: 0.062rem;
+    color: rgba(215, 204, 255, 1);
+    margin-top: 0.1rem;
+}
+
+.modal-sonho__divisor-container {
+    width: 100%;
+    padding-top: 1.5rem;
+    flex-shrink: 0;
+}
+
+.modal-sonho__divisor {
+    width: 100%;
+    height: 0.063rem;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(165, 140, 255, 0.18) 50%, rgba(0, 0, 0, 0) 100%);
+}
+
+.modal-sonho__conteudo {
+    flex: 1;
+    overflow-y: auto;
+    padding-top: 1.5rem;
+    min-height: 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(165, 140, 255, 0.2) transparent;
+}
+
+.modal-sonho__conteudo::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+.modal-sonho__conteudo::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-sonho__conteudo::-webkit-scrollbar-thumb {
+    background: rgba(165, 140, 255, 0.2);
+    border-radius: 0.25rem;
+}
+
+.modal-sonho__conteudo-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.modal-sonho__aspas {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 3.8rem;
+    font-weight: 400;
+    line-height: 2.964rem;
+    color: rgba(165, 140, 255, 0.6);
+    display: block;
+}
+
+.modal-sonho__titulo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1.755rem;
+    letter-spacing: 0.054rem;
+    color: rgba(215, 204, 255, 1);
+    margin: 0;
+    padding-top: 0.6rem;
+}
+
+.modal-sonho__descricao {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.775rem;
+    font-weight: 400;
+    line-height: 1.4rem;
+    letter-spacing: 0.02rem;
+    color: rgba(215, 204, 255, 1);
+    margin: 0;
+    padding-top: 1.3rem;
+}
+
+.modal-sonho__divisor-interno-container {
+    width: 100%;
+    padding-top: 1.8rem;
+}
+
+.modal-sonho__divisor-interno {
+    width: 100%;
+    height: 0.063rem;
+    background: linear-gradient(90deg, rgba(165, 140, 255, 0.18) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.modal-sonho__tags-container {
+    padding-top: 1.1rem;
+}
+
+.modal-sonho__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.modal-sonho__botoes {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    padding-top: 1.8rem;
+    padding-bottom: 0.2rem;
+}
+
+.modal-sonho__botoes > * {
+    flex: 1;
+    height: 3.132rem !important;
+    min-height: 3.132rem !important;
+    max-width: 14.859rem !important;
+}
+
+@media (max-width: 640px) {
+    .modal-sonho {
+        padding: 2rem 1.5rem 1.8rem 1.5rem;
+        border-radius: 1.25rem;
+    }
+
+    .modal-sonho__titulo {
+        font-size: 1.1rem;
+        line-height: 1.5rem;
+    }
+
+    .modal-sonho__aspas {
+        font-size: 3rem;
+        line-height: 2.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-sonho {
+        padding: 1.75rem 1.25rem 1.5rem 1.25rem;
+        border-radius: 1rem;
+        max-height: 95vh;
+    }
+
+    .modal-sonho__icone-container {
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 1.3rem;
+    }
+
+    .modal-sonho__icone-lua {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .modal-sonho__fase-nome {
+        font-size: 0.44rem;
+    }
+
+    .modal-sonho__data {
+        font-size: 0.56rem;
+    }
+
+    .modal-sonho__titulo {
+        font-size: 1rem;
+        line-height: 1.4rem;
+    }
+
+    .modal-sonho__descricao {
+        font-size: 0.72rem;
+        line-height: 1.3rem;
+    }
+
+    .modal-sonho__botoes {
+        flex-direction: column-reverse;
+        gap: 0.6rem;
+    }
+
+    .modal-sonho__botoes > * {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
