@@ -119,6 +119,7 @@ const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, onDe
                         backgroundColor="rgba(88, 8, 16, 0.22)"
                         color="rgba(245, 240, 233, 0.50)"
                         textColor="#F5F0E9"
+                        onClick={() => handleConfirmarDelete(false)} 
                     >
                         Apagar Sonho
                     </Button>

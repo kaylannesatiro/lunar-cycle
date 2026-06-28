@@ -17,7 +17,6 @@ const PopupConfirmacao = ({
     // O ícone de atenção triangular só aparece em confirmações críticas (excluir ou sair da conta)
     const temIcone = variante === "confirmacao" || variante === "perigo";
 
-    // Monta o objeto de estilo apenas se as props forem passadas
     const wrapperStyle = {
         ...(backgroundColor ? { backgroundColor: backgroundColor } : {}),
         ...(borderColor ? { borderColor: borderColor, borderWidth: "1px", borderStyle: "solid" } : {})
@@ -30,7 +29,7 @@ const PopupConfirmacao = ({
             <div
                 className={`popup-confirmacao-wrapper popup-confirmacao-wrapper--${variante}`}
                 onClick={e => e.stopPropagation()}
-                style={wrapperStyle} /* <-- Aplica Background e Borda aqui */
+                style={wrapperStyle} 
             >
                 <div className="popup-confirmacao-area">
 
@@ -45,14 +44,14 @@ const PopupConfirmacao = ({
 
                         <h3 
                             className={`popup-confirmacao-titulo popup-confirmacao-titulo--${variante}`}
-                            style={textStyle} /* <-- Aplica Cor do Texto aqui */
+                            style={{ textColor: "#D74B55" }} 
                         >
                             {title}
                         </h3>
 
                         <p 
                             className={`popup-confirmacao-mensagem popup-confirmacao-mensagem--${variante}`}
-                            style={textStyle} /* <-- Aplica Cor do Texto aqui */
+                            style={textStyle} 
                         >
                             {message}
                         </p>
