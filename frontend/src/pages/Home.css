@@ -1,0 +1,328 @@
+/* =========================================================
+   SHELL E CORE DA PÁGINA HOME
+   ========================================================= */
+.home-dashboard-shell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    /* 920px / 16 */
+    max-width: 57.5rem; 
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.home-loading {
+    color: #E0C58F;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.1875rem;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 15rem;
+}
+
+/* =========================================================
+   CONTAINER CABEÇALHO
+   ========================================================= */
+.home-header-container {
+    display: flex;
+    height: auto; 
+    /* 54px 24px 20px 24px */
+    padding: 3.375rem 1.5rem 1.25rem 1.5rem; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.home-titulo-menor-topo {
+    color: #E0C58F;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0.93rem; 
+    letter-spacing: 0.322rem;
+    text-transform: uppercase;
+    padding-bottom: 1.6rem;
+}
+
+.home-dia-destaque {
+    color: #E0C58F;
+    text-align: center;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 13.625rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 11.1725rem; 
+    letter-spacing: -0.136rem;
+    margin: 0;
+    
+    animation: pulsarLuzDourada 3s infinite alternate ease-in-out;
+}
+
+/* =========================================================
+   KEYFRAMES - LUZ DOURADA PULSANTE
+   ========================================================= */
+@keyframes pulsarLuzDourada {
+    0% {
+        text-shadow: 
+            0 0 0.9375rem rgba(224, 197, 143, 0.20),
+            0 0 2.5rem rgba(224, 197, 143, 0.10),
+            0 0 5rem rgba(224, 197, 143, 0.05);
+    }
+    100% {
+        text-shadow: 
+            0 0 1.5625rem rgba(224, 197, 143, 0.45),
+            0 0 4.375rem rgba(224, 197, 143, 0.25),
+            0 0 7.5rem rgba(224, 197, 143, 0.15);
+    }
+}
+
+.home-mes-subtitulo {
+    color: #F5F0E9;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 2.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 4.3125rem; 
+    padding-left: 1.955rem; 
+    letter-spacing: 1.955rem;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.home-frase-ano {
+    color: #E0C58F;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.68rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.02rem; 
+    letter-spacing: 0.258rem;
+    margin: 0.5rem 0 0 0;
+}
+
+/* =========================================================
+   CONTAINER DIVISÃO
+   ========================================================= */
+.home-container-divisao {
+    display: flex;
+    padding: 2.2rem 0;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+}
+
+.home-linha-divisao {
+    width: 8.125rem;
+    height: 1px; /* Exceção: mantido em px para evitar que o navegador oculte o traço */
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.00) 0%, rgba(224, 197, 143, 0.40) 50%, rgba(0, 0, 0, 0.00) 100%);
+}
+
+.home-action-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* =========================================================
+   ANIMAÇÃO LUA (ZONA DE RESERVA EM ESPERA)
+   ========================================================= */
+.home-animacao-lua-placeholder {
+    height: 13.125rem;
+    align-self: stretch;
+    width: 100%;
+}
+
+/* =========================================================
+   SEÇÃO ORÁCULO LUNAR
+   ========================================================= */
+.home-secao-oraculo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.home-container-titulo-menor {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.home-titulo-menor-sessao {
+    color: #E0C58F;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.59rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0.885rem; 
+    letter-spacing: 0.307rem;
+    text-transform: uppercase;
+}
+
+.home-container-titulo-sessao {
+    display: flex;
+    width: 57.5rem;
+    height: 4.0375rem;
+    padding-top: 0.85rem;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.home-titulo-sessao {
+    color: #F5F0E9;
+    text-align: center;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 2.1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 3.15rem; 
+    letter-spacing: 0.168rem;
+    margin: 0;
+}
+
+/* =========================================================
+   CONTÊINERES DE ALINHAMENTO
+   ========================================================= */
+.home-oraculo-component-wrapper {
+    width: 100%;
+    max-width: 57.416rem; 
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    box-sizing: border-box;
+}
+
+.home-dadosextras-component-wrapper {
+    width: 100%;
+    max-width: 57.416rem; 
+    display: flex;
+    justify-content: center;
+    margin-top: 1.4rem;
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   SEÇÃO CALENDÁRIO
+   ========================================================= */
+.home-secao-calendario {
+    width: 100%;
+    margin-top: calc(3.998rem + 2rem); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 8rem;
+}
+
+/* =========================================================
+   OCULTAR SCROLLBAR DO MODAL
+   ========================================================= */
+.modal-mens-overlay,
+.modal-mens,
+.modal-mens__conteudo {
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+.modal-mens-overlay::-webkit-scrollbar,
+.modal-mens::-webkit-scrollbar,
+.modal-mens__conteudo::-webkit-scrollbar {
+    display: none; 
+}
+
+/* =========================================================
+   TRAVA DE SCROLL GLOBAL 
+   ========================================================= */
+.travar-scroll, 
+.travar-scroll * {
+    overscroll-behavior: none; 
+}
+
+/* =========================================================
+   RESPONSIVIDADE CAPRICHADA (TABLETS E MOBILE)
+   ========================================================= */
+
+/* Telas até 960px (Tablets e Notebooks menores) */
+@media (max-width: 60em) {
+    .home-container-titulo-sessao { 
+        width: 100%; 
+    }
+    .home-oraculo-component-wrapper,
+    .home-dadosextras-component-wrapper {
+        max-width: calc(100% - 2rem); 
+    }
+}
+
+/* Telas até 768px (Tablets em pé e Celulares grandes) */
+@media (max-width: 48em) {
+    .home-dia-destaque { 
+        font-size: 9.375rem; 
+        line-height: 8.125rem; 
+    }
+    .home-mes-subtitulo { 
+        font-size: 2rem; 
+        letter-spacing: 1.125rem; 
+        padding-left: 1.125rem; 
+    }
+    .home-container-titulo-menor { 
+        margin-top: 3.125rem; 
+    }
+}
+
+/* Telas até 600px */
+@media (max-width: 37.5em) {
+    .home-header-container { padding: 3.75rem 1rem 1.5rem 1rem; }
+    .home-dia-destaque { font-size: 8.125rem; line-height: 6.875rem; }
+    .home-mes-subtitulo { font-size: 1.625rem; letter-spacing: 0.75rem; padding-left: 0.75rem; }
+    .home-animacao-lua-placeholder { height: 10rem; }
+    .home-container-titulo-menor { height: 10rem; }
+    .home-titulo-sessao { font-size: 1.25rem; line-height: 1.875rem; }
+}
+
+/* Telas até 480px (Celulares padrão) */
+@media (max-width: 30em) {
+    .home-header-container { 
+        padding: 2rem 1rem 1rem 1rem; 
+    }
+    
+    .home-dia-destaque { 
+        font-size: 6.875rem; 
+        line-height: 5.625rem; 
+    }
+    
+    .home-mes-subtitulo { 
+        font-size: 1.375rem; 
+        letter-spacing: 0.625rem; 
+        padding-left: 0.625rem; 
+    }
+    
+    .home-frase-ano {
+        font-size: 0.5625rem;
+        letter-spacing: 0.1875rem;
+    }
+    
+    .home-container-titulo-menor { 
+        margin-top: 2rem; 
+    }
+    
+    .home-titulo-sessao { 
+        font-size: 1.5rem; 
+        line-height: 2.125rem; 
+        letter-spacing: 0.094rem;
+    }
+    
+    .home-secao-calendario {
+        margin-top: 2.5rem; 
+        padding-bottom: 4rem;
+    }
+}

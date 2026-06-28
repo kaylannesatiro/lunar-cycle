@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import Diario from './pages/Diario'
 import Conta from './pages/Conta'
+import Home from './pages/Home'
 import './App.css';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Navigate to="/home" replace />} />
-            <Route path="home" element={<h1>Home</h1>} />
+            <Route path="home" element={<Home/>} />
             <Route path="diario" element={<Diario/>} />
             <Route path="conta" element={<Conta/>} />
           </Route>
