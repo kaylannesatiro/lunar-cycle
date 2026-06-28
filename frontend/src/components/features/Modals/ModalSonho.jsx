@@ -16,7 +16,7 @@ const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFech
     const [tags, setTags] = useState([]);
     const [tagsSelecionadas, setTagsSelecionadas] = useState([]);
     const [erros, setErros] = useState({});
-    
+
     useEffect(() => {
         if (!isOpen) return;
 
@@ -50,9 +50,6 @@ const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFech
         }
         if (!descricao.trim() || descricao.trim().length < 10) {
             novosErros.descricao = "A descrição deve ter pelo menos 10 caracteres.";
-        }
-        if (descricao.length > 5000) {
-            novosErros.descricao = "A descrição pode ter no máximo 5.000 caracteres.";
         }
 
         setErros(novosErros);
