@@ -1,5 +1,14 @@
 const AnimacaoLua = () => (
-  <div style={{ width: "100%", height: "310px", position: "relative" }}>
+  <div 
+    style={{ 
+      width: "100vw", /* Força a ocupar a tela inteira, ignorando o container pai */
+      height: "310px", 
+      position: "relative",
+      left: "50%",
+      transform: "translateX(-50%)", /* Centraliza perfeitamente na tela */
+      overflow: "hidden" /* Evita criar barra de rolagem horizontal se a tela for menor */
+    }}
+  >
     <svg
       style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }}
       viewBox="0 0 1440 310"
@@ -51,7 +60,6 @@ const AnimacaoLua = () => (
         filter="url(#arcGF)"
       />
       
-      {/* Loop corrigido para rodar liso no React JS */}
       {[0.18, 0.38, 0.5, 0.62, 0.82].map((t, i) => {
         const x = (1-t)*(1-t)*(-90) + 2*(1-t)*t*720 + t*t*1530;
         const y = (1-t)*(1-t)*290 + 2*(1-t)*t*(-55) + t*t*290;
