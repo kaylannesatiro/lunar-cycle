@@ -145,15 +145,15 @@ const Diario = () => {
                 setIsLoading(false)
             }
         }
-        buscarDadosFiltrados();
-    }, [filtrosAtivos]);
+        buscarDadosFiltrados()
+    }, [filtrosAtivos])
 
     const processarSonhosParaATela = () => {
         const limiteExibicao = pagina * LIMITE;
-        const sonhosFatiados = sonhosBrutos.slice(0, limiteExibicao);
+        const sonhosFatiados = sonhosBrutos.slice(0, limiteExibicao)
         
         const nomesMeses = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"];
-        const grupos = [];
+        const grupos = []
 
         sonhosFatiados.forEach((sonho) => {
             const dataObj = new Date(sonho.dataSonho)
