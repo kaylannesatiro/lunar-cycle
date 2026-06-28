@@ -3,6 +3,7 @@ import { sonhosServiceFrontend } from "../services/sonhoService"
 import FiltroSonhos from "../components/features/Diario/FiltroSonhos"
 import LinhaDoTempo from "../components/features/Diario/LinhaTempo"
 import Button from "../components/common/Buttons/Button"
+import ModalSonho from "../components/features/Modals/ModalSonho"
 import "./Diario.css"
 
 const Diario = () => {
@@ -11,7 +12,7 @@ const Diario = () => {
     const [filtrosAtivos, setFiltrosAtivos] = useState({ periodo: "TODOS", tags: [], datas: null })
     const [isLoading, setIsLoading] = useState(true)
     const [pagina, setPagina] = useState(1)
-    const [, setModalAberto] = useState(false)
+    const [modalAberto, setModalAberto] = useState(false)
 
     const LIMITE = 10
 
@@ -137,7 +138,7 @@ const Diario = () => {
         })
 
         return grupos
-    };
+    }
 
     const carregarProximaPagina = () => setPagina((p) => p + 1)
     
@@ -213,6 +214,16 @@ const Diario = () => {
                     </div>
                 )}
             </section>
+
+            <ModalSonho 
+                isOpen={modalAberto}
+                modo="criar"
+                onFechar={() => setModalAberto(false)}
+                onSave={(dados) => {
+                    console.log("Salvar novo sonho:", dados)
+                    setModalAberto(false)
+                }}
+            />
         </div>
     )
 }
