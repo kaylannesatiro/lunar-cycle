@@ -1,7 +1,7 @@
 .orbital-moon-container {
     position: relative; 
     width: 100%; 
-    height: 310px; 
+    height: 19.375rem; 
     display: flex; 
     justify-content: center; 
     align-items: center;
@@ -12,7 +12,8 @@
     left: 50%;
     transform: translateX(-50%);
     width: 100vw;
-    min-width: 1440px; 
+    /* 1440px / 16 */
+    min-width: 90rem; 
     height: 100%; 
     overflow: visible; 
 }
@@ -21,14 +22,16 @@
    RESPONSIVIDADE DA ÓRBITA
    ========================================================= */
 
-@media (max-width: 768px) {
+/* Até 768px */
+@media (max-width: 48em) {
     .orbital-moon-container {
-        height: 220px; 
+        height: 13.75rem; 
     }
 }
 
-@media (max-width: 480px) {
+/* Até 480px */
+@media (max-width: 30em) {
     .orbital-moon-container {
-        height: 140px; /* Corta o buraco invisível no celular e aproxima os componentes */
+        height: 8.75rem; 
     }
 }

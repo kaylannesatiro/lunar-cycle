@@ -6,8 +6,8 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    /* Permitindo expansão total para casar com o contêiner do título da sessão */
-    max-width: 920px; 
+    /* 920px / 16 */
+    max-width: 57.5rem; 
     margin: 0 auto;
     box-sizing: border-box;
 }
@@ -15,7 +15,7 @@
 .home-loading {
     color: #E0C58F;
     font-family: 'Cinzel', serif;
-    letter-spacing: 3px;
+    letter-spacing: 0.1875rem;
     font-size: 1rem;
     text-align: center;
     margin-top: 15rem;
@@ -26,8 +26,9 @@
    ========================================================= */
 .home-header-container {
     display: flex;
-    height: auto; /* A MÁGICA ESTÁ AQUI: Remove o paredão invisível gigante */
-    padding: 54px 24px 20px 24px; /* O 20px no final dá o respiro exato antes da lua */
+    height: auto; 
+    /* 54px 24px 20px 24px */
+    padding: 3.375rem 1.5rem 1.25rem 1.5rem; 
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -40,27 +41,26 @@
     color: #E0C58F;
     text-align: center;
     font-family: 'Cinzel', serif;
-    font-size: 9.92px;
+    font-size: 0.62rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 14.88px; /* 150% */
-    letter-spacing: 5.158px;
+    line-height: 0.93rem; 
+    letter-spacing: 0.322rem;
     text-transform: uppercase;
-    padding-bottom: 25.6px;
+    padding-bottom: 1.6rem;
 }
 
 .home-dia-destaque {
     color: #E0C58F;
     text-align: center;
     font-family: "Cinzel Decorative", serif;
-    font-size: 218px;
+    font-size: 13.625rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 178.76px; /* 82% */
-    letter-spacing: -2.18px;
+    line-height: 11.1725rem; 
+    letter-spacing: -0.136rem;
     margin: 0;
     
-    /* Chama a animação que criamos abaixo, durando 3 segundos em loop infinito de vai e volta */
     animation: pulsarLuzDourada 3s infinite alternate ease-in-out;
 }
 
@@ -69,18 +69,16 @@
    ========================================================= */
 @keyframes pulsarLuzDourada {
     0% {
-        /* Brilho mais fraco (apagando) */
         text-shadow: 
-            0px 0px 15px rgba(224, 197, 143, 0.20),
-            0px 0px 40px rgba(224, 197, 143, 0.10),
-            0px 0px 80px rgba(224, 197, 143, 0.05);
+            0 0 0.9375rem rgba(224, 197, 143, 0.20),
+            0 0 2.5rem rgba(224, 197, 143, 0.10),
+            0 0 5rem rgba(224, 197, 143, 0.05);
     }
     100% {
-        /* Brilho mais forte e espalhado (aceso) */
         text-shadow: 
-            0px 0px 25px rgba(224, 197, 143, 0.45),
-            0px 0px 70px rgba(224, 197, 143, 0.25),
-            0px 0px 120px rgba(224, 197, 143, 0.15);
+            0 0 1.5625rem rgba(224, 197, 143, 0.45),
+            0 0 4.375rem rgba(224, 197, 143, 0.25),
+            0 0 7.5rem rgba(224, 197, 143, 0.15);
     }
 }
 
@@ -88,12 +86,12 @@
     color: #F5F0E9;
     text-align: center;
     font-family: 'Cinzel', serif;
-    font-size: 46px;
+    font-size: 2.875rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 69px; /* 150% */
-    padding-left: 31.28px; 
-    letter-spacing: 31.28px;
+    line-height: 4.3125rem; 
+    padding-left: 1.955rem; 
+    letter-spacing: 1.955rem;
     text-transform: uppercase;
     margin: 0;
 }
@@ -102,12 +100,12 @@
     color: #E0C58F;
     text-align: center;
     font-family: 'Raleway', sans-serif;
-    font-size: 10.88px;
+    font-size: 0.68rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 16.32px; /* 150% */
-    letter-spacing: 4.134px;
-    margin: 8px 0 0 0;
+    line-height: 1.02rem; 
+    letter-spacing: 0.258rem;
+    margin: 0.5rem 0 0 0;
 }
 
 /* =========================================================
@@ -115,15 +113,15 @@
    ========================================================= */
 .home-container-divisao {
     display: flex;
-    padding: 35.2px 0;
+    padding: 2.2rem 0;
     flex-direction: column;
     align-items: center; 
     width: 100%;
 }
 
 .home-linha-divisao {
-    width: 130px;
-    height: 1px;
+    width: 8.125rem;
+    height: 1px; /* Exceção: mantido em px para evitar que o navegador oculte o traço */
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.00) 0%, rgba(224, 197, 143, 0.40) 50%, rgba(0, 0, 0, 0.00) 100%);
 }
 
@@ -137,7 +135,7 @@
    ANIMAÇÃO LUA (ZONA DE RESERVA EM ESPERA)
    ========================================================= */
 .home-animacao-lua-placeholder {
-    height: 210px;
+    height: 13.125rem;
     align-self: stretch;
     width: 100%;
 }
@@ -153,7 +151,7 @@
 }
 
 .home-container-titulo-menor {
-    margin-top: 80px; /* Distância exata entre a animação da lua e o título do oráculo */
+    margin-top: 5rem;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -163,19 +161,19 @@
     color: #E0C58F;
     text-align: center;
     font-family: 'Cinzel', serif;
-    font-size: 9.44px;
+    font-size: 0.59rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 14.16px; /* 150% */
-    letter-spacing: 4.909px;
+    line-height: 0.885rem; 
+    letter-spacing: 0.307rem;
     text-transform: uppercase;
 }
 
 .home-container-titulo-sessao {
     display: flex;
-    width: 920px;
-    height: 64.6px;
-    padding-top: 13.6px;
+    width: 57.5rem;
+    height: 4.0375rem;
+    padding-top: 0.85rem;
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
@@ -185,46 +183,41 @@
     color: #F5F0E9;
     text-align: center;
     font-family: "Cinzel Decorative", serif;
-    font-size: 33.6px;
+    font-size: 2.1rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 50.4px; /* 150% */
-    letter-spacing: 2.688px;
+    line-height: 3.15rem; 
+    letter-spacing: 0.168rem;
     margin: 0;
 }
 
 /* =========================================================
-   CONTÊINERES DE ALINHAMENTO (Larguras Idênticas em rem)
+   CONTÊINERES DE ALINHAMENTO
    ========================================================= */
-
-/* Oráculo: Distância exata de 48px do container de título da sessão */
 .home-oraculo-component-wrapper {
     width: 100%;
-    max-width: 57.416rem; /* Casando perfeitamente com o contêiner interno do oráculo */
+    max-width: 57.416rem; 
     display: flex;
     justify-content: center;
-    margin-top: 48px;
+    margin-top: 3rem;
     box-sizing: border-box;
 }
 
-/* Dados Extras: Distância exata de 22.4px do container do oráculo */
 .home-dadosextras-component-wrapper {
     width: 100%;
-    max-width: 57.416rem; /* Casando perfeitamente para manter o alinhamento em bloco */
+    max-width: 57.416rem; 
     display: flex;
     justify-content: center;
-    margin-top: 22.4px;
+    margin-top: 1.4rem;
     box-sizing: border-box;
 }
 
 /* =========================================================
    SEÇÃO CALENDÁRIO
    ========================================================= */
-
-/* Calendário: Distância exata de 63.98px + 32px dos dados extras */
 .home-secao-calendario {
     width: 100%;
-    margin-top: calc(63.98px + 32px); 
+    margin-top: calc(3.998rem + 2rem); 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -232,30 +225,8 @@
 }
 
 /* =========================================================
-   RESPONSIVIDADE FORÇADA PARA MOBILE COMPACTO
+   OCULTAR SCROLLBAR DO MODAL
    ========================================================= */
-@media (max-width: 960px) {
-    .home-container-titulo-sessao { width: 100%; }
-    .home-oraculo-component-wrapper,
-    .home-dadosextras-component-wrapper {
-        max-width: calc(100% - 2rem);
-    }
-}
-
-@media (max-width: 600px) {
-    .home-header-container { height: auto; padding: 60px 16px 24px 16px; }
-    .home-dia-destaque { font-size: 130px; line-height: 110px; }
-    .home-mes-subtitulo { font-size: 26px; letter-spacing: 12px; padding-left: 12px; }
-    .home-animacao-lua-placeholder { height: 160px; }
-    .home-container-titulo-menor { height: 160px; }
-    .home-titulo-sessao { font-size: 20px; line-height: 30px; }
-}
-
-/* =========================================================
-   OCULTAR SCROLLBAR DO MODAL (Sem mexer no arquivo original)
-   ========================================================= */
-
-/* Para Firefox e navegadores genéricos */
 .modal-mens-overlay,
 .modal-mens,
 .modal-mens__conteudo {
@@ -263,7 +234,6 @@
     -ms-overflow-style: none; 
 }
 
-/* Para navegadores baseados em WebKit (Chrome, Edge, Safari) */
 .modal-mens-overlay::-webkit-scrollbar,
 .modal-mens::-webkit-scrollbar,
 .modal-mens__conteudo::-webkit-scrollbar {
@@ -275,7 +245,6 @@
    ========================================================= */
 .travar-scroll, 
 .travar-scroll * {
-    /* Impede que containers filhos continuem rolando escondidos */
     overscroll-behavior: none; 
 }
 
@@ -284,67 +253,76 @@
    ========================================================= */
 
 /* Telas até 960px (Tablets e Notebooks menores) */
-@media (max-width: 960px) {
+@media (max-width: 60em) {
     .home-container-titulo-sessao { 
         width: 100%; 
     }
     .home-oraculo-component-wrapper,
     .home-dadosextras-component-wrapper {
-        /* Adiciona um respiro nas bordas para os cards não colarem na tela */
-        max-width: calc(100% - 32px); 
+        max-width: calc(100% - 2rem); 
     }
 }
 
 /* Telas até 768px (Tablets em pé e Celulares grandes) */
-@media (max-width: 768px) {
+@media (max-width: 48em) {
     .home-dia-destaque { 
-        font-size: 150px; 
-        line-height: 130px; 
+        font-size: 9.375rem; 
+        line-height: 8.125rem; 
     }
     .home-mes-subtitulo { 
-        font-size: 32px; 
-        letter-spacing: 18px; 
-        padding-left: 18px; 
+        font-size: 2rem; 
+        letter-spacing: 1.125rem; 
+        padding-left: 1.125rem; 
     }
     .home-container-titulo-menor { 
-        margin-top: 50px; /* Reduz o espaço vazio antes do oráculo */
+        margin-top: 3.125rem; 
     }
 }
 
+/* Telas até 600px */
+@media (max-width: 37.5em) {
+    .home-header-container { padding: 3.75rem 1rem 1.5rem 1rem; }
+    .home-dia-destaque { font-size: 8.125rem; line-height: 6.875rem; }
+    .home-mes-subtitulo { font-size: 1.625rem; letter-spacing: 0.75rem; padding-left: 0.75rem; }
+    .home-animacao-lua-placeholder { height: 10rem; }
+    .home-container-titulo-menor { height: 10rem; }
+    .home-titulo-sessao { font-size: 1.25rem; line-height: 1.875rem; }
+}
+
 /* Telas até 480px (Celulares padrão) */
-@media (max-width: 480px) {
+@media (max-width: 30em) {
     .home-header-container { 
-        padding: 32px 16px 16px 16px; /* Sobe os elementos para a lua aparecer mais cedo */
+        padding: 2rem 1rem 1rem 1rem; 
     }
     
     .home-dia-destaque { 
-        font-size: 110px; /* Encaixa perfeitamente sem quebrar a tela */
-        line-height: 90px; 
+        font-size: 6.875rem; 
+        line-height: 5.625rem; 
     }
     
     .home-mes-subtitulo { 
-        font-size: 22px; 
-        letter-spacing: 10px; 
-        padding-left: 10px; 
+        font-size: 1.375rem; 
+        letter-spacing: 0.625rem; 
+        padding-left: 0.625rem; 
     }
     
     .home-frase-ano {
-        font-size: 9px;
-        letter-spacing: 3px;
+        font-size: 0.5625rem;
+        letter-spacing: 0.1875rem;
     }
     
     .home-container-titulo-menor { 
-        margin-top: 32px; /* Junta mais as seções no mobile */
+        margin-top: 2rem; 
     }
     
     .home-titulo-sessao { 
-        font-size: 24px; 
-        line-height: 34px; 
-        letter-spacing: 1.5px;
+        font-size: 1.5rem; 
+        line-height: 2.125rem; 
+        letter-spacing: 0.094rem;
     }
     
     .home-secao-calendario {
-        margin-top: 40px; /* Reduz a distância gigante antes do calendário */
+        margin-top: 2.5rem; 
         padding-bottom: 4rem;
     }
 }
