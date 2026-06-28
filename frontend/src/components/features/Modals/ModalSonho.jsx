@@ -7,7 +7,7 @@ import InputData from "../../common/Inputs/InputData";
 import TextArea from "../../common/Inputs/TextArea";
 import InputTags from "../../common/Tags/TagInput";
 
-const TAGS_SUGERIDAS = ["sonho lúcido", "pesadelo", "voo", "água", "floresta", "pessoas", "cores", "luz"];
+const TAGS_SUGERIDAS = ["lúcido", "recorrente", "profético", "simbólico", "espiritual", "transformação", "natureza", "voar", "água", "luz", "sombra", "amor", "medo", "paz", "magia"];
 
 const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFechar }) => {
     const [titulo, setTitulo] = useState("");
@@ -16,25 +16,25 @@ const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFech
     const [tags, setTags] = useState([]);
     const [tagsSelecionadas, setTagsSelecionadas] = useState([]);
     const [erros, setErros] = useState({});
-
+    
     useEffect(() => {
-        if (isOpen) {
-            if (modo === "editar" && dadosIniciais) {
-                setTitulo(dadosIniciais.titulo || "");
-                setData(dadosIniciais.data || "");
-                setDescricao(dadosIniciais.descricao || "");
-                setTags(dadosIniciais.tags || []);
-                setTagsSelecionadas(dadosIniciais.tagsSelecionadas || []);
-            } else {
-                setTitulo("");
-                setData("");
-                setDescricao("");
-                setTags([]);
-                setTagsSelecionadas([]);
-                setErros({});
-            }
+        if (!isOpen) return;
+
+        if (modo === "editar") {
+            setTitulo(dadosIniciais.titulo || "");
+            setData(dadosIniciais.data || "");
+            setDescricao(dadosIniciais.descricao || "");
+            setTags(dadosIniciais.tags || []);
+            setTagsSelecionadas(dadosIniciais.tagsSelecionadas || []);
+        } else {
+            setTitulo("");
+            setData("");
+            setDescricao("");
+            setTags([]);
+            setTagsSelecionadas([]);
+            setErros({});
         }
-    }, [isOpen, modo, dadosIniciais]);
+    }, [isOpen, modo]);
 
     const validar = () => {
         const novosErros = {};
@@ -61,7 +61,6 @@ const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFech
 
     const aoSalvar = () => {
         if (!validar()) return;
-
         const dadosSonho = { titulo, data, descricao, tags, tagsSelecionadas };
         if (onSave) onSave(dadosSonho);
     };
@@ -82,6 +81,12 @@ const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFech
         }
     };
 
+    const aoClicarOverlay = (e) => {
+        if (e.target === e.currentTarget) {
+            onFechar();
+        }
+    };
+
     const textoSubtitulo = modo === "editar" ? "Editar Sonho" : "Registrar Sonho";
     const textoBotao = modo === "editar" ? "✦ SALVAR ALTERAÇÕES" : "✦ SALVAR SONHO";
 
@@ -93,7 +98,7 @@ const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFech
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    onClick={onFechar}
+                    onMouseDown={aoClicarOverlay}
                 >
                     <motion.div
                         className="modal-sonho"
@@ -101,7 +106,7 @@ const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFech
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         transition={{ duration: 0.2 }}
-                        onClick={(e) => e.stopPropagation()}
+                        onMouseDown={(e) => e.stopPropagation()}
                     >
                         <div className="modal-sonho__fundo-gradiente" />
 
