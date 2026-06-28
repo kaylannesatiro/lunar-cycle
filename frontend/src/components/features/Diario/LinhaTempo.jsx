@@ -1,7 +1,23 @@
+import { useState } from "react"
 import "./LinhaTempo.css"
 import CardSonho from "../Diario/CardSonho"
+import ModalVisualizarSonho from "../Modals/VisualizarSonho"
 
 const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, mensagemVazia = "Seu diário ainda está em branco..." }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [sonhoSelecionado, setSonhoSelecionado] = useState(null)
+
+    const handleAbrirModal = (sonho) => {
+        setSonhoSelecionado(sonho)
+        setIsModalOpen(true)
+        if (onCardClick) onCardClick(sonho.id)
+    }
+
+    const handleFecharModal = () => {
+        setIsModalOpen(false)
+        setTimeout(() => setSonhoSelecionado(null), 200)
+    }
+
     if (isLoading) {
         return (
             <div className="linha-tempo-vazia">
@@ -44,13 +60,21 @@ const LinhaTempo = ({ sonhosAgrupados = [], isLoading = false, onCardClick, mens
                                     data={sonho.diaFormatado}
                                     titulo={sonho.titulo}
                                     tags={sonho.tags}
-                                    onClick={() => onCardClick && onCardClick(sonho.id)}
+                                    onClick={() => handleAbrirModal(sonho)}
                                 />
                             ))}
                         </div>
                     </div>
                 ))}
             </div>
+
+            <ModalVisualizarSonho 
+                isOpen={isModalOpen}
+                sonho={sonhoSelecionado || {}}
+                onFechar={handleFecharModal}
+                onEditClick={() => console.log("Editar sonho:", sonhoSelecionado?.id)}
+                onDeleteClick={() => console.log("Apagar sonho:", sonhoSelecionado?.id)}
+            />
         </div>
     )
 }
