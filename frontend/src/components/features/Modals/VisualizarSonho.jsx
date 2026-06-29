@@ -22,7 +22,7 @@ const ModalVisualizarSonho = ({ isOpen, sonho = {}, onEditClick, onDeleteClick, 
                     onMouseDown={aoClicarOverlay}
                 >
                     <motion.div
-                        className="modal-sonho"
+                        className="modal-sonho modal-sonho--visualizar"
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
