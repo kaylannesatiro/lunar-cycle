@@ -49,7 +49,7 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
     if (eHoje) classeDoDia += " cal-dia--hoje";
 
     const imagemDaFase = obterIconFaseDaLua(faseDaLua);
-    const clipPath = clipPathsDasFases[obterIconFaseDaLua(faseDaLua)] || "circle(48% at 50% 50%)";
+    const clipPath = clipPathsDasFases[faseDaLua] || "circle(48% at 50% 50%)";
 
     return (
         <div className={classeDoDia} onClick={aoClicar}>
@@ -68,6 +68,7 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
                     src={imagemDaFase}
                     alt={faseDaLua}
                     className="cal-dia__icone-lua"
+                    style={{ clipPath: clipPath }}
                 />
             </div>
 

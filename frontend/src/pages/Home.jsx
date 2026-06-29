@@ -116,14 +116,15 @@ const Home = () => {
 
     const diasMenstruacaoFormatados = dadosCalendario.dias
         .filter(d => d.registrada)
-        .map(d => d.data);
+        .map(d => d.data.split('T')[0])
 
     const diasPrevistosFormatados = dadosCalendario.dias
         .filter(d => d.prevista)
-        .map(d => d.data);
+        .map(d => d.data.split('T')[0])
 
     const dicionarioFasesLunares = dadosCalendario.dias.reduce((acc, d) => {
-        acc[d.data] = normalizarFaseParaComponente(d.faseLunar?.nome)
+        const dataLimpa = d.data.split('T')[0]
+        acc[dataLimpa] = normalizarFaseParaComponente(d.faseLunar?.nome)
         return acc
     }, {})
 
