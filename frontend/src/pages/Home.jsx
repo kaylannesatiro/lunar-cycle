@@ -170,7 +170,10 @@ const Home = () => {
                 </div>
                 
                 <div className="home-oraculo-component-wrapper">
-                    <CardOraculo estaMenstruada={dadosHome.estaMenstruada}/>
+                    <CardOraculo 
+                        estaMenstruada={dadosHome.estaMenstruada}
+                        faseLunar={normalizarFaseParaComponente(dadosHome.faseLunar?.nome)}
+                    />
                 </div>
 
                 <div className="home-dadosextras-component-wrapper">
