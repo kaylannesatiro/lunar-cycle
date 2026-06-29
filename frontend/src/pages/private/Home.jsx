@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react"
-import { cicloService } from "../services/cicloService"
-import { usuariaService } from "../services/userService"
-import { gerarIntervaloDeDatas } from "../utils/calculosDate"
+import { cicloService } from "../../services/cicloService"
+import { usuariaService } from "../../services/userService"
+import { gerarIntervaloDeDatas } from "../../utils/calculosDate"
 
-import Button from "../components/common/Buttons/Button"
-import CardOraculo from "../components/features/Ciclo/CardOraculo"
-import DadosExtras from "../components/features/Ciclo/DadosExtras"
-import Calendario from "../components/features/Calendario/Calendario"
-import ModalMenstruacao from "../components/features/Modals/ModalMenstruacao"
-import AnimacaoLua from "../components/common/Animation/AnimacaoLua"
+import Button from "../../components/common/Buttons/Button"
+import CardOraculo from "../../components/features/Ciclo/CardOraculo"
+import DadosExtras from "../../components/features/Ciclo/DadosExtras"
+import Calendario from "../../components/features/Calendario/Calendario"
+import ModalMenstruacao from "../../components/features/Modals/ModalMenstruacao"
+import AnimacaoLua from "../../components/common/Animation/AnimacaoLua"
 import "./Home.css"
 
 const Home = () => {

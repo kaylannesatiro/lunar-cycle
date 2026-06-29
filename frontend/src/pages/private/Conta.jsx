@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { authService } from '../services/authService'
-import Button from '../components/common/Buttons/Button'
-import Input from '../components/common/Inputs/Input'
-import InputSenha from '../components/common/Inputs/InputSenha'
-import SelecaoSigno from '../components/common/Inputs/SelecaoSigno'
-import CardConfig from '../components/common/Cards/CardConfig'
-import PopupAlert from '../components/common/Modals/PopupAlert'
-import PopupConfirmacao from '../components/common/Modals/PopupConfirmacao'
+import { authService } from '../../services/authService'
+import Button from '../../components/common/Buttons/Button'
+import Input from '../../components/common/Inputs/Input'
+import InputSenha from '../../components/common/Inputs/InputSenha'
+import SelecaoSigno from '../../components/common/Inputs/SelecaoSigno'
+import CardConfig from '../../components/common/Cards/CardConfig'
+import PopupAlert from '../../components/common/Modals/PopupAlert'
+import PopupConfirmacao from '../../components/common/Modals/PopupConfirmacao'
 import './Conta.css';
 
 const Conta = () => {

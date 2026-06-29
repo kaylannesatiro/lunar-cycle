@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { useNavigate, useOutletContext } from "react-router-dom"
-import Input from "../components/common/Inputs/Input"
-import InputSenha from "../components/common/Inputs/InputSenha"
-import Button from "../components/common/Buttons/Button"
-import { authService } from "../services/authService"
+import Input from "../../components/common/Inputs/Input"
+import InputSenha from "../../components/common/Inputs/InputSenha"
+import Button from "../../components/common/Buttons/Button"
+import { authService } from "../../services/authService"
 import "./Entrar.css"
 
 const Entrar = () => {
