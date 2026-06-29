@@ -67,7 +67,7 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
     const imagemDaFase = obterIconFaseDaLua(faseDaLua);
     
     return (
-        <div className={classeDoDia} onClick={aoClicar}>
+        <div className={classeDoDia} onClick={aoClicar} title={`Lua ${faseDaLua}`}>
             {(estaMenstruada || estaPrevisto) && (
                 <div className="cal-dia__topo">
                     <div className="cal-dia__icone-gota">
@@ -91,7 +91,7 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
     );
 };
 
-const Calendario = ({ mesAtual, anoAtual, diasMenstruacao = [], diasPrevistos = [], fasesLunares = {}, onDayClick, onNextMonth, onPrevMonth }) => {
+const Calendario = ({ mesAtual, anoAtual, diasMenstruacao = [], diasPrevistos = [], onDayClick, onNextMonth, onPrevMonth }) => {
     const hoje = new Date();
 
     const totalDeDias = obterDiasNoMes(anoAtual, mesAtual);
