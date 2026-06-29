@@ -110,6 +110,7 @@ const Diario = () => {
                 <LinhaDoTempo 
                     sonhosAgrupados={dadosProntos} 
                     isLoading={isLoading}
+                    tagsDaUsuaria={tagsDaUsuaria}
                     onCardClick={(id) => console.log(`Abrir visualização: ${id}`)}
 
                     onDeletarSonho={async (idSonho) => {
@@ -169,6 +170,7 @@ const Diario = () => {
             <ModalSonho 
                 isOpen={modalAberto}
                 modo="criar"
+                tagsDaUsuaria={tagsDaUsuaria}
                 onFechar={() => setModalAberto(false)}
                 onSave={async (dadosNovos) => {
                     try {
