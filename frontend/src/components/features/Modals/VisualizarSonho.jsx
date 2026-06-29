@@ -47,7 +47,7 @@ const ModalVisualizarSonho = ({ isOpen, sonho = {}, onEditClick, onDeleteClick, 
                                         {fase ? fase : "—"}
                                     </span>
                                     <span className="modal-sonho__data">
-                                        {sonho.dataFormatada || "—"}
+                                        {sonho.data || "—"}
                                     </span>
                                 </div>
                             </div>

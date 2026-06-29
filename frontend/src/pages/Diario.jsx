@@ -130,16 +130,18 @@ const Diario = () => {
             }
 
             const dataInput = `${String(dataObj.getUTCDate()).padStart(2, '0')}/${String(dataObj.getUTCMonth() + 1).padStart(2, '0')}/${dataObj.getUTCFullYear()}`;
+            
+            const tagsDoBanco = sonho.tags.map(t => t.nomeTag.toUpperCase());
 
             grupo.itens.push({
                 id: sonho.id,
                 diaFormatado: diaNum,
                 titulo: sonho.titulo,
-                descricao: sonho.descricao, 
-                data: dataInput, 
+                descricao: sonho.descricao,
+                data: dataInput,
                 faseLunar: faseLimpa,
-                tagsSelecionadas: sonho.tags.map(t => t.nomeTag.toUpperCase()), 
-                tags: [] 
+                tags: tagsDoBanco, 
+                tagsSelecionadas: tagsDoBanco 
             })
         })
 
