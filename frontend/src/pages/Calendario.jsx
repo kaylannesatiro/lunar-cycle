@@ -131,7 +131,8 @@ const CalendarioPage = () => {
 
                 <div className="cal-page-action-area">
                     <Button 
-                        variant="padrao"
+                        variant="redondo"
+                        maxWidth="280px"
                         backgroundColor="transparent"
                         color="rgba(224, 197, 143, 0.40)"
                         textColor="#E0C58F"

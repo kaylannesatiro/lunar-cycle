@@ -1,5 +1,5 @@
 /* ========================================================
-   CONTAINER PRINCIPAL (Seu "container")
+   CONTAINER PRINCIPAL
    ======================================================== */
 .cal-page-shell {
     display: flex;
@@ -9,36 +9,33 @@
     flex-shrink: 0;
     box-sizing: border-box;
 
-    /* padding: 112px 24px 96px 24px convertidos para rem */
-    padding: 7rem 1.5rem 6rem 1.5rem;
+    /* A MUDANÇA ESTÁ AQUI: 3.375rem no topo (54px exatos) */
+    padding: 3.375rem 1.5rem 6rem 1.5rem; 
     
-    /* Usamos min-height em vez de height fixo para o layout poder crescer se o celular for muito comprido */
-    min-height: 79.5rem; /* ~ 1272.46px */
+    min-height: 79.5rem; 
     width: 100%;
 }
 
 /* ========================================================
-   CONTEÚDO CENTRALIZADO (Seu "calendário")
+   CONTEÚDO CENTRALIZADO (Calendário + Botão)
    ======================================================== */
 .cal-page-main-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
-    /* Apliquei as proporções que você pediu, limitando o crescimento máximo */
     width: 100%;
-    max-width: 59.9rem; /* ~ 958.667px */
-    
-    /* IMPORTANTE: Removi o "position: absolute; right: -6.3px; bottom: -9.2px;" 
-       para que o calendário não sobreponha o botão e obedeça o Flexbox do container pai. */
+    max-width: 59.9rem; 
     position: relative;
+    
+    /* A MUDANÇA ESTÁ AQUI: gap de 1.75rem (28px exatos entre os itens) */
+    gap: 1.75rem; 
     
     animation: fadeIn 0.6s ease-out forwards;
 }
 
 /* ========================================================
-   ÁREA DO BOTÃO (Seu "container button")
+   ÁREA DO BOTÃO
    ======================================================== */
 .cal-page-action-area {
     display: flex;
@@ -47,8 +44,8 @@
     align-items: center;
     align-self: stretch;
     
-    /* padding-top: 28.8px convertido */
-    padding-top: 1.8rem; 
+    /* Zerei o padding-top aqui para não somar com o gap de 28px lá de cima! */
+    padding-top: 0; 
     
     position: relative;
     z-index: 10;
