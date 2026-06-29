@@ -1,24 +1,5 @@
-import { useState } from "react";
+import { obterIconFaseDaLua } from "../../../data/fasesLua";
 import "./Calendario.css";
-import imgLuaNova from "../../../assets/fases/lua-nova.svg";
-import imgLuaCrescente from "../../../assets/fases/lua-crescente.svg";
-import imgLuaCheia from "../../../assets/fases/lua-cheia.svg";
-import imgLuaMinguante from "../../../assets/fases/lua-minguante.svg";
-import imgLuaQuartoCrescente from "../../../assets/fases/lua-quarto-crescente.svg";
-import imgLuaQuartoMinguante from "../../../assets/fases/lua-quarto-minguante.svg";
-import imgLuaGibosaCrescente from "../../../assets/fases/lua-gibosa-crescente.svg";
-import imgLuaGibosaMinguante from "../../../assets/fases/lua-gibosa-minguante.svg";
-
-const imagensDasFases = {
-    "Nova": imgLuaNova,
-    "Crescente": imgLuaCrescente,
-    "Quarto Crescente": imgLuaQuartoCrescente,
-    "Gibosa Crescente": imgLuaGibosaCrescente,
-    "Cheia": imgLuaCheia,
-    "Minguante": imgLuaMinguante,
-    "Quarto Minguante": imgLuaQuartoMinguante,
-    "Gibosa Minguante": imgLuaGibosaMinguante,
-};
 
 const clipPathsDasFases = {
     "Nova":             "circle(48% at 50% 50%)",
@@ -67,8 +48,9 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
     else if (estaPrevisto) classeDoDia += " cal-dia--previsto";
     if (eHoje) classeDoDia += " cal-dia--hoje";
 
-    const imagemDaFase = imagensDasFases[faseDaLua] || imgLuaNova;
-    const clipPath = clipPathsDasFases[faseDaLua] || "circle(48% at 50% 50%)";
+    const imagemDaFase = obterIconFaseDaLua(faseDaLua);
+    const clipPath = clipPathsDasFases[obterIconFaseDaLua(faseDaLua)] || "circle(48% at 50% 50%)";
+
     return (
         <div className={classeDoDia} onClick={aoClicar}>
 
@@ -93,27 +75,13 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
     );
 };
 
-const Calendario = ({ diasMenstruacao = [], diasPrevistos = [], fasesLunares = {}, onDayClick }) => {
-
+const Calendario = ({ mesAtual, anoAtual, diasMenstruacao = [], diasPrevistos = [], fasesLunares = {}, onDayClick, onNextMonth, onPrevMonth }) => {
     const hoje = new Date();
-    const [mesAtual, setMesAtual] = useState(hoje.getMonth());
-    const [anoAtual, setAnoAtual] = useState(hoje.getFullYear());
-
-    const irParaProximoMes = () => {
-        if (mesAtual === 11) { setMesAtual(0); setAnoAtual(anoAtual + 1); }
-        else { setMesAtual(mesAtual + 1); }
-    };
-
-    const irParaMesAnterior = () => {
-        if (mesAtual === 0) { setMesAtual(11); setAnoAtual(anoAtual - 1); }
-        else { setMesAtual(mesAtual - 1); }
-    };
 
     const totalDeDias = obterDiasNoMes(anoAtual, mesAtual);
     const diaInicialDaSemana = obterDiaDaSemanaInicial(anoAtual, mesAtual);
 
     const celulas = [];
-
     for (let i = 0; i < diaInicialDaSemana; i++) { celulas.push(null); }
     for (let dia = 1; dia <= totalDeDias; dia++) { celulas.push(dia); }
 
@@ -127,14 +95,13 @@ const Calendario = ({ diasMenstruacao = [], diasPrevistos = [], fasesLunares = {
             </div>
 
             <div className="cal-container">
-
                 <div className="cal-cabecalho">
-                    <button className="cal-btn-nav" onClick={irParaMesAnterior} aria-label="Mês anterior">‹</button>
+                    <button className="cal-btn-nav" onClick={onPrevMonth} aria-label="Mês anterior">‹</button>
                     <div className="cal-mes-info">
                         <span className="cal-mes-nome">{NOMES_DOS_MESES[mesAtual].toUpperCase()}</span>
                         <span className="cal-mes-ano">{anoAtual}</span>
                     </div>
-                    <button className="cal-btn-nav" onClick={irParaProximoMes} aria-label="Próximo mês">›</button>
+                    <button className="cal-btn-nav" onClick={onNextMonth} aria-label="Próximo mês">›</button>
                 </div>
 
                 <div className="cal-divisor" />

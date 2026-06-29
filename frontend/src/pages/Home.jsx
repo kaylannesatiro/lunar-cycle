@@ -183,12 +183,28 @@ const Home = () => {
 
             <section className="home-secao-calendario">
                 <Calendario 
+                    mesAtual={mesFiltro - 1}
+                    anoAtual={anoFiltro}
                     diasMenstruacao={diasMenstruacaoFormatados}
                     diasPrevistos={diasPrevistosFormatados}
                     fasesLunares={dicionarioFasesLunares}
                     onDayClick={handleToggleDiaCalendario}
-                    onNextMonth={() => setMesFiltro(prev => prev === 12 ? 1 : prev + 1)}
-                    onPrevMonth={() => setMesFiltro(prev => prev === 1 ? 12 : prev - 1)}
+                    onNextMonth={() => {
+                        if (mesFiltro === 12) {
+                            setMesFiltro(1);
+                            setAnoFiltro(ano => ano + 1);
+                        } else {
+                            setMesFiltro(m => m + 1);
+                        }
+                    }}
+                    onPrevMonth={() => {
+                        if (mesFiltro === 1) {
+                            setMesFiltro(12);
+                            setAnoFiltro(ano => ano - 1);
+                        } else {
+                            setMesFiltro(m => m - 1);
+                        }
+                    }}
                 />
             </section>
 
