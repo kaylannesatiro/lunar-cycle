@@ -8,6 +8,7 @@ import Conta from './pages/private/Conta'
 import Home from './pages/private/Home'
 import Entrar from './pages/public/Entrar'
 import CriarConta from './pages/public/CriarConta'
+import HomePublic from './pages/public/Home'
 
 import './App.css'
 
@@ -15,10 +16,15 @@ function App() {
   return (
     <BrowserRouter>
         <Routes>
-          {/* Rotas públicas */}
+          {/* Rotas de login */}
           <Route element={<AuthLayout />}>
             <Route path="/entrar" element={<Entrar />} />
             <Route path="/criar-conta" element={<CriarConta />} />
+          </Route>
+
+          {/* Rotas públicas */}
+          <Route element={<MainLayout />}>
+            <Route path="/public" element={<HomePublic />} /> 
           </Route>
 
           {/* Rotas privadas */}
