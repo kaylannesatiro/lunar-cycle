@@ -4,7 +4,7 @@ import Input from "../../components/common/Inputs/Input"
 import InputSenha from "../../components/common/Inputs/InputSenha"
 import SelecaoSigno from "../../components/common/Inputs/SelecaoSigno"
 import Button from "../../components/common/Buttons/Button"
-import { authService } from "../../services/authService"
+import { authService } from "../../api/services/authService"
 import "./CriarConta.css"
 
 const REGEX_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/

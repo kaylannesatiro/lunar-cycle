@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import { cicloService } from "../../services/cicloService"
-import { usuariaService } from "../../services/userService"
+import { cicloService } from "../../api/services/cicloService"
+import { usuariaService } from "../../api/services/userService"
 import { gerarIntervaloDeDatas } from "../../utils/calculosDate"
 
 import Button from "../../components/common/Buttons/Button"

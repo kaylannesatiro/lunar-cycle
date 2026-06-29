@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { sonhosServiceFrontend } from "../../services/sonhoService"
+import { sonhosServiceFrontend } from "../../api/services/sonhoService"
 import { obterDatasDoPeriodo, converterDataBRParaISO } from "../../utils/dateHelper"
 import { unificarEFormatarTags } from "../../utils/tagHelper"
 import { agruparSonhosPorMesEAno } from "../../utils/dreamHelper"
