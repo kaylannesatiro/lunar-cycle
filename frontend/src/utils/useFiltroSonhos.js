@@ -24,7 +24,10 @@ export const useFiltroLogica = (tagsDoUsuario, tagsPreCadastradas, onFilterChang
 
     const obterOpcoesDropdown = (tipo) => {
         const hoje = new Date()
-        const inicio = dataPrimeiroSonho ? new Date(dataPrimeiroSonho) : new Date(hoje.getFullYear() - 3, 0, 1)
+        const inicio = dataPrimeiroSonho 
+            ? new Date(dataPrimeiroSonho) 
+            : new Date(hoje.getFullYear() - 1, hoje.getMonth(), hoje.getDate())
+            
         let opcoes = []
 
         if (tipo === 'ANO') {
@@ -44,7 +47,7 @@ export const useFiltroLogica = (tagsDoUsuario, tagsPreCadastradas, onFilterChang
             let fim = new Date(hoje)
             let dataLimite = new Date(inicio)
             
-            let totalSemanas = 0;
+            let totalSemanas = 0
             while (fim >= dataLimite && totalSemanas < 52) {
                 let inicioSemana = new Date(fim)
                 inicioSemana.setDate(inicioSemana.getDate() - 6)

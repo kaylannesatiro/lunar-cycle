@@ -13,25 +13,31 @@ const Diario = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [pagina, setPagina] = useState(1)
     const [modalAberto, setModalAberto] = useState(false)
+    const [dataPrimeiroSonho, setDataPrimeiroSonho] = useState(null)
 
     const LIMITE = 10
 
     useEffect(() => {
-        async function carregarTagsIniciais() {
+        async function carregarDadosIniciais() {
             try {
                 const dados = await sonhosServiceFrontend.listarTodos({})
                 
-                if (Array.isArray(dados)) {
+                if (Array.isArray(dados) && dados.length > 0) {
                     const tagsUnicas = [...new Set(
                         dados.flatMap((sonho) => sonho.tags.map((t) => t.nomeTag.toUpperCase()))
                     )];
                     setTagsDaUsuaria(tagsUnicas)
+
+                    const datas = dados.map(sonho => new Date(sonho.dataSonho).getTime())
+                    const dataMaisAntiga = new Date(Math.min(...datas))
+                    
+                    setDataPrimeiroSonho(dataMaisAntiga)
                 }
             } catch (error) {
-                console.error("Erro ao mapear tags da usuária:", error)
+                console.error("Erro ao carregar dados iniciais:", error)
             }
         }
-        carregarTagsIniciais()
+        carregarDadosIniciais()
     }, [])
 
     const obterDatasDoPeriodo = (periodo, datas) => {
@@ -184,6 +190,7 @@ const Diario = () => {
             <section className="diario-conteudo">
                 <FiltroSonhos 
                     tagsDoUsuario={tagsDaUsuaria} 
+                    dataPrimeiroSonho={dataPrimeiroSonho}
                     onFilterChange={setFiltrosAtivos} 
                 />
 
