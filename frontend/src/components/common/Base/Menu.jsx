@@ -1,22 +1,23 @@
-import { useState } from 'react';
-import './Menu.css';
-import Icone from '../../../assets/Icon.svg';
+import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import './Menu.css'
+import Icone from '../../../assets/Icon.svg'
 
 const Menu = ({ links }) => {
-    const [menuAberto, setMenuAberto] = useState(false);
+    const [menuAberto, setMenuAberto] = useState(false)
 
     const alternarMenu = () => {
-        setMenuAberto(!menuAberto);
+        setMenuAberto(!menuAberto)
     };
 
     return (
         <header className="menu-wrapper">
             <nav className="menu-container">
                 
-                <a href="/" className="menu-logo">
+                <NavLink to="/home" className="menu-logo">
                     <img src={Icone} alt="Lunar Cycle Logo" className="logo-icone"/>
                     <span className="logo-texto">LUNAR CYCLE</span>
-                </a>
+                </NavLink>
 
                 <div className="menu-hamburger" onClick={alternarMenu}>
                     <div className={`barra ${menuAberto ? 'aberta' : ''}`}></div>
@@ -27,16 +28,20 @@ const Menu = ({ links }) => {
                 <ul className={`menu-links ${menuAberto ? 'ativo' : ''}`}>
                     {links.map((link, index) => (
                         <li key={index} className="menu-item">
-                            <a href={link.rota} className="menu-link">
+                            <NavLink 
+                                to={link.rota} 
+                                className={({ isActive }) => isActive ? "menu-link ativo" : "menu-link"}
+                                onClick={() => setMenuAberto(false)}
+                            >
                                 {link.titulo}
-                            </a>
+                            </NavLink>
                         </li>
                     ))}
                 </ul>
                 
             </nav>
         </header>
-    );
+    )
 }
 
-export default Menu;
+export default Menu
