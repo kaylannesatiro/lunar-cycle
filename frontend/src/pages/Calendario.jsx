@@ -26,7 +26,6 @@ const formatarDataISO = (data) => {
 };
 
 // Gera um array com todos os dias entre uma data inicial e final
-// Gera um array com todos os dias entre uma data inicial e final
 const gerarIntervaloDeDatas = (dataInicioBr, dataFimBr, duracaoConfigurada) => {
     const inicio = parseDataBr(dataInicioBr);
     let fim;
@@ -116,18 +115,70 @@ const CalendarioPage = () => {
         .map(d => d.data.split('T')[0])
 
     // ==========================================
-    // LÓGICA DO CLIQUE NO DIA
+    // LÓGICA INTELLIGENT DE CLIQUE NO DIA (EDITAR PERÍODO COMPLETO)
     // ==========================================
     const handleDayClick = (dataStrISO) => {
-        // dataStrISO vem como "YYYY-MM-DD"
+        // dataStrISO vem do calendário no formato "YYYY-MM-DD"
         const isRegistrada = diasMenstruacaoFormatados.includes(dataStrISO);
-        
-        // Converte para "DD/MM/YYYY" para preencher o Input do Modal
-        const [ano, mes, dia] = dataStrISO.split('-');
-        const dataFormatadaModal = `${dia}/${mes}/${ano}`;
 
-        setModalModo(isRegistrada ? "editar" : "registrar");
-        setDadosIniciaisModal({ dataInicio: dataFormatadaModal, dataFim: "" });
+        if (isRegistrada) {
+            // 1. Criamos um objeto Date seguro baseado no dia clicado (usando meio-dia para evitar fuso horário)
+            let dataInicioObj = new Date(dataStrISO + 'T12:00:00');
+            
+            // 2. Varre para TRÁS para encontrar o primeiro dia do período contínuo
+            while (true) {
+                const anterior = new Date(dataInicioObj);
+                anterior.setDate(anterior.getDate() - 1);
+                const anteriorISO = formatarDataISO(anterior);
+                
+                if (diasMenstruacaoFormatados.includes(anteriorISO)) {
+                    dataInicioObj = anterior; // Se o dia anterior também está marcado, recua
+                } else {
+                    break; // Se não está marcado, achamos o primeiro dia!
+                }
+            }
+
+            // 3. Varre para FRENTE para encontrar o último dia do período contínuo
+            let dataFimObj = new Date(dataStrISO + 'T12:00:00');
+            while (true) {
+                const proximo = new Date(dataFimObj);
+                proximo.setDate(proximo.getDate() + 1);
+                const proximoISO = formatarDataISO(proximo);
+                
+                if (diasMenstruacaoFormatados.includes(proximoISO)) {
+                    dataFimObj = proximo; // Se o próximo dia também está marcado, avança
+                } else {
+                    break; // Se não está marcado, achamos o último dia!
+                }
+            }
+
+            // Função interna para transformar o objeto Date em "DD/MM/AAAA" (formato do seu Modal)
+            const formatarParaModal = (dateObj) => {
+                const dia = String(dateObj.getDate()).padStart(2, '0');
+                const mes = String(dateObj.getMonth() + 1).padStart(2, '0');
+                const ano = dateObj.getFullYear();
+                return `${dia}/${mes}/${ano}`;
+            };
+
+            // Se o início e o fim forem o mesmo dia (menstruação de 1 dia só), 
+            // deixamos a data fim vazia para não quebrar a validação do seu modal
+            const temMultiplosDias = dataInicioObj.getTime() !== dataFimObj.getTime();
+
+            setModalModo("editar");
+            setDadosIniciaisModal({
+                dataInicio: formatarParaModal(dataInicioObj),
+                dataFim: temMultiplosDias ? formatarParaModal(dataFimObj) : ""
+            });
+
+        } else {
+            // Modo registrar: Dia vazio clicado, preenche apenas a data de início com o dia
+            const [ano, mes, dia] = dataStrISO.split('-');
+            const dataFormatadaModal = `${dia}/${mes}/${ano}`;
+            
+            setModalModo("registrar");
+            setDadosIniciaisModal({ dataInicio: dataFormatadaModal, dataFim: "" });
+        }
+
         setIsModalOpen(true);
     };
 
@@ -136,10 +187,15 @@ const CalendarioPage = () => {
     // ==========================================
     const handleSalvarModal = async (dadosDoModal) => {
         try {
-            const diasAlvo = gerarIntervaloDeDatas(dadosDoModal.dataInicio, dadosDoModal.dataFim);
+            // IMPORTANTE: Aqui você precisa puxar a 'duracaoMenstruacao' real da usuária!
+            // Exemplo: const duracao = usuaria.duracaoMenstruacao || 5;
+            const duracaoDaUsuaria = 5; // Coloquei 5 fixo só pra você testar e ver funcionar!
+
+            // Agora a função recebe os 3 parâmetros
+            const diasAlvo = gerarIntervaloDeDatas(dadosDoModal.dataInicio, dadosDoModal.dataFim, duracaoDaUsuaria);
+            
             const diasParaMarcar = diasAlvo.filter(diaISO => !diasMenstruacaoFormatados.includes(diaISO));
             
-            // Se já estava tudo marcado, só fecha o modal
             if (diasParaMarcar.length === 0) {
                 setIsModalOpen(false);
                 return;
@@ -156,8 +212,8 @@ const CalendarioPage = () => {
             setIsModalOpen(false);
             
         } catch (error) {
-            console.error("ERRO GRAVE AO SALVAR:", error);
-            alert("🚨 O BACKEND RECUSOU! Aperte F12 e olhe o Console ou o terminal do seu Node.");
+            console.error("Erro ao salvar:", error);
+            alert("🚨 Falha ao salvar as datas!");
         }
     };
 
