@@ -155,6 +155,20 @@ const CalendarioPage = () => {
                 ultimoCalendario = resposta.calendario || resposta
             }
 
+            const dataFimUsada = dadosDoModal.dataFim || dadosDoModal.dataInicio
+            if (dataFimUsada) {
+                const [diaFim, mesFim, anoFim] = dataFimUsada.split('/')
+                const mesFimNum = Number(mesFim)
+                const anoFimNum = Number(anoFim)
+
+                if (mesFimNum !== mesFiltro || anoFimNum !== anoFiltro) {
+                    setMesFiltro(mesFimNum)
+                    setAnoFiltro(anoFimNum)
+                    setIsModalOpen(false)
+                    return
+                }
+            }
+
             setDadosCalendario(ultimoCalendario)
             setIsModalOpen(false)
         } catch (error) {
