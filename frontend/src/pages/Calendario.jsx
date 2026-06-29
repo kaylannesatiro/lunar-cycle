@@ -26,9 +26,20 @@ const formatarDataISO = (data) => {
 };
 
 // Gera um array com todos os dias entre uma data inicial e final
-const gerarIntervaloDeDatas = (dataInicioBr, dataFimBr) => {
+// Gera um array com todos os dias entre uma data inicial e final
+const gerarIntervaloDeDatas = (dataInicioBr, dataFimBr, duracaoConfigurada) => {
     const inicio = parseDataBr(dataInicioBr);
-    const fim = dataFimBr ? parseDataBr(dataFimBr) : parseDataBr(dataInicioBr);
+    let fim;
+    
+    if (dataFimBr) {
+        // Se ela preencheu a data fim no modal, obedece o que ela digitou
+        fim = parseDataBr(dataFimBr);
+    } else {
+        // A MÁGICA AQUI: Se ela só colocou o início, o sistema soma os dias da configuração!
+        // Subtraímos 1 porque o próprio dia de início já conta como 1 dia de sangramento.
+        fim = new Date(inicio);
+        fim.setDate(fim.getDate() + (duracaoConfigurada - 1));
+    }
     
     const datasNoIntervalo = [];
     let atual = new Date(inicio);
@@ -125,26 +136,28 @@ const CalendarioPage = () => {
     // ==========================================
     const handleSalvarModal = async (dadosDoModal) => {
         try {
-            // 1. Gera todos os dias que a usuária digitou no modal
             const diasAlvo = gerarIntervaloDeDatas(dadosDoModal.dataInicio, dadosDoModal.dataFim);
-            
-            // 2. Filtra APENAS os dias que ainda não estão marcados (para não "desligar" o que já está ligado)
             const diasParaMarcar = diasAlvo.filter(diaISO => !diasMenstruacaoFormatados.includes(diaISO));
             
+            // Se já estava tudo marcado, só fecha o modal
+            if (diasParaMarcar.length === 0) {
+                setIsModalOpen(false);
+                return;
+            }
+
             let ultimoCalendario = dadosCalendario;
 
-            // 3. Loop: Chama a rota existente do seu backend para cada dia que precisa ser marcado
             for (const diaISO of diasParaMarcar) {
                 const resposta = await cicloService.alternarMenstruacaoDia(diaISO, mesFiltro, anoFiltro);
                 ultimoCalendario = resposta.calendario;
             }
 
-            // 4. Atualiza a tela de uma vez e fecha o modal
             setDadosCalendario(ultimoCalendario);
             setIsModalOpen(false);
             
         } catch (error) {
-            console.error("Erro ao salvar período menstrual em lote:", error);
+            console.error("ERRO GRAVE AO SALVAR:", error);
+            alert("🚨 O BACKEND RECUSOU! Aperte F12 e olhe o Console ou o terminal do seu Node.");
         }
     };
 

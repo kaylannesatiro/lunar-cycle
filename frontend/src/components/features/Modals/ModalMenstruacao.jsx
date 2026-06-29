@@ -117,7 +117,16 @@ const ModalMenstruacao = ({ isOpen, modo = "registrar", dadosIniciais = {}, onSa
     };
 
     const aoSalvar = () => {
-        if (!validar()) return;
+        const novosErros = {};
+        if (!dataInicio.trim()) novosErros.dataInicio = "Faltou a data de início!";
+        if (mostrarDataFim && !dataFim.trim()) novosErros.dataFim = "Faltou a data de fim!";
+        
+        if (Object.keys(novosErros).length > 0) {
+            setErros(novosErros);
+            alert("Preencha as datas corretamente (DD/MM/AAAA)!");
+            return;
+        }
+
         const dados = { dataInicio, dataFim: mostrarDataFim ? dataFim : "" };
         if (onSave) onSave(dados);
     };
