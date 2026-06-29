@@ -248,7 +248,17 @@ const Diario = () => {
                 onFechar={() => setModalAberto(false)}
                 onSave={async (dadosNovos) => {
                     try {
-                        const sonhoCriado = await sonhosServiceFrontend.criar(dadosNovos)
+                        const [dia, mes, ano] = dadosNovos.data.split('/');
+                        const dataFormatada = `${ano}-${mes}-${dia}`;
+
+                        const payloadBackend = {
+                            titulo: dadosNovos.titulo,
+                            descricao: dadosNovos.descricao,
+                            dataSonho: dataFormatada, 
+                            tags: dadosNovos.tagsSelecionadas || [] 
+                        };
+
+                        const sonhoCriado = await sonhosServiceFrontend.criar(payloadBackend)
                         
                         console.log("Novo sonho salvo no banco:", sonhoCriado)
                     
