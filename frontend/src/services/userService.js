@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/api/usuarias'
+const BASE_URL = 'http://localhost:3000/api/auth'
 
 export const usuariaService = {
     obterPerfil: async () => {

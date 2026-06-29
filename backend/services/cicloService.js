@@ -3,27 +3,18 @@ const usuariaRepository = require('../repositories/usuariaRepository');
 const { obterFaseLunar } = require('../utils/fasesLunares');
 
 const obterDadosHome = async (usuariaId) =>{
-    // Verifica se a usuária existe
     const usuaria = await usuariaRepository.buscarPorId(usuariaId);
     if(!usuaria){
         throw new Error('Usuária não encontrada');
     }
 
-    // Obtém a data atual
     const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0); // Zera as horas para comparar apenas a data
+    hoje.setHours(0, 0, 0, 0);
 
-    //calcular a fase da lua para o dia de hoje
-    //função vindo de utils/fasesLunares.js
     const faseLunar = obterFaseLunar(hoje);
-
-    //verifica se hoje está marcado como dia de menstruação (para a Home saber o status do botão)
     const menstruandoHoje = await diaMenstruacaoRepository.verificarDiaMarcado(usuariaId, hoje);
-
-    //procura o registro de menstruacao mais recente para calcular o ciclo menstrual
     const ultimoRegistroMenstruacao = await diaMenstruacaoRepository.buscarUltimaMenstruacao(usuariaId);
 
-    //Caso 1: Se não houver nenhum registro no banco de dados
     if(!ultimoRegistroMenstruacao){
         return{
             nomeUsuaria: usuaria.nome,
@@ -33,7 +24,6 @@ const obterDadosHome = async (usuariaId) =>{
         };
     }
 
-    //Caso 2: Se houver registro no banco de dados
     let dataInicioCiclo = new Date(ultimoRegistroMenstruacao.data);
 
     while(true){
@@ -42,35 +32,30 @@ const obterDadosHome = async (usuariaId) =>{
 
         const estamarcado = await diaMenstruacaoRepository.verificarDiaMarcado(usuariaId, diaAnterior);
         if(estamarcado){
-            dataInicioCiclo = diaAnterior;   //Continua a andar para trás até encontrar o primeiro dia do ciclo      
+            dataInicioCiclo = diaAnterior;
         } else {
-            break; // O periodo contínuo começou, então sai do loop.
+            break;
         }
     }
 
-    //Calcula o número do dia atual do ciclo
     const diffTempo = hoje.getTime() - dataInicioCiclo.getTime();
     const diffDias = Math.floor(diffTempo / (1000 * 60 * 60 * 24));
-    const diaDoCiclo = diffDias + 1; // Adiciona 1 para contar o dia atual
+    const diaDoCiclo = diffDias + 1;
 
-    //Calcula a previsão de início do próximo ciclo (inicio atual + duracao do ciclo)
     const previsaoProximoCiclo = new Date(dataInicioCiclo);
     previsaoProximoCiclo.setDate(previsaoProximoCiclo.getDate() + usuaria.duracaoCiclo);
-
-    // (O bloco de Montar mensagem dinâmica contextual foi removido para o Front-end)
 
     return {
         nomeUsuaria: usuaria.nome,
         faseLunar,
         menstruandoHoje,
         possuiCicloMenstrual: true,
-        diaDoCiclo: diaDoCiclo > 0 ? diaDoCiclo : 1, // Garante que o dia do ciclo seja pelo menos 1
+        diaDoCiclo: diaDoCiclo > 0 ? diaDoCiclo : 1,
         previsaoProximoCiclo: previsaoProximoCiclo.toLocaleDateString('pt-BR')
     };
 };
 
 
-// Função para alternar o status de menstruação do dia atual
 const alternarMenstruacaoHoje = async (usuariaId) =>{
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -83,7 +68,6 @@ const alternarMenstruacaoHoje = async (usuariaId) =>{
         await diaMenstruacaoRepository.registrarDia(usuariaId, hoje);
     }
 
-    //Pega os dados atualizados para devolver à tela
     const dadosHomeAtualizados = await obterDadosHome(usuariaId);
 
     return{
@@ -92,25 +76,18 @@ const alternarMenstruacaoHoje = async (usuariaId) =>{
     };
 };
 
-//Funcao para obter o calendario
 const obterCalendario = async (usuariaId, mes, ano) => {
-    // Verifica se a usuária existe
     const usuaria = await usuariaRepository.buscarPorId(usuariaId);
     if (!usuaria) {
         throw new Error('Usuária não encontrada');
     }
 
-    // Define o intervalo do mês (início e fim)
-    const dataInicio = new Date(ano, mes - 1, 1); // mes -1 pois o mês no JS é 0-indexado
-    const dataFim = new Date(ano, mes, 0); // 0 para pegar o último dia do mês desejado
+    const dataInicio = new Date(ano, mes - 1, 1);
+    const dataFim = new Date(ano, mes, 0);
 
-    // Busca os dias registrados no mês
     const diasRegistrados = await diaMenstruacaoRepository.buscarDiasPorIntervalo(usuariaId, dataInicio, dataFim);
-
-    // Cria um Set com as datas registradas (formato ISO só da data) para lookup rápido
     const datasRegistradas = new Set(diasRegistrados.map(dia => dia.data.toISOString().split('T')[0]));
 
-    // Calcula os dias previstos de menstruação
     const datasPrevistas = new Set();
     const ultimoRegistroMenstruacao = await diaMenstruacaoRepository.buscarUltimaMenstruacao(usuariaId);
 
@@ -127,30 +104,38 @@ const obterCalendario = async (usuariaId, mes, ano) => {
             }
         }
 
+        // CORREÇÃO BUG: o loop agora avança até encontrar um ciclo que
+        // cruze o mês pedido, em vez de parar antes de entrar nele.
+        // Antes: "while (inicioPrevisto <= dataFim)" nunca entrava se a
+        // previsão caísse em mês futuro. Agora avançamos enquanto o início
+        // previsto ainda não chegou ao começo do mês exibido.
         let inicioPrevisto = new Date(dataInicioCiclo);
         inicioPrevisto.setDate(inicioPrevisto.getDate() + usuaria.duracaoCiclo);
 
+        // Avança ciclo a ciclo até chegar no mês que o calendário está mostrando
+        while (inicioPrevisto < dataInicio) {
+            inicioPrevisto.setDate(inicioPrevisto.getDate() + usuaria.duracaoCiclo);
+        }
+
+        // Agora marca os dias previstos que caem dentro do mês exibido
         while (inicioPrevisto <= dataFim) {
             for (let i = 0; i < usuaria.duracaoMenstruacao; i++) {
                 const diaPrevisto = new Date(inicioPrevisto);
                 diaPrevisto.setDate(diaPrevisto.getDate() + i);
                 const chave = diaPrevisto.toISOString().split('T')[0];
-                // Marca como previsto só se não estiver já registrado
                 if (!datasRegistradas.has(chave)) {
                     datasPrevistas.add(chave);
                 }
             }
-            // Avança para o próximo ciclo previsto (evita loop infinito)
             inicioPrevisto.setDate(inicioPrevisto.getDate() + usuaria.duracaoCiclo);
         }
     }
 
-    // Monta o array com todos os dias do mês
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
 
     const diasDoMes = [];
-    const totalDias = dataFim.getDate(); 
+    const totalDias = dataFim.getDate();
 
     for (let dia = 1; dia <= totalDias; dia++) {
         const dataAtual = new Date(ano, mes - 1, dia);
@@ -162,7 +147,7 @@ const obterCalendario = async (usuariaId, mes, ano) => {
             prevista: datasPrevistas.has(chave),
             hoje: dataAtual.getTime() === hoje.getTime()
         });
-    } 
+    }
 
     return {
         mes,
@@ -171,13 +156,18 @@ const obterCalendario = async (usuariaId, mes, ano) => {
     };
 };
 
-//Alternar status de menstruacao de qualquer dia do calendario
 const alternarMenstruacaoDia = async (usuariaId, dataStr, mes, ano) => {
-    const data = new Date(dataStr);
-    data.setUTCHours(0, 0, 0, 0);
+    // CORREÇÃO BUG: trocamos setUTCHours por setHours para usar o
+    // mesmo fuso local que o resto do código usa ao criar datas.
+    // Com setUTCHours(0,0,0,0) no Brasil (UTC-3), "2026-06-15T00:00:00Z"
+    // virava "2026-06-14T21:00:00" no horário local — o Prisma não
+    // encontrava o registro e o dia sumia ou duplicava.
+    const [anoStr, mesStr, diaStr] = dataStr.split('-');
+    const data = new Date(Number(anoStr), Number(mesStr) - 1, Number(diaStr));
+    data.setHours(0, 0, 0, 0);
 
     const jaEstaMarcado = await diaMenstruacaoRepository.verificarDiaMarcado(usuariaId, data);
-    
+
     if(jaEstaMarcado){
         await diaMenstruacaoRepository.desmarcarDia(usuariaId, data);
     } else{
@@ -190,7 +180,7 @@ const alternarMenstruacaoDia = async (usuariaId, dataStr, mes, ano) => {
         acao: jaEstaMarcado ? 'desmarcado' : 'registrado',
         calendario: calendarioAtualizado
     }
-} 
+}
 
 module.exports = {
     obterDadosHome,
