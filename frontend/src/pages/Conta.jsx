@@ -20,6 +20,7 @@ const Conta = () => {
     
     const [mostrarCamposSenha, setMostrarCamposSenha] = useState(false)
     const [dadosOriginais, setDadosOriginais] = useState({})
+
     const [popupAlertConfig, setPopupAlertConfig] = useState({ 
         isOpen: false, 
         title: '', 
@@ -57,7 +58,6 @@ const Conta = () => {
                 setIsLoading(false)
             }
         }
-
         carregarPerfil()
     }, [])
 
@@ -82,6 +82,14 @@ const Conta = () => {
         })
     }
 
+    const exibirSemAlteracoes = () => {
+        setPopupAlertConfig({
+            isOpen: true,
+            title: "SEM ALTERAÇÕES",
+            message: "Nenhuma informação foi modificada."
+        })
+    }
+
     const exibirErro = (mensagemCustomizada, acaoTentarNovamente = null) => {
         setPopupConfirmConfig({
             isOpen: true,
@@ -97,6 +105,13 @@ const Conta = () => {
     const fecharConfirm = () => setPopupConfirmConfig(prev => ({ ...prev, isOpen: false }))
 
     const handleSalvarPerfil = async () => {
+        if (
+            dados.nome === dadosOriginais.nome &&
+            dados.signo === dadosOriginais.signo
+        ) {
+            return exibirSemAlteracoes()
+        }
+
         try {
             setIsSavingPerfil(true)
             await authService.atualizarPerfil(montarPayloadCompleto({
@@ -113,6 +128,13 @@ const Conta = () => {
     }
 
     const handleSalvarSeguranca = async () => {
+        const emailMudou = dados.email !== dadosOriginais.email
+        const tentouMudarSenha = mostrarCamposSenha && dados.novaSenha
+
+        if (!emailMudou && !tentouMudarSenha) {
+            return exibirSemAlteracoes()
+        }
+
         if (mostrarCamposSenha) {
             if (dados.novaSenha && dados.novaSenha !== dados.confirmarNovaSenha) {
                 return exibirErro("A nova senha e a confirmação não coincidem.", handleSalvarSeguranca)
@@ -135,7 +157,7 @@ const Conta = () => {
             
             await authService.atualizarPerfil(payload)
 
-            const mensagem = mostrarCamposSenha && dados.novaSenha
+            const mensagem = tentouMudarSenha
                 ? "Senha atualizada com sucesso!"
                 : "E-mail atualizado com sucesso!"
             exibirSucesso(mensagem)
@@ -163,6 +185,13 @@ const Conta = () => {
     const handleSalvarCiclo = async () => {
         const ciclo = Number(dados.duracaoCiclo)
         const menstruacao = Number(dados.duracaoMenstruacao)
+
+        if (
+            ciclo === Number(dadosOriginais.duracaoCiclo) &&
+            menstruacao === Number(dadosOriginais.duracaoMenstruacao)
+        ) {
+            return exibirSemAlteracoes()
+        }
 
         if (!ciclo || ciclo < 1)
             return exibirErro("Informe um valor válido para os dias do ciclo.", handleSalvarCiclo)
