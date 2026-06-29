@@ -115,9 +115,10 @@ const Diario = () => {
 
         sonhosFatiados.forEach((sonho) => {
             const dataObj = new Date(sonho.dataSonho)
-            const mesNome = nomesMeses[dataObj.getMonth()]
-            const anoNum = dataObj.getFullYear().toString()
-            const diaNum = dataObj.getDate().toString()
+            
+            const mesNome = nomesMeses[dataObj.getUTCMonth()]
+            const anoNum = dataObj.getUTCFullYear().toString()
+            const diaNum = dataObj.getUTCDate().toString()
 
             const faseLimpa = sonho.faseLunar.substring(sonho.faseLunar.indexOf(' ') + 1)
 
@@ -215,7 +216,7 @@ const Diario = () => {
                             
                             setSonhosBrutos((sonhosAntigos) => 
                                 sonhosAntigos.map(sonho => 
-                                    sonho.id === dadosAtualizados.id ? { ...sonho, ...dadosAtualizados } : sonho
+                                    sonho.id === dadosAtualizados.id ? sonhoAtualizado : sonho
                                 )
                             )
                         } catch (erro) {
