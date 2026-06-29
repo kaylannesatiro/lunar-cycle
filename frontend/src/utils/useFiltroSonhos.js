@@ -23,8 +23,11 @@ export const useFiltroLogica = (tagsDoUsuario, tagsPreCadastradas, onFilterChang
         : ''
 
     const obterOpcoesDropdown = (tipo) => {
-        const inicio = dataPrimeiroSonho ? new Date(dataPrimeiroSonho) : new Date(2026, 0, 1)
         const hoje = new Date()
+        const inicio = dataPrimeiroSonho 
+            ? new Date(dataPrimeiroSonho) 
+            : new Date(hoje.getFullYear() - 1, hoje.getMonth(), hoje.getDate())
+            
         let opcoes = []
 
         if (tipo === 'ANO') {
@@ -41,13 +44,21 @@ export const useFiltroLogica = (tagsDoUsuario, tagsPreCadastradas, onFilterChang
                 dataAtual.setMonth(dataAtual.getMonth() - 1)
             }
         } else if (tipo === 'SEMANA') {
-            for (let i = 0; i < 4; i++) {
-                let fim = new Date(hoje)
-                fim.setDate(fim.getDate() - (i * 7))
+            let fim = new Date(hoje)
+            let dataLimite = new Date(inicio)
+            
+            let totalSemanas = 0
+            while (fim >= dataLimite && totalSemanas < 52) {
                 let inicioSemana = new Date(fim)
                 inicioSemana.setDate(inicioSemana.getDate() - 6)
                 
-                opcoes.push(`${inicioSemana.getDate()}/${inicioSemana.getMonth() + 1} a ${fim.getDate()}/${fim.getMonth() + 1}`)
+                const strInicio = `${String(inicioSemana.getDate()).padStart(2, '0')}/${String(inicioSemana.getMonth() + 1).padStart(2, '0')}`
+                const strFim = `${String(fim.getDate()).padStart(2, '0')}/${String(fim.getMonth() + 1).padStart(2, '0')}`
+                
+                opcoes.push(`${strInicio} a ${strFim}`)
+                
+                fim.setDate(fim.getDate() - 7)
+                totalSemanas++
             }
         }
         return opcoes
