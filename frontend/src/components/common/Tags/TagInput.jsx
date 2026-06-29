@@ -30,7 +30,7 @@ const InputTags = ({ tags, onAddTag, onRemoveTag, tagsDoSistema = [], tagsSeleci
             tagLimpa.length >= MIN_CHARS &&
             tagLimpa.length <= MAX_CHARS &&
             !tags.includes(tagLimpa) &&
-            !tagsDoSistema.includes(tagLimpa)
+            !tagsDoSistema.includes(tagLimpa.toUpperCase()) // Garante verificação correta com maiúsculas
         ) {
             onAddTag(tagLimpa);
         }
@@ -68,21 +68,39 @@ const InputTags = ({ tags, onAddTag, onRemoveTag, tagsDoSistema = [], tagsSeleci
         <div className="input-tags-wrapper">
             <div className="input-tags-lista">
 
+                {/* 1. RENDERIZA AS TAGS DO SISTEMA / HISTÓRICO DA USUÁRIA */}
                 {tagsDoSistema.map((tag) => {
                     const selecionada = tagsSelecionadas.includes(tag);
                     return (
                         <span
                             key={tag}
                             className={`tag-item ${selecionada ? "tag-item--ativa" : ""}`}
-                            onClick={() => (!limiteAtingido || selecionada) ? onToggleTagSistema(tag) : undefined}
+                            // Se a tag não estiver selecionada, o clique nela a adiciona
+                            onClick={() => (!limiteAtingido && !selecionada) ? onToggleTagSistema(tag) : undefined}
                         >
                             <span className={`tag-item-texto ${selecionada ? "tag-item-texto--ativa" : ""}`}>
                                 {tag}
                             </span>
+                            
+                            {/* CORREÇÃO: Se a tag do sistema estiver selecionada, exibe o "X" para remover */}
+                            {selecionada && (
+                                <button
+                                    type="button"
+                                    className="tag-item-remover"
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Impede que o clique ative a tag novamente
+                                        onToggleTagSistema(tag);
+                                    }}
+                                    aria-label={`Remover tag ${tag}`}
+                                >
+                                    ✕
+                                </button>
+                            )}
                         </span>
                     );
                 })}
 
+                {/* 2. RENDERIZA AS TAGS NOVAS DIGITADAS NESTE EXATO MOMENTO */}
                 {tags.map((tag) => (
                     <span key={tag} className="tag-item tag-item--ativa">
                         <span className="tag-item-texto tag-item-texto--ativa">{tag}</span>
@@ -97,6 +115,7 @@ const InputTags = ({ tags, onAddTag, onRemoveTag, tagsDoSistema = [], tagsSeleci
                     </span>
                 ))}
 
+                {/* 3. INPUT PARA DIGITAR UMA NOVA TAG */}
                 {!limiteAtingido && (
                     <span
                         className={`tag-nova ${editando ? "tag-nova--editando" : ""}`}
