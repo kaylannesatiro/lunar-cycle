@@ -229,17 +229,17 @@ const CalendarioPage = () => {
             <PopupConfirmacao 
                 isOpen={isPopupOpen}
                 title="Apagar Ciclo"
-                message="Você tem certeza que deseja excluir os registros deste ciclo? Esta ação não poderá ser desfeita."
+                message="Tem certeza que deseja apagar este registro? Esta ação não pode ser desfeita."
                 variante="perigo"
-                backgroundColor="#181119"
-                borderColor="#D74B55"
+                backgroundColor="radial-gradient(111.8% 111.8% at 50% 0%, rgba(150, 22, 32, 0.08) 0%, rgba(0, 0, 0, 0.00) 58%)"
                 textColor="#F5F0E9"
                 onCancel={() => setIsPopupOpen(false)}
                 botaoCancelar={
                     <Button 
                         variant="padrao" 
-                        backgroundColor="rgba(224, 197, 143, 0.05)" 
+                        backgroundColor="linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%)" 
                         textColor="#E0C58F" 
+                        color="rgba(224, 197, 143, 0.50)"
                         onClick={() => setIsPopupOpen(false)}
                         width="8rem"
                     >
@@ -248,13 +248,14 @@ const CalendarioPage = () => {
                 }
                 botaoConfirmar={
                     <Button 
-                        variant="padrao" 
-                        backgroundColor="rgba(215, 75, 85, 0.2)" 
-                        textColor="#D74B55" 
+                        variant="padrao"
+                        backgroundColor="rgba(88, 8, 16, 0.22)"
+                        color="rgba(245, 240, 233, 0.50)"
+                        textColor="#F5F0E9"
                         onClick={confirmarApagarPerido}
                         width="8rem"
                     >
-                        Apagar
+                        Apagar REGISTRO
                     </Button>
                 }
             />
