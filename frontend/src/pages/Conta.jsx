@@ -17,9 +17,9 @@ const Conta = () => {
     const [isSavingPerfil, setIsSavingPerfil] = useState(false)
     const [isSavingSeguranca, setIsSavingSeguranca] = useState(false)
     const [isSavingCiclo, setIsSavingCiclo] = useState(false)
-
+    
     const [mostrarCamposSenha, setMostrarCamposSenha] = useState(false)
-
+    const [dadosOriginais, setDadosOriginais] = useState({})
     const [popupAlertConfig, setPopupAlertConfig] = useState({ 
         isOpen: false, 
         title: '', 
@@ -50,6 +50,7 @@ const Conta = () => {
             try {
                 const perfil = await authService.obterPerfil()
                 setDados(prev => ({ ...prev, ...perfil }))
+                setDadosOriginais(perfil)
             } catch (error) {
                 console.error("Erro ao carregar perfil:", error)
             } finally {
@@ -64,11 +65,20 @@ const Conta = () => {
         setDados(prev => ({ ...prev, [campo]: valor }))
     }
 
-    const exibirSucesso = () => {
+    const montarPayloadCompleto = (camposEditados = {}) => ({
+        nome: dados.nome,
+        email: dados.email,
+        signo: dados.signo,
+        duracaoCiclo: Number(dados.duracaoCiclo),
+        duracaoMenstruacao: Number(dados.duracaoMenstruacao),
+        ...camposEditados
+    })
+
+    const exibirSucesso = (mensagem) => {
         setPopupAlertConfig({
             isOpen: true,
             title: "DADOS SALVOS",
-            message: "Você atualizou seus dados com sucesso."
+            message: mensagem || "Você atualizou seus dados com sucesso."
         })
     }
 
@@ -89,7 +99,11 @@ const Conta = () => {
     const handleSalvarPerfil = async () => {
         try {
             setIsSavingPerfil(true)
-            await authService.atualizarPerfil({ nome: dados.nome, signo: dados.signo })
+            await authService.atualizarPerfil(montarPayloadCompleto({
+                nome: dados.nome,
+                signo: dados.signo
+            }))
+            setDadosOriginais(prev => ({ ...prev, nome: dados.nome, signo: dados.signo }))
             exibirSucesso()
         } catch {
             exibirErro(null, handleSalvarPerfil)
@@ -109,39 +123,68 @@ const Conta = () => {
         }
 
         try {
-            setIsSavingSeguranca(true) 
-            const payload = { email: dados.email }
+            setIsSavingSeguranca(true)
+
+            const payload = montarPayloadCompleto({ email: dados.email })
 
             if (mostrarCamposSenha && dados.novaSenha) {
                 payload.senhaAtual = dados.senhaAtual
                 payload.novaSenha = dados.novaSenha
+                payload.confirmarNovaSenha = dados.confirmarNovaSenha
             }
             
             await authService.atualizarPerfil(payload)
-            exibirSucesso()
+
+            const mensagem = mostrarCamposSenha && dados.novaSenha
+                ? "Senha atualizada com sucesso!"
+                : "E-mail atualizado com sucesso!"
+            exibirSucesso(mensagem)
             
+            setDadosOriginais(prev => ({ ...prev, email: dados.email }))
             setDados(prev => ({ ...prev, senhaAtual: '', novaSenha: '', confirmarNovaSenha: '' }))
             setMostrarCamposSenha(false)
             
-        } catch {
+        } catch (erro) {
+            const mensagem = erro.message || ""
+
+            if (mensagem.includes("senha atual")) {
+                return exibirErro("A senha atual informada está incorreta.", handleSalvarSeguranca)
+            }
+            if (mensagem.includes("email informado já está cadastrado")) {
+                return exibirErro("Este e-mail já está em uso por outra conta.", handleSalvarSeguranca)
+            }
+
             exibirErro("Ocorreu um problema ao atualizar suas credenciais.", handleSalvarSeguranca)
         } finally {
-            setIsSavingSeguranca(false) 
+            setIsSavingSeguranca(false)
         }
     }
 
     const handleSalvarCiclo = async () => {
+        const ciclo = Number(dados.duracaoCiclo)
+        const menstruacao = Number(dados.duracaoMenstruacao)
+
+        if (!ciclo || ciclo < 1)
+            return exibirErro("Informe um valor válido para os dias do ciclo.", handleSalvarCiclo)
+
+        if (!menstruacao || menstruacao < 1)
+            return exibirErro("Informe um valor válido para os dias de menstruação.", handleSalvarCiclo)
+
+        if (menstruacao >= ciclo)
+            return exibirErro("Os dias de menstruação devem ser menores que os dias do ciclo.", handleSalvarCiclo)
+
         try {
-            setIsSavingCiclo(true) 
-            await authService.atualizarPerfil({ 
-                duracaoCiclo: Number(dados.duracaoCiclo), 
-                duracaoMenstruacao: Number(dados.duracaoMenstruacao) 
-            })
+            setIsSavingCiclo(true)
+            await authService.atualizarPerfil(montarPayloadCompleto({
+                duracaoCiclo: ciclo,
+                duracaoMenstruacao: menstruacao
+            }))
+            setDadosOriginais(prev => ({ ...prev, duracaoCiclo: ciclo, duracaoMenstruacao: menstruacao }))
             exibirSucesso()
         } catch {
             exibirErro(null, handleSalvarCiclo)
         } finally {
-            setIsSavingCiclo(false) 
+            setIsSavingCiclo(false)
         }
     }
 
@@ -149,12 +192,17 @@ const Conta = () => {
         setPopupConfirmConfig({
             isOpen: true,
             title: "CONFIRMAR SAIR",
-            message: "Tem certeza que deseja apagar sair? Você terá que entrar novamente.",
+            message: "Tem certeza que deseja sair? Você terá que entrar novamente.",
             variante: "confirmacao",
             textoConfirmar: "SAIR DA CONTA",
-            onConfirm: () => {
-                localStorage.removeItem('token')
-                navigate('/entrar')
+            onConfirm: async () => {
+                try {
+                    await authService.logout()
+                } catch {
+                    localStorage.removeItem('token')
+                } finally {
+                    navigate('/entrar')
+                }
             }
         })
     }
@@ -170,7 +218,7 @@ const Conta = () => {
                 try {
                     await authService.excluirConta()
                     localStorage.removeItem('token')
-                    navigate('/cadastro')
+                    navigate('/criar-conta')
                 } catch (error) {
                     exibirErro(`Erro ao excluir conta: ${error.message}`)
                 }
@@ -231,8 +279,7 @@ const Conta = () => {
                 </Button>
             )
         })
-    } 
-    else {
+    } else {
         camposSeguranca.push(
             {
                 label: "SENHA ATUAL",
@@ -245,7 +292,6 @@ const Conta = () => {
                     />
                 )
             },
-
             {
                 label: "NOVA SENHA",
                 input: (
@@ -257,7 +303,6 @@ const Conta = () => {
                     />
                 )
             },
-
             {
                 label: "CONFIRMAR SENHA",
                 input: (
@@ -413,19 +458,16 @@ const Conta = () => {
                         color="rgba(224, 197, 143, 0.50)"
                         textColor="#E0C58F"
                         onClick={fecharConfirm}
-
                     >
                         CANCELAR
                     </Button>
                 }
-
                 botaoConfirmar={
                     <Button
                         variant="padrao"
                         width="180px"
                         backgroundColor={popupConfirmConfig.variante === 'perigo' ? 'rgba(88, 8, 16, 0.25)' : 'linear-gradient(135deg, rgba(224, 197, 143, 0.13) 0%, rgba(224, 197, 143, 0.05) 100%)'}
                         color={popupConfirmConfig.variante === 'perigo' ? 'rgba(215, 75, 85, 0.3)' : 'rgba(224, 197, 143, 0.50)'}
-
                         textColor={popupConfirmConfig.variante === 'perigo' ? '#F5F0E9' : '#E0C58F'}
                         onClick={() => {
                             if (popupConfirmConfig.onConfirm) popupConfirmConfig.onConfirm();
