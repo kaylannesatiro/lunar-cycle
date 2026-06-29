@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import AuthLayout from './layouts/AuthLayout' 
 import Diario from './pages/Diario'
+import Calendario from './pages/Calendario'
 import Conta from './pages/Conta'
 import Home from './pages/Home'
 import Entrar from './pages/Entrar'
@@ -23,6 +24,7 @@ function App() {
             <Route path="home" element={<Home/>} />
             <Route path="diario" element={<Diario/>} />
             <Route path="conta" element={<Conta/>} />
+            <Route path="calendario" element={<Calendario/>} />
           </Route>
         </Routes>
     </BrowserRouter>
