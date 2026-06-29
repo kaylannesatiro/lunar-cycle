@@ -129,12 +129,17 @@ const Diario = () => {
                 grupos.push(grupo)
             }
 
+            const dataInput = `${String(dataObj.getUTCDate()).padStart(2, '0')}/${String(dataObj.getUTCMonth() + 1).padStart(2, '0')}/${dataObj.getUTCFullYear()}`;
+
             grupo.itens.push({
                 id: sonho.id,
                 diaFormatado: diaNum,
                 titulo: sonho.titulo,
+                descricao: sonho.descricao, 
+                data: dataInput, 
                 faseLunar: faseLimpa,
-                tags: sonho.tags.map(t => t.nomeTag.toUpperCase())
+                tagsSelecionadas: sonho.tags.map(t => t.nomeTag.toUpperCase()), 
+                tags: [] 
             })
         })
 
@@ -181,16 +186,14 @@ const Diario = () => {
             <div className="diario-divisor-principal"></div>
 
             <section className="diario-conteudo">
-                {!isLoading && sonhosBrutos.length > 0 && (
-                    <FiltroSonhos 
-                        tagsDoUsuario={tagsDaUsuaria} 
-                        onFilterChange={setFiltrosAtivos} 
-                    />
-                )}
+                <FiltroSonhos 
+                    tagsDoUsuario={tagsDaUsuaria} 
+                    onFilterChange={setFiltrosAtivos} 
+                />
 
                 <LinhaDoTempo 
                     sonhosAgrupados={dadosProntos} 
-                    isLoading={isLoading} 
+                    isLoading={isLoading}
                     onCardClick={(id) => console.log(`Abrir visualização: ${id}`)}
 
                     onDeletarSonho={async (idSonho) => {
@@ -210,15 +213,26 @@ const Diario = () => {
 
                     onEditarSonho={async (dadosAtualizados) => {
                         try {
-                            const sonhoAtualizado = await sonhosServiceFrontend.atualizar(dadosAtualizados.id, dadosAtualizados)
+                            const [dia, mes, ano] = dadosAtualizados.data.split('/')
+                            const dataFormatada = `${ano}-${mes}-${dia}`
+
+                            const payloadBackend = {
+                                titulo: dadosAtualizados.titulo,
+                                descricao: dadosAtualizados.descricao,
+                                dataSonho: dataFormatada, 
+                                tags: dadosAtualizados.tagsSelecionadas || [] 
+                            };
+
+                            const sonhoAtualizado = await sonhosServiceFrontend.atualizar(dadosAtualizados.id, payloadBackend)
                             
                             console.log("Sonho atualizado no backend:", sonhoAtualizado)
                             
-                            setSonhosBrutos((sonhosAntigos) => 
-                                sonhosAntigos.map(sonho => 
+                            setSonhosBrutos((sonhosAntigos) => {
+                                const novaLista = sonhosAntigos.map(sonho => 
                                     sonho.id === dadosAtualizados.id ? sonhoAtualizado : sonho
                                 )
-                            )
+                                return novaLista.sort((a, b) => new Date(b.dataSonho) - new Date(a.dataSonho))
+                            })
                         } catch (erro) {
                             console.error("Erro ao editar o sonho:", erro)
                             alert("Não foi possível salvar as alterações.")
@@ -262,7 +276,10 @@ const Diario = () => {
                         
                         console.log("Novo sonho salvo no banco:", sonhoCriado)
                     
-                        setSonhosBrutos(sonhosAntigos => [sonhoCriado, ...sonhosAntigos])
+                        setSonhosBrutos(sonhosAntigos => {
+                            const novaLista = [sonhoCriado, ...sonhosAntigos];
+                            return novaLista.sort((a, b) => new Date(b.dataSonho) - new Date(a.dataSonho));
+                        })
                         
                         setModalAberto(false);
                     } catch (erro) {
