@@ -46,23 +46,17 @@ const Diario = () => {
             return { dataInicio: `${periodo}-01-01`, dataFim: `${periodo}-12-31` };
         }
         
-        if (periodo.includes(" ")) {
-            const mesesMap = {
-                Jan: "01", Fev: "02", Mar: "03", Abr: "04", Mai: "05", Jun: "06",
-                Jul: "07", Ago: "08", Set: "09", Out: "10", Nov: "11", Dez: "12"
-            }
+        if (periodo.includes("a") && periodo.includes("/")) {
+            const [inicioParte, fimParte] = periodo.split(" a ");
+            const [diaIni, mesIni] = inicioParte.split("/").map(Number);
+            const [diaFim, mesFim] = fimParte.split("/").map(Number);
+            
+            const anoInicio = mesIni > mesFim ? anoAtual - 1 : anoAtual;
 
-            const [mesTexto, anoTexto] = periodo.split(" ")
-            const mesDigito = mesesMap[mesTexto]
-
-            if (mesDigito) {
-                const ultimoDia = new Date(Number(anoTexto), Number(mesDigito), 0).getDate()
-
-                return { 
-                    dataInicio: `${anoTexto}-${mesDigito}-01`, 
-                    dataFim: `${anoTexto}-${mesDigito}-${String(ultimoDia).padStart(2, '0')}` 
-                }
-            }
+            const dIni = `${anoInicio}-${String(mesIni).padStart(2, '0')}-${String(diaIni).padStart(2, '0')}`;
+            const dFim = `${anoAtual}-${String(mesFim).padStart(2, '0')}-${String(diaFim).padStart(2, '0')}`;
+            
+            return { dataInicio: dIni, dataFim: dFim }
         }
         
         if (periodo.includes("a") && periodo.includes("/")) {
@@ -76,7 +70,7 @@ const Diario = () => {
         }
         
         return { dataInicio: undefined, dataFim: undefined }
-    };
+    }
 
     useEffect(() => {
         async function buscarDadosFiltrados() {
