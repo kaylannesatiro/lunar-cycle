@@ -6,9 +6,49 @@ import Calendario from "../components/features/Calendario/Calendario"
 import ModalMenstruacao from "../components/features/Modals/ModalMenstruacao"
 import "./Calendario.css"
 
+// ==========================================
+// FUNÇÕES AUXILIARES DE DATA (Para o truque do Frontend)
+// ==========================================
+
+// Converte de "DD/MM/YYYY" para objeto Date
+const parseDataBr = (dataStr) => {
+    if (!dataStr) return new Date();
+    const [dia, mes, ano] = dataStr.split('/');
+    return new Date(ano, mes - 1, dia);
+};
+
+// Converte objeto Date para "YYYY-MM-DD" (Formato do Backend)
+const formatarDataISO = (data) => {
+    const ano = data.getFullYear();
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const dia = String(data.getDate()).padStart(2, '0');
+    return `${ano}-${mes}-${dia}`;
+};
+
+// Gera um array com todos os dias entre uma data inicial e final
+const gerarIntervaloDeDatas = (dataInicioBr, dataFimBr) => {
+    const inicio = parseDataBr(dataInicioBr);
+    const fim = dataFimBr ? parseDataBr(dataFimBr) : parseDataBr(dataInicioBr);
+    
+    const datasNoIntervalo = [];
+    let atual = new Date(inicio);
+    
+    while (atual <= fim) {
+        datasNoIntervalo.push(formatarDataISO(atual));
+        atual.setDate(atual.getDate() + 1);
+    }
+    
+    return datasNoIntervalo;
+};
+
+
 const CalendarioPage = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    
+    // Controle do Modal
+    const [modalModo, setModalModo] = useState("registrar")
+    const [dadosIniciaisModal, setDadosIniciaisModal] = useState({})
 
     const hoje = new Date()
     const [mesFiltro, setMesFiltro] = useState(hoje.getMonth() + 1)
@@ -27,7 +67,6 @@ const CalendarioPage = () => {
                 setIsLoading(false)
             }
         }
-
         carregarCalendarioInicial()
     }, [])
 
@@ -40,7 +79,6 @@ const CalendarioPage = () => {
                 console.error("Erro ao transicionar mês lunar:", error)
             }
         }
-
         if (!isLoading) atualizarMesCalendario()
     }, [mesFiltro, anoFiltro])
 
@@ -58,33 +96,6 @@ const CalendarioPage = () => {
         }
     }, [isModalOpen])
 
-    const handleSalvarModal = async (dadosDoModal) => {
-        try {
-            console.log("Período registrado via visão mensal:", dadosDoModal)
-            const dadosAtualizados = await cicloService.obterCalendario(mesFiltro, anoFiltro)
-            setDadosCalendario(dadosAtualizados)
-            setIsModalOpen(false)
-        } catch (error) {
-            console.error("Erro ao salvar período menstrual:", error)
-        }
-    }
-
-    const handleToggleDiaCalendario = async (dataStr) => {
-        try {
-            const resposta = await cicloService.alternarMenstruacaoDia(dataStr, mesFiltro, anoFiltro)
-            setDadosCalendario(resposta.calendario)
-        } catch (error) {
-            console.error("Erro ao alternar registro do dia selecionado:", error)
-        }
-    };
-
-    const normalizarFaseParaComponente = (nomeFaseBackend) => {
-        if (!nomeFaseBackend) return "Nova"
-        if (nomeFaseBackend.includes("Crescente Côncava")) return "Crescente"
-        if (nomeFaseBackend.includes("Minguante Côncava")) return "Minguante"
-        return nomeFaseBackend;
-    };
-
     const diasMenstruacaoFormatados = dadosCalendario.dias
         .filter(d => d.registrada)
         .map(d => d.data.split('T')[0])
@@ -93,11 +104,87 @@ const CalendarioPage = () => {
         .filter(d => d.prevista)
         .map(d => d.data.split('T')[0])
 
+    // ==========================================
+    // LÓGICA DO CLIQUE NO DIA
+    // ==========================================
+    const handleDayClick = (dataStrISO) => {
+        // dataStrISO vem como "YYYY-MM-DD"
+        const isRegistrada = diasMenstruacaoFormatados.includes(dataStrISO);
+        
+        // Converte para "DD/MM/YYYY" para preencher o Input do Modal
+        const [ano, mes, dia] = dataStrISO.split('-');
+        const dataFormatadaModal = `${dia}/${mes}/${ano}`;
+
+        setModalModo(isRegistrada ? "editar" : "registrar");
+        setDadosIniciaisModal({ dataInicio: dataFormatadaModal, dataFim: "" });
+        setIsModalOpen(true);
+    };
+
+    // ==========================================
+    // LÓGICA DE SALVAR SEM MEXER NO BACKEND
+    // ==========================================
+    const handleSalvarModal = async (dadosDoModal) => {
+        try {
+            // 1. Gera todos os dias que a usuária digitou no modal
+            const diasAlvo = gerarIntervaloDeDatas(dadosDoModal.dataInicio, dadosDoModal.dataFim);
+            
+            // 2. Filtra APENAS os dias que ainda não estão marcados (para não "desligar" o que já está ligado)
+            const diasParaMarcar = diasAlvo.filter(diaISO => !diasMenstruacaoFormatados.includes(diaISO));
+            
+            let ultimoCalendario = dadosCalendario;
+
+            // 3. Loop: Chama a rota existente do seu backend para cada dia que precisa ser marcado
+            for (const diaISO of diasParaMarcar) {
+                const resposta = await cicloService.alternarMenstruacaoDia(diaISO, mesFiltro, anoFiltro);
+                ultimoCalendario = resposta.calendario;
+            }
+
+            // 4. Atualiza a tela de uma vez e fecha o modal
+            setDadosCalendario(ultimoCalendario);
+            setIsModalOpen(false);
+            
+        } catch (error) {
+            console.error("Erro ao salvar período menstrual em lote:", error);
+        }
+    };
+
+    // ==========================================
+    // LÓGICA DE APAGAR SEM MEXER NO BACKEND
+    // ==========================================
+    const handleApagarModal = async () => {
+        try {
+            const diasAlvo = gerarIntervaloDeDatas(dadosIniciaisModal.dataInicio, dadosIniciaisModal.dataFim);
+            
+            // Pega apenas os dias alvo que ESTÃO marcados no banco (para podermos "desligá-los")
+            const diasParaDesmarcar = diasAlvo.filter(diaISO => diasMenstruacaoFormatados.includes(diaISO));
+            
+            let ultimoCalendario = dadosCalendario;
+
+            for (const diaISO of diasParaDesmarcar) {
+                const resposta = await cicloService.alternarMenstruacaoDia(diaISO, mesFiltro, anoFiltro);
+                ultimoCalendario = resposta.calendario;
+            }
+
+            setDadosCalendario(ultimoCalendario);
+            setIsModalOpen(false);
+            
+        } catch (error) {
+            console.error("Erro ao apagar período menstrual em lote:", error);
+        }
+    };
+
+    const normalizarFaseParaComponente = (nomeFaseBackend) => {
+        if (!nomeFaseBackend) return "Nova";
+        if (nomeFaseBackend.includes("Crescente Côncava")) return "Crescente";
+        if (nomeFaseBackend.includes("Minguante Côncava")) return "Minguante";
+        return nomeFaseBackend;
+    };
+
     const dicionarioFasesLunares = dadosCalendario.dias.reduce((acc, d) => {
         const dataLimpa = d.data.split('T')[0];
-        acc[dataLimpa] = normalizarFaseParaComponente(d.faseLunar?.nome)
-        return acc
-    }, {})
+        acc[dataLimpa] = normalizarFaseParaComponente(d.faseLunar?.nome);
+        return acc;
+    }, {});
 
     if (isLoading) return <div className="cal-page-loading">Sintonizando marés e ciclos lunares...</div>
 
@@ -110,22 +197,16 @@ const CalendarioPage = () => {
                     diasMenstruacao={diasMenstruacaoFormatados}
                     diasPrevistos={diasPrevistosFormatados}
                     fasesLunares={dicionarioFasesLunares}
-                    onDayClick={handleToggleDiaCalendario}
+                    onDayClick={handleDayClick}
                     onNextMonth={() => {
                         if (mesFiltro === 12) {
-                            setMesFiltro(1);
-                            setAnoFiltro(ano => ano + 1)
-                        } else {
-                            setMesFiltro(m => m + 1)
-                        }
+                            setMesFiltro(1); setAnoFiltro(ano => ano + 1)
+                        } else setMesFiltro(m => m + 1)
                     }}
                     onPrevMonth={() => {
                         if (mesFiltro === 1) {
-                            setMesFiltro(12);
-                            setAnoFiltro(ano => ano - 1)
-                        } else {
-                            setMesFiltro(m => m - 1)
-                        }
+                            setMesFiltro(12); setAnoFiltro(ano => ano - 1)
+                        } else setMesFiltro(m => m - 1)
                     }}
                 />
 
@@ -137,7 +218,11 @@ const CalendarioPage = () => {
                         color="rgba(224, 197, 143, 0.40)"
                         textColor="#E0C58F"
                         style={{ border: "1px solid #E0C58F" }}
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={() => {
+                            setModalModo("registrar");
+                            setDadosIniciaisModal({ dataInicio: "", dataFim: "" });
+                            setIsModalOpen(true);
+                        }}
                     >
                         ◈ Registrar Menstruação
                     </Button>
@@ -146,9 +231,11 @@ const CalendarioPage = () => {
 
             <ModalMenstruacao 
                 isOpen={isModalOpen}
-                modo="registrar"
+                modo={modalModo}
+                dadosIniciais={dadosIniciaisModal}
                 onFechar={() => setIsModalOpen(false)}
                 onSave={handleSalvarModal}
+                onDelete={handleApagarModal}
             />
         </div>
     )

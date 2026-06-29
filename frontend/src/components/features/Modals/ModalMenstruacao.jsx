@@ -14,18 +14,18 @@ const ModalMenstruacao = ({ isOpen, modo = "registrar", dadosIniciais = {}, onSa
 
     useEffect(() => {
         if (!isOpen) return;
-
-        if (modo === "editar") {
-            setDataInicio(dadosIniciais.dataInicio || "");
+        if (dadosIniciais && dadosIniciais.dataInicio) {
+            setDataInicio(dadosIniciais.dataInicio);
             setDataFim(dadosIniciais.dataFim || "");
             setMostrarDataFim(!!dadosIniciais.dataFim);
         } else {
             setDataInicio("");
             setDataFim("");
             setMostrarDataFim(false);
-            setErros({});
         }
-    }, [isOpen, modo]);
+        
+        setErros({});
+    }, [isOpen, modo, dadosIniciais]);
 
     const eBissexto = (ano) => {
         return (ano % 4 === 0 && ano % 100 !== 0) || (ano % 400 === 0);
