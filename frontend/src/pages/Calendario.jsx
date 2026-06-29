@@ -31,7 +31,6 @@ const CalendarioPage = () => {
                 const dadosBrutos = await cicloService.obterCalendario(mesFiltro, anoFiltro)
                 setDadosCalendario(dadosBrutos)
 
-                // Busca a duração direto do novo usuariaService
                 const perfil = await usuariaService.obterPerfil()
                 if (perfil.duracaoMenstruacao) {
                     setDuracaoUsuaria(perfil.duracaoMenstruacao)
@@ -207,10 +206,6 @@ const CalendarioPage = () => {
                     <Button 
                         variant="redondo"
                         maxWidth="280px"
-                        backgroundColor="transparent"
-                        color="rgba(224, 197, 143, 0.40)"
-                        textColor="#E0C58F"
-                        style={{ border: "1px solid #E0C58F" }}
                         onClick={() => {
                             setModalModo("registrar")
                             setDadosIniciaisModal({ dataInicio: "", dataFim: "" })
