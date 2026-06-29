@@ -1,6 +1,33 @@
 import { obterIconFaseDaLua } from "../../../data/fasesLua";
 import "./Calendario.css";
 
+const calcularFaseDaLuaLocal = (ano, mes, dia) => {
+    const data = new Date(ano, mes, dia);
+    const CICLO_LUNAR_DIAS = 29.530588853;
+    const CICLO_LUNAR_MS = CICLO_LUNAR_DIAS * 24 * 60 * 60 * 1000;
+    const LUA_NOVA_REFERENCIA = new Date('2000-01-06T18:14:00Z').getTime();
+    
+    const tempoDecorrido = data.getTime() - LUA_NOVA_REFERENCIA;
+    let diasDoCiclo = (tempoDecorrido % CICLO_LUNAR_MS) / (24 * 60 * 60 * 1000);
+    
+    if (diasDoCiclo < 0) diasDoCiclo += CICLO_LUNAR_DIAS;
+    
+    const indice = Math.floor(((diasDoCiclo + (CICLO_LUNAR_DIAS / 16)) / CICLO_LUNAR_DIAS) * 8) % 8;
+    
+    const fases = [
+        "Nova", 
+        "Crescente",
+        "Quarto Crescente", 
+        "Gibosa Crescente", 
+        "Cheia", 
+        "Gibosa Minguante", 
+        "Quarto Minguante", 
+        "Minguante"
+    ];
+    
+    return fases[indice];
+};
+
 const NOMES_DOS_MESES = [
     "Janeiro", "Fevereiro", "Março", "Abril",
     "Maio", "Junho", "Julho", "Agosto",
@@ -111,7 +138,7 @@ const Calendario = ({ mesAtual, anoAtual, diasMenstruacao = [], diasPrevistos = 
 
                         const estaMenstruada = conjuntoMenstruacao.has(chaveData);
                         const estaPrevisto = conjuntoPrevistos.has(chaveData);
-                        const faseDaLua = fasesLunares[chaveData] || "Nova";
+                        const faseDaLua = calcularFaseDaLuaLocal(anoAtual, mesAtual, dia);
                         
                         const eHoje =
                             dia === hoje.getDate() &&
