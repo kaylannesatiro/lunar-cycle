@@ -7,6 +7,22 @@ import Button from "../components/common/Buttons/Button"
 import { authService } from "../services/authService"
 import "./CriarConta.css"
 
+const REGEX_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+const validarSenha = (senha) => {
+    if (!senha.trim())
+        return "Informe sua senha."
+    if (senha.length < 8)
+        return "A senha deve ter pelo menos 8 caracteres."
+    if (!/[A-Z]/.test(senha))
+        return "A senha deve conter pelo menos uma letra maiúscula."
+    if (!/[0-9]/.test(senha))
+        return "A senha deve conter pelo menos um número."
+    if (!/[^A-Za-z0-9]/.test(senha))
+        return "A senha deve conter pelo menos um caractere especial."
+    return null
+}
+
 const CriarConta = () => {
     const navigate = useNavigate()
     const { setCardProps } = useOutletContext()
@@ -33,11 +49,17 @@ const CriarConta = () => {
     const validar = () => {
         const novosErros = {}
 
-        if (!nome.trim())
+        const nomeTrim = nome.trim()
+        if (!nomeTrim)
             novosErros.nome = "Informe seu nome de exibição."
-
+        else if (nomeTrim.length < 3)
+            novosErros.nome = "O nome deve ter pelo menos 3 caracteres."
+        else if (nomeTrim.length > 60)
+            novosErros.nome = "O nome pode ter no máximo 60 caracteres."
         if (!email.trim())
             novosErros.email = "Informe seu e-mail."
+        else if (!REGEX_EMAIL.test(email.trim()))
+            novosErros.email = "Informe um e-mail válido."
 
         const ciclo = parseInt(duracaoCiclo)
         const menstruacao = parseInt(duracaoMenstruacao)
@@ -49,18 +71,18 @@ const CriarConta = () => {
             novosErros.duracaoMenstruacao = "Informe os dias de menstruação."
 
         if (duracaoCiclo && duracaoMenstruacao && !isNaN(ciclo) && !isNaN(menstruacao) && menstruacao >= ciclo)
-            novosErros.duracaoMenstruacao = "Deve ser menor que os dias do ciclo."
+            novosErros.duracaoMenstruacao = "A duração da menstruação deve ser menor que a duração do ciclo."
 
         if (!signo)
-            novosErros.signo = "Selecione seu signo."
+            novosErros.signo = "Selecione o seu signo."
 
-        if (!senha.trim())
-            novosErros.senha = "Informe sua senha."
+        const erroSenha = validarSenha(senha)
+        if (erroSenha)
+            novosErros.senha = erroSenha
 
         if (!confirmarSenha.trim())
             novosErros.confirmarSenha = "Confirme sua senha."
-
-        if (senha && confirmarSenha && senha !== confirmarSenha)
+        else if (senha && confirmarSenha && senha !== confirmarSenha)
             novosErros.confirmarSenha = "As senhas não coincidem."
 
         setErros(novosErros)
@@ -91,10 +113,24 @@ const CriarConta = () => {
             navigate("/home")
 
         } catch (erro) {
-            setErros(prev => ({
-                ...prev,
-                geral: erro.message || "Ocorreu um erro ao criar a conta. Tente novamente."
-            }))
+            const mensagem = erro.message || ""
+
+            if (
+                erro.status === 409 ||
+                mensagem.includes("e-mail já está em uso") ||
+                mensagem.includes("email already") ||
+                mensagem.includes("EMAIL_JA_CADASTRADO")
+            ) {
+                setErros(prev => ({
+                    ...prev,
+                    email: "Este e-mail já está em uso. Tente fazer login."
+                }))
+            } else {
+                setErros(prev => ({
+                    ...prev,
+                    geral: "Ocorreu um erro ao criar a conta. Tente novamente."
+                }))
+            }
         } finally {
             setIsLoading(false)
         }
