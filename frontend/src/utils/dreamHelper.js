@@ -1,4 +1,4 @@
-import { formatarDataObjParaBR } from "./dateHelper";
+import { formatarDataObjParaBR } from "./dateHelper"
 
 export const agruparSonhosPorMesEAno = (sonhos, pagina, limite) => {
     const limiteExibicao = pagina * limite
