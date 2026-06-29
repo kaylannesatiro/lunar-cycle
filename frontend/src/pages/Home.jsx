@@ -95,18 +95,6 @@ const Home = () => {
         }
     }
 
-    const handleToggleDiaCalendario = async (dataStr) => {
-        try {
-            const resposta = await cicloService.alternarMenstruacaoDia(dataStr, mesFiltro, anoFiltro)
-            setDadosCalendario(resposta.calendario)
-            
-            const dadosHomeAtualizados = await cicloService.obterDadosHome()
-            setDadosHome(dadosHomeAtualizados)
-        } catch (error) {
-            console.error("Erro ao alterar registro do dia:", error)
-        }
-    }
-
     const normalizarFaseParaComponente = (nomeFaseBackend) => {
         if (!nomeFaseBackend) return "Nova"
         if (nomeFaseBackend.includes("Crescente Côncava")) return "Crescente"
@@ -172,7 +160,7 @@ const Home = () => {
                 
                 <div className="home-oraculo-component-wrapper">
                     <CardOraculo 
-                        estaMenstruada={dadosHome.estaMenstruada}
+                        estaMenstruada={dadosHome.menstruandoHoje}
                         faseLunar={normalizarFaseParaComponente(dadosHome.faseLunar?.nome)}
                     />
                 </div>
@@ -189,7 +177,6 @@ const Home = () => {
                     diasMenstruacao={diasMenstruacaoFormatados}
                     diasPrevistos={diasPrevistosFormatados}
                     fasesLunares={dicionarioFasesLunares}
-                    onDayClick={handleToggleDiaCalendario}
                     onNextMonth={() => {
                         if (mesFiltro === 12) {
                             setMesFiltro(1);
