@@ -28,8 +28,13 @@ const Entrar = () => {
 
     const validar = () => {
         const novosErros = {}
-        if (!email.trim()) novosErros.email = "Informe seu e-mail."
-        if (!senha.trim()) novosErros.senha = "Informe sua senha."
+
+        if (!email.trim())
+            novosErros.email = "Informe seu e-mail."
+
+        if (!senha.trim())
+            novosErros.senha = "Informe sua senha."
+
         setErros(novosErros)
         return Object.keys(novosErros).length === 0
     }
@@ -42,10 +47,24 @@ const Entrar = () => {
             await authService.login({ email: email.toLowerCase(), senha })
             navigate("/home")
         } catch (erro) {
-            if (erro.status === 401 || erro.message === "CREDENCIAIS_INVALIDAS") {
-                setErros(prev => ({ ...prev, geral: "E-mail ou senha incorretos." }))
+            const mensagem = erro.message || ""
+
+            if (
+                erro.status === 401 ||
+                mensagem === "CREDENCIAIS_INVALIDAS" ||
+                mensagem.includes("credenciais") ||
+                mensagem.includes("inválid") ||
+                mensagem.includes("incorrect")
+            ) {
+                setErros(prev => ({
+                    ...prev,
+                    geral: "E-mail ou senha incorretos."
+                }))
             } else {
-                setErros(prev => ({ ...prev, geral: "Ocorreu um erro ao tentar entrar. Tente novamente." }))
+                setErros(prev => ({
+                    ...prev,
+                    geral: "Ocorreu um erro ao tentar entrar. Tente novamente."
+                }))
             }
         } finally {
             setIsLoading(false)
