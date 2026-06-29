@@ -7,17 +7,14 @@ import ModalMenstruacao from "../components/features/Modals/ModalMenstruacao"
 import "./Calendario.css"
 
 // ==========================================
-// FUNÇÕES AUXILIARES DE DATA (Para o truque do Frontend)
+// FUNÇÕES AUXILIARES DE DATA
 // ==========================================
-
-// Converte de "DD/MM/YYYY" para objeto Date
 const parseDataBr = (dataStr) => {
     if (!dataStr) return new Date();
     const [dia, mes, ano] = dataStr.split('/');
     return new Date(ano, mes - 1, dia);
 };
 
-// Converte objeto Date para "YYYY-MM-DD" (Formato do Backend)
 const formatarDataISO = (data) => {
     const ano = data.getFullYear();
     const mes = String(data.getMonth() + 1).padStart(2, '0');
@@ -25,19 +22,17 @@ const formatarDataISO = (data) => {
     return `${ano}-${mes}-${dia}`;
 };
 
-// Gera um array com todos os dias entre uma data inicial e final
+// Modificado para receber a duração configurada dinamicamente
 const gerarIntervaloDeDatas = (dataInicioBr, dataFimBr, duracaoConfigurada) => {
     const inicio = parseDataBr(dataInicioBr);
     let fim;
     
     if (dataFimBr) {
-        // Se ela preencheu a data fim no modal, obedece o que ela digitou
         fim = parseDataBr(dataFimBr);
     } else {
-        // A MÁGICA AQUI: Se ela só colocou o início, o sistema soma os dias da configuração!
-        // Subtraímos 1 porque o próprio dia de início já conta como 1 dia de sangramento.
+        // Usa a duração vinda das configurações da usuária no banco de dados
         fim = new Date(inicio);
-        fim.setDate(fim.getDate() + (duracaoConfigurada - 1));
+        fim.setDate(fim.getDate() + (parseInt(duracaoConfigurada, 10) - 1));
     }
     
     const datasNoIntervalo = [];
@@ -56,28 +51,38 @@ const CalendarioPage = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false)
     
-    // Controle do Modal
     const [modalModo, setModalModo] = useState("registrar")
     const [dadosIniciaisModal, setDadosIniciaisModal] = useState({})
+
+    // NOVO ESTADO: Guarda as configurações da usuária (duração do ciclo, menstruação, etc.)
+    const [dadosConfigUsuaria, setDadosConfigUsuaria] = useState(null)
 
     const hoje = new Date()
     const [mesFiltro, setMesFiltro] = useState(hoje.getMonth() + 1)
     const [anoFiltro, setAnoFiltro] = useState(hoje.getFullYear())
     const [dadosCalendario, setDadosCalendario] = useState({ dias: [] })
 
+    // 1. Carrega os registros do calendário E as configurações da usuária logada
     useEffect(() => {
-        const carregarCalendarioInicial = async () => {
+        const carregarDadosIniciais = async () => {
             try {
                 setIsLoading(true)
-                const dadosBrutos = await cicloService.obterCalendario(mesFiltro, anoFiltro)
-                setDadosCalendario(dadosBrutos)
+                
+                // Busca em paralelo: os dias do mês E o perfil/configurações da usuária
+                const [dadosBrutosCalendario, dadosHomePerfil] = await Promise.all([
+                    cicloService.obterCalendario(mesFiltro, anoFiltro),
+                    cicloService.obterDadosHome() // Traz as configurações cadastradas pela usuária
+                ]);
+
+                setDadosCalendario(dadosBrutosCalendario);
+                setDadosConfigUsuaria(dadosHomePerfil); // Salva as configurações (como duracaoMenstruacao)
             } catch (error) {
                 console.error("Erro ao sincronizar dados com a órbita lunar:", error)
             } finally {
                 setIsLoading(false)
             }
         }
-        carregarCalendarioInicial()
+        carregarDadosIniciais()
     }, [])
 
     useEffect(() => {
@@ -114,45 +119,35 @@ const CalendarioPage = () => {
         .filter(d => d.prevista)
         .map(d => d.data.split('T')[0])
 
-    // ==========================================
-    // LÓGICA INTELLIGENT DE CLIQUE NO DIA (EDITAR PERÍODO COMPLETO)
-    // ==========================================
     const handleDayClick = (dataStrISO) => {
-        // dataStrISO vem do calendário no formato "YYYY-MM-DD"
         const isRegistrada = diasMenstruacaoFormatados.includes(dataStrISO);
-
+        
+        let dataInicioObj = new Date(dataStrISO + 'T12:00:00');
+        
         if (isRegistrada) {
-            // 1. Criamos um objeto Date seguro baseado no dia clicado (usando meio-dia para evitar fuso horário)
-            let dataInicioObj = new Date(dataStrISO + 'T12:00:00');
-            
-            // 2. Varre para TRÁS para encontrar o primeiro dia do período contínuo
             while (true) {
                 const anterior = new Date(dataInicioObj);
                 anterior.setDate(anterior.getDate() - 1);
                 const anteriorISO = formatarDataISO(anterior);
-                
                 if (diasMenstruacaoFormatados.includes(anteriorISO)) {
-                    dataInicioObj = anterior; // Se o dia anterior também está marcado, recua
+                    dataInicioObj = anterior;
                 } else {
-                    break; // Se não está marcado, achamos o primeiro dia!
+                    break;
                 }
             }
 
-            // 3. Varre para FRENTE para encontrar o último dia do período contínuo
             let dataFimObj = new Date(dataStrISO + 'T12:00:00');
             while (true) {
                 const proximo = new Date(dataFimObj);
                 proximo.setDate(proximo.getDate() + 1);
                 const proximoISO = formatarDataISO(proximo);
-                
                 if (diasMenstruacaoFormatados.includes(proximoISO)) {
-                    dataFimObj = proximo; // Se o próximo dia também está marcado, avança
+                    dataFimObj = proximo;
                 } else {
-                    break; // Se não está marcado, achamos o último dia!
+                    break;
                 }
             }
 
-            // Função interna para transformar o objeto Date em "DD/MM/AAAA" (formato do seu Modal)
             const formatarParaModal = (dateObj) => {
                 const dia = String(dateObj.getDate()).padStart(2, '0');
                 const mes = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -160,8 +155,6 @@ const CalendarioPage = () => {
                 return `${dia}/${mes}/${ano}`;
             };
 
-            // Se o início e o fim forem o mesmo dia (menstruação de 1 dia só), 
-            // deixamos a data fim vazia para não quebrar a validação do seu modal
             const temMultiplosDias = dataInicioObj.getTime() !== dataFimObj.getTime();
 
             setModalModo("editar");
@@ -171,7 +164,6 @@ const CalendarioPage = () => {
             });
 
         } else {
-            // Modo registrar: Dia vazio clicado, preenche apenas a data de início com o dia
             const [ano, mes, dia] = dataStrISO.split('-');
             const dataFormatadaModal = `${dia}/${mes}/${ano}`;
             
@@ -183,16 +175,20 @@ const CalendarioPage = () => {
     };
 
     // ==========================================
-    // LÓGICA DE SALVAR SEM MEXER NO BACKEND
+    // SALVAMENTO USANDO A CONFIGURAÇÃO DO BANCO
     // ==========================================
     const handleSalvarModal = async (dadosDoModal) => {
         try {
-            // IMPORTANTE: Aqui você precisa puxar a 'duracaoMenstruacao' real da usuária!
-            // Exemplo: const duracao = usuaria.duracaoMenstruacao || 5;
-            const duracaoDaUsuaria = 5; // Coloquei 5 fixo só pra você testar e ver funcionar!
+            // Pega o valor real vindo do backend. Se a API falhar ou não achar por algum motivo místico, 
+            // usamos 4 como um plano de segurança ("fallback") baseado na média padrão.
+            const duracaoMenstruacaoConfigurada = dadosConfigUsuaria?.duracaoMenstruacao || 4;
 
-            // Agora a função recebe os 3 parâmetros
-            const diasAlvo = gerarIntervaloDeDatas(dadosDoModal.dataInicio, dadosDoModal.dataFim, duracaoDaUsuaria);
+            // Envia a duração salva nas configurações da usuária para calcular o preenchimento automático
+            const diasAlvo = gerarIntervaloDeDatas(
+                dadosDoModal.dataInicio, 
+                dadosDoModal.dataFim, 
+                duracaoMenstruacaoConfigurada
+            );
             
             const diasParaMarcar = diasAlvo.filter(diaISO => !diasMenstruacaoFormatados.includes(diaISO));
             
@@ -212,19 +208,13 @@ const CalendarioPage = () => {
             setIsModalOpen(false);
             
         } catch (error) {
-            console.error("Erro ao salvar:", error);
-            alert("🚨 Falha ao salvar as datas!");
+            console.error("Erro ao salvar período menstrual em lote:", error);
         }
     };
 
-    // ==========================================
-    // LÓGICA DE APAGAR SEM MEXER NO BACKEND
-    // ==========================================
     const handleApagarModal = async () => {
         try {
-            const diasAlvo = gerarIntervaloDeDatas(dadosIniciaisModal.dataInicio, dadosIniciaisModal.dataFim);
-            
-            // Pega apenas os dias alvo que ESTÃO marcados no banco (para podermos "desligá-los")
+            const diasAlvo = gerarIntervaloDeDatas(dadosIniciaisModal.dataInicio, dadosIniciaisModal.dataFim, dadosConfigUsuaria?.duracaoMenstruacao || 4);
             const diasParaDesmarcar = diasAlvo.filter(diaISO => diasMenstruacaoFormatados.includes(diaISO));
             
             let ultimoCalendario = dadosCalendario;
@@ -310,4 +300,4 @@ const CalendarioPage = () => {
     )
 }
 
-export default CalendarioPage
+export default CalendarioPage;
