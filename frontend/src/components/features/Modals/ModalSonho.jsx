@@ -50,7 +50,7 @@ const ModalSonho = ({ isOpen, modo = "criar", dadosIniciais = {}, onSave, onFech
             setErros({});
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isOpen, modo, dadosIniciais]);
+    }, [isOpen, modo]);
 
     const validar = () => {
         const novosErros = {};
