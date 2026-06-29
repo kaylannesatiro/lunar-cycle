@@ -1,0 +1,67 @@
+/* ========================================================
+   CONTAINER PRINCIPAL
+   ======================================================== */
+.cal-page-shell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    /* Zerei tudo aqui para evitar interferência externa */
+    padding: 0 !important; 
+    margin: 0 !important;
+}
+
+/* ========================================================
+   CONTEÚDO CENTRALIZADO (O Calendário)
+   ======================================================== */
+.cal-page-main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 958px !important; /* A medida exata do seu design */
+    
+    /* 54 PIXELS EXATOS DO TOPO */
+    margin-top: 27px !important; 
+}
+
+/* ========================================================
+   ÁREA DO BOTÃO
+   ======================================================== */
+.cal-page-action-area {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    
+    /* 28 PIXELS EXATOS DE DISTÂNCIA DO CALENDÁRIO */
+    margin-top: 28px !important; 
+}
+
+/* ========================================================
+   TELA DE CARREGAMENTO MÍSTICA
+   ======================================================== */
+.cal-page-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60vh;
+    color: #E0C58F;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.25rem;
+    animation: pulseText 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseText {
+    0%, 100% { opacity: 0.5; text-shadow: 0 0 5px rgba(224, 197, 143, 0.2); }
+    50% { opacity: 1; text-shadow: 0 0 20px rgba(224, 197, 143, 0.7); }
+}
+
+/* Força o componente do calendário a parar de flutuar e respeitar os espaços */
+.cal-page-main-content .cal-wrapper {
+    position: relative !important;
+    height: auto !important;
+    margin-bottom: 28px !important;
+}

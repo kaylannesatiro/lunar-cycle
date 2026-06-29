@@ -63,6 +63,6 @@
 
 @media (max-width: 350px) {
     .signo-container {
-        grid-template-columns: repeat(3, 1fr); /
+        grid-template-columns: repeat(3, 1fr);
     }
 }

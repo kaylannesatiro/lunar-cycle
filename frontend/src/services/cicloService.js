@@ -43,5 +43,33 @@ export const cicloService = {
         })
         if (!resposta.ok) throw new Error('Erro ao alternar data específica do calendário')
         return await resposta.json()
+    },
+
+    salvarPeriodo: async (dadosPeriodo) => {
+        const token = localStorage.getItem('token')
+        const resposta = await fetch(`${BASE_URL}/calendario/periodo`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify(dadosPeriodo)
+        })
+        if (!resposta.ok) throw new Error('Erro ao salvar período menstrual')
+        return await resposta.json()
+    },
+
+    apagarPeriodo: async (dadosPeriodo) => {
+        const token = localStorage.getItem('token')
+        const resposta = await fetch(`${BASE_URL}/calendario/periodo`, {
+            method: 'DELETE',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify(dadosPeriodo)
+        })
+        if (!resposta.ok) throw new Error('Erro ao apagar período menstrual')
+        return await resposta.json()
     }
 }
