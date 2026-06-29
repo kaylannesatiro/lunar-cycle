@@ -28,7 +28,8 @@ const CalendarioPage = () => {
         const carregarDados = async () => {
             try {
                 setIsLoading(true)
-                const dadosBrutos = await cicloService.obterCalendario(mesFiltro, anoFiltro)
+                const mesFormatado = String(mesFiltro).padStart(2, '0');
+                const dadosBrutos = await cicloService.obterCalendario(mesFormatado, anoFiltro)
                 setDadosCalendario(dadosBrutos)
 
                 const perfil = await usuariaService.obterPerfil()
@@ -56,17 +57,43 @@ const CalendarioPage = () => {
         }
     }, [isModalOpen, isPopupOpen])
 
-    const diasMenstruacaoFormatados = dadosCalendario.dias
-        .filter(d => d.registrada)
+    // Extração segura do array de dias do backend
+    const extrairDias = (dados) => {
+        if (!dados) return [];
+        if (Array.isArray(dados)) return dados;
+        if (Array.isArray(dados.dias)) return dados.dias;
+        if (dados.calendario && Array.isArray(dados.calendario.dias)) return dados.calendario.dias;
+        return [];
+    };
+
+    const listaDias = extrairDias(dadosCalendario);
+
+    const diasMenstruacaoFormatados = listaDias
+        .filter(d => d.registrada === true || d.menstruacao === true || d.isMenstruacao === true)
         .map(d => d.data.split('T')[0])
 
-    const diasPrevistosFormatados = dadosCalendario.dias
-        .filter(d => d.prevista)
+    const diasPrevistosFormatados = listaDias
+        .filter(d => d.prevista === true || d.isPrevita === true || d.fase === 'prevista')
         .map(d => d.data.split('T')[0])
+
+    // ADAPTER: Converte YYYY-MM-DD de volta para DD/MM/YYYY apenas para o utilitário gerarIntervaloDeDatas
+    const paraUtils = (strISO) => {
+        if (!strISO) return "";
+        if (strISO.includes('/')) return strISO; // Se já tiver barras, mantém
+        const [ano, mes, dia] = strISO.split('-');
+        return `${dia}/${mes}/${ano}`;
+    };
 
     const handleDayClick = (dataStrISO) => {
         const isRegistrada = diasMenstruacaoFormatados.includes(dataStrISO)
         
+        // Movemos o formatador para fora do 'if' para podermos usá-lo tanto para editar quanto para criar
+        const formatarParaModal = (dateObj) => {
+            const dia = String(dateObj.getDate()).padStart(2, '0')
+            const mes = String(dateObj.getMonth() + 1).padStart(2, '0')
+            return `${dateObj.getFullYear()}-${mes}-${dia}` // Formato ISO para o Input nativo
+        }
+
         if (isRegistrada) {
             let dataInicioObj = new Date(dataStrISO + 'T12:00:00')
             while (true) {
@@ -86,32 +113,44 @@ const CalendarioPage = () => {
                 } else break
             }
 
-            const formatarParaModal = (dateObj) => {
-                const dia = String(dateObj.getDate()).padStart(2, '0')
-                const mes = String(dateObj.getMonth() + 1).padStart(2, '0')
-                return `${dia}/${mes}/${dateObj.getFullYear()}`
-            }
-
             setModalModo("editar")
             setDadosIniciaisModal({
                 dataInicio: formatarParaModal(dataInicioObj),
                 dataFim: formatarParaModal(dataFimObj)
             })
         } else {
-            const [ano, mes, dia] = dataStrISO.split('-')
+            // A MÁGICA ACONTECE AQUI: Quando é um novo registro
             setModalModo("registrar")
-            setDadosIniciaisModal({ dataInicio: `${dia}/${mes}/${ano}`, dataFim: "" })
+            
+            // 1. Pegamos o dia que a usuária clicou
+            const dataFimCalculada = new Date(dataStrISO + 'T12:00:00')
+            
+            // 2. Somamos a duração da menstruação dela (menos 1, porque o próprio dia clicado já conta como o dia 1)
+            // O fallback de `|| 5` garante que não quebre caso o perfil não tenha carregado a tempo
+            dataFimCalculada.setDate(dataFimCalculada.getDate() + ((duracaoUsuaria || 5) - 1))
+
+            // 3. Entregamos o início e o fim preenchidos perfeitamente para o Modal!
+            setDadosIniciaisModal({ 
+                dataInicio: dataStrISO, 
+                dataFim: formatarParaModal(dataFimCalculada) 
+            })
         }
         setIsModalOpen(true)
     }
 
     const handleSalvarModal = async (dadosDoModal) => {
         try {
+            // Convertendo os inputs para o formato com barras que o calculosDate espera
+            const inicioAntigo = paraUtils(dadosIniciaisModal.dataInicio);
+            const fimAntigo = paraUtils(dadosIniciaisModal.dataFim || dadosIniciaisModal.dataInicio);
+            const inicioNovo = paraUtils(dadosDoModal.dataInicio);
+            const fimNovo = paraUtils(dadosDoModal.dataFim || dadosDoModal.dataInicio);
+
             const diasAntigos = modalModo === "editar" 
-                ? gerarIntervaloDeDatas(dadosIniciaisModal.dataInicio, dadosIniciaisModal.dataFim, duracaoUsuaria)
+                ? gerarIntervaloDeDatas(inicioAntigo, fimAntigo, duracaoUsuaria)
                 : []
 
-            const diasNovos = gerarIntervaloDeDatas(dadosDoModal.dataInicio, dadosDoModal.dataFim, duracaoUsuaria)
+            const diasNovos = gerarIntervaloDeDatas(inicioNovo, fimNovo, duracaoUsuaria)
 
             const diasParaDesmarcar = diasAntigos.filter(dia => !diasNovos.includes(dia))
             const diasParaMarcar = diasNovos.filter(dia => !diasAntigos.includes(dia) && !diasMenstruacaoFormatados.includes(dia))
@@ -120,12 +159,12 @@ const CalendarioPage = () => {
 
             for (const diaISO of diasParaDesmarcar) {
                 const resposta = await cicloService.alternarMenstruacaoDia(diaISO, mesFiltro, anoFiltro)
-                ultimoCalendario = resposta.calendario
+                ultimoCalendario = resposta.calendario || resposta
             }
 
             for (const diaISO of diasParaMarcar) {
                 const resposta = await cicloService.alternarMenstruacaoDia(diaISO, mesFiltro, anoFiltro)
-                ultimoCalendario = resposta.calendario
+                ultimoCalendario = resposta.calendario || resposta
             }
 
             setDadosCalendario(ultimoCalendario)
@@ -142,12 +181,15 @@ const CalendarioPage = () => {
 
     const confirmarApagarPerido = async () => {
         try {
-            const diasAntigos = gerarIntervaloDeDatas(dadosIniciaisModal.dataInicio, dadosIniciaisModal.dataFim, duracaoUsuaria)
+            const inicioAntigo = paraUtils(dadosIniciaisModal.dataInicio);
+            const fimAntigo = paraUtils(dadosIniciaisModal.dataFim || dadosIniciaisModal.dataInicio);
+
+            const diasAntigos = gerarIntervaloDeDatas(inicioAntigo, fimAntigo, duracaoUsuaria)
             let ultimoCalendario = dadosCalendario
 
             for (const diaISO of diasAntigos) {
                 const resposta = await cicloService.alternarMenstruacaoDia(diaISO, mesFiltro, anoFiltro)
-                ultimoCalendario = resposta.calendario
+                ultimoCalendario = resposta.calendario || resposta
             }
 
             setDadosCalendario(ultimoCalendario)
@@ -166,9 +208,10 @@ const CalendarioPage = () => {
         return nomeFaseBackend
     }
 
-    const dicionarioFasesLunares = dadosCalendario.dias.reduce((acc, d) => {
+    const dicionarioFasesLunares = listaDias.reduce((acc, d) => {
+        if (!d.data) return acc;
         const dataLimpa = d.data.split('T')[0]
-        acc[dataLimpa] = normalizarFaseParaComponente(d.faseLunar?.nome)
+        acc[dataLimpa] = normalizarFaseParaComponente(d.faseLunar?.nome || d.faseLunar)
         return acc
     }, {})
 
