@@ -154,7 +154,7 @@ const Conta = () => {
             textoConfirmar: "SAIR DA CONTA",
             onConfirm: () => {
                 localStorage.removeItem('token')
-                navigate('/login')
+                navigate('/entrar')
             }
         })
     }
