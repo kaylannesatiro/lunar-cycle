@@ -1,37 +1,55 @@
 /* ========================================================
-   CONTAINER PRINCIPAL
+   CONTAINER PRINCIPAL (Seu "container")
    ======================================================== */
 .cal-page-shell {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    min-height: 100%;
-    padding: 2rem 1rem;
+    align-self: stretch;
+    flex-shrink: 0;
     box-sizing: border-box;
+
+    /* padding: 112px 24px 96px 24px convertidos para rem */
+    padding: 7rem 1.5rem 6rem 1.5rem;
+    
+    /* Usamos min-height em vez de height fixo para o layout poder crescer se o celular for muito comprido */
+    min-height: 79.5rem; /* ~ 1272.46px */
+    width: 100%;
 }
 
 /* ========================================================
-   CONTEÚDO CENTRALIZADO (Calendário + Botão)
+   CONTEÚDO CENTRALIZADO (Seu "calendário")
    ======================================================== */
 .cal-page-main-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 45rem; /* Limita a largura para o calendário não esticar demais em telas grandes */
-    gap: 2.5rem; /* Espaço exato entre o calendário e o botão */
     
-    /* Animação suave ao entrar na página */
+    /* Apliquei as proporções que você pediu, limitando o crescimento máximo */
+    width: 100%;
+    max-width: 59.9rem; /* ~ 958.667px */
+    
+    /* IMPORTANTE: Removi o "position: absolute; right: -6.3px; bottom: -9.2px;" 
+       para que o calendário não sobreponha o botão e obedeça o Flexbox do container pai. */
+    position: relative;
+    
     animation: fadeIn 0.6s ease-out forwards;
 }
 
+/* ========================================================
+   ÁREA DO BOTÃO (Seu "container button")
+   ======================================================== */
 .cal-page-action-area {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 100%;
+    align-items: center;
+    align-self: stretch;
+    
+    /* padding-top: 28.8px convertido */
+    padding-top: 1.8rem; 
+    
     position: relative;
     z-index: 10;
 }
@@ -46,13 +64,12 @@
     width: 100%;
     height: 60vh;
     
-    color: #E0C58F; /* Dourado/Champanhe */
+    color: #E0C58F;
     font-family: 'Cinzel Decorative', serif;
     font-size: 1.25rem;
     text-align: center;
     letter-spacing: 0.15rem;
     
-    /* Faz o texto pulsar como se estivesse "respirando" */
     animation: pulseText 2.5s infinite ease-in-out;
 }
 
@@ -86,14 +103,12 @@
    ======================================================== */
 @media (max-width: 48rem) {
     .cal-page-shell {
-        padding: 1.5rem 0.5rem;
-    }
-
-    .cal-page-main-content {
-        gap: 1.5rem; /* Aproxima um pouco mais o botão do calendário no celular */
+        /* Reduz o padding gigante de 112px no celular para não espremer o calendário */
+        padding: 3rem 1rem 3rem 1rem;
+        min-height: auto;
     }
     
-    .cal-page-loading {
-        font-size: 1rem;
+    .cal-page-action-area {
+        padding-top: 1.5rem;
     }
 }
