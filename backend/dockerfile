@@ -16,5 +16,5 @@ RUN npx prisma generate
 # Porta padrão que o Express costuma rodar
 EXPOSE 3000
 
-# Comando para iniciar o servidor (ajuste para o seu arquivo principal se necessário)
-CMD ["node", "index.js"]
+# Comando para iniciar o servidor depois de aplicar as migrations
+CMD ["npm", "start"]
