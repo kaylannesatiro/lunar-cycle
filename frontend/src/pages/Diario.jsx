@@ -218,23 +218,32 @@ const Diario = () => {
                             const [dia, mes, ano] = dadosAtualizados.data.split('/')
                             const dataFormatada = `${ano}-${mes}-${dia}`
 
+                            const todasAsTags = [...new Set([
+                                ...(dadosAtualizados.tags || []), 
+                                ...(dadosAtualizados.tagsSelecionadas || [])
+                            ])];
+
                             const payloadBackend = {
                                 titulo: dadosAtualizados.titulo,
                                 descricao: dadosAtualizados.descricao,
                                 dataSonho: dataFormatada, 
-                                tags: dadosAtualizados.tagsSelecionadas || [] 
+                                tags: todasAsTags 
                             };
 
                             const sonhoAtualizado = await sonhosServiceFrontend.atualizar(dadosAtualizados.id, payloadBackend)
-                            
-                            console.log("Sonho atualizado no backend:", sonhoAtualizado)
                             
                             setSonhosBrutos((sonhosAntigos) => {
                                 const novaLista = sonhosAntigos.map(sonho => 
                                     sonho.id === dadosAtualizados.id ? sonhoAtualizado : sonho
                                 )
-                                return novaLista.sort((a, b) => new Date(b.dataSonho) - new Date(a.dataSonho))
+                                return novaLista.sort((a, b) => new Date(b.dataSonho) - new Date(a.dataSonho));
                             })
+
+                            setTagsDaUsuaria(tagsAntigas => {
+                                const novasTags = todasAsTags.map(t => t.toUpperCase());
+                                return [...new Set([...tagsAntigas, ...novasTags])];
+                            })
+
                         } catch (erro) {
                             console.error("Erro ao editar o sonho:", erro)
                             alert("Não foi possível salvar as alterações.")
@@ -267,21 +276,29 @@ const Diario = () => {
                         const [dia, mes, ano] = dadosNovos.data.split('/');
                         const dataFormatada = `${ano}-${mes}-${dia}`;
 
+                        const todasAsTags = [...new Set([
+                            ...(dadosNovos.tags || []), 
+                            ...(dadosNovos.tagsSelecionadas || [])
+                        ])];
+
                         const payloadBackend = {
                             titulo: dadosNovos.titulo,
                             descricao: dadosNovos.descricao,
                             dataSonho: dataFormatada, 
-                            tags: dadosNovos.tagsSelecionadas || [] 
+                            tags: todasAsTags
                         };
 
                         const sonhoCriado = await sonhosServiceFrontend.criar(payloadBackend)
-                        
-                        console.log("Novo sonho salvo no banco:", sonhoCriado)
                     
                         setSonhosBrutos(sonhosAntigos => {
                             const novaLista = [sonhoCriado, ...sonhosAntigos];
                             return novaLista.sort((a, b) => new Date(b.dataSonho) - new Date(a.dataSonho));
-                        })
+                        });
+
+                        setTagsDaUsuaria(tagsAntigas => {
+                            const novasTags = todasAsTags.map(t => t.toUpperCase());
+                            return [...new Set([...tagsAntigas, ...novasTags])];
+                        });
                         
                         setModalAberto(false);
                     } catch (erro) {
