@@ -1,17 +1,6 @@
 import { obterIconFaseDaLua } from "../../../data/fasesLua";
 import "./Calendario.css";
 
-const clipPathsDasFases = {
-    "Nova":             "circle(48% at 50% 50%)",
-    "Cheia":            "circle(48% at 50% 50%)",
-    "Crescente":        "ellipse(30% 48% at 65% 50%)",
-    "Minguante":        "ellipse(30% 48% at 35% 50%)",
-    "Quarto Crescente": "ellipse(48% 48% at 65% 50%)",
-    "Quarto Minguante": "ellipse(48% 48% at 35% 50%)",
-    "Gibosa Crescente": "ellipse(44% 48% at 55% 50%)",
-    "Gibosa Minguante": "ellipse(44% 48% at 45% 50%)",
-};
-
 const NOMES_DOS_MESES = [
     "Janeiro", "Fevereiro", "Março", "Abril",
     "Maio", "Junho", "Julho", "Agosto",
@@ -41,19 +30,17 @@ const formatarChaveData = (ano, mes, dia) => {
 
 const obterDiasNoMes = (ano, mes) => new Date(ano, mes + 1, 0).getDate();
 const obterDiaDaSemanaInicial = (ano, mes) => new Date(ano, mes, 1).getDay();
-const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, eHoje, aoClicar }) => {
 
+const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, eHoje, aoClicar }) => {
     let classeDoDia = "cal-dia";
     if (estaMenstruada) classeDoDia += " cal-dia--menstruacao";
     else if (estaPrevisto) classeDoDia += " cal-dia--previsto";
     if (eHoje) classeDoDia += " cal-dia--hoje";
 
     const imagemDaFase = obterIconFaseDaLua(faseDaLua);
-    const clipPath = clipPathsDasFases[faseDaLua] || "circle(48% at 50% 50%)";
-
+    
     return (
         <div className={classeDoDia} onClick={aoClicar}>
-
             {(estaMenstruada || estaPrevisto) && (
                 <div className="cal-dia__topo">
                     <div className="cal-dia__icone-gota">
@@ -63,15 +50,16 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
             )}
 
             <span className="cal-dia__numero">{numeroDia}</span>
-            <div className="cal-dia__lua-container">
-                <img
-                    src={imagemDaFase}
-                    alt={faseDaLua}
-                    className="cal-dia__icone-lua"
-                    style={{ clipPath: clipPath }}
-                />
-            </div>
-
+        
+            {imagemDaFase && (
+                <div className="cal-dia__lua-container">
+                    <img
+                        src={imagemDaFase}
+                        alt={faseDaLua}
+                        className="cal-dia__icone-lua"
+                    />
+                </div>
+            )}
         </div>
     );
 };
