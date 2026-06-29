@@ -12,19 +12,13 @@
     width: 100%;
     max-width: 1200px; 
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 120px 20px 40px 20px; 
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     overflow: visible !important; 
-}
-
-.menu-wrapper {
-    position: sticky;
-    top: 0;
-    z-index: 50;
 }
 
 .footer-wrapper {
