@@ -116,14 +116,15 @@ const Home = () => {
 
     const diasMenstruacaoFormatados = dadosCalendario.dias
         .filter(d => d.registrada)
-        .map(d => d.data);
+        .map(d => d.data.split('T')[0])
 
     const diasPrevistosFormatados = dadosCalendario.dias
         .filter(d => d.prevista)
-        .map(d => d.data);
+        .map(d => d.data.split('T')[0])
 
     const dicionarioFasesLunares = dadosCalendario.dias.reduce((acc, d) => {
-        acc[d.data] = normalizarFaseParaComponente(d.faseLunar?.nome)
+        const dataLimpa = d.data.split('T')[0]
+        acc[dataLimpa] = normalizarFaseParaComponente(d.faseLunar?.nome)
         return acc
     }, {})
 
@@ -170,7 +171,10 @@ const Home = () => {
                 </div>
                 
                 <div className="home-oraculo-component-wrapper">
-                    <CardOraculo estaMenstruada={dadosHome.estaMenstruada}/>
+                    <CardOraculo 
+                        estaMenstruada={dadosHome.estaMenstruada}
+                        faseLunar={normalizarFaseParaComponente(dadosHome.faseLunar?.nome)}
+                    />
                 </div>
 
                 <div className="home-dadosextras-component-wrapper">
@@ -180,12 +184,28 @@ const Home = () => {
 
             <section className="home-secao-calendario">
                 <Calendario 
+                    mesAtual={mesFiltro - 1}
+                    anoAtual={anoFiltro}
                     diasMenstruacao={diasMenstruacaoFormatados}
                     diasPrevistos={diasPrevistosFormatados}
                     fasesLunares={dicionarioFasesLunares}
                     onDayClick={handleToggleDiaCalendario}
-                    onNextMonth={() => setMesFiltro(prev => prev === 12 ? 1 : prev + 1)}
-                    onPrevMonth={() => setMesFiltro(prev => prev === 1 ? 12 : prev - 1)}
+                    onNextMonth={() => {
+                        if (mesFiltro === 12) {
+                            setMesFiltro(1);
+                            setAnoFiltro(ano => ano + 1);
+                        } else {
+                            setMesFiltro(m => m + 1);
+                        }
+                    }}
+                    onPrevMonth={() => {
+                        if (mesFiltro === 1) {
+                            setMesFiltro(12);
+                            setAnoFiltro(ano => ano - 1);
+                        } else {
+                            setMesFiltro(m => m - 1);
+                        }
+                    }}
                 />
             </section>
 

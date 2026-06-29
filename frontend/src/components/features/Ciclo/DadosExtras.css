@@ -23,7 +23,7 @@
     border: 0.041rem solid rgba(224, 197, 143, 0.40); 
     background: rgba(17, 34, 80, 0.40); 
     width: 100%;              
-    max-width: 15.817rem;     
+    flex: 1;
 }
 
 .dados-extras-dado {
@@ -76,5 +76,23 @@
 @media (max-width: 20rem) {
     .dados-extras-card {
         padding: 1rem;       
+    }
+}
+
+@media (max-width: 48rem) {
+    .oraculo-dados-grupo-pai {
+        flex-direction: column; 
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .dados-extras-card {
+        max-width: 100%; 
+    }
+}
+
+@media (max-width: 20rem) {
+    .dados-extras-card {
+        padding: 1rem;        
     }
 }
