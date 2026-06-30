@@ -1,11 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import AuthLayout from './layouts/AuthLayout' 
+import PublicLayout from './layouts/PublicLayout'
+
 import RotaProtegida from './components/common/Security/RotaProtegida'
+
 import Diario from './pages/private/Diario'
 import CalendarioPage from './pages/private/Calendario'
 import Conta from './pages/private/Conta'
 import Home from './pages/private/Home'
+
 import Entrar from './pages/public/Entrar'
 import CriarConta from './pages/public/CriarConta'
 import HomePublic from './pages/public/Home'
@@ -23,7 +27,7 @@ function App() {
           </Route>
 
           {/* Rotas públicas */}
-          <Route element={<MainLayout />}>
+          <Route element={<PublicLayout />}>
             <Route path="/public" element={<HomePublic />} /> 
           </Route>
 

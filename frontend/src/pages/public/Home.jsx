@@ -1,7 +1,6 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { obterFaseLunar } from "../../utils/fasesLunares"
 
-import Button from "../../components/common/Buttons/Button"
 import CardOraculo from "../../components/features/Ciclo/CardOraculo"
 import DadosExtras from "../../components/features/Ciclo/DadosExtras"
 import Calendario from "../../components/features/Calendario/Calendario"
@@ -9,19 +8,15 @@ import AnimacaoLua from "../../components/common/Animation/AnimacaoLua"
 import "../../pages/private/Home.css" 
 
 const HomePublic = () => {
-    const navigate = useNavigate()
-
     const hoje = new Date()
+    const faseLunarAtual = obterFaseLunar(hoje)
+
     const [mesFiltro, setMesFiltro] = useState(hoje.getMonth() + 1)
     const [anoFiltro, setAnoFiltro] = useState(hoje.getFullYear())
 
     const diaDestaque = String(hoje.getDate()).padStart(2, '0')
     const mesSubtitulo = hoje.toLocaleDateString('pt-BR', { month: 'long' }).toUpperCase()
     const anoFrase = hoje.getFullYear()
-
-    const convidarParaLogin = () => {
-        navigate('/entrar')
-    }
 
     return (
         <div className="home-dashboard-shell">
@@ -33,16 +28,6 @@ const HomePublic = () => {
                 
                 <div className="home-container-divisao">
                     <div className="home-linha-divisao" />
-                </div>
-
-                <div className="home-action-container">
-                    <Button 
-                        variant="redondo"
-                        maxWidth="280px"
-                        onClick={convidarParaLogin}
-                    >
-                        ◈ Registrar Menstruação
-                    </Button>
                 </div>
             </header>
 
@@ -60,7 +45,7 @@ const HomePublic = () => {
                 <div className="home-oraculo-component-wrapper">
                     <CardOraculo 
                         estaMenstruada={false}
-                        faseLunar="Cheia" 
+                        faseLunar={(faseLunarAtual.nome)}
                     />
                 </div>
 
@@ -76,7 +61,6 @@ const HomePublic = () => {
                     diasMenstruacao={[]}
                     diasPrevistos={[]}
                     fasesLunares={{}}
-                    onDayClick={convidarParaLogin}
                     onNextMonth={() => {
                         if (mesFiltro === 12) {
                             setMesFiltro(1)
