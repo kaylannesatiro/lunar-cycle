@@ -29,8 +29,13 @@ const Menu = ({ links }) => {
                     {links.map((link, index) => (
                         <li key={index} className="menu-item">
                             <NavLink 
-                                to={link.rota} 
-                                className={({ isActive }) => isActive ? "menu-link ativo" : "menu-link"}
+                                to={link.rota}
+                                className={({ isActive }) => {
+                                    let classes = "menu-link";
+                                    if (isActive) classes += " ativo";
+                                    if (link.destaque) classes += " menu-link-btn";
+                                    return classes;
+                                }}
                                 onClick={() => setMenuAberto(false)}
                             >
                                 {link.titulo}
