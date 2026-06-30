@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { cicloService } from "../../api/services/cicloService"
 
 import Calendario from "../../components/features/Calendario/Calendario"
-import "./Calendario.css"
+import "../private/Calendario.css"
 
 const CalendarioPage = () => {
     const [isLoading, setIsLoading] = useState(true)
