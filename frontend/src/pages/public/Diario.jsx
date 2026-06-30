@@ -1,26 +1,38 @@
-import "../private/Diario.css"
+import "./Diario.css"
 
-const Diario = () => {
+const DiarioPublic = () => {
     return (
-        <div className="diario-page-container">
-            <header className="diario-header">
-                <div className="diario-glow-externo"></div>
-                <div className="diario-glow-interno"></div>
-                
-                <div className="diario-header-conteudo">
-                    <div className="diario-badge-topo">
-                        <span className="diario-estrelas">✦</span>
-                        <span className="diario-badge-texto">DIÁRIO DOS SONHOS</span>
-                        <span className="diario-estrelas">✦</span>
-                    </div>
-                    <h1 className="diario-titulo-principal">MEUS<br/>SONHOS</h1>
-                    <p className="diario-subtitulo">
-                        "A lua guarda os segredos que sua alma sussurrou<br/>enquanto você sonhava."
-                    </p>
+        <div className="diario-pub-container">
+            <div className="diario-pub-glow-externo"></div>
+            <div className="diario-pub-glow-interno"></div>
+
+            <div className="diario-pub-conteudo">
+                <div className="diario-pub-badge">
+                    <span className="diario-pub-estrelas">✦</span>
+                    <span className="diario-pub-badge-texto">DIÁRIO DOS SONHOS</span>
+                    <span className="diario-pub-estrelas">✦</span>
                 </div>
-            </header>
+
+                <h1 className="diario-pub-titulo">MEUS<br/>SONHOS</h1>
+
+                <p className="diario-pub-chamada">
+                    Cada sonho é uma mensagem do seu inconsciente.<br/>
+                    Registre, explore e descubra o que sua alma revela enquanto você dorme.<br/>
+                </p>
+
+                <div className="diario-pub-divisor"></div>
+
+                <div className="diario-pub-acoes">
+                    <a href="/cadastro" className="diario-pub-btn-primario">
+                        Criar minha conta
+                    </a>
+                    <a href="/criar-conta" className="diario-pub-btn-secundario">
+                        Já tenho conta
+                    </a>
+                </div>
+            </div>
         </div>
     )
 }
 
-export default Diario
+export default DiarioPublic
