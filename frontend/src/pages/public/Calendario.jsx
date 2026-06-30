@@ -54,6 +54,7 @@ const CalendarioPage = () => {
                     mesAtual={mesFiltro - 1}
                     anoAtual={anoFiltro}
                     fasesLunares={dicionarioFasesLunares}
+                    mostrarLegenda={false}
                     onNextMonth={() => {
                         if (mesFiltro === 12) {
                             setMesFiltro(1)
