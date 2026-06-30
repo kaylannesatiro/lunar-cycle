@@ -105,12 +105,12 @@ const CriarConta = () => {
 
             if (resposta?.token) {
                 localStorage.setItem("token", resposta.token)
-                navigate("/home")
+                navigate("/app/home")
                 return
             }
 
             await authService.login({ email: email.toLowerCase(), senha })
-            navigate("/home")
+            navigate("/app/home")
 
         } catch (erro) {
             const mensagem = erro.message || ""
