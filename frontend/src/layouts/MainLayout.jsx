@@ -6,16 +6,16 @@ import "./MainLayout.css"
 
 const MainLayout = () => {
     const linksMenu = [
-        { titulo: "Diário dos Sonhos", rota: "/diario" },
-        { titulo: "Calendário", rota: "/calendario" },
-        { titulo: "Conta", rota: "/conta" }
+        { titulo: "Diário dos Sonhos", rota: "/app/diario" },
+        { titulo: "Calendário", rota: "/app/calendario" },
+        { titulo: "Conta", rota: "/app/conta" }
     ]
 
     const linkFooter = [
-        { titulo: "Início", rota: "/home" },
-        { titulo: "Diário dos Sonhos", rota: "/diario" },
-        { titulo: "Calendário", rota: "/calendario" },
-        { titulo: "Conta", rota: "/conta" }
+        { titulo: "Início", rota: "/app/home" },
+        { titulo: "Diário dos Sonhos", rota: "/app/diario" },
+        { titulo: "Calendário", rota: "/app/calendario" },
+        { titulo: "Conta", rota: "/app/conta" }
     ]
 
     return (
