@@ -230,7 +230,7 @@ const Conta = () => {
                 } catch {
                     localStorage.removeItem('token')
                 } finally {
-                    navigate('/entrar')
+                    navigate('/home')
                 }
             }
         })

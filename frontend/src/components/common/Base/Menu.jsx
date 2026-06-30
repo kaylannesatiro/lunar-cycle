@@ -8,13 +8,16 @@ const Menu = ({ links }) => {
 
     const alternarMenu = () => {
         setMenuAberto(!menuAberto)
-    };
+    }
+
+    const estaLogada = !!localStorage.getItem('token')
+    const rotaLogo = estaLogada ? '/app/home' : '/home'
 
     return (
         <header className="menu-wrapper">
             <nav className="menu-container">
                 
-                <NavLink to="/home" className="menu-logo">
+                <NavLink to={rotaLogo} className="menu-logo">
                     <img src={Icone} alt="Lunar Cycle Logo" className="logo-icone"/>
                     <span className="logo-texto">LUNAR CYCLE</span>
                 </NavLink>
