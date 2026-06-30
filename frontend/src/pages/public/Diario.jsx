@@ -23,10 +23,10 @@ const DiarioPublic = () => {
                 <div className="diario-pub-divisor"></div>
 
                 <div className="diario-pub-acoes">
-                    <a href="/cadastro" className="diario-pub-btn-primario">
+                    <a href="/criar-conta" className="diario-pub-btn-primario">
                         Criar minha conta
                     </a>
-                    <a href="/criar-conta" className="diario-pub-btn-secundario">
+                    <a href="/entrar" className="diario-pub-btn-secundario">
                         Já tenho conta
                     </a>
                 </div>
