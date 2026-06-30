@@ -1,30 +1,54 @@
-import CardConta from './components/common/Cards/CardConta';
-import Input from './components/common/Inputs/Input';
-import Button from './components/common/Buttons/Button';
-import Background from './components/common/Base/Background';
-import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import MainLayout from './layouts/MainLayout'
+import AuthLayout from './layouts/AuthLayout' 
+import PublicLayout from './layouts/PublicLayout'
+
+import RotaProtegida from './components/common/Security/RotaProtegida'
+
+import Diario from './pages/private/Diario'
+import CalendarioPage from './pages/private/Calendario'
+import Conta from './pages/private/Conta'
+import Home from './pages/private/Home'
+
+import Entrar from './pages/public/Entrar'
+import CriarConta from './pages/public/CriarConta'
+import HomePublic from './pages/public/Home'
+import DiarioPublic from './pages/public/Diario'
+import CalendarioPublic from './pages/public/Calendario'
+
+import './App.css'
 
 function App() {
-    return (
-      <Background>
-        <div style={{ padding: '50px', display: 'flex', gap: '50px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <CardConta 
-                titulo="Recupere sua conexão"
-                subtitulo="Informe seu email para receber o código de recuperação."
-            >
-              <label className="card-conta-grupo-input">
-                <span className="card-conta-texto-label">Emailo</span>
-                <Input
-                    placeholder="Digite o e-mail da sua conta" 
-                />
-              </label>
+  return (
+    <BrowserRouter>
+        <Routes>
+          {/* Rotas de login */}
+          <Route element={<AuthLayout />}>
+            <Route path="/entrar" element={<Entrar />} />
+            <Route path="/criar-conta" element={<CriarConta />} />
+          </Route>
 
-              <Button variant = 'padrao'>◇ Voltar</Button>
-              <Button variant = 'padrao'>◈ Entrar</Button>
-            </CardConta>
-        </div>
-      </Background>
-    );
+          {/* Rotas públicas */}
+            <Route path="/" element={<PublicLayout />}>
+              <Route index element={<Navigate to="/home" replace />} />
+              <Route path="home" element={<HomePublic/>} />
+              <Route path="diario" element={<DiarioPublic/>} />
+              <Route path="calendario" element={<CalendarioPublic/>} />
+            </Route>
+
+          {/* Rotas privadas */}
+          <Route element={<RotaProtegida />}>
+            <Route path="/app/" element={<MainLayout />}>
+              <Route index element={<Navigate to="/app/home" replace />} />
+              <Route path="home" element={<Home/>} />
+              <Route path="diario" element={<Diario/>} />
+              <Route path="conta" element={<Conta/>} />
+              <Route path="calendario" element={<CalendarioPage/>} />
+            </Route>
+          </Route>
+        </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App

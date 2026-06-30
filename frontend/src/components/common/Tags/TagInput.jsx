@@ -9,6 +9,7 @@ const InputTags = ({ tags, onAddTag, onRemoveTag, tagsDoSistema = [], tagsSeleci
     const [editando, setEditando] = useState(false);
     const [texto, setTexto] = useState("");
     const inputRef = useRef(null);
+
     const totalSelecionadas = tags.length + tagsSelecionadas.length;
     const limiteAtingido = totalSelecionadas >= LIMITE_TAGS;
 
@@ -29,7 +30,7 @@ const InputTags = ({ tags, onAddTag, onRemoveTag, tagsDoSistema = [], tagsSeleci
             tagLimpa.length >= MIN_CHARS &&
             tagLimpa.length <= MAX_CHARS &&
             !tags.includes(tagLimpa) &&
-            !tagsDoSistema.includes(tagLimpa)
+            !tagsDoSistema.includes(tagLimpa.toUpperCase()) // Garante verificação correta com maiúsculas
         ) {
             onAddTag(tagLimpa);
         }
@@ -65,86 +66,88 @@ const InputTags = ({ tags, onAddTag, onRemoveTag, tagsDoSistema = [], tagsSeleci
 
     return (
         <div className="input-tags-wrapper">
+            <div className="input-tags-lista">
 
-            {/* Tags do sistema (pré-cadastradas)*/}
-
-            {tagsDoSistema.length > 0 && (
-                <div className="input-tags-secao">
-                    <span className="input-tags-secao-label">Sugeridas</span>
-                    <div className="input-tags-lista">
-                        {tagsDoSistema.map((tag) => {
-                            const selecionada = tagsSelecionadas.includes(tag);
-                            return (
-                                <span
-                                    key={tag}
-                                    className={`tag-sonho ${selecionada ? "tag-sonho--ativa" : ""}`}
-                                    onClick={() => !limiteAtingido || selecionada ? onToggleTagSistema(tag) : undefined}
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    <span className={`tag-sonho-texto ${selecionada ? "tag-sonho-texto--ativa" : ""}`}>
-                                        {tag}
-                                    </span>
-                                </span>
-                            );
-                        })}
-                    </div>
-                </div>
-            )}
-
-            {/*Tags do usuário + input */}
-            
-            <div className="input-tags-secao">
-                <span className="input-tags-secao-label">Suas tags</span>
-                <div className="input-tags-lista">
-
-                    {tags.map((tag) => (
-                        <span key={tag} className="tag-sonho tag-sonho--ativa">
-                            <span className="tag-sonho-texto tag-sonho-texto--ativa">{tag}</span>
-                            <button
-                                type="button"
-                                className="tag-sonho-remover"
-                                onClick={() => onRemoveTag(tag)}
-                                aria-label={`Remover tag ${tag}`}
-                            >
-                                ✕
-                            </button>
-                        </span>
-                    ))}
-
-                    {!limiteAtingido && (
+                {/* 1. RENDERIZA AS TAGS DO SISTEMA / HISTÓRICO DA USUÁRIA */}
+                {tagsDoSistema.map((tag) => {
+                    const selecionada = tagsSelecionadas.includes(tag);
+                    return (
                         <span
-                            className={`tag-nova ${editando ? "tag-nova--editando" : ""}`}
-                            onClick={!editando ? ativarEdicao : undefined}
+                            key={tag}
+                            className={`tag-item ${selecionada ? "tag-item--ativa" : ""}`}
+                            // Se a tag não estiver selecionada, o clique nela a adiciona
+                            onClick={() => (!limiteAtingido && !selecionada) ? onToggleTagSistema(tag) : undefined}
                         >
-                            {editando && (
-                                <span className="tag-nova-fantasma" aria-hidden="true">
-                                    {texto || ""}
-                                </span>
-                            )}
-
-                            {editando ? (
-                                <input
-                                    ref={inputRef}
-                                    type="text"
-                                    value={texto}
-                                    onChange={aoMudarTexto}
-                                    onKeyDown={aoApertarTecla}
-                                    onBlur={tentarAdicionarTag}
-                                    className="tag-nova-input"
-                                    maxLength={MAX_CHARS}
-                                />
-                            ) : (
-                                <span className="tag-nova-label">Nova Tag +</span>
+                            <span className={`tag-item-texto ${selecionada ? "tag-item-texto--ativa" : ""}`}>
+                                {tag}
+                            </span>
+                            
+                            {/* CORREÇÃO: Se a tag do sistema estiver selecionada, exibe o "X" para remover */}
+                            {selecionada && (
+                                <button
+                                    type="button"
+                                    className="tag-item-remover"
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Impede que o clique ative a tag novamente
+                                        onToggleTagSistema(tag);
+                                    }}
+                                    aria-label={`Remover tag ${tag}`}
+                                >
+                                    ✕
+                                </button>
                             )}
                         </span>
-                    )}
+                    );
+                })}
 
-                    {limiteAtingido && (
-                        <span className="tag-aviso">Limite de 10 tags atingido</span>
-                    )}
-                </div>
+                {/* 2. RENDERIZA AS TAGS NOVAS DIGITADAS NESTE EXATO MOMENTO */}
+                {tags.map((tag) => (
+                    <span key={tag} className="tag-item tag-item--ativa">
+                        <span className="tag-item-texto tag-item-texto--ativa">{tag}</span>
+                        <button
+                            type="button"
+                            className="tag-item-remover"
+                            onClick={() => onRemoveTag(tag)}
+                            aria-label={`Remover tag ${tag}`}
+                        >
+                            ✕
+                        </button>
+                    </span>
+                ))}
+
+                {/* 3. INPUT PARA DIGITAR UMA NOVA TAG */}
+                {!limiteAtingido && (
+                    <span
+                        className={`tag-nova ${editando ? "tag-nova--editando" : ""}`}
+                        onClick={!editando ? ativarEdicao : undefined}
+                    >
+                        {editando && (
+                            <span className="tag-nova-fantasma" aria-hidden="true">
+                                {texto || ""}
+                            </span>
+                        )}
+
+                        {editando ? (
+                            <input
+                                ref={inputRef}
+                                type="text"
+                                value={texto}
+                                onChange={aoMudarTexto}
+                                onKeyDown={aoApertarTecla}
+                                onBlur={tentarAdicionarTag}
+                                className="tag-nova-input"
+                                maxLength={MAX_CHARS}
+                            />
+                        ) : (
+                            <span className="tag-nova-label">Nova Tag +</span>
+                        )}
+                    </span>
+                )}
+
+                {limiteAtingido && (
+                    <span className="tag-aviso">Limite de 10 tags atingido</span>
+                )}
             </div>
-
         </div>
     );
 };

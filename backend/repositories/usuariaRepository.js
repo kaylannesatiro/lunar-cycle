@@ -8,6 +8,13 @@ const buscarPorEmail = async (email) => {
     });
 };
 
+
+const buscarPorId = async (id) =>{
+    return await prisma.usuaria.findUnique({
+        where: {id}
+    });
+};
+
 const criarUsuaria = async (dadosUsuaria) => {
     return await prisma.usuaria.create({
         data: {
@@ -21,7 +28,26 @@ const criarUsuaria = async (dadosUsuaria) => {
     });
 };
 
+const atualizarDados = async (id, dadosAtualizados) => {
+    return await prisma.usuaria.update({
+        where: { id },
+        data: dadosAtualizados
+    });
+};
+
+//deletar usuaria (apaga tudo associado a ela)
+const deletarConta = async (id) =>{
+    return await prisma.usuaria.delete({
+        where:{
+            id:id
+        }
+    })
+}
+
 module.exports = {
     buscarPorEmail,
-    criarUsuaria
+    criarUsuaria,
+    buscarPorId,
+    atualizarDados,
+    deletarConta
 };

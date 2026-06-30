@@ -2,9 +2,9 @@ import React from "react"
 import "./CardConta.css"
 import icone from "../../../assets/Icon-Modal.svg"
 
-const CardConta = ({ titulo, subtitulo, children, linksRodape }) => {
+const CardConta = ({ titulo, subtitulo, children, linksRodape, variante = "auth" }) => {
     return (
-        <div className="card-conta-wrapper">
+        <div className={`card-conta-wrapper card-conta-wrapper--${variante}`}>
             <div className="card-conta-cabecalho">
                 <img src={icone} alt="Ícone Lunar" className="card-conta-icone" />
                 <h2 className="card-conta-titulo">{titulo}</h2>
@@ -28,7 +28,7 @@ const CardConta = ({ titulo, subtitulo, children, linksRodape }) => {
                         </React.Fragment>
                     ))}
                 </div>
-            )}    
+            )}
         </div>
     )
 }

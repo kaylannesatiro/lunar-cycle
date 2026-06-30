@@ -1,3 +1,4 @@
+const { ca } = require('zod/v4/locales');
 const usuariaService = require('../services/usuariaService');
 
 const criarConta = async (req, res) => {
@@ -15,7 +16,7 @@ const criarConta = async (req, res) => {
         });
     } catch (error) {
         //erro 409
-        if (error.mensage === 'Email já cadastrado, tente fazer login ou use outro email.') {
+        if (error.message === 'Email já cadastrado, tente fazer login ou use outro email.') {
             return res.status(409).json({ mensagem: error.message });
         }
         //erro 500
@@ -44,7 +45,98 @@ const realizarLogin = async (req, res) => {
     }
 };
 
+const obterDadosPerfil = async(req, res) =>{
+    try{
+        //middleware de autenticação adiciona o id da usuaria no objeto de requisição. Por isso posso acessar o id da usuaria através de req.usuariaId
+        const id = req.usuariaId;
+
+        const perfil = await usuariaService.obterPerfil(id);
+        //o service retorna o perfil da usuaria sem a senha, então posso retornar diretamente para o frontend.
+        return res.status(200).json(perfil)
+    } catch (erro){
+        return res.status(400).json({
+            mensagem: erro.message
+        })
+    }
+}
+
+
+const atualizarPerfil = async(req, res) =>{
+    try{
+        //id garantido na req pelo middleware.
+        const id = req.usuariaId;
+        //dados chegam aqui limpos e validados pelo schema zod. Então já envio pro service.
+        const dadosAtualizados = req.body;
+        const perfilAtualizado =  await usuariaService.atualizarPerfil(id, dadosAtualizados);
+
+        const mensagemSucesso = dadosAtualizados.novaSenha ? 'Senha atualizada com sucesso!' : 'Perfil atualizado com sucesso!';
+        return res.status(200).json({
+            mensagem: mensagemSucesso,
+            perfil: perfilAtualizado
+        })
+
+    } catch (erro){
+        if(erro.message == 'Usuária não encontrada.'){
+            return res.status(404).json({
+                mensagem: erro.message
+            })
+        }
+        if(erro.message == 'A senha atual informada incorreta.'){
+            return res.status(400).json({
+                mensagem: erro.message
+            })
+        }
+        if(erro.message == 'O email informado já está cadastrado'){
+            return res.status(409).json({
+                mensagem: erro.message
+            })
+        }
+
+        return res.status(500).json({
+            mensagem: 'Ocorreu um erro ao atualizar o perfil. Por favor, tente novamente mais tarde.'
+        })
+    }
+}
+
+//função simples de logout (maior trabalho é feito no frontend, que deve apagar o token do localStorage ou cookies)
+const logout = async(req, res) =>{
+    try{
+        //apenas confirmar que o logout foi realizado com sucesso. O frontend deve apagar o token do localStorage ou cookies.
+        return res.status(200).json({
+            mensagem: 'Logout realizado com sucesso!'
+        });
+    } catch (erro){
+        return res.status(500).json({
+            mensagem: 'Ocorreu um erro ao realizar o logout. Por favor, tente novamente mais tarde.'
+        });
+    }
+}
+
+const deletarConta = async(req, res) =>{
+    try{
+        const usuariaId = req.usuariaId;
+        await usuariaService.deletarConta(usuariaId);
+
+        return res.status(200).json({
+            mensagem: 'Conta deletada com sucesso!'
+        });
+    } catch (erro){
+        if(erro.message == 'Usuária não encontrada.'){
+            return res.status(404).json({
+                mensagem: erro.message
+            })
+        }
+        return res.status(500).json({
+            mensagem: 'Ocorreu um erro ao deletar a conta. Por favor, tente novamente mais tarde.'
+        });
+    }
+}
+
 module.exports = {
     criarConta,
-    realizarLogin
+    realizarLogin,
+    obterDadosPerfil,
+    atualizarPerfil,
+    logout,
+    deletarConta
 };

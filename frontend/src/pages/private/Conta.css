@@ -1,0 +1,106 @@
+.conta-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 1rem 6rem 1rem;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.conta-loading {
+    color: #E0C58F;
+    font-family: 'Raleway', sans-serif;
+    margin-top: 5rem;
+    font-style: italic;
+    text-align: center;
+    animation: pulsar 2s infinite;
+}
+
+.conta-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.conta-badge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+}
+
+.conta-badge {
+    color: #E0C58F;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 9.6px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14.4px; 
+    letter-spacing: 4.8px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.conta-titulo-container {
+    display: flex;
+    padding-top: 16px;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+}
+
+.conta-titulo {
+    color: #E0C58F;
+    text-align: center;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 44.8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 67.2px;
+    letter-spacing: 2.688px;
+    width: 100%;
+    max-width: 780px;
+    margin: 0;
+}
+
+.conta-conteudo {
+    display: flex;
+    width: 100%;
+    max-width: 780px; 
+    padding-top: 48px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.conta-actions-footer {
+    display: flex;
+    width: 100%;
+    max-width: 779px; 
+    padding: 0 20px;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .conta-titulo {
+        font-size: 28px;
+        line-height: 42px;
+        letter-spacing: 1.5px;
+    }
+    
+    .conta-actions-footer {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0;
+    }
+}
+
+@keyframes pulsar {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
