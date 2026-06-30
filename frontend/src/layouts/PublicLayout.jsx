@@ -4,18 +4,17 @@ import Footer from "../components/common/Base/Footer"
 import Background from "../components/common/Base/Background"
 import "./MainLayout.css"
 
-const MainLayout = () => {
+const PublicLayout = () => { 
     const linksMenu = [
-        { titulo: "Diário dos Sonhos", rota: "/app/diario" },
-        { titulo: "Calendário", rota: "/app/calendario" },
-        { titulo: "Conta", rota: "/app/conta" }
+        { titulo: "Diário dos Sonhos", rota: "/diario" },
+        { titulo: "Calendário", rota: "/calendario" },
+        { titulo: "Entrar", rota: "/entrar", destaque: true } 
     ]
 
     const linkFooter = [
-        { titulo: "Início", rota: "/app/home" },
-        { titulo: "Diário dos Sonhos", rota: "/app/diario" },
-        { titulo: "Calendário", rota: "/app/calendario" },
-        { titulo: "Conta", rota: "/app/conta" }
+        { titulo: "Início", rota: "/home" },
+        { titulo: "Diário dos Sonhos", rota: "/diario" },
+        { titulo: "Calendário", rota: "/calendario" }
     ]
 
     return (
@@ -33,4 +32,5 @@ const MainLayout = () => {
     )
 }
 
-export default MainLayout
+export default PublicLayout
+

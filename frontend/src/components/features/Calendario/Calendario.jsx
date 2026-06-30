@@ -91,7 +91,7 @@ const DiaDoCalendario = ({ numeroDia, faseDaLua, estaMenstruada, estaPrevisto, e
     );
 };
 
-const Calendario = ({ mesAtual, anoAtual, diasMenstruacao = [], diasPrevistos = [], onDayClick, onNextMonth, onPrevMonth }) => {
+const Calendario = ({ mesAtual, anoAtual, diasMenstruacao = [], diasPrevistos = [], onDayClick, onNextMonth, onPrevMonth, mostrarLegenda = true }) => {
     const hoje = new Date();
 
     const totalDeDias = obterDiasNoMes(anoAtual, mesAtual);
@@ -159,18 +159,20 @@ const Calendario = ({ mesAtual, anoAtual, diasMenstruacao = [], diasPrevistos = 
                     })}
                 </div>
 
-                <div className="cal-footer">
-                    <div className="cal-footer__container">
-                        <div className="cal-legenda-item">
-                            <IconeGota />
-                            <span className="cal-legenda-texto">Menstruação</span>
-                        </div>
-                        <div className="cal-legenda-item cal-legenda-item--previsto">
-                            <IconeGota />
-                            <span className="cal-legenda-texto cal-legenda-texto--previsto">Previsão</span>
+                {mostrarLegenda && (
+                    <div className="cal-footer">
+                        <div className="cal-footer__container">
+                            <div className="cal-legenda-item">
+                                <IconeGota />
+                                <span className="cal-legenda-texto">Menstruação</span>
+                            </div>
+                            <div className="cal-legenda-item cal-legenda-item--previsto">
+                                <IconeGota />
+                                <span className="cal-legenda-texto cal-legenda-texto--previsto">Previsão</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );
