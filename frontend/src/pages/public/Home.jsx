@@ -61,6 +61,7 @@ const HomePublic = () => {
                     diasMenstruacao={[]}
                     diasPrevistos={[]}
                     fasesLunares={{}}
+                    mostrarLegenda={false}
                     onNextMonth={() => {
                         if (mesFiltro === 12) {
                             setMesFiltro(1)
