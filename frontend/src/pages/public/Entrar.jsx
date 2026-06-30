@@ -45,7 +45,7 @@ const Entrar = () => {
         setErros(prev => ({ ...prev, geral: "" }))
         try {
             await authService.login({ email: email.toLowerCase(), senha })
-            navigate("/home")
+            navigate("/app/home")
         } catch (erro) {
             const mensagem = erro.message || ""
 

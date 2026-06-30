@@ -13,6 +13,8 @@ import Home from './pages/private/Home'
 import Entrar from './pages/public/Entrar'
 import CriarConta from './pages/public/CriarConta'
 import HomePublic from './pages/public/Home'
+import DiarioPublic from './pages/public/Diario'
+import CalendarioPublic from './pages/public/Calendario'
 
 import './App.css'
 
@@ -27,14 +29,17 @@ function App() {
           </Route>
 
           {/* Rotas públicas */}
-          <Route element={<PublicLayout />}>
-            <Route path="/public" element={<HomePublic />} /> 
-          </Route>
+            <Route path="/" element={<PublicLayout />}>
+              <Route index element={<Navigate to="/home" replace />} />
+              <Route path="home" element={<HomePublic/>} />
+              <Route path="diario" element={<DiarioPublic/>} />
+              <Route path="calendario" element={<CalendarioPublic/>} />
+            </Route>
 
           {/* Rotas privadas */}
           <Route element={<RotaProtegida />}>
-            <Route path="/" element={<MainLayout />}>
-              <Route index element={<Navigate to="/home" replace />} />
+            <Route path="/app/" element={<MainLayout />}>
+              <Route index element={<Navigate to="/app/home" replace />} />
               <Route path="home" element={<Home/>} />
               <Route path="diario" element={<Diario/>} />
               <Route path="conta" element={<Conta/>} />
