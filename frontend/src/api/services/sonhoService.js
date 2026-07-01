@@ -10,8 +10,8 @@ export const sonhosServiceFrontend = {
 
             const queryString = queryParams.toString()
             const urlCompleta = queryString 
-                ? `${BASE_URL}/sonhos?${queryString}` 
-                : `${BASE_URL}/sonhos`
+                ? `${BASE_URL}?${queryString}` 
+                : BASE_URL
 
             const token = localStorage.getItem('token');
             const resposta = await fetch(urlCompleta, {
@@ -37,7 +37,7 @@ export const sonhosServiceFrontend = {
     criar: async (dadosSonho) => {
         try {
             const token = localStorage.getItem('token');
-            const resposta = await fetch(`${BASE_URL}/sonhos`, {
+            const resposta = await fetch(BASE_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export const sonhosServiceFrontend = {
     atualizar: async (id, dadosSonho) => {
         try {
             const token = localStorage.getItem('token');
-            const resposta = await fetch(`${BASE_URL}/sonhos/${id}`, {
+            const resposta = await fetch(`${BASE_URL}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ export const sonhosServiceFrontend = {
     excluir: async (id) => {
         try {
             const token = localStorage.getItem('token');
-            const resposta = await fetch(`${BASE_URL}/sonhos/${id}`, {
+            const resposta = await fetch(`${BASE_URL}/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
