@@ -33,7 +33,7 @@ Diferente dos aplicativos de rastreamento convencionais — que tratam o corpo d
 
 **Objetivo:** prover uma plataforma contínua e imersiva que correlacione automaticamente o ciclo da usuária às fases da lua, ofereça previsões de ciclos futuros baseadas no histórico e disponibilize um diário de sonhos completo, com tags e filtros dinâmicos.
 
-> 🎓 **Contexto acadêmico:** projeto desenvolvido no curso de Engenharia de Software da **Universidade Federal do Ceará (UFC) — Campus Quixadá**..
+> 🎓 **Contexto acadêmico:** projeto desenvolvido no curso de Engenharia de Software da **Universidade Federal do Ceará (UFC) — Campus Quixadá**
 
 ---
 
