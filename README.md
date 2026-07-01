@@ -21,25 +21,6 @@
 
 ---
 
-## 📖 Sumário
-
-- [Descrição](#descrição)
-- [Funcionalidades](#funcionalidades)
-- [Arquitetura](#arquitetura)
-- [Tecnologias](#tecnologias)
-- [Bibliotecas](#bibliotecas)
-- [Pré-requisitos](#pré-requisitos)
-- [Instalação](#instalação)
-- [Configuração](#configuração)
-- [Executando](#executando)
-- [Como Testar](#como-testar)
-- [Fluxo da Aplicação](#fluxo-da-aplicação)
-- [Padrões Utilizados](#padrões-utilizados)
-- [Equipe](#equipe)
-- [Licença](#licença)
-
----
-
 ## 📝 Descrição
 
 **Lunar Cycle** é uma plataforma web de bem-estar pessoal que une três dimensões em uma única experiência: o **rastreamento fisiológico do ciclo menstrual**, a **observação astronômica das fases da lua** e o **registro introspectivo de um diário de sonhos**.
