@@ -19,6 +19,13 @@
 
 <br>
 
+## 🚀 Acesse a aplicação
+
+### 🌐 Produção
+**https://lunar-cycle-rouge.vercel.app/app/home**
+
+</div>
+
 ---
 
 ## 📝 Descrição
@@ -91,6 +98,9 @@ flowchart TD
 | **PostgreSQL 16** | Banco de dados relacional (`postgres:16-alpine`) |
 | **Docker / Docker Compose** | Orquestração dos três serviços (frontend, backend, banco) |
 | **ESLint** | Padronização e qualidade do código JavaScript |
+| **Vercel** | Hospedagem do Frontend |
+| **Render** | Hospedagem da API |
+| **Supabase** | Banco PostgreSQL em nuvem |
 
 ---
 
@@ -169,6 +179,18 @@ VITE_API_URL=http://localhost:3000
 
 ## ▶️ Executando
 
+#### Ambiente de Produção
+
+O ambiente atualmente publicado utiliza:
+
+- **Frontend:** Vercel
+- **Backend:** Render
+- **Banco de Dados:** Supabase PostgreSQL
+
+A aplicação está disponível em:
+
+**https://lunar-cycle-rouge.vercel.app/app/home**
+
 #### Modo desenvolvimento (manual)
 ```bash
 # Backend
@@ -195,7 +217,35 @@ npm run preview
 
 ---
 
+## 🌐 Deploy
+
+O projeto encontra-se disponível publicamente em produção.
+
+| Serviço | Plataforma |
+|----------|------------|
+| Frontend | Vercel |
+| Backend (API REST) | Render |
+| Banco de Dados PostgreSQL | Supabase |
+
+### Link da aplicação
+
+➡️ **https://lunar-cycle-rouge.vercel.app/app/home**
+
+---
+
 ## 🧪 Como Testar
+
+### Testando a versão em produção
+
+A aplicação pode ser utilizada imediatamente através do link:
+
+**https://lunar-cycle-rouge.vercel.app/app/home**
+
+Basta criar uma conta e começar a utilizar o sistema.
+
+---
+
+### Executando localmente
 
 Um passo a passo pensado para quem nunca viu o projeto:
 
@@ -295,6 +345,10 @@ Copyright (c) 2026 Kaylanne Sátiro
 ---
 
 <div align="center">
+
+🌐 Aplicação disponível em produção:
+
+**https://lunar-cycle-rouge.vercel.app/app/home**
 
 Feito com 🌙 para quem busca se conhecer um pouco mais a cada ciclo.
 
