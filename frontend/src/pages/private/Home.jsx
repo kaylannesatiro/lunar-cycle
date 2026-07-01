@@ -122,7 +122,7 @@ const Home = () => {
     const handleSalvarModal = async (dadosDoModal) => {
         try {
             const duracaoEfetiva = duracaoUsuaria || 5
-            const diasNovos = gerarIntervaloDeDatas(dadosDoModal.dataInicio, dadosDoModal.dataFim, duracaoEfetiva)
+            const diasNovos = gerarIntervaloDeDatas(dadosDoModal.dataIniciodadosDoModal.dataFim, duracaoEfetiva)
 
             const listaDiasAtual = dadosCalendario?.dias || []
             const diasJaMarcados = listaDiasAtual
