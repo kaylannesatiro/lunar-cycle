@@ -107,9 +107,9 @@ flowchart TD
 
 | Requisito | Versão | Observação |
 |---|---|---|
-| Node.js | ⚠ não especificada (recomenda-se a versão LTS) | necessário para rodar frontend e backend fora do Docker |
+| Node.js | versão LTS | necessário para rodar frontend e backend fora do Docker |
 | npm | distribuído com o Node.js | gerenciador de pacotes do projeto |
-| Docker e Docker Compose | ⚠ versão não especificada (`docker-compose.yml` usa a sintaxe `3.8`) | necessário apenas para o fluxo via Docker |
+| Docker e Docker Compose | 3.8 | necessário apenas para o fluxo via Docker |
 | Git | qualquer versão recente | para clonar o repositório |
 | PostgreSQL | 16 | apenas se for rodar **sem** Docker (versão usada na imagem `postgres:16-alpine`) |
 
